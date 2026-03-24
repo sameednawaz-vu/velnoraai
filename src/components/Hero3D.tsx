@@ -148,6 +148,87 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     mindsGroup.add(mind1.mindGroup, mind2.mindGroup, mind3.mindGroup);
     scene.add(mindsGroup);
 
+    // Floating UFO objects with smooth magnetic behavior
+    const ufoGroup = new THREE.Group();
+    const ufos: any[] = [];
+
+    const createUFO = (startX: number, startY: number, startZ: number, color: number, speed: number) => {
+      const ufoMesh = new THREE.Group();
+
+      // UFO disc body - elongated saucer shape
+      const discGeometry = new THREE.IcosahedronGeometry(2.5, 3);
+      const discMaterial = new THREE.MeshPhongMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 0.7,
+        shininess: 160,
+        wireframe: false,
+        transparent: true,
+        opacity: 0.85,
+      });
+      const disc = new THREE.Mesh(discGeometry, discMaterial);
+      disc.scale.set(1.2, 0.4, 1);
+      ufoMesh.add(disc);
+
+      // Glowing underside
+      const underwearGeometry = new THREE.SphereGeometry(2.2, 16, 16);
+      const underMaterial = new THREE.MeshBasicMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 1.2,
+        transparent: true,
+        opacity: 0.3,
+      });
+      const underlight = new THREE.Mesh(underwearGeometry, underMaterial);
+      underlight.scale.set(1.1, 0.2, 0.9);
+      ufoMesh.add(underlight);
+
+      // Rotation ring
+      const ringGeometry = new THREE.TorusGeometry(2.5, 0.15, 8, 32);
+      const ringMaterial = new THREE.MeshPhongMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 1.1,
+      });
+      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+      ring.rotation.x = Math.PI / 2.5;
+      ufoMesh.add(ring);
+
+      ufoMesh.position.set(startX, startY, startZ);
+      ufoMesh.userData = {
+        originalX: startX,
+        originalY: startY,
+        originalZ: startZ,
+        speed,
+        time: Math.random() * Math.PI * 2,
+        disc,
+        ring,
+        radius: Math.random() * 3 + 2,
+        targetX: startX,
+        targetY: startY,
+        targetZ: startZ,
+        isFollowingMouse: false,
+      };
+
+      return ufoMesh;
+    };
+
+    // Create 7 UFOs scattered around
+    const ufo1 = createUFO(-40, 20, -5, COLORS.primary, 0.8);
+    const ufo2 = createUFO(35, -25, 3, COLORS.secondary, 0.6);
+    const ufo3 = createUFO(-35, -18, 2, COLORS.cyan, 0.9);
+    const ufo4 = createUFO(40, 15, -8, COLORS.primary, 0.7);
+    const ufo5 = createUFO(-20, 30, 1, COLORS.secondary, 0.75);
+    const ufo6 = createUFO(28, 10, -4, COLORS.cyan, 0.65);
+    const ufo7 = createUFO(-48, 8, 2, COLORS.primary, 0.8);
+
+    [ufo1, ufo2, ufo3, ufo4, ufo5, ufo6, ufo7].forEach(ufo => {
+      ufoGroup.add(ufo);
+      ufos.push(ufo);
+    });
+
+    scene.add(ufoGroup);
+
     // Neural connections between minds (lines showing AI communication)
     const connectionGroup = new THREE.Group();
     const connectionMaterial = new THREE.LineBasicMaterial({
@@ -302,6 +383,55 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         // Pulsing glow
         const glow = 1.2 + Math.sin(time * 5 + idx) * 0.4;
         packet.material.emissiveIntensity = glow;
+      });
+
+      // Animate smooth UFOs with magnetic behavior
+      ufos.forEach((ufo) => {
+        // Independent orbital motion as base
+        ufo.userData.time += 0.01 * ufo.userData.speed;
+        const orbitX = Math.cos(ufo.userData.time) * ufo.userData.radius;
+        const orbitY = Math.sin(ufo.userData.time * 0.7) * ufo.userData.radius * 0.5;
+
+        // Convert cursor position to 3D world space (roughly)
+        const cursorWorldX = mouseX * 50;
+        const cursorWorldY = mouseY * 35;
+
+        // Calculate distance from cursor
+        const distToCursor = Math.sqrt(
+          (ufo.position.x - cursorWorldX) ** 2 + 
+          (ufo.position.y - cursorWorldY) ** 2
+        );
+
+        // Magnetic attraction radius
+        const attractionRadius = 25;
+
+        if (distToCursor < attractionRadius) {
+          // Close to cursor - follow it smoothly
+          ufo.userData.isFollowingMouse = true;
+          ufo.userData.targetX = cursorWorldX + (Math.random() - 0.5) * 8;
+          ufo.userData.targetY = cursorWorldY + (Math.random() - 0.5) * 8;
+          ufo.userData.targetZ = ufo.userData.originalZ;
+        } else {
+          // Far from cursor - return to base orbital position smoothly
+          ufo.userData.isFollowingMouse = false;
+          ufo.userData.targetX = ufo.userData.originalX + orbitX;
+          ufo.userData.targetY = ufo.userData.originalY + orbitY;
+          ufo.userData.targetZ = ufo.userData.originalZ + Math.sin(time * 0.8 + ufo.userData.time) * 2;
+        }
+
+        // Smooth movement to target with easing (no jerking)
+        const easing = 0.05; // Lower value = smoother, more fluid movement
+        ufo.position.x += (ufo.userData.targetX - ufo.position.x) * easing;
+        ufo.position.y += (ufo.userData.targetY - ufo.position.y) * easing;
+        ufo.position.z += (ufo.userData.targetZ - ufo.position.z) * easing;
+
+        // Self-rotation
+        ufo.userData.disc.rotation.z += 0.005;
+        ufo.userData.ring.rotation.y += 0.008;
+
+        // Pulsing glow
+        const glow = 0.7 + Math.sin(time * 2 + ufo.userData.time) * 0.35;
+        ufo.userData.disc.material.emissiveIntensity = glow;
       });
 
       // Update connection opacity based on data flow
