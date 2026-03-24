@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import * as THREE from 'three';
 
 interface Hero3DProps {
@@ -7,6 +7,7 @@ interface Hero3DProps {
 
 export default function Hero3D({ height = 600 }: Hero3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -85,34 +86,42 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Rotate central torus
-      torus.rotation.x += 0.001;
-      torus.rotation.y += 0.002;
+      // Only animate when mouse is hovering over the hero
+      if (isHovering) {
+        // Rotate central torus
+        torus.rotation.x += 0.001;
+        torus.rotation.y += 0.002;
 
-      // Animate orbiting particles with magnetic effect
-      particles.forEach((particle) => {
-        particle.userData.angle += particle.userData.speed;
-        
-        let x = Math.cos(particle.userData.angle) * particle.userData.distance;
-        let y = Math.sin(particle.userData.angle) * particle.userData.distance * 0.5;
-        
-        // Magnetic attraction to mouse
-        const magnetStrength = 0.05;
-        x += (mouseX / width) * 30 * magnetStrength;
-        y += (mouseY / height) * 30 * magnetStrength;
-        
-        particle.position.x = x;
-        particle.position.y = y;
-        particle.rotation.x += 0.005;
-        particle.rotation.y += 0.005;
-      });
+        // Animate orbiting particles with magnetic effect
+        particles.forEach((particle) => {
+          particle.userData.angle += particle.userData.speed;
+          
+          let x = Math.cos(particle.userData.angle) * particle.userData.distance;
+          let y = Math.sin(particle.userData.angle) * particle.userData.distance * 0.5;
+          
+          // Magnetic attraction to mouse
+          const magnetStrength = 0.05;
+          x += (mouseX / width) * 30 * magnetStrength;
+          y += (mouseY / height) * 30 * magnetStrength;
+          
+          particle.position.x = x;
+          particle.position.y = y;
+          particle.rotation.x += 0.005;
+          particle.rotation.y += 0.005;
+        });
+      }
 
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // Handle resize
+    // Handle mouse enter/leave for hover animation
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
+
+    container.addEventListener('mouseenter', handleMouseEnter);
+    container.addEventListener('mouseleave', handleMouseLeave);
     const handleResize = () => {
       const newWidth = container.clientWidth;
       camera.aspect = newWidth / height;
@@ -126,12 +135,14 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', handleResize);
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
       renderer.dispose();
       torusGeometry.dispose();
       torusMaterial.dispose();
       container.removeChild(renderer.domElement);
     };
-  }, [height]);
+  }, [height, isHovering]);
 
   return (
     <div
