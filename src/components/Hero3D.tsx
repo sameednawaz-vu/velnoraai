@@ -5,6 +5,16 @@ interface Hero3DProps {
   height?: number;
 }
 
+// Colors from AI Prompt Vault reference
+const COLORS = {
+  bg: 0x0a0a0f,
+  surface: 0x14141f,
+  text: 0xe8e4f0,
+  primary: 0x7b2ff2,
+  secondary: 0xf22fb0,
+  cyan: 0x2ff2d0,
+};
+
 export default function Hero3D({ height = 600 }: Hero3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
@@ -15,277 +25,206 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     const width = containerRef.current.clientWidth;
     const container = containerRef.current;
 
-    // Scene with galaxy background
+    // Scene setup
     const scene = new THREE.Scene();
-    
-    // Create starfield background
-    const starsGeometry = new THREE.BufferGeometry();
-    const starCount = 2000;
-    const positions = new Float32Array(starCount * 3);
-    const colors = new Float32Array(starCount * 3);
-    
-    for (let i = 0; i < starCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 200;
-      positions[i + 1] = (Math.random() - 0.5) * 200;
-      positions[i + 2] = (Math.random() - 0.5) * 200;
-      
-      const hue = Math.random();
-      const color = new THREE.Color().setHSL(hue, 0.6, Math.random() * 0.7 + 0.3);
-      colors[i] = color.r;
-      colors[i + 1] = color.g;
-      colors[i + 2] = color.b;
-    }
-    
-    starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    starsGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    
-    const starsMaterial = new THREE.PointsMaterial({
-      size: 0.2,
-      sizeAttenuation: true,
-      vertexColors: true,
-      transparent: true,
-    });
-    
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    scene.add(stars);
-    
-    // Space gradient background
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext('2d')!;
-    
-    // Create galaxy gradient
-    const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 512);
-    gradient.addColorStop(0, '#0a0510');
-    gradient.addColorStop(0.3, '#1a0a2e');
-    gradient.addColorStop(0.6, '#0f0a1f');
-    gradient.addColorStop(1, '#000000');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 512, 512);
-    
-    // Add some nebula colors
-    ctx.globalAlpha = 0.1;
-    ctx.fillStyle = '#6a00ff';
-    ctx.fillRect(0, 0, 512, 512);
-    ctx.globalAlpha = 0.08;
-    ctx.fillStyle = '#00d9ff';
-    ctx.fillRect(0, 0, 512, 512);
-    
-    const texture = new THREE.CanvasTexture(canvas);
-    scene.background = texture;
+    scene.background = new THREE.Color(COLORS.bg);
 
     const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
-    camera.position.z = 45;
+    camera.position.z = 40;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
-    // Create sophisticated AI robot
-    const aiRobot = new THREE.Group();
-
-    // Core central orb - AI neural core
-    const coreGeometry = new THREE.IcosahedronGeometry(2, 4);
-    const coreMaterial = new THREE.MeshPhongMaterial({
-      color: 0x06f8d9,
-      emissive: 0x06f8d9,
-      emissiveIntensity: 1.2,
-      wireframe: false,
-      shininess: 200,
-      metalness: 0.9,
-    });
-    const core = new THREE.Mesh(coreGeometry, coreMaterial);
-    core.position.y = 0;
-    core.castShadow = true;
-    aiRobot.add(core);
-
-    // Orbiting data rings around core
-    for (let i = 0; i < 3; i++) {
-      const ringGeometry = new THREE.TorusGeometry(4 + i * 2, 0.3, 16, 100);
-      const ringMaterial = new THREE.MeshPhongMaterial({
-        color: i % 2 === 0 ? 0x06f8d9 : 0xd946ef,
-        emissive: i % 2 === 0 ? 0x06f8d9 : 0xd946ef,
-        emissiveIntensity: 0.8,
-        shininess: 150,
+    // Floating orbs background (like the reference)
+    const orbGroup = new THREE.Group();
+    
+    const createOrb = (size: number, color: number, x: number, y: number, z: number) => {
+      const geometry = new THREE.IcosahedronGeometry(size, 4);
+      const material = new THREE.MeshPhongMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 0.15,
+        wireframe: false,
+        transparent: true,
+        opacity: 0.35,
       });
-      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-      ring.rotation.x = Math.PI / 2.5 + i * 0.3;
-      ring.userData = { speed: 0.002 + i * 0.001, index: i };
-      aiRobot.add(ring);
-    }
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(x, y, z);
+      return mesh;
+    };
 
-    // Head module - angular and sleek
-    const headGeometry = new THREE.TetrahedronGeometry(3.5, 0);
-    const headMaterial = new THREE.MeshPhongMaterial({
-      color: 0x1a1a3e,
-      emissive: 0x1a1a3e,
-      emissiveIntensity: 0.4,
-      shininess: 120,
-      metalness: 0.8,
-    });
-    const head = new THREE.Mesh(headGeometry, headMaterial);
-    head.position.y = 8;
-    head.castShadow = true;
-    aiRobot.add(head);
+    const orb1 = createOrb(12, COLORS.primary, -20, 8, -15);
+    const orb2 = createOrb(10, COLORS.secondary, 25, -12, -18);
+    const orb3 = createOrb(8, COLORS.cyan, 0, 15, -20);
+    
+    orbGroup.add(orb1, orb2, orb3);
+    scene.add(orbGroup);
 
-    // Visor - advanced display
-    const visorGeometry = new THREE.BoxGeometry(4.5, 2.5, 0.5);
-    const visorMaterial = new THREE.MeshPhongMaterial({
-      color: 0x00ffff,
-      emissive: 0x00ffff,
-      emissiveIntensity: 1.5,
-      shininess: 200,
-      transparent: true,
-      opacity: 0.9,
-    });
-    const visor = new THREE.Mesh(visorGeometry, visorMaterial);
-    visor.position.set(0, 8.2, 2.8);
-    visor.castShadow = true;
-    aiRobot.add(visor);
+    // Three thinking minds
+    const mindsGroup = new THREE.Group();
 
-    // Upper body torso - angular design
-    const torsoGeometry = new THREE.OctahedronGeometry(3, 1);
-    const torsoMaterial = new THREE.MeshPhongMaterial({
-      color: 0x0d1b2a,
-      emissive: 0x0d1b2a,
-      emissiveIntensity: 0.3,
-      shininess: 100,
-      metalness: 0.85,
-    });
-    const torso = new THREE.Mesh(torsoGeometry, torsoMaterial);
-    torso.position.y = 2;
-    torso.scale.set(1.2, 1.5, 1);
-    torso.castShadow = true;
-    aiRobot.add(torso);
+    // Helper to create a thinking mind sphere with neural structure
+    const createMind = (x: number, color: number, id: number) => {
+      const mindGroup = new THREE.Group();
 
-    // Energy chest panel
-    const chestGeometry = new THREE.PlaneGeometry(3.5, 4);
-    const chestMaterial = new THREE.MeshPhongMaterial({
-      color: 0x000000,
-      emissive: 0xd946ef,
-      emissiveIntensity: 0.9,
-      shininess: 180,
-      side: THREE.DoubleSide,
-    });
-    const chest = new THREE.Mesh(chestGeometry, chestMaterial);
-    chest.position.set(0, 2, 2.2);
-    chest.castShadow = true;
-    aiRobot.add(chest);
+      // Main brain sphere
+      const brainGeometry = new THREE.IcosahedronGeometry(3.5, 5);
+      const brainMaterial = new THREE.MeshPhongMaterial({
+        color: 0x1a1a2e,
+        emissive: color,
+        emissiveIntensity: 0.4,
+        shininess: 120,
+        metalness: 0.7,
+      });
+      const brain = new THREE.Mesh(brainGeometry, brainMaterial);
+      brain.position.x = x;
+      brain.userData = { originalPosition: { x, y: 0, z: 0 }, floatSpeed: 1.2 + id * 0.3 };
+      mindGroup.add(brain);
 
-    // Energy grid pattern on chest
-    const gridGeometry = new THREE.BufferGeometry();
-    const gridPositions: number[] = [];
-    for (let x = -1.5; x <= 1.5; x += 0.3) {
-      for (let y = -2; y <= 2; y += 0.3) {
-        gridPositions.push(x, y, 2.25);
+      // Core glowing center
+      const coreGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+      const coreMaterial = new THREE.MeshBasicMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 1.2,
+      });
+      const core = new THREE.Mesh(coreGeometry, coreMaterial);
+      core.position.x = x;
+      core.scale.set(0.6, 0.6, 0.6);
+      mindGroup.add(core);
+
+      // Neural spikes around brain
+      for (let i = 0; i < 8; i++) {
+        const spikeGeometry = new THREE.ConeGeometry(0.3, 2, 8);
+        const spikeMaterial = new THREE.MeshPhongMaterial({
+          color,
+          emissive: color,
+          emissiveIntensity: 0.8,
+        });
+        const spike = new THREE.Mesh(spikeGeometry, spikeMaterial);
+        
+        const angle = (i / 8) * Math.PI * 2;
+        spike.position.x = x + Math.cos(angle) * 4;
+        spike.position.y = Math.sin(angle) * 4;
+        spike.position.z = Math.sin(i / 8 * Math.PI) * 3;
+        spike.lookAt(x, 0, 0);
+        spike.userData = { angle, distance: 4, index: i, parentId: id };
+        
+        mindGroup.add(spike);
       }
-    }
-    gridGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(gridPositions), 3));
-    const gridMaterial = new THREE.PointsMaterial({
-      color: 0x06f8d9,
-      size: 0.15,
-      sizeAttenuation: true,
-    });
-    const gridPoints = new THREE.Points(gridGeometry, gridMaterial);
-    aiRobot.add(gridPoints);
 
-    // Left arm - sleek and advanced
-    const armGeometry = new THREE.ConeGeometry(1, 5, 16);
-    const armMaterialLeft = new THREE.MeshPhongMaterial({
-      color: 0x0a0a1a,
-      emissive: 0x06f8d9,
-      emissiveIntensity: 0.5,
-      shininess: 130,
-      metalness: 0.8,
-    });
-    const armLeft = new THREE.Mesh(armGeometry, armMaterialLeft);
-    armLeft.position.set(-4.8, 3, 0);
-    armLeft.rotation.z = Math.PI / 3;
-    armLeft.castShadow = true;
-    aiRobot.add(armLeft);
+      // Particle halo around mind
+      const particleCount = 50;
+      const particleGeometry = new THREE.BufferGeometry();
+      const particlePositions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        const rad = Math.random() * Math.PI * 2;
+        const dist = 3 + Math.random() * 3;
+        particlePositions[i] = x + Math.cos(rad) * dist;
+        particlePositions[i + 1] = Math.sin(rad) * dist;
+        particlePositions[i + 2] = Math.random() * 2 - 1;
+      }
+      particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+      const particleMaterial = new THREE.PointsMaterial({
+        color,
+        size: 0.15,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 0.8,
+      });
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      particles.userData = { parentX: x, particleCount };
+      mindGroup.add(particles);
 
-    // Right arm
-    const armMaterialRight = new THREE.MeshPhongMaterial({
-      color: 0x0a0a1a,
-      emissive: 0xd946ef,
-      emissiveIntensity: 0.5,
-      shininess: 130,
-      metalness: 0.8,
-    });
-    const armRight = new THREE.Mesh(armGeometry, armMaterialRight);
-    armRight.position.set(4.8, 3, 0);
-    armRight.rotation.z = -Math.PI / 3;
-    armRight.castShadow = true;
-    aiRobot.add(armRight);
+      return { mindGroup, brain, core, particles };
+    };
 
-    // Lower body stabilizers
-    const legGeometry = new THREE.CylinderGeometry(0.7, 1.2, 4, 16);
-    const legMaterialLeft = new THREE.MeshPhongMaterial({
-      color: 0x000000,
-      emissive: 0x06f8d9,
-      emissiveIntensity: 0.4,
-      shininess: 110,
-      metalness: 0.85,
-    });
-    const legLeft = new THREE.Mesh(legGeometry, legMaterialLeft);
-    legLeft.position.set(-2, -5.5, 0);
-    legLeft.castShadow = true;
-    aiRobot.add(legLeft);
+    const mind1 = createMind(-15, COLORS.primary, 1);
+    const mind2 = createMind(0, COLORS.secondary, 2);
+    const mind3 = createMind(15, COLORS.cyan, 3);
 
-    const legMaterialRight = new THREE.MeshPhongMaterial({
-      color: 0x000000,
-      emissive: 0xd946ef,
-      emissiveIntensity: 0.4,
-      shininess: 110,
-      metalness: 0.85,
-    });
-    const legRight = new THREE.Mesh(legGeometry, legMaterialRight);
-    legRight.position.set(2, -5.5, 0);
-    legRight.castShadow = true;
-    aiRobot.add(legRight);
+    mindsGroup.add(mind1.mindGroup, mind2.mindGroup, mind3.mindGroup);
+    scene.add(mindsGroup);
 
-    // Data flow particles
-    const particleCount = 100;
-    const particleGeometry = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 20;
-      particlePositions[i + 1] = (Math.random() - 0.5) * 20;
-      particlePositions[i + 2] = (Math.random() - 0.5) * 20;
-    }
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-    const particleMaterial = new THREE.PointsMaterial({
-      color: 0x06f8d9,
-      size: 0.1,
-      sizeAttenuation: true,
+    // Neural connections between minds (lines showing AI communication)
+    const connectionGroup = new THREE.Group();
+    const connectionMaterial = new THREE.LineBasicMaterial({
+      color: COLORS.primary,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.5,
+      linewidth: 1,
     });
-    const particles = new THREE.Points(particleGeometry, particleMaterial);
-    aiRobot.add(particles);
 
-    aiRobot.position.y = 0;
-    scene.add(aiRobot);
+    // Connection 1-2
+    const geo12 = new THREE.BufferGeometry();
+    const pos12 = new Float32Array([
+      -15, 0, 0,
+      0, 0, 0,
+    ]);
+    geo12.setAttribute('position', new THREE.BufferAttribute(pos12, 3));
+    const line12 = new THREE.Line(geo12, connectionMaterial);
+    connectionGroup.add(line12);
 
-    // Advanced lighting
+    // Connection 2-3
+    const geo23 = new THREE.BufferGeometry();
+    const pos23 = new Float32Array([
+      0, 0, 0,
+      15, 0, 0,
+    ]);
+    geo23.setAttribute('position', new THREE.BufferAttribute(pos23, 3));
+    const line23 = new THREE.Line(geo23, connectionMaterial);
+    connectionGroup.add(line23);
+
+    // Connection 1-3
+    const geo13 = new THREE.BufferGeometry();
+    const pos13 = new Float32Array([
+      -15, 0, 0,
+      15, 0, 0,
+    ]);
+    geo13.setAttribute('position', new THREE.BufferAttribute(pos13, 3));
+    const connectionMaterial2 = new THREE.LineBasicMaterial({
+      color: COLORS.secondary,
+      transparent: true,
+      opacity: 0.3,
+      linewidth: 1,
+    });
+    const line13 = new THREE.Line(geo13, connectionMaterial2);
+    connectionGroup.add(line13);
+
+    mindsGroup.add(connectionGroup);
+
+    // Data packets flowing through connections
+    const dataPackets: any[] = [];
+    for (let i = 0; i < 6; i++) {
+      const packetGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+      const packetMaterial = new THREE.MeshBasicMaterial({
+        color: i % 2 === 0 ? COLORS.primary : COLORS.secondary,
+        emissive: i % 2 === 0 ? COLORS.primary : COLORS.secondary,
+        emissiveIntensity: 1.5,
+      });
+      const packet = new THREE.Mesh(packetGeometry, packetMaterial);
+      packet.userData = {
+        pathIndex: i % 3,
+        progress: (i / 6) % 1.0,
+        speed: 0.015 + Math.random() * 0.01,
+      };
+      connectionGroup.add(packet);
+      dataPackets.push(packet);
+    }
+
+    // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.PointLight(0x06f8d9, 2.5, 200);
-    keyLight.position.set(30, 30, 50);
-    keyLight.castShadow = true;
-    scene.add(keyLight);
+    const primaryLight = new THREE.PointLight(COLORS.primary, 2, 200);
+    primaryLight.position.set(30, 20, 30);
+    scene.add(primaryLight);
 
-    const fillLight = new THREE.PointLight(0xd946ef, 1.8, 200);
-    fillLight.position.set(-30, 20, -40);
-    scene.add(fillLight);
-
-    const backlightLight = new THREE.PointLight(0x00ffff, 1, 150);
-    backlightLight.position.set(0, -10, -50);
-    scene.add(backlightLight);
+    const secondaryLight = new THREE.PointLight(COLORS.secondary, 1.5, 200);
+    secondaryLight.position.set(-30, -20, 30);
+    scene.add(secondaryLight);
 
     // Mouse tracking
     let mouseX = 0;
@@ -310,43 +249,66 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
       mouseX += (targetMouseX - mouseX) * 0.08;
       mouseY += (targetMouseY - mouseY) * 0.08;
 
-      // Rotate orbiting rings
-      aiRobot.children.forEach((child, index) => {
-        if (child.userData && child.userData.speed) {
-          child.rotation.z += child.userData.speed;
+      // Animate orbs
+      orb1.position.y = 8 + Math.sin(time * 0.8) * 3;
+      orb2.position.y = -12 + Math.cos(time * 0.6) * 3;
+      orb3.position.y = 15 + Math.sin(time * 0.5) * 2;
+
+      // Rotate minds and float them
+      [mind1, mind2, mind3].forEach((mind, idx) => {
+        const brain = mind.brain as THREE.Mesh;
+        const particles = mind.particles as THREE.Points;
+        const originalX = brain.position.x;
+
+        // Floating animation
+        brain.position.y = Math.sin(time * (1.2 + idx * 0.3)) * 2;
+        particles.position.y = brain.position.y;
+
+        // Rotation
+        brain.rotation.x += 0.003;
+        brain.rotation.y += 0.005 + idx * 0.002;
+
+        // Pulsing effect
+        const pulse = 0.8 + Math.sin(time * 2 + idx * 2) * 0.2;
+        brain.scale.set(pulse, pulse, pulse);
+        particles.rotation.z += 0.002;
+
+        if (isHovering) {
+          // React to mouse
+          brain.rotation.z = mouseX * 0.3;
+          brain.rotation.x += mouseY * 0.2;
         }
       });
 
-      // Star field gentle rotation
-      stars.rotation.z += 0.00003;
+      // Animate data packets flowing
+      dataPackets.forEach((packet, idx) => {
+        packet.userData.progress += packet.userData.speed;
+        if (packet.userData.progress > 1) {
+          packet.userData.progress = 0;
+          packet.userData.pathIndex = (packet.userData.pathIndex + 1) % 3;
+        }
 
-      if (isHovering) {
-        // Active AI mode
-        aiRobot.rotation.x = mouseY * 0.4;
-        aiRobot.rotation.y = mouseX * 0.5;
-        aiRobot.rotation.z = mouseX * 0.15;
-        
-        core.scale.set(
-          1 + Math.sin(time * 3) * 0.15,
-          1 + Math.sin(time * 3) * 0.15,
-          1 + Math.sin(time * 3) * 0.15
-        );
-      } else {
-        // Idle AI mode - subtle rotation
-        aiRobot.rotation.y = Math.sin(time * 0.5) * 0.15;
-        aiRobot.rotation.x = Math.sin(time * 0.3) * 0.1;
-        aiRobot.rotation.z = 0;
-        
-        core.scale.set(
-          1 + Math.sin(time * 2) * 0.08,
-          1 + Math.sin(time * 2) * 0.08,
-          1 + Math.sin(time * 2) * 0.08
-        );
-      }
+        const p = packet.userData.progress;
+        const path = packet.userData.pathIndex;
 
-      // Data flow animation
-      particles.rotation.x += 0.0003;
-      particles.rotation.y += 0.0005;
+        if (path === 0) {
+          packet.position.set(-15 + p * 15, p * 1, 0);
+        } else if (path === 1) {
+          packet.position.set(p * 15, 1 - p * 1, 0);
+        } else {
+          packet.position.set(15 - p * 30, -p * 1, 0);
+        }
+
+        // Pulsing glow
+        const glow = 1.2 + Math.sin(time * 5 + idx) * 0.4;
+        packet.material.emissiveIntensity = glow;
+      });
+
+      // Update connection opacity based on data flow
+      [line12, line23, line13].forEach((line, idx) => {
+        const opacity = 0.3 + Math.sin(time * (2 + idx * 0.5)) * 0.3;
+        (line.material as THREE.LineBasicMaterial).opacity = opacity;
+      });
 
       renderer.render(scene, camera);
     };
@@ -390,7 +352,7 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
       style={{
         width: '100%',
         height: `${height}px`,
-        background: '#000000',
+        background: '#0a0a0f',
         position: 'relative',
       }}
     />
