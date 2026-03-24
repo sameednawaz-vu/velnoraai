@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout title="Contact Us" description="Get in touch with Velnora. Have questions or feedback? We'd love to hear from you.">
+  <Header />
+  
+  <main class="contact-page">
+    <div class="container">
+      <h1>Get in Touch</h1>
+      <p class="subtitle">We'd love to hear from you. Send us a message!</p>
+
+      <div class="contact-content">
+        <div class="contact-info">
+          <h2>Contact Information</h2>
+          
+          <div class="info-item">
+            <h3>Email</h3>
+            <p><a href="mailto:hello@velnoraai.com">hello@velnoraai.com</a></p>
+          </div>
+
+          <div class="info-item">
+            <h3>Response Time</h3>
+            <p>We typically respond within 24-48 hours during business days.</p>
+          </div>
+
+          <div class="info-item">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+              <a href="https://twitter.com/velnoraai" target="_blank">Twitter</a>
+              <a href="https://linkedin.com/company/velnoraai" target="_blank">LinkedIn</a>
+              <a href="https://github.com/velnoraai" target="_blank">GitHub</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <h3>What We're Looking For</h3>
+            <ul>
+              <li>Feedback on our content and prompts</li>
+              <li>Partnership and collaboration opportunities</li>
+              <li>Guest posting or contributor inquiries</li>
+              <li>General questions about our services</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .contact-page {
+    padding: 3rem 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-page h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    margin-bottom: 3rem;
+  }
+
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--color-primary);
+  }
+
+  .info-item {
+    margin-bottom: 2rem;
+  }
+
+  .info-item h3 {
+    color: var(--color-secondary);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .info-item p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .info-item a {
+    color: var(--color-secondary);
+    font-weight: 600;
+  }
+
+  .info-item a:hover {
+    color: var(--color-accent);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .social-links a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid var(--color-border);
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .social-links a:hover {
+    background-color: var(--color-secondary);
+    color: white;
+    border-color: var(--color-secondary);
+  }
+
+  .info-item ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-item ul li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    color: #666;
+    position: relative;
+  }
+
+  .info-item ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
+
+  .contact-form-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .contact-page h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .contact-info h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

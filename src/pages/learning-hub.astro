@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Learning Hub" description="Comprehensive guides on AI fundamentals, prompt engineering, and best practices for working with AI systems.">
+  <Header />
+  
+  <main class="learning-hub">
+    <div class="container">
+      <h1>AI Learning Hub</h1>
+      <p class="subtitle">Master the fundamentals of AI and prompt engineering</p>
+
+      <div class="learning-grid">
+        <article class="learning-card">
+          <h2>Getting Started with AI</h2>
+          <p>Learn the basics of AI systems, how they work, and what prompt engineering means. Perfect for complete beginners.</p>
+          <ul class="topics">
+            <li>What is AI?</li>
+            <li>How Large Language Models work</li>
+            <li>Understanding prompts</li>
+            <li>Your first AI conversation</li>
+          </ul>
+        </article>
+
+        <article class="learning-card">
+          <h2>Prompt Engineering Fundamentals</h2>
+          <p>Learn proven techniques to craft effective prompts that get better results from AI systems.</p>
+          <ul class="topics">
+            <li>The anatomy of a good prompt</li>
+            <li>Clarity and specificity matter</li>
+            <li>Context and examples</li>
+            <li>Iterating and refining</li>
+          </ul>
+        </article>
+
+        <article class="learning-card">
+          <h2>Advanced Prompt Techniques</h2>
+          <p>Master advanced strategies for complex tasks including chain-of-thought prompting and role-based prompts.</p>
+          <ul class="topics">
+            <li>Chain-of-thought prompting</li>
+            <li>Role-based prompts</li>
+            <li>Few-shot learning</li>
+            <li>Custom instructions</li>
+          </ul>
+        </article>
+
+        <article class="learning-card">
+          <h2>Content Creation with AI</h2>
+          <p>Use AI to enhance your creative process for writing, design, and business communication.</p>
+          <ul class="topics">
+            <li>AI for copywriting</li>
+            <li>Content ideation</li>
+            <li>Blog writing strategies</li>
+            <li>Marketing content generation</li>
+          </ul>
+        </article>
+
+        <article class="learning-card">
+          <h2>Business Applications</h2>
+          <p>Discover how businesses are using AI for productivity, customer service, and strategic planning.</p>
+          <ul class="topics">
+            <li>AI for business analysis</li>
+            <li>Customer support automation</li>
+            <li>Email and communication</li>
+            <li>Business strategy and planning</li>
+          </ul>
+        </article>
+
+        <article class="learning-card">
+          <h2>Tool Mastery</h2>
+          <p>Get detailed guides on using popular AI tools effectively and efficiently.</p>
+          <ul class="topics">
+            <li>ChatGPT best practices</li>
+            <li>Other AI platforms</li>
+            <li>Integration workflows</li>
+            <li>Productivity tips</li>
+          </ul>
+        </article>
+      </div>
+
+      <section class="learning-cta">
+        <h2>Ready to dive deeper?</h2>
+        <p>Explore our detailed articles, examples, and ready-to-use prompts in the Library.</p>
+        <a href="/library" class="btn-primary">Browse Prompt Library</a>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .learning-hub {
+    padding: 3rem 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .learning-hub h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    margin-bottom: 3rem;
+  }
+
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .learning-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .learning-card:hover {
+    box-shadow: 0 10px 30px rgba(13, 115, 119, 0.1);
+    border-color: var(--color-secondary);
+    transform: translateY(-5px);
+  }
+
+  .learning-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .learning-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .topics {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .topics li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    color: #555;
+    position: relative;
+  }
+
+  .topics li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
+
+  .learning-cta {
+    background: linear-gradient(135deg, #0d7377 0%, #1a1a1a 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+
+  .learning-cta h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .learning-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .learning-hub h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .learning-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .learning-cta {
+      padding: 2rem;
+    }
+  }
+</style>

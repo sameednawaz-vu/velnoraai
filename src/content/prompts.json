@@ -1,0 +1,140 @@
+{
+  "categories": {
+    "creative": {
+      "name": "Creative Writing",
+      "description": "Prompts for storytelling, narrative creation, and creative content",
+      "prompts": [
+        {
+          "id": "creative_1",
+          "title": "Character Development Generator",
+          "description": "Create detailed, compelling characters with consistent personalities and backgrounds.",
+          "example": "A mysterious detective who hides a supernatural ability, working in a steampunk noir city",
+          "useCase": "Fiction writing, character-driven narratives, screenplay development",
+          "category": "Creative Writing"
+        },
+        {
+          "id": "creative_2",
+          "title": "Story Plot Generator",
+          "description": "Generate unique plot ideas with tension, conflict, and narrative arc.",
+          "example": "A heist story set in a future where memories can be stolen and sold",
+          "useCase": "Novel outlines, short stories, creative brainstorming",
+          "category": "Creative Writing"
+        },
+        {
+          "id": "creative_3",
+          "title": "Dialogue Enhancement",
+          "description": "Create authentic character dialogue that reveals personality and advances the plot.",
+          "example": "Banter between rivals who must work together to survive",
+          "useCase": "Screenplay writing, novel dialogue, creative storytelling",
+          "category": "Creative Writing"
+        },
+        {
+          "id": "creative_4",
+          "title": "World Building Assistant",
+          "description": "Build cohesive fictional worlds with consistent rules, cultures, and histories.",
+          "example": "A floating city suspended in clouds with its own ecosystem and civilization",
+          "useCase": "Fantasy worldbuilding, sci-fi settings, immersive storytelling",
+          "category": "Creative Writing"
+        }
+      ]
+    },
+    "business": {
+      "name": "Business",
+      "description": "Professional prompts for business communication and strategy",
+      "prompts": [
+        {
+          "id": "business_1",
+          "title": "Executive Summary Writer",
+          "description": "Generate concise, impactful executive summaries for reports and proposals.",
+          "example": "Software as a Service (SaaS) platform summary for investor pitch",
+          "useCase": "Business proposals, investor pitches, executive reports",
+          "category": "Business"
+        },
+        {
+          "id": "business_2",
+          "title": "Email Communication Optimizer",
+          "description": "Craft professional, persuasive emails for various business scenarios.",
+          "example": "Follow-up email after a networking event",
+          "useCase": "Client communication, business development, internal emails",
+          "category": "Business"
+        },
+        {
+          "id": "business_3",
+          "title": "Business Strategy Analyzer",
+          "description": "Analyze business scenarios and develop strategic recommendations.",
+          "example": "Market entry strategy for a new product in competitive space",
+          "useCase": "Strategic planning, market analysis, business decisions",
+          "category": "Business"
+        }
+      ]
+    },
+    "technical": {
+      "name": "Technical",
+      "description": "Technical prompts for developers and technical professionals",
+      "prompts": [
+        {
+          "id": "tech_1",
+          "title": "Code Generation & Debugging",
+          "description": "Generate code snippets or debug existing code with explanations.",
+          "example": "React component for user authentication with error handling",
+          "useCase": "Software development, code optimization, learning programming",
+          "category": "Technical"
+        },
+        {
+          "id": "tech_2",
+          "title": "Technical Documentation",
+          "description": "Create clear, comprehensive technical documentation for projects.",
+          "example": "API documentation for a RESTful backend service",
+          "useCase": "Project documentation, API guides, technical specifications",
+          "category": "Technical"
+        },
+        {
+          "id": "tech_3",
+          "title": "System Architecture Designer",
+          "description": "Design scalable system architectures for different requirements.",
+          "example": "Microservices architecture for high-traffic e-commerce platform",
+          "useCase": "System design, architecture planning, technical interviews",
+          "category": "Technical"
+        }
+      ]
+    },
+    "marketing": {
+      "name": "Marketing",
+      "description": "Marketing-focused prompts for campaigns and audience engagement",
+      "prompts": [
+        {
+          "id": "marketing_1",
+          "title": "Copywriting for Campaigns",
+          "description": "Write compelling marketing copy that converts readers to customers.",
+          "example": "Landing page headline and description for SaaS product",
+          "useCase": "Marketing campaigns, landing pages, social media ads",
+          "category": "Marketing"
+        },
+        {
+          "id": "marketing_2",
+          "title": "Social Media Content Strategy",
+          "description": "Generate engaging social media content ideas and strategies.",
+          "example": "LinkedIn content calendar for a B2B tech company",
+          "useCase": "Social media marketing, content planning, audience engagement",
+          "category": "Marketing"
+        },
+        {
+          "id": "marketing_3",
+          "title": "Customer Analysis",
+          "description": "Analyze target audiences and develop customer personas.",
+          "example": "Detailed buyer persona for a productivity SaaS tool",
+          "useCase": "Market research, customer targeting, product development",
+          "category": "Marketing"
+        },
+        {
+          "id": "marketing_4",
+          "title": "Brand Voice Developer",
+          "description": "Define and maintain consistent brand voice across platforms.",
+          "example": "Brand voice guidelines for a sustainable fashion startup",
+          "useCase": "Brand development, content consistency, marketing strategy",
+          "category": "Marketing"
+        }
+      ]
+    }
+  }
+}

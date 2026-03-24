@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// For now, we'll create this as a placeholder
+// In the actual site, this would dynamically load blog posts
+const posts = [
+  {
+    title: "5 Essential AI Prompting Techniques",
+    slug: "5-essential-ai-prompting-techniques",
+    excerpt: "Learn the fundamental techniques that will transform your AI prompts from basic to exceptional.",
+    date: "2026-03-24",
+    category: "AI Tips",
+    readingTime: 8
+  },
+  {
+    title: "The Complete Guide to Prompt Engineering",
+    slug: "complete-guide-prompt-engineering",
+    excerpt: "A comprehensive deep-dive into prompt engineering principles, patterns, and best practices.",
+    date: "2026-03-23",
+    category: "Guides",
+    readingTime: 15
+  },
+  {
+    title: "AI for Content Creators: A Beginner's Guide",
+    slug: "ai-content-creators-beginners-guide",
+    excerpt: "Discover how to leverage AI tools to enhance your creative writing and content production.",
+    date: "2026-03-22",
+    category: "Content",
+    readingTime: 10
+  },
+  {
+    title: "Using AI for Business Strategy and Planning",
+    slug: "ai-business-strategy-planning",
+    excerpt: "Explore practical applications of AI in business decision-making, analysis, and strategic planning.",
+    date: "2026-03-21",
+    category: "Business",
+    readingTime: 12
+  },
+  {
+    title: "AI Prompt Organization and Workflow",
+    slug: "ai-prompt-organization-workflow",
+    excerpt: "Build a sustainable system for organizing and managing your AI prompts and workflows.",
+    date: "2026-03-20",
+    category: "Workflow",
+    readingTime: 9
+  },
+  {
+    title: "Advanced Techniques: Chain-of-Thought and Reasoning",
+    slug: "advanced-chain-of-thought-reasoning",
+    excerpt: "Master advanced prompting techniques that leverage AI's ability to reason through complex problems.",
+    date: "2026-03-19",
+    category: "Advanced",
+    readingTime: 14
+  },
+  {
+    title: "Real-World Case Studies: AI Success Stories",
+    slug: "real-world-case-studies-ai-success",
+    excerpt: "Learn from real implementations: how businesses and creators are successfully using AI.",
+    date: "2026-03-18",
+    category: "Case Studies",
+    readingTime: 11
+  }
+];
+---
+
+<BaseLayout title="Blog" description="Read our latest articles on AI, prompt engineering, and content creation with artificial intelligence.">
+  <Header />
+  
+  <main class="blog-page">
+    <div class="container">
+      <h1>Blog</h1>
+      <p class="subtitle">Insights, guides, and tips for mastering AI</p>
+
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <article class="blog-card">
+            <div class="blog-meta">
+              <span class="category">{post.category}</span>
+              <span class="reading-time">{post.readingTime} min read</span>
+            </div>
+            <h2><a href={`/blog/${post.slug}`}>{post.title}</a></h2>
+            <p class="excerpt">{post.excerpt}</p>
+            <div class="blog-footer">
+              <time datetime={post.date}>
+                {new Date(post.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </time>
+              <a href={`/blog/${post.slug}`} class="read-more">Read Article →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <section class="blog-cta">
+        <h2>Weekly Content</h2>
+        <p>We publish in-depth guides and insights every week. Subscribe to stay updated with the latest on AI and prompt engineering.</p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-page {
+    padding: 3rem 2rem;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .blog-page h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    margin-bottom: 3rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .blog-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .blog-card:hover {
+    box-shadow: 0 10px 30px rgba(13, 115, 119, 0.1);
+    border-color: var(--color-secondary);
+    transform: translateY(-3px);
+  }
+
+  .blog-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .category {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .reading-time {
+    color: #999;
+  }
+
+  .blog-card h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  .blog-card h2 a {
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+  }
+
+  .blog-card h2 a:hover {
+    color: var(--color-secondary);
+  }
+
+  .excerpt {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .read-more {
+    color: var(--color-secondary);
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .read-more:hover {
+    color: var(--color-accent);
+  }
+
+  .blog-cta {
+    background: linear-gradient(135deg, #0d7377 0%, #1a1a1a 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+
+  .blog-cta h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .blog-cta p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .blog-page h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .blog-card {
+      padding: 1.5rem;
+    }
+
+    .blog-card h2 {
+      font-size: 1.25rem;
+    }
+
+    .blog-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .blog-cta {
+      padding: 2rem;
+    }
+  }
+</style>

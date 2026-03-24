@@ -1,0 +1,27 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const blogPosts = [
+    { slug: '5-essential-ai-prompting-techniques', title: '5 Essential AI Prompting Techniques', description: 'Master fundamental AI prompting techniques.', publishedDate: '2026-03-24', author: 'Velnora Team', readingTime: 8 },
+    { slug: 'complete-guide-prompt-engineering', title: 'The Complete Guide to Prompt Engineering', description: 'A comprehensive deep-dive into prompt engineering.', publishedDate: '2026-03-23', author: 'Velnora Team', readingTime: 15 },
+    { slug: 'ai-content-creators-beginners-guide', title: 'AI for Content Creators', description: 'Leverage AI for better content creation.', publishedDate: '2026-03-22', author: 'Velnora Team', readingTime: 10 },
+    { slug: 'ai-business-strategy-planning', title: 'AI for Business Strategy', description: 'Practical AI applications in business.', publishedDate: '2026-03-21', author: 'Velnora Team', readingTime: 12 },
+    { slug: 'ai-prompt-organization-workflow', title: 'Prompt Organization System', description: 'Build sustainable prompt management systems.', publishedDate: '2026-03-20', author: 'Velnora Team', readingTime: 9 },
+    { slug: 'advanced-chain-of-thought-reasoning', title: 'Chain-of-Thought Prompting', description: 'Master advanced AI reasoning techniques.', publishedDate: '2026-03-19', author: 'Velnora Team', readingTime: 14 },
+    { slug: 'real-world-case-studies-ai-success', title: 'Real-World AI Success Stories', description: 'Learn from successful AI implementations.', publishedDate: '2026-03-18', author: 'Velnora Team', readingTime: 11 }
+  ];
+
+  return blogPosts.map(post => ({
+    params: { slug: post.slug },
+    props: post
+  }));
+}
+
+const { title, description, publishedDate, author, readingTime } = Astro.props;
+---
+
+<BlogPost title={title} description={description} publishedDate={publishedDate} author={author} readingTime={readingTime}>
+  <h2>Article Content</h2>
+  <p>Full article content can be added here. Your blog infrastructure is fully configured with all 7 article routes ready.</p>
+</BlogPost>

@@ -1,0 +1,358 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero3D from '../components/Hero3D';
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Velnora",
+  "url": "https://velnoraai.com",
+  "logo": "https://velnoraai.com/logo.png",
+  "description": "Elegant AI Intelligence Engine - Teaching people the art of using AI and writing powerful prompts",
+  "sameAs": [
+    "https://twitter.com/velnora",
+    "https://linkedin.com/company/velnora",
+    "https://github.com/velnora"
+  ]
+};
+---
+
+<BaseLayout title="Home - Velnora" description="Velnora - Elegant AI Intelligence Engine. Learn AI, master prompt writing, and access a library of pre-built prompts with examples.">
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  
+  <Header />
+  
+  <!-- 3D Hero Section -->
+  <section class="hero-section">
+    <Hero3D client:visible height={600} />
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1>Velnora</h1>
+        <p class="tagline-large">Elegant AI Intelligence Engine</p>
+        <p class="hero-description">Master the art of AI and prompt engineering with our comprehensive guides, templates, and real-world examples.</p>
+        <div class="hero-buttons">
+          <a href="/learning-hub" class="btn btn-primary">Start Learning</a>
+          <a href="/library" class="btn btn-secondary">Browse Prompts</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2>What We Offer</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Learning Hub</h3>
+          <p>Comprehensive guides to understand AI capabilities and best practices for prompt engineering.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Prompt Library</h3>
+          <p>4 categories with 12+ pre-built prompts. Copy-paste ready with real examples and use cases.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✍️</div>
+          <h3>Blog & Insights</h3>
+          <p>Weekly articles on AI trends, prompt techniques, and content creation strategies.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Implementation Ready</h3>
+          <p>Each prompt comes with examples, use cases, and step-by-step implementation guides.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Preview -->
+  <section class="categories-preview">
+    <div class="container">
+      <h2>Prompt Categories</h2>
+      <div class="categories-grid">
+        <div class="category-item">
+          <h3>🎨 Creative Writing</h3>
+          <p>Prompts for storytelling, narrative creation, and creative content development.</p>
+          <a href="/prompts/category/creative">Explore →</a>
+        </div>
+        <div class="category-item">
+          <h3>💼 Business</h3>
+          <p>Professional prompts for marketing, strategy, and business communication.</p>
+          <a href="/prompts/category/business">Explore →</a>
+        </div>
+        <div class="category-item">
+          <h3>⚙️ Technical</h3>
+          <p>Technical prompts for coding, documentation, and system architecture.</p>
+          <a href="/prompts/category/technical">Explore →</a>
+        </div>
+        <div class="category-item">
+          <h3>📢 Marketing</h3>
+          <p>Marketing-focused prompts for campaigns, copywriting, and audience engagement.</p>
+          <a href="/prompts/category/marketing">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Master AI?</h2>
+      <p>Join thousands learning to use AI effectively. Start with our guided tutorials and explore our prompt library.</p>
+      <div class="cta-buttons">
+        <a href="/learning-hub" class="btn btn-primary">Begin Learning</a>
+        <a href="/contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero-section {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(245, 245, 245, 0.7) 100%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #0d7377 0%, #14ffec 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline-large {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(13, 115, 119, 0.2);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-secondary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .features {
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+  }
+
+  .features h2,
+  .categories-preview h2,
+  .cta-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--color-primary);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-border);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(13, 115, 119, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .feature-card p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .categories-preview {
+    padding: 4rem 2rem;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .category-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--color-border);
+    transition: all 0.3s ease;
+  }
+
+  .category-item:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 10px 20px rgba(13, 115, 119, 0.1);
+  }
+
+  .category-item h3 {
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+  }
+
+  .category-item p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .category-item a {
+    font-weight: 600;
+    color: var(--color-secondary);
+    transition: all 0.2s ease;
+  }
+
+  .category-item a:hover {
+    color: var(--color-accent);
+  }
+
+  .cta-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #0d7377 0%, #1a1a1a 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .tagline-large {
+      font-size: 1.2rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .features h2,
+    .categories-preview h2,
+    .cta-section h2 {
+      font-size: 1.75rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>

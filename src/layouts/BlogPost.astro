@@ -1,0 +1,220 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishedDate: string;
+  author: string;
+  readingTime: number;
+  image?: string;
+}
+
+const { title, description, publishedDate, author, readingTime, image } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": image || undefined,
+  "datePublished": publishedDate,
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Velnora",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://velnoraai.com/logo.png"
+    }
+  }
+};
+---
+
+<BaseLayout title={title} description={description} image={image} article={true} publishedDate={publishedDate} author={author}>
+  <Header />
+  
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  
+  <article class="blog-article">
+    <div class="article-container">
+      <div class="article-header">
+        <h1>{title}</h1>
+        <p class="article-description">{description}</p>
+        
+        <div class="article-meta">
+          <span class="author">By {author}</span>
+          <span class="separator">•</span>
+          <time datetime={publishedDate}>
+            {new Date(publishedDate).toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </time>
+          <span class="separator">•</span>
+          <span class="reading-time">{readingTime} min read</span>
+        </div>
+      </div>
+
+      <div class="article-content">
+        <slot />
+      </div>
+
+      <div class="article-footer">
+        <nav class="article-nav">
+          <a href="/blog" class="back-link">← Back to Blog</a>
+        </nav>
+      </div>
+    </div>
+  </article>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-article {
+    padding: 3rem 2rem;
+    background-color: var(--color-background);
+  }
+
+  .article-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .article-header {
+    margin-bottom: 3rem;
+  }
+
+  .article-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .article-description {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .separator {
+    opacity: 0.5;
+  }
+
+  .article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  :global(.article-content h2) {
+    font-size: 1.75rem;
+    margin: 2rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--color-border);
+  }
+
+  :global(.article-content h3) {
+    font-size: 1.35rem;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  :global(.article-content p) {
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  :global(.article-content a) {
+    color: var(--color-secondary);
+    text-decoration: underline;
+  }
+
+  :global(.article-content a:hover) {
+    color: var(--color-accent);
+  }
+
+  :global(.article-content ul),
+  :global(.article-content ol) {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.article-content li) {
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.article-content code) {
+    background-color: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    color: #d63384;
+  }
+
+  :global(.article-content pre) {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  :global(.article-content blockquote) {
+    border-left: 4px solid var(--color-secondary);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #666;
+    font-style: italic;
+  }
+
+  .article-footer {
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .back-link {
+    color: var(--color-secondary);
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .blog-article {
+      padding: 1.5rem 1rem;
+    }
+
+    .article-header h1 {
+      font-size: 1.75rem;
+    }
+
+    .article-description {
+      font-size: 1rem;
+    }
+
+    .article-content {
+      font-size: 1rem;
+    }
+  }
+</style>

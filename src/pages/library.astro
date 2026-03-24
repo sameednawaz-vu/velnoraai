@@ -1,0 +1,340 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Prompt Library" description="Browse our comprehensive library of AI prompts across 4 categories: Creative Writing, Business, Technical, and Marketing.">
+  <Header />
+  
+  <main class="library-page">
+    <div class="container">
+      <h1>Prompt Library</h1>
+      <p class="subtitle">Pre-built, production-ready prompts for every use case</p>
+
+      <div class="library-intro">
+        <p>
+          Our curated library contains 12+ prompts across 4 categories, each with detailed examples, use cases, and implementation guides.
+          All prompts are tested and production-ready. Simply copy and customize for your needs.
+        </p>
+      </div>
+
+      <div class="categories-showcase">
+        <div class="category-showcase-card">
+          <div class="category-icon">🎨</div>
+          <h2>Creative Writing</h2>
+          <p>Prompts for storytelling, narrative creation, character development, and creative content that captures imagination.</p>
+          <ul class="prompt-count">
+            <li>Character Development</li>
+            <li>Story Ideation</li>
+            <li>Dialogue Writing</li>
+            <li>Plot Development</li>
+          </ul>
+          <a href="/prompts/category/creative" class="explore-btn">View Prompts →</a>
+        </div>
+
+        <div class="category-showcase-card">
+          <div class="category-icon">💼</div>
+          <h2>Business</h2>
+          <p>Professional prompts for marketing strategy, business communication, email templates, and strategic planning.</p>
+          <ul class="prompt-count">
+            <li>Email Writing</li>
+            <li>Business Analysis</li>
+            <li>Proposal Writing</li>
+            <li>Strategic Planning</li>
+          </ul>
+          <a href="/prompts/category/business" class="explore-btn">View Prompts →</a>
+        </div>
+
+        <div class="category-showcase-card">
+          <div class="category-icon">⚙️</div>
+          <h2>Technical</h2>
+          <p>Technical prompts for code generation, documentation, system design, and debugging. Perfect for developers.</p>
+          <ul class="prompt-count">
+            <li>Code Generation</li>
+            <li>Documentation</li>
+            <li>Code Review</li>
+            <li>System Design</li>
+          </ul>
+          <a href="/prompts/category/technical" class="explore-btn">View Prompts →</a>
+        </div>
+
+        <div class="category-showcase-card">
+          <div class="category-icon">📢</div>
+          <h2>Marketing</h2>
+          <p>Marketing-focused prompts for campaigns, copywriting, social media content, and audience engagement strategies.</p>
+          <ul class="prompt-count">
+            <li>Campaign Strategy</li>
+            <li>Copywriting</li>
+            <li>Social Media</li>
+            <li>Audience Analysis</li>
+          </ul>
+          <a href="/prompts/category/marketing" class="explore-btn">View Prompts →</a>
+        </div>
+      </div>
+
+      <section class="how-to-use">
+        <h2>How to Use Prompts</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Browse Categories</h3>
+            <p>Select a category that matches your needs.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Read the Example</h3>
+            <p>Understand how the prompt works by viewing the example output.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Copy the Prompt</h3>
+            <p>Click the copy button to copy the prompt to your clipboard.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Customize & Use</h3>
+            <p>Paste into your AI tool and customize for your specific needs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="library-cta">
+        <h2>Start Exploring</h2>
+        <p>Choose a category to see all available prompts with examples and use cases.</p>
+        <div class="cta-buttons">
+          <a href="/prompts/category/creative" class="btn btn-primary">Creative Writing</a>
+          <a href="/prompts/category/business" class="btn btn-primary">Business</a>
+          <a href="/prompts/category/technical" class="btn btn-primary">Technical</a>
+          <a href="/prompts/category/marketing" class="btn btn-primary">Marketing</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .library-page {
+    padding: 3rem 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .library-page h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .library-intro {
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  .categories-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .category-showcase-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--color-border);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-showcase-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 10px 30px rgba(13, 115, 119, 0.1);
+    transform: translateY(-5px);
+  }
+
+  .category-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-showcase-card h2 {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .category-showcase-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .prompt-count {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .prompt-count li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    color: #555;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .prompt-count li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+  }
+
+  .explore-btn {
+    margin-top: auto;
+    color: var(--color-secondary);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+
+  .explore-btn:hover {
+    color: var(--color-accent);
+  }
+
+  .how-to-use {
+    background: #f9f9f9;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .how-to-use h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-secondary);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+  }
+
+  .step h3 {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .step p {
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .library-cta {
+    background: linear-gradient(135deg, #0d7377 0%, #1a1a1a 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+
+  .library-cta h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .library-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 600;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+
+  .btn:hover {
+    background-color: white;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .library-page h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .categories-showcase {
+      grid-template-columns: 1fr;
+    }
+
+    .how-to-use {
+      padding: 2rem;
+    }
+
+    .library-cta {
+      padding: 2rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>

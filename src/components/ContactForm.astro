@@ -1,0 +1,154 @@
+---
+---
+
+<form id="contact-form" class="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
+  <div class="form-group">
+    <label for="name">Name *</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      placeholder="Your name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email *</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      placeholder="your@email.com"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Subject *</label>
+    <input
+      type="text"
+      id="subject"
+      name="subject"
+      required
+      placeholder="How can we help?"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="message">Message *</label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="6"
+      placeholder="Your message here..."
+    ></textarea>
+  </div>
+
+  <!-- reCAPTCHA v3 -->
+  <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+
+  <button type="submit" class="btn-submit">Send Message</button>
+</form>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script>
+  const form = document.getElementById('contact-form');
+  
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      if (typeof grecaptcha === 'undefined') {
+        console.error('reCAPTCHA not loaded');
+        return;
+      }
+      
+      grecaptcha.ready(() => {
+        grecaptcha.execute('YOUR_RECAPTCHA_SITE_KEY', {action: 'submit'})
+          .then(token => {
+            const recaptchaField = document.createElement('input');
+            recaptchaField.type = 'hidden';
+            recaptchaField.name = 'g-recaptcha-response';
+            recaptchaField.value = token;
+            form.appendChild(recaptchaField);
+            form.submit();
+          });
+      });
+    });
+  }
+</script>
+
+<style>
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.25rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.1);
+  }
+
+  .g-recaptcha {
+    margin-bottom: 1.5rem;
+    transform: scale(0.9);
+    transform-origin: 0 0;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--color-secondary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-submit:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .contact-form {
+      padding: 1.5rem;
+    }
+    
+    .g-recaptcha {
+      transform: scale(0.8);
+    }
+  }
+</style>

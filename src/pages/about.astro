@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Velnora",
+  "description": "Learn about Velnora's mission to teach AI and prompt engineering"
+};
+---
+
+<BaseLayout title="About Velnora" description="Discover the story behind Velnora and our mission to make AI accessible to everyone.">
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  
+  <Header />
+  
+  <main class="about-page">
+    <div class="container">
+      <h1>About Velnora</h1>
+      
+      <section class="about-hero">
+        <p class="tagline">Elegant AI Intelligence Engine</p>
+        <p class="description">
+          Velnora is dedicated to demystifying artificial intelligence and empowering people to harness its potential through the art of prompt engineering.
+        </p>
+      </section>
+
+      <section class="about-section">
+        <h2>Our Mission</h2>
+        <p>
+          We believe that AI is not just a tool for tech experts—it's a transformative technology that should be accessible to everyone. 
+          Our mission is simple: teach people how to effectively communicate with AI systems and unlock their creative and professional potential.
+        </p>
+      </section>
+
+      <section class="about-section">
+        <h2>What We Do</h2>
+        <ul>
+          <li>Provide comprehensive guides on AI fundamentals and best practices</li>
+          <li>Curate a library of pre-built, production-ready prompts across multiple categories</li>
+          <li>Share weekly insights on AI trends, techniques, and real-world applications</li>
+          <li>Offer detailed examples and use cases for every prompt and tutorial</li>
+        </ul>
+      </section>
+
+      <section class="about-section">
+        <h2>Why Velnora?</h2>
+        <p>
+          In a world where AI is rapidly evolving, staying informed and skilled is crucial. Velnora cuts through the noise 
+          and brings you practical, actionable knowledge. Whether you're a content creator, marketer, developer, or business owner, 
+          our resources are designed to help you work smarter with AI.
+        </p>
+      </section>
+
+      <section class="about-section">
+        <h2>Our Values</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <h3>Accessibility</h3>
+            <p>Making AI knowledge available to everyone, regardless of technical background.</p>
+          </div>
+          <div class="value-card">
+            <h3>Clarity</h3>
+            <p>Cutting through complexity to provide clear, actionable guidance.</p>
+          </div>
+          <div class="value-card">
+            <h3>Quality</h3>
+            <p>Every prompt, guide, and article is carefully vetted and tested.</p>
+          </div>
+          <div class="value-card">
+            <h3>Innovation</h3>
+            <p>Staying ahead of AI trends to bring you the latest techniques and tools.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding: 3rem 2rem;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about-page h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .about-section {
+    margin-bottom: 3rem;
+  }
+
+  .about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.5rem;
+  }
+
+  .about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  .about-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .about-section li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    padding: 0.75rem 0 0.75rem 2rem;
+    position: relative;
+  }
+
+  .about-section li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .value-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+  }
+
+  .value-card:hover {
+    box-shadow: 0 10px 20px rgba(13, 115, 119, 0.1);
+    border-color: var(--color-secondary);
+  }
+
+  .value-card h3 {
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .value-card p {
+    color: #666;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .about-page h1 {
+      font-size: 2rem;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+    }
+
+    .description {
+      font-size: 1rem;
+    }
+
+    .about-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .about-section p {
+      font-size: 1rem;
+    }
+  }
+</style>

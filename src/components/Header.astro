@@ -1,0 +1,97 @@
+---
+import type { AstroComponentFactory } from 'astro';
+---
+
+<header>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="/">
+          <span class="brand-name">Velnora</span>
+          <span class="tagline">Elegant AI Intelligence Engine</span>
+        </a>
+      </div>
+      
+      <ul class="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/learning-hub">Learning Hub</a></li>
+        <li><a href="/library">Prompts</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  
+  .logo a {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    color: var(--color-primary);
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  
+  .tagline {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-secondary);
+    letter-spacing: 0.05em;
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+  
+  .nav-menu a {
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-menu a:hover {
+    color: var(--color-secondary);
+  }
+  
+  @media (max-width: 768px) {
+    .nav-menu {
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .nav-container {
+      flex-direction: column;
+      gap: 1rem;
+      height: auto;
+      padding: 1rem 0;
+    }
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  example: string;
+  useCase: string;
+  category: string;
+}
+
+const { title, description, example, useCase, category } = Astro.props;
+---
+
+<div class="prompt-card">
+  <div class="card-header">
+    <h3>{title}</h3>
+    <span class="category-badge">{category}</span>
+  </div>
+
+  <p class="description">{description}</p>
+
+  <div class="example-section">
+    <h4>Example Use:</h4>
+    <p class="example">{example}</p>
+  </div>
+
+  <div class="usecase-section">
+    <h4>Best For:</h4>
+    <p class="usecase">{useCase}</p>
+  </div>
+
+  <button class="copy-btn" data-prompt={description}>
+    📋 Copy Prompt
+  </button>
+</div>
+
+<style>
+  .prompt-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prompt-card:hover {
+    box-shadow: 0 10px 30px rgba(13, 115, 119, 0.1);
+    border-color: var(--color-secondary);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .card-header h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .category-badge {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .description {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .example-section,
+  .usecase-section {
+    margin-bottom: 1rem;
+  }
+
+  .example-section h4,
+  .usecase-section h4 {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .example,
+  .usecase {
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    border-left: 3px solid var(--color-secondary);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .copy-btn {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .copy-btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+  }
+
+  .copy-btn.copied {
+    background-color: #4caf50;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const prompt = (e.target as HTMLButtonElement).dataset.prompt;
+      try {
+        await navigator.clipboard.writeText(prompt || '');
+        (e.target as HTMLButtonElement).textContent = '✓ Copied!';
+        (e.target as HTMLButtonElement).classList.add('copied');
+        setTimeout(() => {
+          (e.target as HTMLButtonElement).textContent = '📋 Copy Prompt';
+          (e.target as HTMLButtonElement).classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  });
+</script>
