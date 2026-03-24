@@ -117,7 +117,8 @@ const organizationSchema = {
   .hero-section {
     position: relative;
     height: 600px;
-    overflow: hidden;
+    overflow: visible;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.5) 0%, rgba(26, 10, 46, 0.3) 100%);
   }
 
   .hero-overlay {
@@ -217,7 +218,7 @@ const organizationSchema = {
 
   .features {
     padding: 4rem 2rem;
-    background: linear-gradient(180deg, rgba(26, 10, 46, 0.3) 0%, rgba(10, 10, 10, 0.1) 100%);
+    background: linear-gradient(180deg, rgba(26, 10, 46, 0.6) 0%, rgba(10, 10, 10, 0.3) 100%);
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
   }
@@ -241,19 +242,20 @@ const organizationSchema = {
   }
 
   .feature-card {
-    background: rgba(26, 26, 35, 0.6);
+    background: rgba(26, 26, 40, 0.9);
     padding: 2rem;
     border-radius: 0.5rem;
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid rgba(217, 70, 239, 0.2);
+    border: 2px solid rgba(217, 70, 239, 0.4);
     backdrop-filter: blur(10px);
   }
 
   .feature-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(217, 70, 239, 0.2);
-    border-color: rgba(217, 70, 239, 0.5);
+    box-shadow: 0 10px 30px rgba(217, 70, 239, 0.3);
+    border-color: var(--color-secondary);
+    background: rgba(26, 26, 40, 1);
   }
 
   .feature-icon {
@@ -282,17 +284,18 @@ const organizationSchema = {
   }
 
   .category-item {
-    background: rgba(26, 26, 35, 0.6);
+    background: rgba(26, 26, 40, 0.95);
     padding: 2rem;
     border-radius: 0.5rem;
-    border: 2px solid var(--color-border);
+    border: 2px solid rgba(217, 70, 239, 0.3);
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
   }
 
   .category-item:hover {
     border-color: var(--color-secondary);
-    box-shadow: 0 10px 20px rgba(217, 70, 239, 0.2);
+    box-shadow: 0 10px 20px rgba(217, 70, 239, 0.4);
+    background: rgba(26, 26, 40, 1);
   }
 
   .category-item h3 {
