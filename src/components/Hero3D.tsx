@@ -148,66 +148,82 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     mindsGroup.add(mind1.mindGroup, mind2.mindGroup, mind3.mindGroup);
     scene.add(mindsGroup);
 
-    // Side magnetic pods/doors
-    const podGroup = new THREE.Group();
-    const pods: any[] = [];
+    // Floating UFO-like objects scattered around
+    const ufoGroup = new THREE.Group();
+    const ufos: any[] = [];
 
-    const createPod = (x: number, y: number, color: number, side: string) => {
-      const podMesh = new THREE.Group();
-      
-      // Main pod sphere
-      const podGeometry = new THREE.SphereGeometry(2, 16, 16);
-      const podMaterial = new THREE.MeshPhongMaterial({
+    const createUFO = (startX: number, startY: number, startZ: number, color: number, speed: number) => {
+      const ufoMesh = new THREE.Group();
+
+      // UFO disc body - elongated saucer shape
+      const discGeometry = new THREE.IcosahedronGeometry(2.5, 3);
+      const discMaterial = new THREE.MeshPhongMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 0.6,
-        shininess: 150,
+        emissiveIntensity: 0.7,
+        shininess: 160,
         wireframe: false,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.85,
       });
-      const pod = new THREE.Mesh(podGeometry, podMaterial);
-      pod.position.set(x, y, 0);
-      podMesh.add(pod);
+      const disc = new THREE.Mesh(discGeometry, discMaterial);
+      disc.scale.set(1.2, 0.4, 1);
+      ufoMesh.add(disc);
 
-      // Inner glow ring
-      const ringGeometry = new THREE.TorusGeometry(2.5, 0.2, 8, 32);
+      // Glowing underside
+      const underwearGeometry = new THREE.SphereGeometry(2.2, 16, 16);
+      const underMaterial = new THREE.MeshBasicMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 1.2,
+        transparent: true,
+        opacity: 0.3,
+      });
+      const underlight = new THREE.Mesh(underwearGeometry, underMaterial);
+      underlight.scale.set(1.1, 0.2, 0.9);
+      ufoMesh.add(underlight);
+
+      // Rotation ring
+      const ringGeometry = new THREE.TorusGeometry(2.5, 0.15, 8, 32);
       const ringMaterial = new THREE.MeshPhongMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 1.0,
+        emissiveIntensity: 1.1,
       });
       const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-      ring.position.set(x, y, 0);
-      ring.rotation.x = Math.random() * Math.PI;
-      podMesh.add(ring);
+      ring.rotation.x = Math.PI / 2.5;
+      ufoMesh.add(ring);
 
-      podMesh.userData = {
-        originalX: x,
-        originalY: y,
-        color,
-        side,
-        pod,
+      ufoMesh.position.set(startX, startY, startZ);
+      ufoMesh.userData = {
+        originalX: startX,
+        originalY: startY,
+        originalZ: startZ,
+        speed,
+        time: Math.random() * Math.PI * 2,
+        disc,
         ring,
+        radius: Math.random() * 3 + 2,
       };
 
-      return podMesh;
+      return ufoMesh;
     };
 
-    // Create 6 side pods
-    const pod1 = createPod(-45, 15, COLORS.primary, 'left');
-    const pod2 = createPod(-45, -15, COLORS.secondary, 'left');
-    const pod3 = createPod(45, 10, COLORS.cyan, 'right');
-    const pod4 = createPod(45, -10, COLORS.primary, 'right');
-    const pod5 = createPod(-45, 0, COLORS.secondary, 'left');
-    const pod6 = createPod(45, 0, COLORS.cyan, 'right');
+    // Create 7 UFOs scattered around
+    const ufo1 = createUFO(-40, 20, -5, COLORS.primary, 0.8);
+    const ufo2 = createUFO(35, -25, 3, COLORS.secondary, 0.6);
+    const ufo3 = createUFO(-35, -18, 2, COLORS.cyan, 0.9);
+    const ufo4 = createUFO(40, 15, -8, COLORS.primary, 0.7);
+    const ufo5 = createUFO(-20, 30, 1, COLORS.secondary, 0.75);
+    const ufo6 = createUFO(28, 10, -4, COLORS.cyan, 0.65);
+    const ufo7 = createUFO(-48, 8, 2, COLORS.primary, 0.8);
 
-    [pod1, pod2, pod3, pod4, pod5, pod6].forEach(pod => {
-      podGroup.add(pod);
-      pods.push(pod);
+    [ufo1, ufo2, ufo3, ufo4, ufo5, ufo6, ufo7].forEach(ufo => {
+      ufoGroup.add(ufo);
+      ufos.push(ufo);
     });
 
-    scene.add(podGroup);
+    scene.add(ufoGroup);
 
     // Neural connections between minds (lines showing AI communication)
     const connectionGroup = new THREE.Group();
@@ -365,25 +381,31 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         packet.material.emissiveIntensity = glow;
       });
 
-      // Animate magnetic pods - attract to mouse
-      pods.forEach((pod) => {
-        const targetX = pod.userData.originalX + mouseX * (pod.userData.side === 'left' ? -15 : 15);
-        const targetY = pod.userData.originalY + mouseY * 10;
+      // Animate magnetic UFOs - independent floating with magnetic attraction
+      ufos.forEach((ufo) => {
+        // Independent circular/orbital motion
+        ufo.userData.time += 0.01 * ufo.userData.speed;
+        const orbitX = Math.cos(ufo.userData.time) * ufo.userData.radius;
+        const orbitY = Math.sin(ufo.userData.time * 0.7) * ufo.userData.radius * 0.5;
 
-        pod.position.x += (targetX - pod.position.x) * 0.08;
-        pod.position.y += (targetY - pod.position.y) * 0.08;
+        const baseX = ufo.userData.originalX + orbitX;
+        const baseY = ufo.userData.originalY + orbitY;
 
-        // Pulsing glow effect
-        const glow = 0.6 + Math.sin(time * 3) * 0.4;
-        pod.userData.pod.material.emissiveIntensity = glow;
-        
-        // Ring rotation
-        pod.userData.ring.rotation.z += 0.01;
+        // Magnetic attraction to cursor
+        const mouseInfluence = 0.12;
+        ufo.position.x += (baseX + mouseX * 20 - ufo.position.x) * 0.08;
+        ufo.position.y += (baseY + mouseY * 15 - ufo.position.y) * 0.08;
 
-        // Distance-based scale
-        const distToMouse = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
-        const scale = 1 + Math.sin(time + distToMouse) * 0.15;
-        pod.scale.set(scale, scale, scale);
+        // Gentle floating motion
+        ufo.position.z = ufo.userData.originalZ + Math.sin(time * 0.8 + ufo.userData.time) * 2;
+
+        // Self-rotation
+        ufo.userData.disc.rotation.z += 0.005;
+        ufo.userData.ring.rotation.y += 0.008;
+
+        // Pulsing glow
+        const glow = 0.7 + Math.sin(time * 2 + ufo.userData.time) * 0.35;
+        ufo.userData.disc.material.emissiveIntensity = glow;
       });
 
       // Update connection opacity based on data flow
@@ -430,7 +452,6 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
 
   return (
     <div
-      ref={containerRef}
       style={{
         width: '100%',
         height: `${height}px`,
@@ -439,115 +460,90 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         overflow: 'hidden',
       }}
     >
-      {/* Edge decorative circles - top left */}
+      {/* Blurred ambient glow - top left */}
       <div
         style={{
           position: 'absolute',
-          top: '10%',
-          left: '2%',
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          background: 'rgba(123, 47, 242, 0.4)',
-          boxShadow: '0 0 20px rgba(123, 47, 242, 0.6)',
+          top: '-100px',
+          left: '-150px',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(123, 47, 242, 0.15) 0%, transparent 70%)',
+          filter: 'blur(80px)',
           pointerEvents: 'none',
         }}
       />
-      {/* Edge decorative circles - top right */}
+      {/* Blurred ambient glow - top right */}
       <div
         style={{
           position: 'absolute',
-          top: '15%',
-          right: '3%',
-          width: '35px',
-          height: '35px',
-          borderRadius: '50%',
-          background: 'rgba(242, 47, 176, 0.35)',
-          boxShadow: '0 0 15px rgba(242, 47, 176, 0.5)',
+          top: '-80px',
+          right: '-120px',
+          width: '450px',
+          height: '450px',
+          background: 'radial-gradient(circle, rgba(242, 47, 176, 0.12) 0%, transparent 70%)',
+          filter: 'blur(90px)',
           pointerEvents: 'none',
         }}
       />
-      {/* Edge decorative circles - middle left */}
+      {/* Blurred ambient glow - middle left */}
       <div
         style={{
           position: 'absolute',
-          top: '50%',
-          left: '1.5%',
-          width: '30px',
-          height: '30px',
-          borderRadius: '50%',
-          background: 'rgba(47, 242, 208, 0.3)',
-          boxShadow: '0 0 18px rgba(47, 242, 208, 0.4)',
+          top: '30%',
+          left: '-100px',
+          width: '350px',
+          height: '350px',
+          background: 'radial-gradient(circle, rgba(47, 242, 208, 0.1) 0%, transparent 70%)',
+          filter: 'blur(70px)',
           pointerEvents: 'none',
         }}
       />
-      {/* Edge decorative circles - middle right */}
+      {/* Blurred ambient glow - middle right */}
       <div
         style={{
           position: 'absolute',
-          top: '45%',
-          right: '2%',
-          width: '45px',
-          height: '45px',
-          borderRadius: '50%',
-          background: 'rgba(123, 47, 242, 0.35)',
-          boxShadow: '0 0 22px rgba(123, 47, 242, 0.5)',
+          top: '35%',
+          right: '-130px',
+          width: '420px',
+          height: '420px',
+          background: 'radial-gradient(circle, rgba(123, 47, 242, 0.13) 0%, transparent 70%)',
+          filter: 'blur(85px)',
           pointerEvents: 'none',
         }}
       />
-      {/* Edge decorative circles - bottom left */}
+      {/* Blurred ambient glow - bottom left */}
       <div
         style={{
           position: 'absolute',
-          bottom: '12%',
-          left: '2.5%',
-          width: '35px',
-          height: '35px',
-          borderRadius: '50%',
-          background: 'rgba(242, 47, 176, 0.4)',
-          boxShadow: '0 0 20px rgba(242, 47, 176, 0.6)',
+          bottom: '-120px',
+          left: '-110px',
+          width: '380px',
+          height: '380px',
+          background: 'radial-gradient(circle, rgba(242, 47, 176, 0.11) 0%, transparent 70%)',
+          filter: 'blur(75px)',
           pointerEvents: 'none',
         }}
       />
-      {/* Edge decorative circles - bottom right */}
+      {/* Blurred ambient glow - bottom right */}
       <div
         style={{
           position: 'absolute',
-          bottom: '18%',
-          right: '3.5%',
-          width: '32px',
-          height: '32px',
-          borderRadius: '50%',
-          background: 'rgba(47, 242, 208, 0.35)',
-          boxShadow: '0 0 18px rgba(47, 242, 208, 0.5)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Additional accent circles */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '8%',
-          right: '15%',
-          width: '25px',
-          height: '25px',
-          borderRadius: '50%',
-          background: 'rgba(123, 47, 242, 0.25)',
-          boxShadow: '0 0 12px rgba(123, 47, 242, 0.4)',
+          bottom: '-100px',
+          right: '-140px',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(47, 242, 208, 0.12) 0%, transparent 70%)',
+          filter: 'blur(80px)',
           pointerEvents: 'none',
         }}
       />
       <div
+        ref={containerRef}
         style={{
-          position: 'absolute',
-          bottom: '8%',
-          left: '12%',
-          width: '28px',
-          height: '28px',
-          borderRadius: '50%',
-          background: 'rgba(242, 47, 176, 0.3)',
-          boxShadow: '0 0 14px rgba(242, 47, 176, 0.45)',
-          pointerEvents: 'none',
+          width: '100%',
+          height: `${height}px`,
+          position: 'relative',
         }}
       />
     </div>
