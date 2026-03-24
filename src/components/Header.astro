@@ -26,11 +26,12 @@ import type { AstroComponentFactory } from 'astro';
 
 <style>
   header {
-    background-color: var(--color-background);
+    background: rgba(10, 10, 10, 0.8);
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
     z-index: 100;
+    backdrop-filter: blur(10px);
   }
   
   .navbar {
@@ -50,13 +51,17 @@ import type { AstroComponentFactory } from 'astro';
     display: flex;
     flex-direction: column;
     padding: 0;
-    color: var(--color-primary);
+    color: var(--color-cyan);
   }
   
   .brand-name {
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .tagline {
@@ -74,11 +79,13 @@ import type { AstroComponentFactory } from 'astro';
   
   .nav-menu a {
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: all 0.3s ease;
+    color: var(--color-text);
   }
   
   .nav-menu a:hover {
-    color: var(--color-secondary);
+    color: var(--color-cyan);
+    text-shadow: 0 0 8px rgba(6, 248, 217, 0.5);
   }
   
   @media (max-width: 768px) {
