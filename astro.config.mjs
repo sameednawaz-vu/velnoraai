@@ -4,6 +4,7 @@ import preact from '@astrojs/preact';
 
 export default defineConfig({
   site: 'https://velnoraai.com',
+  base: '/velnoraai',
   integrations: [
     preact(),
     // sitemap({
