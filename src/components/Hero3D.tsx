@@ -69,8 +69,8 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     const createMind = (x: number, color: number, id: number) => {
       const mindGroup = new THREE.Group();
 
-      // Main brain sphere - ENLARGED
-      const brainGeometry = new THREE.IcosahedronGeometry(6, 5);
+      // Main brain sphere - SIGNIFICANTLY ENLARGED
+      const brainGeometry = new THREE.IcosahedronGeometry(9.5, 5);
       const brainMaterial = new THREE.MeshPhongMaterial({
         color: 0x1a1a2e,
         emissive: color,
@@ -83,8 +83,8 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
       brain.userData = { originalPosition: { x, y: 0, z: 0 }, floatSpeed: 1.2 + id * 0.3 };
       mindGroup.add(brain);
 
-      // Core glowing center - ENLARGED
-      const coreGeometry = new THREE.SphereGeometry(2.5, 32, 32);
+      // Core glowing center - SIGNIFICANTLY ENLARGED
+      const coreGeometry = new THREE.SphereGeometry(4, 32, 32);
       const coreMaterial = new THREE.MeshBasicMaterial({
         color,
         emissive: color,
@@ -95,9 +95,9 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
       core.scale.set(0.6, 0.6, 0.6);
       mindGroup.add(core);
 
-      // Neural spikes around brain - MORE SPIKES, LARGER
-      for (let i = 0; i < 12; i++) {
-        const spikeGeometry = new THREE.ConeGeometry(0.5, 3.5, 8);
+      // Neural spikes around brain - LARGER AND MORE PROMINENT
+      for (let i = 0; i < 16; i++) {
+        const spikeGeometry = new THREE.ConeGeometry(0.75, 5.5, 8);
         const spikeMaterial = new THREE.MeshPhongMaterial({
           color,
           emissive: color,
@@ -105,23 +105,23 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         });
         const spike = new THREE.Mesh(spikeGeometry, spikeMaterial);
         
-        const angle = (i / 12) * Math.PI * 2;
-        spike.position.x = x + Math.cos(angle) * 7;
-        spike.position.y = Math.sin(angle) * 7;
-        spike.position.z = Math.sin(i / 12 * Math.PI) * 4;
+        const angle = (i / 16) * Math.PI * 2;
+        spike.position.x = x + Math.cos(angle) * 10.5;
+        spike.position.y = Math.sin(angle) * 10.5;
+        spike.position.z = Math.sin(i / 16 * Math.PI) * 5;
         spike.lookAt(x, 0, 0);
-        spike.userData = { angle, distance: 7, index: i, parentId: id };
+        spike.userData = { angle, distance: 10.5, index: i, parentId: id };
         
         mindGroup.add(spike);
       }
 
-      // Particle halo around mind - MORE PARTICLES
-      const particleCount = 100;
+      // Particle halo around mind - EXTENDED FURTHER
+      const particleCount = 150;
       const particleGeometry = new THREE.BufferGeometry();
       const particlePositions = new Float32Array(particleCount * 3);
       for (let i = 0; i < particleCount * 3; i += 3) {
         const rad = Math.random() * Math.PI * 2;
-        const dist = 5 + Math.random() * 5;
+        const dist = 8 + Math.random() * 7;
         particlePositions[i] = x + Math.cos(rad) * dist;
         particlePositions[i + 1] = Math.sin(rad) * dist;
         particlePositions[i + 2] = Math.random() * 2 - 1;
@@ -129,7 +129,7 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
       particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
       const particleMaterial = new THREE.PointsMaterial({
         color,
-        size: 0.2,
+        size: 0.25,
         sizeAttenuation: true,
         transparent: true,
         opacity: 0.8,
@@ -141,9 +141,9 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
       return { mindGroup, brain, core, particles };
     };
 
-    const mind1 = createMind(-25, COLORS.primary, 1);
+    const mind1 = createMind(-35, COLORS.primary, 1);
     const mind2 = createMind(0, COLORS.secondary, 2);
-    const mind3 = createMind(25, COLORS.cyan, 3);
+    const mind3 = createMind(35, COLORS.cyan, 3);
 
     mindsGroup.add(mind1.mindGroup, mind2.mindGroup, mind3.mindGroup);
     scene.add(mindsGroup);
@@ -241,7 +241,7 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     // Connection 1-2
     const geo12 = new THREE.BufferGeometry();
     const pos12 = new Float32Array([
-      -25, 0, 0,
+      -35, 0, 0,
       0, 0, 0,
     ]);
     geo12.setAttribute('position', new THREE.BufferAttribute(pos12, 3));
@@ -252,7 +252,7 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     const geo23 = new THREE.BufferGeometry();
     const pos23 = new Float32Array([
       0, 0, 0,
-      25, 0, 0,
+      35, 0, 0,
     ]);
     geo23.setAttribute('position', new THREE.BufferAttribute(pos23, 3));
     const line23 = new THREE.Line(geo23, connectionMaterial);
@@ -261,8 +261,8 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     // Connection 1-3
     const geo13 = new THREE.BufferGeometry();
     const pos13 = new Float32Array([
-      -25, 0, 0,
-      25, 0, 0,
+      -35, 0, 0,
+      35, 0, 0,
     ]);
     geo13.setAttribute('position', new THREE.BufferAttribute(pos13, 3));
     const connectionMaterial2 = new THREE.LineBasicMaterial({
@@ -373,11 +373,11 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         const path = packet.userData.pathIndex;
 
         if (path === 0) {
-          packet.position.set(-25 + p * 25, p * 1.5, 0);
+          packet.position.set(-35 + p * 35, p * 1.5, 0);
         } else if (path === 1) {
-          packet.position.set(p * 25, 1.5 - p * 1.5, 0);
+          packet.position.set(p * 35, 1.5 - p * 1.5, 0);
         } else {
-          packet.position.set(25 - p * 50, -p * 1.5, 0);
+          packet.position.set(35 - p * 70, -p * 1.5, 0);
         }
 
         // Pulsing glow
