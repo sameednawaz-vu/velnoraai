@@ -148,83 +148,6 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     mindsGroup.add(mind1.mindGroup, mind2.mindGroup, mind3.mindGroup);
     scene.add(mindsGroup);
 
-    // Floating UFO-like objects scattered around
-    const ufoGroup = new THREE.Group();
-    const ufos: any[] = [];
-
-    const createUFO = (startX: number, startY: number, startZ: number, color: number, speed: number) => {
-      const ufoMesh = new THREE.Group();
-
-      // UFO disc body - elongated saucer shape
-      const discGeometry = new THREE.IcosahedronGeometry(2.5, 3);
-      const discMaterial = new THREE.MeshPhongMaterial({
-        color,
-        emissive: color,
-        emissiveIntensity: 0.7,
-        shininess: 160,
-        wireframe: false,
-        transparent: true,
-        opacity: 0.85,
-      });
-      const disc = new THREE.Mesh(discGeometry, discMaterial);
-      disc.scale.set(1.2, 0.4, 1);
-      ufoMesh.add(disc);
-
-      // Glowing underside
-      const underwearGeometry = new THREE.SphereGeometry(2.2, 16, 16);
-      const underMaterial = new THREE.MeshBasicMaterial({
-        color,
-        emissive: color,
-        emissiveIntensity: 1.2,
-        transparent: true,
-        opacity: 0.3,
-      });
-      const underlight = new THREE.Mesh(underwearGeometry, underMaterial);
-      underlight.scale.set(1.1, 0.2, 0.9);
-      ufoMesh.add(underlight);
-
-      // Rotation ring
-      const ringGeometry = new THREE.TorusGeometry(2.5, 0.15, 8, 32);
-      const ringMaterial = new THREE.MeshPhongMaterial({
-        color,
-        emissive: color,
-        emissiveIntensity: 1.1,
-      });
-      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-      ring.rotation.x = Math.PI / 2.5;
-      ufoMesh.add(ring);
-
-      ufoMesh.position.set(startX, startY, startZ);
-      ufoMesh.userData = {
-        originalX: startX,
-        originalY: startY,
-        originalZ: startZ,
-        speed,
-        time: Math.random() * Math.PI * 2,
-        disc,
-        ring,
-        radius: Math.random() * 3 + 2,
-      };
-
-      return ufoMesh;
-    };
-
-    // Create 7 UFOs scattered around
-    const ufo1 = createUFO(-40, 20, -5, COLORS.primary, 0.8);
-    const ufo2 = createUFO(35, -25, 3, COLORS.secondary, 0.6);
-    const ufo3 = createUFO(-35, -18, 2, COLORS.cyan, 0.9);
-    const ufo4 = createUFO(40, 15, -8, COLORS.primary, 0.7);
-    const ufo5 = createUFO(-20, 30, 1, COLORS.secondary, 0.75);
-    const ufo6 = createUFO(28, 10, -4, COLORS.cyan, 0.65);
-    const ufo7 = createUFO(-48, 8, 2, COLORS.primary, 0.8);
-
-    [ufo1, ufo2, ufo3, ufo4, ufo5, ufo6, ufo7].forEach(ufo => {
-      ufoGroup.add(ufo);
-      ufos.push(ufo);
-    });
-
-    scene.add(ufoGroup);
-
     // Neural connections between minds (lines showing AI communication)
     const connectionGroup = new THREE.Group();
     const connectionMaterial = new THREE.LineBasicMaterial({
@@ -381,33 +304,6 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         packet.material.emissiveIntensity = glow;
       });
 
-      // Animate magnetic UFOs - independent floating with magnetic attraction
-      ufos.forEach((ufo) => {
-        // Independent circular/orbital motion
-        ufo.userData.time += 0.01 * ufo.userData.speed;
-        const orbitX = Math.cos(ufo.userData.time) * ufo.userData.radius;
-        const orbitY = Math.sin(ufo.userData.time * 0.7) * ufo.userData.radius * 0.5;
-
-        const baseX = ufo.userData.originalX + orbitX;
-        const baseY = ufo.userData.originalY + orbitY;
-
-        // Magnetic attraction to cursor
-        const mouseInfluence = 0.12;
-        ufo.position.x += (baseX + mouseX * 20 - ufo.position.x) * 0.08;
-        ufo.position.y += (baseY + mouseY * 15 - ufo.position.y) * 0.08;
-
-        // Gentle floating motion
-        ufo.position.z = ufo.userData.originalZ + Math.sin(time * 0.8 + ufo.userData.time) * 2;
-
-        // Self-rotation
-        ufo.userData.disc.rotation.z += 0.005;
-        ufo.userData.ring.rotation.y += 0.008;
-
-        // Pulsing glow
-        const glow = 0.7 + Math.sin(time * 2 + ufo.userData.time) * 0.35;
-        ufo.userData.disc.material.emissiveIntensity = glow;
-      });
-
       // Update connection opacity based on data flow
       [line12, line23, line13].forEach((line, idx) => {
         const opacity = 0.3 + Math.sin(time * (2 + idx * 0.5)) * 0.3;
@@ -452,100 +348,13 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
 
   return (
     <div
+      ref={containerRef}
       style={{
         width: '100%',
         height: `${height}px`,
         background: '#0a0a0f',
         position: 'relative',
-        overflow: 'hidden',
       }}
-    >
-      {/* Blurred ambient glow - top left */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-100px',
-          left: '-150px',
-          width: '400px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(123, 47, 242, 0.15) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Blurred ambient glow - top right */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-80px',
-          right: '-120px',
-          width: '450px',
-          height: '450px',
-          background: 'radial-gradient(circle, rgba(242, 47, 176, 0.12) 0%, transparent 70%)',
-          filter: 'blur(90px)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Blurred ambient glow - middle left */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '30%',
-          left: '-100px',
-          width: '350px',
-          height: '350px',
-          background: 'radial-gradient(circle, rgba(47, 242, 208, 0.1) 0%, transparent 70%)',
-          filter: 'blur(70px)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Blurred ambient glow - middle right */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '35%',
-          right: '-130px',
-          width: '420px',
-          height: '420px',
-          background: 'radial-gradient(circle, rgba(123, 47, 242, 0.13) 0%, transparent 70%)',
-          filter: 'blur(85px)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Blurred ambient glow - bottom left */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-120px',
-          left: '-110px',
-          width: '380px',
-          height: '380px',
-          background: 'radial-gradient(circle, rgba(242, 47, 176, 0.11) 0%, transparent 70%)',
-          filter: 'blur(75px)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Blurred ambient glow - bottom right */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-100px',
-          right: '-140px',
-          width: '400px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(47, 242, 208, 0.12) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        ref={containerRef}
-        style={{
-          width: '100%',
-          height: `${height}px`,
-          position: 'relative',
-        }}
-      />
-    </div>
+    />
   );
 }

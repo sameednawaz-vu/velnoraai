@@ -128,6 +128,47 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </style>
 </head>
 <body>
+  <!-- 3 Large Blurred Ambient Blob Elements -->
+  
+  <!-- Blob 1 - Top Left Purple -->
+  <div style="
+    position: fixed;
+    top: -200px;
+    left: -250px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(123, 47, 242, 0.15) 0%, transparent 70%);
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 1;
+  "></div>
+  
+  <!-- Blob 2 - Bottom Right Pink -->
+  <div style="
+    position: fixed;
+    bottom: -250px;
+    right: -200px;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(242, 47, 176, 0.12) 0%, transparent 70%);
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: 1;
+  "></div>
+  
+  <!-- Blob 3 - Middle Right Cyan -->
+  <div style="
+    position: fixed;
+    top: 25%;
+    right: -300px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(47, 242, 208, 0.1) 0%, transparent 70%);
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 1;
+  "></div>
+
   <slot />
 </body>
 </html>
