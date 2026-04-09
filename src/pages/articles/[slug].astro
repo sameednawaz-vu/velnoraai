@@ -17,13 +17,22 @@ if (!article) {
   throw new Error(`Article ${slug} not found.`);
 }
 
-const relatedArticles = toolArticles
-  .filter(
-    (entry) =>
-      entry.slug !== article.slug &&
-      (entry.sectionLabel === article.sectionLabel || entry.familyLabel === article.familyLabel)
-  )
-  .slice(0, 8);
+const relatedArticles = article.relatedArticles.length > 0
+  ? article.relatedArticles
+  : toolArticles
+      .filter(
+        (entry) =>
+          entry.slug !== article.slug &&
+          (entry.sectionLabel === article.sectionLabel || entry.familyLabel === article.familyLabel)
+      )
+      .map((entry) => ({
+        slug: entry.slug,
+        title: entry.articleTitle,
+        href: entry.articleHref,
+      }))
+      .slice(0, 8);
+
+const relatedTools = article.relatedTools;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -42,7 +51,7 @@ const articleSchema = {
   datePublished: article.updatedDate,
   dateModified: article.updatedDate,
   mainEntityOfPage: `https://velnoraai.app${article.articleHref}`,
-  articleSection: article.sectionLabel,
+  articleSection: `${article.sectionLabel} - ${article.articleTypeLabel}`,
   keywords: article.keywords.join(', '),
 };
 
@@ -107,7 +116,9 @@ const faqSchema = {
         <h1>{article.articleTitle}</h1>
         <p class="article-description">{article.articleDescription}</p>
         <div class="meta-row">
+          <span>{article.articleTypeLabel}</span>
           <span>{article.sectionLabel}</span>
+          <span>{article.clusterLabel}</span>
           <span>Updated {article.updatedDate}</span>
           <span>Free to use</span>
         </div>
@@ -159,6 +170,17 @@ const faqSchema = {
             </>
           ))}
         </dl>
+      </section>
+
+      <section>
+        <h2>Related tools</h2>
+        <ul class="related-tool-list">
+          {relatedTools.map((entry) => (
+            <li>
+              <a href={entry.href}>{entry.name}</a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section class="article-actions">
@@ -290,6 +312,20 @@ const faqSchema = {
     line-height: 1.58;
   }
 
+  .related-tool-list {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .related-tool-list li {
+    list-style: disc;
+  }
+
+  .related-tool-list a {
+    color: #2b527b;
+    font-weight: 700;
+  }
+
   .article-actions {
     display: flex;
     flex-wrap: wrap;
@@ -362,6 +398,10 @@ const faqSchema = {
     .article-shell,
     .related-articles {
       padding: 0.9rem;
+    }
+
+    .related-tool-list {
+      padding-left: 1rem;
     }
 
     .related-articles li {

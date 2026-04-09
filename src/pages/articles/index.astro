@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import toolsData from '../../content/data/tools.json';
 import catalog from '../../content/data/freeconvert-catalog.json';
-import { toolArticles, toolArticleCount, toolArticleFamilySummary } from '../../lib/article-catalog';
+import { toolArticles, toolArticleCount, toolArticleFamilySummary, toolArticleTypeSummary } from '../../lib/article-catalog';
 
 const publishedToolCount = toolsData.tools.filter((tool) => tool.status === 'published').length;
 const utilityToolCount = catalog.surfaces.reduce(
@@ -97,6 +97,15 @@ const itemListSchema = {
       ))}
     </section>
 
+    <section class="article-type-strip" data-reveal>
+      {toolArticleTypeSummary.map((item) => (
+        <article>
+          <strong>{item.count}</strong>
+          <span>{item.label}</span>
+        </article>
+      ))}
+    </section>
+
     <section class="article-directory" data-reveal>
       {sectionGroups.map((section) => (
         <section class="article-section" id={section.sectionLabel.toLowerCase().replaceAll(' ', '-')}>
@@ -109,10 +118,11 @@ const itemListSchema = {
           <ul>
             {section.entries.map((entry) => (
               <li>
-                <a href={entry.articleHref}>{entry.articleTitle}</a>
-                <small>
-                  <a href={entry.toolHref}>Open tool</a>
-                </small>
+                <div class="article-link-stack">
+                  <span class="article-type-chip">{entry.articleTypeLabel}</span>
+                  <a href={entry.articleHref}>{entry.articleTitle}</a>
+                </div>
+                <small><a href={entry.toolHref}>Open tool</a></small>
               </li>
             ))}
           </ul>
@@ -193,6 +203,33 @@ const itemListSchema = {
     font-size: 0.84rem;
   }
 
+  .article-type-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .article-type-strip article {
+    border: 1px solid #d7e3ef;
+    border-radius: 0.76rem;
+    background: #f7fbff;
+    padding: 0.7rem 0.8rem;
+    display: grid;
+    gap: 0.16rem;
+  }
+
+  .article-type-strip strong {
+    font-size: 1.15rem;
+    font-family: var(--font-display);
+    color: #143159;
+    line-height: 1;
+  }
+
+  .article-type-strip span {
+    color: #4d6585;
+    font-size: 0.8rem;
+  }
+
   .article-directory {
     border: 1px solid var(--color-border);
     border-radius: 0.92rem;
@@ -257,6 +294,24 @@ const itemListSchema = {
     border-bottom: none;
   }
 
+  .article-link-stack {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .article-type-chip {
+    display: inline-flex;
+    width: fit-content;
+    border-radius: 999px;
+    background: #eaf3ff;
+    color: #24507f;
+    border: 1px solid #c8dbf2;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    letter-spacing: 0.03em;
+  }
+
   .article-section li a {
     color: #233e5e;
     font-size: 0.9rem;
@@ -284,6 +339,10 @@ const itemListSchema = {
       flex-direction: column;
       align-items: flex-start;
       gap: 0.24rem;
+    }
+
+    .article-link-stack {
+      width: 100%;
     }
   }
 </style>

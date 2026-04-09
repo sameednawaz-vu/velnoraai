@@ -18,6 +18,8 @@ const blogSlugs = [
   'real-world-case-studies-ai-success',
 ];
 
+const professionalArticleTypes = ['guide', 'workflow', 'decision'];
+
 const routes = new Set([
   '/',
   '/about',
@@ -39,7 +41,11 @@ for (const category of tools.categories) {
 for (const tool of tools.tools) {
   if (tool.status === 'published') {
     routes.add(`/tools/${tool.category}/${tool.slug}`);
-    routes.add(`/articles/tool-${tool.slug}`);
+
+    for (const articleType of professionalArticleTypes) {
+      const suffix = articleType === 'guide' ? '' : `-${articleType}`;
+      routes.add(`/articles/tool-${tool.slug}${suffix}`);
+    }
   }
 }
 
@@ -66,6 +72,10 @@ const routePriority = (route) => {
   if (route === '/articles') return '0.93';
   if (route === '/convert' || route === '/compress' || route === '/utility-tools') return '0.9';
   if (route.startsWith('/tools/') && route.split('/').length === 4) return '0.9';
+  if (route.startsWith('/articles/utility-')) return '0.84';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-decision')) return '0.85';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-workflow')) return '0.86';
+  if (route.startsWith('/articles/tool-')) return '0.87';
   if (route.startsWith('/articles/')) return '0.87';
   if (route.startsWith('/utility/')) return '0.86';
   if (route.startsWith('/tools/')) return '0.8';
