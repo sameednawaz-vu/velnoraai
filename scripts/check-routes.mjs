@@ -157,7 +157,7 @@ async function checkUrl(url) {
     if (deepValidation && ok) {
       const contentType = (response.headers.get('content-type') || '').toLowerCase();
       const hasTitle = /<title>[\s\S]{1,200}<\/title>/i.test(bodyText);
-      const looksLikeErrorPage = /\b404\b|page not found|cannot be found/i.test(bodyText);
+      const looksLikeErrorPage = /page not found|file not found|cannot be found|\bnot found\b/i.test(bodyText);
 
       if (!contentType.includes('text/html')) {
         ok = false;
