@@ -1,0 +1,150 @@
+---
+interface ToolEntry {
+  name: string;
+  slug: string;
+  status: string;
+}
+
+interface ToolGroup {
+  slug: string;
+  name: string;
+  tools: ToolEntry[];
+}
+
+interface SurfaceEntry {
+  slug: string;
+  name: string;
+  description: string;
+  groups: ToolGroup[];
+}
+
+interface Props {
+  surface: SurfaceEntry;
+  eyebrow?: string;
+}
+
+const { surface, eyebrow = 'Utility Surface' } = Astro.props;
+const totalTools = surface.groups.reduce((count, group) => count + group.tools.length, 0);
+---
+
+<section class="surface-hero" data-reveal>
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{surface.name}</h1>
+  <p class="description">{surface.description}</p>
+  <p class="meta">{totalTools} tools mapped across {surface.groups.length} groups.</p>
+</section>
+
+<section class="surface-groups" data-reveal>
+  {surface.groups.map((group) => (
+    <article class="group-card">
+      <h2>{group.name}</h2>
+      <ul>
+        {group.tools.map((tool) => (
+          <li>
+            <a href={`/utility/${surface.slug}/${tool.slug}`}>{tool.name}</a>
+            {tool.status === 'starter' && <span class="starter-badge">Live starter</span>}
+          </li>
+        ))}
+      </ul>
+    </article>
+  ))}
+</section>
+
+<style>
+  .surface-hero {
+    border: 1px solid var(--color-border);
+    border-radius: 0.92rem;
+    padding: 1.25rem;
+    background: linear-gradient(145deg, rgba(255, 93, 61, 0.14), rgba(10, 138, 130, 0.12));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: #8a531f;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .surface-hero h1 {
+    margin-bottom: 0.65rem;
+  }
+
+  .description {
+    color: #374d6b;
+    max-width: 72ch;
+    line-height: 1.62;
+  }
+
+  .meta {
+    margin-top: 0.7rem;
+    font-weight: 600;
+    color: #23415f;
+  }
+
+  .surface-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .group-card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .group-card h2 {
+    margin-bottom: 0.8rem;
+    font-size: 1.24rem;
+  }
+
+  .group-card ul {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .group-card li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .group-card a {
+    color: #223b59;
+    font-weight: 600;
+  }
+
+  .group-card a:hover {
+    color: var(--color-accent);
+  }
+
+  .starter-badge {
+    display: inline-flex;
+    border: 1px solid rgba(10, 138, 130, 0.35);
+    background: rgba(10, 138, 130, 0.08);
+    color: #0b6f68;
+    font-size: 0.7rem;
+    border-radius: 999px;
+    padding: 0.18rem 0.5rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .surface-hero,
+    .group-card {
+      padding: 0.9rem;
+    }
+
+    .surface-groups {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

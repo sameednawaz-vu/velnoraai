@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SurfaceHub from '../components/utility/SurfaceHub.astro';
+import catalog from '../content/data/freeconvert-catalog.json';
+
+const surface = catalog.surfaces.find((entry) => entry.slug === 'convert');
+if (!surface) {
+  throw new Error('Convert surface catalog not found.');
+}
+
+const allTools = surface.groups.flatMap((group) => group.tools);
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Convert tools by Velnora',
+  itemListElement: allTools.map((tool, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: tool.name,
+    url: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Convert"
+  description="FreeConvert-style Convert surface for Velnora with grouped media and document conversion utilities."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+
+  <Header />
+
+  <main class="surface-page">
+    <SurfaceHub surface={surface} eyebrow="Convert Surface" />
+
+    <section class="surface-note" data-reveal>
+      <h2>Implementation track</h2>
+      <p>
+        This surface is now route-ready and indexed. Starter deterministic handlers are live for selected utilities and
+        all remaining tools are scaffolded for upcoming implementation waves.
+      </p>
+      <div class="links-row">
+        <a href="/compress">Open Compress Surface</a>
+        <a href="/utility-tools">Open Tools Surface</a>
+        <a href="/tools">Browse Existing 120 Tools</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .surface-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .surface-note {
+    border: 1px solid var(--color-border);
+    border-radius: 0.86rem;
+    background: #fffdf7;
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-note p {
+    margin-top: 0.45rem;
+    color: #4e627f;
+  }
+
+  .links-row {
+    margin-top: 0.85rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .links-row a {
+    border: 1px solid #d6c3a4;
+    background: #fff7e8;
+    color: #25415f;
+    border-radius: 0.48rem;
+    padding: 0.5rem 0.72rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .surface-page {
+      padding: 1rem 0.8rem 2.6rem;
+    }
+  }
+</style>

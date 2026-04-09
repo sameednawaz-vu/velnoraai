@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does Velnora API require authentication in this phase?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The current release track is static and client-side first. Public API surfaces are documented for roadmap alignment and optional enhancement phases.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="API"
+  description="Velnora API roadmap and integration model for client-side utility tools with deterministic fallbacks."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <Header />
+
+  <main class="simple-page">
+    <section class="hero" data-reveal>
+      <p class="eyebrow">Product Surface</p>
+      <h1>API</h1>
+      <p>
+        API integrations are planned as optional enrichment layers. Every utility keeps deterministic local behavior so
+        core workflows remain available without credentials.
+      </p>
+    </section>
+
+    <section class="card" data-reveal>
+      <h2>Implementation policy</h2>
+      <ul>
+        <li>No private key requirement for core utility execution.</li>
+        <li>Public no-auth data sources can be added as optional upgrades.</li>
+        <li>Any remote enhancement must keep local fallback output available.</li>
+      </ul>
+      <a href="/contact">Request API early access</a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .simple-page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero,
+  .card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hero {
+    background: linear-gradient(145deg, rgba(255, 93, 61, 0.12), rgba(10, 138, 130, 0.09));
+  }
+
+  .eyebrow {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    color: #8a531f;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero p,
+  .card li {
+    color: #445a77;
+  }
+
+  .card ul {
+    margin: 0.65rem 0 0.9rem;
+    display: grid;
+    gap: 0.4rem;
+    padding-left: 1.1rem;
+  }
+
+  .card a {
+    border: 1px solid #d7c39f;
+    border-radius: 0.45rem;
+    padding: 0.48rem 0.72rem;
+    background: #fff6e5;
+    color: #26405f;
+    font-weight: 700;
+    display: inline-flex;
+    width: fit-content;
+  }
+</style>

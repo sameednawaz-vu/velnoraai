@@ -1,4 +1,18 @@
 ---
+import catalog from '../content/data/freeconvert-catalog.json';
+
+const primaryMenus = [
+  { label: 'Convert', href: '/convert', surfaceSlug: 'convert' },
+  { label: 'Compress', href: '/compress', surfaceSlug: 'compress' },
+  { label: 'Tools', href: '/utility-tools', surfaceSlug: 'tools' },
+];
+
+const secondaryLinks = [
+  { label: 'API', href: '/api' },
+  { label: 'Pricing', href: '/pricing' },
+];
+
+const surfaceMap = new Map(catalog.surfaces.map((surface) => [surface.slug, surface]));
 ---
 
 <header>
@@ -12,14 +26,46 @@
       </div>
       
       <ul class="nav-menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/tools">Tools</a></li>
-        <li><a href="/learning-hub">Learning Hub</a></li>
-        <li><a href="/library">Prompts</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
+        {primaryMenus.map((menu) => {
+          const surface = surfaceMap.get(menu.surfaceSlug);
+
+          return (
+            <li class="nav-item has-mega">
+              <a href={menu.href} class="top-link">{menu.label}</a>
+
+              {surface && (
+                <div class="mega-menu" aria-label={`${menu.label} menu`}>
+                  <div class="mega-columns">
+                    {surface.groups.map((group) => (
+                      <section class="mega-column">
+                        <h4>{group.name}</h4>
+                        <ul>
+                          {group.tools.slice(0, 6).map((tool) => (
+                            <li><a href={`/utility/${surface.slug}/${tool.slug}`}>{tool.name}</a></li>
+                          ))}
+                        </ul>
+                        <a href={menu.href} class="view-all">View all</a>
+                      </section>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </li>
+          );
+        })}
+
+        {secondaryLinks.map((item) => (
+          <li class="nav-item">
+            <a href={item.href} class="top-link">{item.label}</a>
+          </li>
+        ))}
       </ul>
+
+      <div class="auth-actions">
+        <a class="search-chip" href="/tools" aria-label="Search all tools">Search</a>
+        <a class="auth-link" href="/login">Log In</a>
+        <a class="auth-link auth-signup" href="/signup">Sign Up</a>
+      </div>
     </div>
   </nav>
 </header>
@@ -45,7 +91,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    min-height: 72px;
+    min-height: 78px;
   }
   
   .logo a {
@@ -78,44 +124,202 @@
   .nav-menu {
     display: flex;
     list-style: none;
-    gap: 0.45rem;
+    gap: 0.25rem;
     align-items: center;
+    flex: 1;
+    justify-content: center;
   }
   
-  .nav-menu a {
+  .nav-item {
+    position: relative;
+  }
+
+  .top-link {
     font-weight: 600;
     transition: all 0.22s ease;
     color: #2d3d58;
     border-radius: 999px;
     padding: 0.5rem 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
   }
   
-  .nav-menu a:hover {
+  .top-link:hover {
     color: var(--color-primary);
     background: rgba(255, 93, 61, 0.13);
   }
+
+  .mega-menu {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 50%;
+    transform: translate(-50%, 8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    min-width: min(1080px, calc(100vw - 1.6rem));
+    width: max-content;
+    max-width: min(1080px, calc(100vw - 1.6rem));
+    border: 1px solid var(--color-border);
+    border-radius: 0.82rem;
+    background: rgba(255, 250, 240, 0.97);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 26px 44px rgba(18, 39, 63, 0.18);
+    padding: 0.8rem;
+    z-index: 130;
+  }
+
+  .has-mega:hover .mega-menu,
+  .has-mega:focus-within .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  .mega-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .mega-column {
+    border-right: 1px solid rgba(34, 58, 91, 0.08);
+    padding-right: 0.6rem;
+  }
+
+  .mega-column:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .mega-column h4 {
+    font-size: 0.88rem;
+    margin-bottom: 0.4rem;
+    color: #1e3554;
+  }
+
+  .mega-column ul {
+    list-style: none;
+    display: grid;
+    gap: 0.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .mega-column li a {
+    border-radius: 0.44rem;
+    padding: 0.28rem 0.42rem;
+    color: #274260;
+    display: inline-flex;
+    width: 100%;
+    font-size: 0.86rem;
+  }
+
+  .mega-column li a:hover {
+    background: rgba(255, 93, 61, 0.12);
+    color: #17304f;
+  }
+
+  .view-all {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .search-chip {
+    border: 1px solid rgba(36, 56, 83, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+    color: #2a3f5d;
+    font-weight: 600;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .auth-link {
+    border-radius: 0.45rem;
+    border: 1px solid rgba(36, 56, 83, 0.24);
+    color: #223853;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.45rem 0.72rem;
+    background: #fffdf7;
+  }
+
+  .auth-link:hover {
+    border-color: #bea47f;
+    color: #162f4b;
+  }
+
+  .auth-signup {
+    border-color: rgba(10, 138, 130, 0.36);
+    color: #0b6f68;
+    background: rgba(10, 138, 130, 0.08);
+  }
   
+  @media (max-width: 1100px) {
+    .mega-menu {
+      display: none;
+    }
+
+    .nav-container {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.3rem 0;
+    }
+
+    .nav-menu {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .auth-actions {
+      margin-left: auto;
+    }
+  }
+
   @media (max-width: 768px) {
     .navbar {
       padding: 0.4rem 0.8rem;
     }
 
+    .brand-name {
+      font-size: 1.42rem;
+    }
+
+    .tagline {
+      font-size: 0.64rem;
+      letter-spacing: 0.08rem;
+    }
+
     .nav-menu {
-      gap: 0.35rem;
-      font-size: 0.8rem;
-      flex-wrap: wrap;
+      gap: 0.2rem;
+      font-size: 0.82rem;
+    }
+
+    .top-link {
+      padding: 0.38rem 0.56rem;
+    }
+
+    .auth-actions {
+      width: 100%;
       justify-content: center;
     }
 
-    .nav-menu a {
-      padding: 0.38rem 0.62rem;
-    }
-    
-    .nav-container {
-      flex-direction: column;
-      gap: 0.55rem;
-      height: auto;
-      padding: 0.65rem 0;
+    .auth-link,
+    .search-chip {
+      font-size: 0.82rem;
+      padding: 0.36rem 0.56rem;
     }
   }
 </style>

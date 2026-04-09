@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Log In"
+  description="Log in surface placeholder for Velnora while static-first utility tracks are deployed."
+>
+  <Header />
+
+  <main class="auth-page">
+    <section class="auth-card" data-reveal>
+      <p class="eyebrow">Account Surface</p>
+      <h1>Log In</h1>
+      <p>
+        Authentication workflows are intentionally deferred in this static-first phase. Core utility surfaces are
+        available without account creation.
+      </p>
+      <div class="actions">
+        <a href="/convert">Open Convert</a>
+        <a href="/signup">Open Sign Up</a>
+        <a href="/contact">Contact Team</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .auth-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+  }
+
+  .auth-card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.86rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .eyebrow {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    color: #8a531f;
+    font-weight: 700;
+  }
+
+  .auth-card p {
+    color: #445a77;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.66rem;
+    flex-wrap: wrap;
+  }
+
+  .actions a {
+    border: 1px solid #d7c39f;
+    border-radius: 0.45rem;
+    padding: 0.48rem 0.7rem;
+    background: #fff6e5;
+    color: #26405f;
+    font-weight: 700;
+  }
+</style>

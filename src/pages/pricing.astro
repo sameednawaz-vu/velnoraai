@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Velnora pricing model for utility surfaces and implementation tracks, starting with free client-side baseline access."
+>
+  <Header />
+
+  <main class="pricing-page">
+    <section class="hero" data-reveal>
+      <p class="eyebrow">Commercial Surface</p>
+      <h1>Pricing</h1>
+      <p>
+        The current launch baseline keeps deterministic utility execution available at no cost while advanced capability
+        packs are prepared for future tiers.
+      </p>
+    </section>
+
+    <section class="tier-grid" data-reveal>
+      <article>
+        <h2>Free</h2>
+        <p class="price">$0</p>
+        <ul>
+          <li>Client-side deterministic utility flows</li>
+          <li>Convert, Compress, and Tools surface access</li>
+          <li>Route-level SEO coverage</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Pro (Planned)</h2>
+        <p class="price">Roadmap</p>
+        <ul>
+          <li>Advanced media utility packs</li>
+          <li>Optional API enhancement layers</li>
+          <li>Workflow templates and exports</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pricing-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    background: linear-gradient(145deg, rgba(255, 93, 61, 0.12), rgba(10, 138, 130, 0.09));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .eyebrow {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    color: #8a531f;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero p {
+    color: #445a77;
+  }
+
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .tier-grid article {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+  }
+
+  .price {
+    margin: 0.45rem 0 0.6rem;
+    color: #16324f;
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+
+  .tier-grid ul {
+    display: grid;
+    gap: 0.4rem;
+    padding-left: 1.1rem;
+    color: #445a77;
+  }
+</style>

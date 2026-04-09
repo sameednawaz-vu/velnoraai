@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import StarterUtilityRunner from '../../../components/utility/StarterUtilityRunner';
+import catalog from '../../../content/data/freeconvert-catalog.json';
+
+interface ToolEntry {
+  name: string;
+  slug: string;
+  status: string;
+}
+
+interface GroupEntry {
+  slug: string;
+  name: string;
+  tools: ToolEntry[];
+}
+
+interface SurfaceEntry {
+  slug: string;
+  name: string;
+  description: string;
+  groups: GroupEntry[];
+}
+
+interface CatalogEntry {
+  surface: SurfaceEntry;
+  group: GroupEntry;
+  tool: ToolEntry;
+}
+
+export async function getStaticPaths() {
+  return catalog.surfaces.flatMap((surface) =>
+    surface.groups.flatMap((group) =>
+      group.tools.map((tool) => ({
+        params: {
+          surface: surface.slug,
+          slug: tool.slug,
+        },
+        props: {
+          surface,
+          group,
+          tool,
+        },
+      }))
+    )
+  );
+}
+
+const { surface, group, tool } = Astro.props as CatalogEntry;
+const hubHref = surface.slug === 'tools' ? '/utility-tools' : `/${surface.slug}`;
+
+const sameGroup = group.tools.filter((item) => item.slug !== tool.slug);
+const sameSurface = surface.groups
+  .flatMap((entry) => entry.tools)
+  .filter((item) => item.slug !== tool.slug && !sameGroup.some((same) => same.slug === item.slug));
+
+const relatedTools = [...sameGroup, ...sameSurface].slice(0, 4);
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: tool.name,
+  applicationCategory: 'UtilityApplication',
+  applicationSubCategory: `${surface.name} / ${group.name}`,
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  description: `${tool.name} utility in Velnora ${surface.name} surface. Client-side execution with deterministic implementation strategy.`,
+  url: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: surface.name,
+      item: `https://velnoraai.app${hubHref}`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: group.name,
+      item: `https://velnoraai.app${hubHref}`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: tool.name,
+      item: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={tool.name}
+  description={`${tool.name} in the ${surface.name} surface. Deterministic client-side implementation with staged capability rollout.`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <Header />
+
+  <main class="utility-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-reveal>
+      <a href={hubHref}>{surface.name}</a>
+      <span>/</span>
+      <span>{group.name}</span>
+      <span>/</span>
+      <span>{tool.name}</span>
+    </nav>
+
+    <section class="hero" data-reveal>
+      <p class="eyebrow">{surface.name} / {group.name}</p>
+      <h1>{tool.name}</h1>
+      <p>
+        This route is now live as part of the FreeConvert-style expansion track. Execution handlers are delivered in
+        phased batches with deterministic browser behavior as the baseline.
+      </p>
+      <div class="chips">
+        <span>Surface: {surface.name}</span>
+        <span>Group: {group.name}</span>
+        <span>Status: {tool.status}</span>
+      </div>
+    </section>
+
+    <section data-reveal>
+      <StarterUtilityRunner client:load toolSlug={tool.slug} />
+    </section>
+
+    <section class="readiness" data-reveal>
+      <h2>Implementation readiness</h2>
+      <ul>
+        <li>Static route and metadata are live.</li>
+        <li>Capability and constraint planning are attached to this utility track.</li>
+        <li>Related utility links are active for cross-surface discovery.</li>
+      </ul>
+    </section>
+
+    <section class="related" data-reveal>
+      <h2>Related utilities</h2>
+      <div class="related-grid">
+        {relatedTools.map((entry) => (
+          <a href={`/utility/${surface.slug}/${entry.slug}`}>{entry.name}</a>
+        ))}
+      </div>
+      <div class="cross-links">
+        <a href={hubHref}>Back to {surface.name}</a>
+        <a href="/tools">Open Existing Tools Platform</a>
+        <a href="/learning-hub">Open Learning Hub</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .utility-page {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: #60728e;
+    font-size: 0.9rem;
+  }
+
+  .hero {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    background: linear-gradient(145deg, rgba(255, 93, 61, 0.12), rgba(10, 138, 130, 0.12));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .eyebrow {
+    font-size: 0.77rem;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+    color: #8a531f;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero p {
+    color: #3f5674;
+    line-height: 1.6;
+  }
+
+  .chips {
+    margin-top: 0.85rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .chips span {
+    border: 1px solid rgba(10, 138, 130, 0.28);
+    border-radius: 999px;
+    background: rgba(10, 138, 130, 0.08);
+    color: #23596e;
+    font-size: 0.76rem;
+    padding: 0.24rem 0.56rem;
+    font-weight: 700;
+  }
+
+  .readiness,
+  .related {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .readiness ul {
+    margin-top: 0.7rem;
+    display: grid;
+    gap: 0.45rem;
+    padding-left: 1.1rem;
+    color: #3f5674;
+  }
+
+  .related-grid {
+    margin-top: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .related-grid a,
+  .cross-links a {
+    border: 1px solid #dbc8ab;
+    border-radius: 0.48rem;
+    padding: 0.52rem 0.7rem;
+    color: #23415f;
+    background: #fff8eb;
+    font-weight: 700;
+  }
+
+  .cross-links {
+    margin-top: 0.85rem;
+    display: flex;
+    gap: 0.68rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .utility-page {
+      padding: 1rem 0.8rem 2.6rem;
+    }
+  }
+</style>

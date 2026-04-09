@@ -150,6 +150,11 @@ declare module 'astro:content' {
   data: any;
 }>;
 "data": {
+"freeconvert-catalog": {
+	id: "freeconvert-catalog";
+  collection: "data";
+  data: any
+};
 "prompts": {
 	id: "prompts";
   collection: "data";

@@ -6,6 +6,7 @@ const now = new Date().toISOString();
 
 const tools = JSON.parse(readFileSync(resolve('src/content/data/tools.json'), 'utf-8'));
 const prompts = JSON.parse(readFileSync(resolve('src/content/data/prompts.json'), 'utf-8'));
+const utilityCatalog = JSON.parse(readFileSync(resolve('src/content/data/freeconvert-catalog.json'), 'utf-8'));
 
 const blogSlugs = [
   '5-essential-ai-prompting-techniques',
@@ -20,10 +21,17 @@ const blogSlugs = [
 const routes = new Set([
   '/',
   '/about',
+  '/api',
+  '/compress',
   '/contact',
   '/learning-hub',
   '/library',
   '/blog',
+  '/login',
+  '/pricing',
+  '/signup',
+  '/utility-tools',
+  '/convert',
   '/tools',
 ]);
 
@@ -45,10 +53,20 @@ for (const slug of blogSlugs) {
   routes.add(`/blog/${slug}`);
 }
 
+for (const surface of utilityCatalog.surfaces) {
+  for (const group of surface.groups) {
+    for (const tool of group.tools) {
+      routes.add(`/utility/${surface.slug}/${tool.slug}`);
+    }
+  }
+}
+
 const routePriority = (route) => {
   if (route === '/') return '1.0';
   if (route === '/tools') return '0.95';
+  if (route === '/convert' || route === '/compress' || route === '/utility-tools') return '0.9';
   if (route.startsWith('/tools/') && route.split('/').length === 4) return '0.9';
+  if (route.startsWith('/utility/')) return '0.86';
   if (route.startsWith('/tools/')) return '0.8';
   if (route.startsWith('/blog/')) return '0.7';
   return '0.65';
