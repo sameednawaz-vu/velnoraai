@@ -3,9 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ToolCard from '../../components/tools/ToolCard.astro';
-import toolsData from '../../content/tools.json';
+import toolsData from '../../content/data/tools.json';
 
 const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published');
+const allCategories = toolsData.categories;
 const categorySummaries = toolsData.categories
   .map((category) => {
     const count = publishedTools.filter((tool) => tool.category === category.slug).length;
@@ -35,16 +36,16 @@ const itemListSchema = {
   <Header />
 
   <main class="tools-page">
-    <section class="tools-hero">
+    <section class="tools-hero" data-reveal>
       <p class="eyebrow">Velnora Tools Hub</p>
-      <h1>Client-side tools you can run immediately</h1>
+      <h1>120 tools, one client-side platform</h1>
       <p>
-        No account setup. No private API key requirement. Batch 1 is live with deterministic writing and messaging tools,
-        and each tool page includes metadata, related links, and implementation guidance.
+        Full catalog is now live with deterministic fallbacks, category routes, internal linking, and indexable tool pages.
+        Search by name, tags, mode, and category to find exactly what you need.
       </p>
     </section>
 
-    <section class="category-strip">
+    <section class="category-strip" data-reveal>
       {categorySummaries.map((category) => (
         <a href={`/tools/${category.slug}`}>
           <strong>{category.name}</strong>
@@ -53,10 +54,48 @@ const itemListSchema = {
       ))}
     </section>
 
-    <section class="tools-grid-section">
+    <section class="search-panel" data-reveal>
+      <div class="search-input-wrap">
+        <label for="tool-search">Search tools</label>
+        <input
+          id="tool-search"
+          type="text"
+          placeholder="Search by tool name or tag"
+          aria-label="Search tools"
+        />
+      </div>
+
+      <div class="search-filters">
+        <div>
+          <label for="tool-category-filter">Category</label>
+          <select id="tool-category-filter" aria-label="Filter by category">
+            <option value="all">All categories</option>
+            {allCategories.map((category) => (
+              <option value={category.slug}>{category.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label for="tool-mode-filter">Mode</label>
+          <select id="tool-mode-filter" aria-label="Filter by mode">
+            <option value="all">All modes</option>
+            <option value="L">L: Launch now</option>
+            <option value="B">B: Build-time</option>
+            <option value="O">O: Optional API enhancement</option>
+          </select>
+        </div>
+
+        <button id="tool-filter-reset" type="button">Clear filters</button>
+      </div>
+    </section>
+
+    <section class="tools-grid-section" data-reveal>
       <div class="section-header">
         <h2>Published tools</h2>
-        <p>{publishedTools.length} tools are currently live in Batch 1.</p>
+        <p>
+          <span id="tools-visible-count">{publishedTools.length}</span> of {publishedTools.length} tools visible.
+        </p>
       </div>
 
       <div class="tools-grid">
@@ -64,11 +103,74 @@ const itemListSchema = {
           <ToolCard tool={tool} />
         ))}
       </div>
+
+      <p class="no-results" id="tools-no-results" hidden>
+        No tools matched your current search and filters. Try clearing filters or adjusting the search terms.
+      </p>
     </section>
   </main>
 
   <Footer />
 </BaseLayout>
+
+<script>
+  const setupToolSearch = () => {
+    const searchInput = document.getElementById('tool-search');
+    const categoryFilter = document.getElementById('tool-category-filter');
+    const modeFilter = document.getElementById('tool-mode-filter');
+    const resetButton = document.getElementById('tool-filter-reset');
+    const countNode = document.getElementById('tools-visible-count');
+    const noResultsNode = document.getElementById('tools-no-results');
+    const cards = Array.from(document.querySelectorAll('[data-tool-card]'));
+
+    if (!(searchInput instanceof HTMLInputElement) || !(categoryFilter instanceof HTMLSelectElement) || !(modeFilter instanceof HTMLSelectElement) || !(resetButton instanceof HTMLButtonElement) || !(countNode instanceof HTMLElement) || !(noResultsNode instanceof HTMLElement)) {
+      return;
+    }
+
+    const update = () => {
+      const query = searchInput.value.trim().toLowerCase();
+      const category = categoryFilter.value;
+      const mode = modeFilter.value;
+      let visible = 0;
+
+      for (const card of cards) {
+        const cardName = (card.getAttribute('data-name') ?? '').toLowerCase();
+        const cardTags = (card.getAttribute('data-tags') ?? '').toLowerCase();
+        const cardCategory = card.getAttribute('data-category') ?? '';
+        const cardMode = card.getAttribute('data-mode') ?? '';
+
+        const queryMatch = query.length === 0 || cardName.includes(query) || cardTags.includes(query);
+        const categoryMatch = category === 'all' || cardCategory === category;
+        const modeMatch = mode === 'all' || cardMode === mode;
+
+        const isVisible = queryMatch && categoryMatch && modeMatch;
+        card.toggleAttribute('hidden', !isVisible);
+        if (isVisible) {
+          visible += 1;
+        }
+      }
+
+      countNode.textContent = `${visible}`;
+      noResultsNode.toggleAttribute('hidden', visible !== 0);
+    };
+
+    searchInput.addEventListener('input', update);
+    categoryFilter.addEventListener('change', update);
+    modeFilter.addEventListener('change', update);
+    resetButton.addEventListener('click', () => {
+      searchInput.value = '';
+      categoryFilter.value = 'all';
+      modeFilter.value = 'all';
+      update();
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupToolSearch, { once: true });
+  } else {
+    setupToolSearch();
+  }
+</script>
 
 <style>
   .tools-page {
@@ -81,13 +183,14 @@ const itemListSchema = {
 
   .tools-hero {
     padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--color-border);
     border-radius: 0.9rem;
-    background: linear-gradient(160deg, rgba(217, 70, 239, 0.15), rgba(6, 248, 217, 0.08));
+    background: linear-gradient(130deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.13));
+    box-shadow: var(--shadow-soft);
   }
 
   .eyebrow {
-    color: var(--color-cyan);
+    color: #8a531f;
     font-size: 0.82rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -96,13 +199,14 @@ const itemListSchema = {
   }
 
   .tools-hero h1 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 0.8rem;
   }
 
   .tools-hero p {
     max-width: 76ch;
-    color: rgba(244, 248, 252, 0.9);
+    color: #334a69;
     line-height: 1.65;
   }
 
@@ -113,30 +217,100 @@ const itemListSchema = {
   }
 
   .category-strip a {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--color-border);
     border-radius: 0.7rem;
     padding: 0.85rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #fff;
-    background: rgba(15, 15, 24, 0.8);
+    color: #294161;
+    background: #fffdf7;
+    box-shadow: var(--shadow-soft);
   }
 
   .category-strip a:hover {
-    border-color: var(--color-cyan);
+    border-color: #d4bea0;
   }
 
   .category-strip span {
-    color: rgba(210, 220, 245, 0.9);
+    color: #60728f;
     font-size: 0.86rem;
   }
 
+  .search-panel {
+    border: 1px solid var(--color-border);
+    border-radius: 0.9rem;
+    padding: 1rem;
+    background: linear-gradient(180deg, #fffdf8 0%, #fff4e7 100%);
+    display: grid;
+    gap: 0.9rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .search-input-wrap {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .search-panel label {
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: #80502a;
+    font-weight: 700;
+  }
+
+  .search-panel input,
+  .search-panel select {
+    width: 100%;
+    border: 1px solid #dcc8ab;
+    border-radius: 0.55rem;
+    background: #fffef9;
+    color: #2b3f5c;
+    font-size: 0.95rem;
+    padding: 0.65rem 0.8rem;
+  }
+
+  .search-panel input:focus,
+  .search-panel select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(10, 138, 130, 0.14);
+  }
+
+  .search-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    align-items: end;
+  }
+
+  .search-filters > div {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  #tool-filter-reset {
+    border: 1px solid #ddc5a2;
+    border-radius: 0.55rem;
+    background: #fff3df;
+    color: #274163;
+    font-weight: 700;
+    padding: 0.64rem 0.95rem;
+    cursor: pointer;
+    height: fit-content;
+  }
+
+  #tool-filter-reset:hover {
+    border-color: #cba77a;
+  }
+
   .tools-grid-section {
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--color-border);
     border-radius: 0.9rem;
     padding: 1.3rem;
-    background: rgba(12, 13, 22, 0.82);
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
   }
 
   .section-header {
@@ -149,12 +323,32 @@ const itemListSchema = {
   }
 
   .section-header p {
-    color: rgba(210, 220, 245, 0.9);
+    color: #556b87;
   }
 
   .tools-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
+  }
+
+  .no-results {
+    margin-top: 1rem;
+    padding: 0.85rem;
+    border-radius: 0.65rem;
+    border: 1px dashed #d9c2a0;
+    color: #5f6981;
+    background: #fff4e5;
+  }
+
+  @media (max-width: 768px) {
+    .tools-page {
+      padding: 1.4rem 0.8rem 3rem;
+      gap: 1rem;
+    }
+
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

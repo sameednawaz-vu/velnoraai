@@ -2,8 +2,8 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
-import BatchOneToolRunner from '../../../components/tools/BatchOneToolRunner';
-import toolsData from '../../../content/tools.json';
+import UniversalToolRunner from '../../../components/tools/UniversalToolRunner';
+import toolsData from '../../../content/data/tools.json';
 
 export async function getStaticPaths() {
   return toolsData.tools
@@ -126,7 +126,7 @@ const faqSchema =
       <span>{tool.name}</span>
     </nav>
 
-    <header class="tool-hero">
+    <header class="tool-hero" data-reveal>
       <p class="mode">Mode {tool.mode}</p>
       <h1>{tool.name}</h1>
       <p class="description">{tool.description}</p>
@@ -137,12 +137,12 @@ const faqSchema =
       </ul>
     </header>
 
-    <section class="runner-section" aria-label="Tool runner">
+    <section class="runner-section" aria-label="Tool runner" data-reveal>
       <h2>Run the tool</h2>
-      <BatchOneToolRunner client:load toolSlug={tool.slug} />
+      <UniversalToolRunner client:load tool={tool} />
     </section>
 
-    <section class="info-grid">
+    <section class="info-grid" data-reveal>
       <article>
         <h2>How it works</h2>
         <ol>
@@ -161,13 +161,13 @@ const faqSchema =
       </article>
     </section>
 
-    <section class="example-block">
+    <section class="example-block" data-reveal>
       <h2>Example input</h2>
       <pre>{tool.exampleInput}</pre>
       <p class="updated">Last updated: {tool.lastUpdated}</p>
     </section>
 
-    <section class="related-section">
+    <section class="related-section" data-reveal>
       <h2>Related tools</h2>
       <div class="related-grid">
         {relatedTools.map((entry) => (
@@ -179,7 +179,7 @@ const faqSchema =
       </div>
     </section>
 
-    <section class="internal-cross-links">
+    <section class="internal-cross-links" data-reveal>
       <h2>Continue learning</h2>
       <p>
         Review practical implementation guides and workflow examples in the learning and blog sections, then return to
@@ -193,7 +193,7 @@ const faqSchema =
     </section>
 
     {tool.faq && tool.faq.length > 0 && (
-      <section class="faq-section">
+      <section class="faq-section" data-reveal>
         <h2>FAQ</h2>
         <div class="faq-items">
           {tool.faq.map((entry) => (
@@ -225,14 +225,15 @@ const faqSchema =
     align-items: center;
     gap: 0.5rem;
     font-size: 0.92rem;
-    color: rgba(238, 247, 255, 0.86);
+    color: #5f6f8b;
   }
 
   .tool-hero {
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid var(--color-border);
     border-radius: 0.9rem;
     padding: 1.4rem;
-    background: linear-gradient(150deg, rgba(18, 19, 30, 0.92), rgba(35, 19, 49, 0.8));
+    background: linear-gradient(145deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.12));
+    box-shadow: var(--shadow-soft);
   }
 
   .mode {
@@ -240,7 +241,7 @@ const faqSchema =
     margin-bottom: 0.45rem;
     font-size: 0.82rem;
     font-weight: 700;
-    color: var(--color-cyan);
+    color: #0c6f68;
     letter-spacing: 0.06rem;
     text-transform: uppercase;
   }
@@ -252,12 +253,12 @@ const faqSchema =
 
   .description {
     margin-bottom: 0.45rem;
-    color: rgba(245, 245, 245, 0.92);
+    color: #3d4f6d;
     line-height: 1.6;
   }
 
   .value-prop {
-    color: rgba(206, 246, 248, 0.96);
+    color: #27486d;
     line-height: 1.6;
   }
 
@@ -270,11 +271,12 @@ const faqSchema =
   }
 
   .tags li {
-    border: 1px solid rgba(6, 248, 217, 0.42);
+    border: 1px solid rgba(10, 138, 130, 0.34);
     border-radius: 999px;
     padding: 0.28rem 0.7rem;
     font-size: 0.78rem;
-    color: #cbffff;
+    color: #28576c;
+    background: rgba(10, 138, 130, 0.08);
   }
 
   .runner-section,
@@ -283,10 +285,11 @@ const faqSchema =
   .related-section,
   .internal-cross-links,
   .faq-section {
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid var(--color-border);
     border-radius: 0.85rem;
     padding: 1.2rem;
-    background: rgba(12, 14, 25, 0.9);
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
   }
 
   .runner-section h2,
@@ -311,31 +314,31 @@ const faqSchema =
     display: grid;
     gap: 0.5rem;
     line-height: 1.55;
-    color: rgba(236, 244, 255, 0.95);
+    color: #2c3f5d;
   }
 
   .info-grid h3 {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     font-size: 1.05rem;
-    color: var(--color-cyan);
+    color: var(--color-accent);
   }
 
   .example-block pre {
-    background: rgba(5, 8, 14, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #fffaf1;
+    border: 1px solid #dfc7a6;
     border-radius: 0.6rem;
     padding: 0.85rem;
     white-space: pre-wrap;
     line-height: 1.55;
-    color: #ecf4ff;
+    color: #273954;
     font-size: 0.9rem;
   }
 
   .updated {
     margin-top: 0.65rem;
     font-size: 0.86rem;
-    color: rgba(212, 226, 248, 0.92);
+    color: #5f718f;
   }
 
   .related-grid {
@@ -347,25 +350,25 @@ const faqSchema =
   .related-grid a {
     display: grid;
     gap: 0.35rem;
-    border: 1px solid rgba(255, 255, 255, 0.17);
+    border: 1px solid #dfc9a8;
     border-radius: 0.65rem;
     padding: 0.8rem;
-    color: #fff;
-    background: rgba(19, 20, 31, 0.92);
+    color: #233a58;
+    background: #fff9ef;
   }
 
   .related-grid a:hover {
-    border-color: var(--color-cyan);
+    border-color: var(--color-accent);
   }
 
   .related-grid span {
-    color: rgba(218, 228, 248, 0.95);
+    color: #4a5e7c;
     line-height: 1.5;
     font-size: 0.9rem;
   }
 
   .internal-cross-links p {
-    color: rgba(218, 228, 248, 0.96);
+    color: #4a5e7c;
     line-height: 1.6;
     margin-bottom: 0.75rem;
   }
@@ -377,15 +380,16 @@ const faqSchema =
   }
 
   .cross-links-row a {
-    border: 1px solid rgba(255, 255, 255, 0.26);
+    border: 1px solid #dac29f;
     border-radius: 0.5rem;
     padding: 0.52rem 0.85rem;
-    color: #fff;
+    color: #26425f;
+    background: #fff5e5;
   }
 
   .cross-links-row a:hover {
-    border-color: var(--color-cyan);
-    color: var(--color-cyan);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   .faq-items {
@@ -394,20 +398,20 @@ const faqSchema =
   }
 
   .faq-items article {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid #ddc8aa;
     border-radius: 0.6rem;
     padding: 0.85rem;
-    background: rgba(8, 10, 17, 0.95);
+    background: #fff8ed;
   }
 
   .faq-items h3 {
     margin-bottom: 0.35rem;
     font-size: 1rem;
-    color: var(--color-cyan);
+    color: var(--color-accent);
   }
 
   .faq-items p {
-    color: rgba(232, 241, 255, 0.95);
+    color: #344c6c;
     line-height: 1.55;
   }
 </style>

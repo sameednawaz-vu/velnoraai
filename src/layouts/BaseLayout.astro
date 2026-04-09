@@ -11,6 +11,8 @@ interface Props {
 const { title, description = "Velnora - Elegant AI Intelligence Engine", image, article = false, publishedDate, author } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID;
+const defaultOgImage = 'https://velnoraai.app/images/og-velnora.png';
+const socialImage = image ?? defaultOgImage;
 ---
 
 <!DOCTYPE html>
@@ -18,6 +20,17 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFF9ED" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="generator" content="Astro" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Sora:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <title>{title} | Velnora</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
@@ -27,13 +40,14 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
   <meta property="og:description" content={description} />
   <meta property="og:type" content={article ? "article" : "website"} />
   <meta property="og:url" content={canonicalURL} />
-  {image && <meta property="og:image" content={image} />}
+  <meta property="og:image" content={socialImage} />
+  <meta property="og:site_name" content="Velnora" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  {image && <meta name="twitter:image" content={image} />}
+  <meta name="twitter:image" content={socialImage} />
   
   {article && publishedDate && (
     <meta property="article:published_time" content={publishedDate} />
@@ -57,6 +71,32 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
       </script>
     </>
   )}
+
+  <script>
+    if (typeof window !== 'undefined') {
+      window.addEventListener('DOMContentLoaded', () => {
+        const targets = document.querySelectorAll('[data-reveal]');
+        if (!('IntersectionObserver' in window) || targets.length === 0) {
+          targets.forEach((node) => node.classList.add('is-visible'));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        targets.forEach((node) => observer.observe(node));
+      });
+    }
+  </script>
   
   <style is:global>
     * {
@@ -66,114 +106,137 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
     }
     
     :root {
-      --color-primary: #0a0a0a;
-      --color-secondary: #d946ef;
-      --color-accent: #06b6d4;
-      --color-background: #0f0f0f;
-      --color-text: #f5f5f5;
-      --color-border: #2a2a2a;
-      --color-card-bg: #1a1a1a;
-      --color-cyan: #06f8d9;
-      --color-purple: #d946ef;
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      --color-primary: #132239;
+      --color-secondary: #ff5d3d;
+      --color-accent: #0a8a82;
+      --color-background: #fff9ed;
+      --color-background-soft: #f8f3e4;
+      --color-text: #20314a;
+      --color-border: #e5d8bf;
+      --color-card-bg: #fffdf7;
+      --color-cyan: #0a8a82;
+      --color-purple: #ff5d3d;
+      --color-highlight: #ffc53d;
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Sora', 'Segoe UI', Tahoma, sans-serif;
+      --shadow-soft: 0 10px 30px rgba(20, 42, 68, 0.08);
+      --shadow-medium: 0 20px 42px rgba(16, 40, 66, 0.14);
     }
     
     html {
       font-family: var(--font-sans);
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0f0f0f 100%);
+      background: radial-gradient(circle at 12% 10%, rgba(255, 197, 61, 0.35), transparent 45%),
+                  radial-gradient(circle at 85% 4%, rgba(10, 138, 130, 0.2), transparent 35%),
+                  linear-gradient(180deg, #fff9ed 0%, #fff3de 100%);
       background-attachment: fixed;
       color: var(--color-text);
     }
     
     body {
       line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      color: var(--color-text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(19, 34, 57, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(19, 34, 57, 0.05) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 76%);
+      z-index: 0;
+    }
+
+    body > * {
+      position: relative;
+      z-index: 1;
     }
     
     h1, h2, h3, h4, h5, h6 {
       font-weight: 700;
       letter-spacing: -0.02em;
+      color: var(--color-primary);
     }
     
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
+    h1, .display-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.08;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+      line-height: 1.15;
+    }
+
+    h3 {
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      line-height: 1.25;
+    }
     
     a {
       color: var(--color-accent);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease, opacity 0.2s ease;
     }
     
     a:hover {
-      color: var(--color-cyan);
-      text-shadow: 0 0 8px rgba(6, 248, 217, 0.5);
+      color: #066861;
     }
     
     button {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 0.25rem;
+      padding: 0.74rem 1.15rem;
+      border: 1px solid transparent;
+      border-radius: 0.55rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+      transition: all 0.18s ease;
     }
     
     button.primary {
-      background: linear-gradient(135deg, #d946ef 0%, #b935d9 100%);
+      background: linear-gradient(135deg, var(--color-secondary) 0%, #ff7f2f 100%);
       color: white;
-      border: 1px solid #d946ef;
-      box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+      box-shadow: var(--shadow-soft);
     }
     
     button.primary:hover {
-      background: linear-gradient(135deg, #e84bb8 0%, #d946ef 100%);
-      box-shadow: 0 0 30px rgba(217, 70, 239, 0.6);
-      transform: translateY(-2px);
+      background: linear-gradient(135deg, #ff6a3f 0%, #ff963f 100%);
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-1px);
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      * {
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- 3 Large Blurred Ambient Blob Elements -->
-  
-  <!-- Blob 1 - Top Left Purple -->
-  <div style="
-    position: fixed;
-    top: -200px;
-    left: -250px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(123, 47, 242, 0.15) 0%, transparent 70%);
-    filter: blur(100px);
-    pointer-events: none;
-    z-index: 1;
-  "></div>
-  
-  <!-- Blob 2 - Bottom Right Pink -->
-  <div style="
-    position: fixed;
-    bottom: -250px;
-    right: -200px;
-    width: 650px;
-    height: 650px;
-    background: radial-gradient(circle, rgba(242, 47, 176, 0.12) 0%, transparent 70%);
-    filter: blur(110px);
-    pointer-events: none;
-    z-index: 1;
-  "></div>
-  
-  <!-- Blob 3 - Middle Right Cyan -->
-  <div style="
-    position: fixed;
-    top: 25%;
-    right: -300px;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(circle, rgba(47, 242, 208, 0.1) 0%, transparent 70%);
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 1;
-  "></div>
-
   <slot />
 </body>
 </html>

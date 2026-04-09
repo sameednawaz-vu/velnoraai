@@ -19,7 +19,14 @@ interface Props {
 const { tool } = Astro.props;
 ---
 
-<article class="tool-card">
+<article
+  class="tool-card"
+  data-tool-card
+  data-name={tool.name.toLowerCase()}
+  data-category={tool.category}
+  data-tags={tool.tags.join(' ').toLowerCase()}
+  data-mode={tool.mode}
+>
   <div class="tool-card-top">
     <p class="tool-mode">Mode {tool.mode}</p>
     <p class="tool-updated">Updated {tool.lastUpdated}</p>
@@ -43,14 +50,22 @@ const { tool } = Astro.props;
 
 <style>
   .tool-card {
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 0.75rem;
-    background: rgba(18, 19, 29, 0.92);
+    border: 1px solid var(--color-border);
+    border-radius: 0.82rem;
+    background: linear-gradient(165deg, #fffef9 0%, #fff6e8 100%);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
     height: 100%;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    border-color: #d9c4a0;
   }
 
   .tool-card-top {
@@ -58,12 +73,14 @@ const { tool } = Astro.props;
     justify-content: space-between;
     gap: 1rem;
     font-size: 0.78rem;
-    color: rgba(238, 248, 255, 0.75);
+    color: #5a6a86;
   }
 
   .tool-mode {
     font-weight: 700;
-    color: var(--color-cyan);
+    color: #0b6f68;
+    text-transform: uppercase;
+    letter-spacing: 0.07rem;
   }
 
   .tool-updated {
@@ -76,20 +93,20 @@ const { tool } = Astro.props;
   }
 
   .tool-card h3 a {
-    color: #ffffff;
+    color: var(--color-primary);
   }
 
   .tool-card h3 a:hover {
-    color: var(--color-cyan);
+    color: var(--color-accent);
   }
 
   .tool-description {
-    color: rgba(245, 245, 245, 0.85);
+    color: #425472;
     line-height: 1.55;
   }
 
   .tool-value {
-    color: rgba(214, 248, 250, 0.95);
+    color: #29466b;
     font-size: 0.95rem;
     line-height: 1.5;
   }
@@ -105,8 +122,9 @@ const { tool } = Astro.props;
 
   .tool-tags li {
     font-size: 0.76rem;
-    border: 1px solid rgba(6, 248, 217, 0.4);
-    color: #cafff8;
+    border: 1px solid rgba(10, 138, 130, 0.35);
+    color: #26566c;
+    background: rgba(10, 138, 130, 0.09);
     border-radius: 999px;
     padding: 0.28rem 0.65rem;
   }
@@ -116,14 +134,15 @@ const { tool } = Astro.props;
     width: fit-content;
     padding: 0.55rem 0.95rem;
     border-radius: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #fff;
+    border: 1px solid #d5c2a2;
+    color: var(--color-primary);
+    background: #fffaf0;
     font-weight: 700;
     transition: all 0.2s ease;
   }
 
   .tool-link:hover {
-    border-color: var(--color-cyan);
-    color: var(--color-cyan);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 </style>

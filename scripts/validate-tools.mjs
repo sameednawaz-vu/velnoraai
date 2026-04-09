@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const filePath = resolve('src/content/tools.json');
+const filePath = resolve('src/content/data/tools.json');
 const raw = readFileSync(filePath, 'utf-8');
 const data = JSON.parse(raw);
 
@@ -12,6 +12,8 @@ const requiredToolFields = [
   'category',
   'mode',
   'status',
+  'engine',
+  'inputSchema',
   'description',
   'valueProposition',
   'seoTitle',
@@ -60,6 +62,10 @@ for (const tool of data.tools) {
 
   if (!Array.isArray(tool.tags) || tool.tags.length < 3) {
     errors.push(`Tool ${tool.slug} must have at least 3 tags.`);
+  }
+
+  if (!Array.isArray(tool.inputSchema) || tool.inputSchema.length < 2) {
+    errors.push(`Tool ${tool.slug} must define at least 2 input schema fields.`);
   }
 
   if (!Array.isArray(tool.relatedTools) || tool.relatedTools.length < 3) {

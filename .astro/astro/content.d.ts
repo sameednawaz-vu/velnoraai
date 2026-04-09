@@ -149,6 +149,18 @@ declare module 'astro:content' {
   collection: "blog";
   data: any;
 }>;
+"data": {
+"prompts": {
+	id: "prompts";
+  collection: "data";
+  data: any
+};
+"tools": {
+	id: "tools";
+  collection: "data";
+  data: any
+};
+};
 
 	};
 

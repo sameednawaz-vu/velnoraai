@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ToolCard from '../../components/tools/ToolCard.astro';
-import toolsData from '../../content/tools.json';
+import toolsData from '../../content/data/tools.json';
 
 export async function getStaticPaths() {
   return toolsData.categories.map((category) => ({
@@ -45,20 +45,20 @@ const collectionSchema = {
       <span>{categoryInfo.name}</span>
     </div>
 
-    <section class="category-hero">
+    <section class="category-hero" data-reveal>
       <p class="eyebrow">Category</p>
       <h1>{categoryInfo.name}</h1>
       <p>{categoryInfo.description}</p>
     </section>
 
     {categoryTools.length > 0 ? (
-      <section class="category-grid">
+      <section class="category-grid" data-reveal>
         {categoryTools.map((tool) => (
           <ToolCard tool={tool} />
         ))}
       </section>
     ) : (
-      <section class="coming-soon">
+      <section class="coming-soon" data-reveal>
         <h2>Tools for this category are in progress</h2>
         <p>
           This category is part of upcoming batches. You can explore currently published tools from Batch 1 in the main
@@ -68,7 +68,7 @@ const collectionSchema = {
       </section>
     )}
 
-    <section class="cross-links">
+    <section class="cross-links" data-reveal>
       <h2>Keep learning</h2>
       <p>
         Pair these tools with practical guidance from the learning and blog sections for implementation examples and
@@ -97,19 +97,20 @@ const collectionSchema = {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: rgba(230, 238, 255, 0.85);
+    color: #61718c;
     font-size: 0.92rem;
   }
 
   .category-hero {
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid var(--color-border);
     border-radius: 0.85rem;
     padding: 1.4rem;
-    background: rgba(17, 18, 30, 0.85);
+    background: linear-gradient(145deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.1));
+    box-shadow: var(--shadow-soft);
   }
 
   .eyebrow {
-    color: var(--color-cyan);
+    color: #8a531f;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08rem;
@@ -124,7 +125,7 @@ const collectionSchema = {
 
   .category-hero p {
     max-width: 70ch;
-    color: rgba(245, 245, 245, 0.9);
+    color: #37506f;
     line-height: 1.6;
   }
 
@@ -135,10 +136,11 @@ const collectionSchema = {
   }
 
   .coming-soon {
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--color-border);
     border-radius: 0.85rem;
     padding: 1.2rem;
-    background: rgba(12, 14, 24, 0.88);
+    background: #fff8eb;
+    box-shadow: var(--shadow-soft);
   }
 
   .coming-soon h2 {
@@ -148,15 +150,16 @@ const collectionSchema = {
 
   .coming-soon p {
     margin-bottom: 0.9rem;
-    color: rgba(220, 230, 247, 0.92);
+    color: #4e627f;
     line-height: 1.6;
   }
 
   .coming-soon a {
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    border: 1px solid #d6c19e;
     border-radius: 0.5rem;
     padding: 0.55rem 0.9rem;
-    color: #fff;
+    color: #2b3f5c;
+    background: #fffdf7;
     display: inline-block;
   }
 
@@ -167,10 +170,11 @@ const collectionSchema = {
 
   .cross-links {
     margin-top: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--color-border);
     border-radius: 0.85rem;
     padding: 1.2rem;
-    background: rgba(12, 14, 24, 0.9);
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
   }
 
   .cross-links h2 {
@@ -180,7 +184,7 @@ const collectionSchema = {
 
   .cross-links p {
     margin-bottom: 0.9rem;
-    color: rgba(220, 230, 247, 0.92);
+    color: #4f627e;
     line-height: 1.6;
   }
 
@@ -191,10 +195,11 @@ const collectionSchema = {
   }
 
   .cross-links-row a {
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    border: 1px solid #d7c4a4;
     border-radius: 0.5rem;
     padding: 0.55rem 0.9rem;
-    color: #fff;
+    color: #2a415f;
+    background: #fffaf1;
   }
 
   .cross-links-row a:hover {

@@ -4,8 +4,8 @@ import { resolve } from 'node:path';
 const site = 'https://velnoraai.app';
 const now = new Date().toISOString();
 
-const tools = JSON.parse(readFileSync(resolve('src/content/tools.json'), 'utf-8'));
-const prompts = JSON.parse(readFileSync(resolve('src/content/prompts.json'), 'utf-8'));
+const tools = JSON.parse(readFileSync(resolve('src/content/data/tools.json'), 'utf-8'));
+const prompts = JSON.parse(readFileSync(resolve('src/content/data/prompts.json'), 'utf-8'));
 
 const blogSlugs = [
   '5-essential-ai-prompting-techniques',

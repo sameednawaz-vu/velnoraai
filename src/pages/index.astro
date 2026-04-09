@@ -19,93 +19,93 @@ const organizationSchema = {
 };
 ---
 
-<BaseLayout title="Home - Velnora" description="Velnora - Elegant AI Intelligence Engine. Learn AI, master prompt writing, and access a library of pre-built prompts with examples.">
+<BaseLayout title="Home - Velnora" description="Velnora is a client-side tools platform with 120 deterministic tools, searchable categories, and practical implementation guides.">
   <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
   
   <Header />
   
   <!-- 3D Hero Section -->
-  <section class="hero-section">
+  <section class="hero-section" data-reveal>
     <Hero3D client:visible height={600} />
     <div class="hero-overlay">
       <div class="hero-content">
         <h1>Velnora</h1>
-        <p class="tagline-large">Elegant AI Intelligence Engine</p>
-        <p class="hero-description">Master the art of AI and prompt engineering with our comprehensive guides, templates, and real-world examples.</p>
+        <p class="tagline-large">Client-side tools that ship outcomes</p>
+        <p class="hero-description">Run 120 deterministic tools with no private API keys required. Search by category, execute instantly, and ship cleaner work faster.</p>
         <div class="hero-buttons">
           <a href="/tools" class="btn btn-primary">Browse Tools</a>
-          <a href="./learning-hub" class="btn btn-primary">Start Learning</a>
-          <a href="./library" class="btn btn-secondary">Browse Prompts</a>
+          <a href="/tools/writing-messaging" class="btn btn-primary">Open Writing Tools</a>
+          <a href="./learning-hub" class="btn btn-secondary">Start Learning</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section class="features">
+  <section class="features" data-reveal>
     <div class="container">
-      <h2>What We Offer</h2>
+      <h2>What You Can Do</h2>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">📚</div>
-          <h3>Learning Hub</h3>
-          <p>Comprehensive guides to understand AI capabilities and best practices for prompt engineering.</p>
+          <div class="feature-icon">🧩</div>
+          <h3>Run 120 Tools</h3>
+          <p>Writing, SEO, developer, finance, UX, and communication tools in one static platform.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">📋</div>
-          <h3>Prompt Library</h3>
-          <p>4 categories with 12+ pre-built prompts. Copy-paste ready with real examples and use cases.</p>
+          <div class="feature-icon">🔎</div>
+          <h3>Search and Filter</h3>
+          <p>Find tools by name, tags, category, and mode from a single searchable tools index.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">✍️</div>
-          <h3>Blog & Insights</h3>
-          <p>Weekly articles on AI trends, prompt techniques, and content creation strategies.</p>
+          <div class="feature-icon">🗂️</div>
+          <h3>Category Hubs</h3>
+          <p>Each category has a dedicated index and crawlable child tool links for better discovery.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-          <h3>Implementation Ready</h3>
-          <p>Each prompt comes with examples, use cases, and step-by-step implementation guides.</p>
+          <div class="feature-icon">📈</div>
+          <h3>SEO-ready Pages</h3>
+          <p>Canonical URLs, structured data, internal links, and static sitemap coverage are built in.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Categories Preview -->
-  <section class="categories-preview">
+  <section class="categories-preview" data-reveal>
     <div class="container">
-      <h2>Prompt Categories</h2>
+      <h2>Tool Categories</h2>
       <div class="categories-grid">
         <div class="category-item">
-          <h3>🎨 Creative Writing</h3>
-          <p>Prompts for storytelling, narrative creation, and creative content development.</p>
-          <a href="./prompts/category/creative">Explore →</a>
+          <h3>✍️ Writing and Messaging</h3>
+          <p>Headlines, CTAs, outlines, tone adjustments, and messaging frameworks.</p>
+          <a href="/tools/writing-messaging">Explore →</a>
         </div>
         <div class="category-item">
-          <h3>💼 Business</h3>
-          <p>Professional prompts for marketing, strategy, and business communication.</p>
-          <a href="./prompts/category/business">Explore →</a>
+          <h3>📊 SEO and Content Ops</h3>
+          <p>Metadata, schema, link operations, and publishing readiness helpers.</p>
+          <a href="/tools/seo-content-ops">Explore →</a>
         </div>
         <div class="category-item">
-          <h3>⚙️ Technical</h3>
-          <p>Technical prompts for coding, documentation, and system architecture.</p>
-          <a href="./prompts/category/technical">Explore →</a>
+          <h3>⚙️ Developer and Data</h3>
+          <p>Formatters, converters, utilities, and technical workflow accelerators.</p>
+          <a href="/tools/developer-data-core">Explore →</a>
         </div>
         <div class="category-item">
-          <h3>📢 Marketing</h3>
-          <p>Marketing-focused prompts for campaigns, copywriting, and audience engagement.</p>
-          <a href="./prompts/category/marketing">Explore →</a>
+          <h3>💼 Business and Finance</h3>
+          <p>Calculators and planning tools for pricing, budget, revenue, and cash flow.</p>
+          <a href="/tools/business-finance">Explore →</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA Section -->
-  <section class="cta-section">
+  <section class="cta-section" data-reveal>
     <div class="container">
-      <h2>Ready to Master AI?</h2>
-      <p>Join thousands learning to use AI effectively. Start with our guided tutorials and explore our prompt library.</p>
+      <h2>Start with Search, Ship with Confidence</h2>
+      <p>Use the tools index to find the right utility, run it instantly, and move into implementation with less friction.</p>
       <div class="cta-buttons">
-        <a href="./learning-hub" class="btn btn-primary">Begin Learning</a>
+        <a href="/tools" class="btn btn-primary">Open Tools Index</a>
         <a href="./contact" class="btn btn-secondary">Get in Touch</a>
       </div>
     </div>
@@ -119,7 +119,11 @@ const organizationSchema = {
     position: relative;
     height: 600px;
     overflow: visible;
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.5) 0%, rgba(26, 10, 46, 0.3) 100%);
+    background: linear-gradient(130deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.1));
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    margin: 1.2rem;
+    box-shadow: var(--shadow-soft);
   }
 
   .hero-overlay {
@@ -131,7 +135,7 @@ const organizationSchema = {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.4) 0%, rgba(26, 10, 46, 0.5) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 243, 223, 0.72) 100%);
     pointer-events: none;
   }
 
@@ -151,12 +155,11 @@ const organizationSchema = {
   }
 
   .tagline-large {
-    font-size: 1.5rem;
-    color: var(--color-cyan);
+    font-size: 1.35rem;
+    color: #8a531f;
     font-weight: 600;
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
-    text-shadow: 0 0 20px rgba(6, 248, 217, 0.3);
   }
 
   .hero-description {
@@ -178,37 +181,37 @@ const organizationSchema = {
     padding: 1rem 2rem;
     font-weight: 600;
     font-size: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.55rem;
     transition: all 0.3s ease;
     display: inline-block;
     text-decoration: none;
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #b935d9 100%);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, #ff9134 100%);
     color: white;
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+    box-shadow: var(--shadow-soft);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #e84bb8 0%, var(--color-secondary) 100%);
+    background: linear-gradient(135deg, #ff6f47 0%, #ff9b3d 100%);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(217, 70, 239, 0.6);
+    box-shadow: var(--shadow-medium);
   }
 
   .btn-secondary {
-    background-color: transparent;
-    color: var(--color-cyan);
-    border: 2px solid var(--color-cyan);
+    background: #fff6e8;
+    color: var(--color-primary);
+    border: 2px solid #d7c19f;
   }
 
   .btn-secondary:hover {
-    background-color: rgba(6, 248, 217, 0.1);
-    color: var(--color-cyan);
-    border-color: var(--color-cyan);
+    background-color: #fff0d6;
+    color: var(--color-primary);
+    border-color: #b98a55;
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(6, 248, 217, 0.3);
+    box-shadow: var(--shadow-soft);
   }
 
   .container {
@@ -219,18 +222,22 @@ const organizationSchema = {
 
   .features {
     padding: 4rem 2rem;
-    background: linear-gradient(180deg, rgba(26, 10, 46, 0.6) 0%, rgba(10, 10, 10, 0.3) 100%);
+    background: linear-gradient(180deg, #fffdf7 0%, #fff2df 100%);
+    border-radius: 1rem;
+    margin: 1.2rem;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
   }
 
   .features h2,
   .categories-preview h2,
   .cta-section h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-family: var(--font-display);
+    font-size: 2.3rem;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-accent) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -243,20 +250,19 @@ const organizationSchema = {
   }
 
   .feature-card {
-    background: rgba(26, 26, 40, 0.9);
+    background: #fffef9;
     padding: 2rem;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     text-align: center;
     transition: all 0.3s ease;
-    border: 2px solid rgba(217, 70, 239, 0.4);
-    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
   }
 
   .feature-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(217, 70, 239, 0.3);
-    border-color: var(--color-secondary);
-    background: rgba(26, 26, 40, 1);
+    box-shadow: var(--shadow-medium);
+    border-color: #d5b78f;
   }
 
   .feature-icon {
@@ -270,12 +276,17 @@ const organizationSchema = {
   }
 
   .feature-card p {
-    color: rgba(245, 245, 245, 0.7);
+    color: #4f627e;
     line-height: 1.6;
   }
 
   .categories-preview {
     padding: 4rem 2rem;
+    border-radius: 1rem;
+    margin: 1.2rem;
+    background: linear-gradient(180deg, #fff9ed 0%, #fff3e1 100%);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
   }
 
   .categories-grid {
@@ -285,18 +296,17 @@ const organizationSchema = {
   }
 
   .category-item {
-    background: rgba(26, 26, 40, 0.95);
+    background: #fffef8;
     padding: 2rem;
-    border-radius: 0.5rem;
-    border: 2px solid rgba(217, 70, 239, 0.3);
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
   }
 
   .category-item:hover {
-    border-color: var(--color-secondary);
-    box-shadow: 0 10px 20px rgba(217, 70, 239, 0.4);
-    background: rgba(26, 26, 40, 1);
+    border-color: #d1b188;
+    box-shadow: var(--shadow-medium);
   }
 
   .category-item h3 {
@@ -305,7 +315,7 @@ const organizationSchema = {
   }
 
   .category-item p {
-    color: rgba(245, 245, 245, 0.7);
+    color: #4f627e;
     margin-bottom: 1.5rem;
     line-height: 1.6;
   }
@@ -318,15 +328,17 @@ const organizationSchema = {
 
   .category-item a:hover {
     color: var(--color-cyan);
-    text-shadow: 0 0 8px rgba(6, 248, 217, 0.5);
   }
 
   .cta-section {
     padding: 4rem 2rem;
-    background: linear-gradient(135deg, rgba(217, 70, 239, 0.1) 0%, rgba(6, 248, 217, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(255, 93, 61, 0.12) 0%, rgba(10, 138, 130, 0.07) 100%);
     border: 1px solid var(--color-border);
-    color: white;
+    border-radius: 1rem;
+    margin: 1.2rem;
+    color: var(--color-primary);
     text-align: center;
+    box-shadow: var(--shadow-soft);
   }
 
   .cta-section h2 {
@@ -338,7 +350,7 @@ const organizationSchema = {
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto 2rem;
-    opacity: 0.9;
+    color: #405572;
   }
 
   .cta-buttons {
@@ -370,6 +382,13 @@ const organizationSchema = {
     .btn {
       padding: 0.75rem 1.5rem;
       font-size: 0.9rem;
+    }
+
+    .hero-section,
+    .features,
+    .categories-preview,
+    .cta-section {
+      margin: 0.7rem;
     }
   }
 </style>
