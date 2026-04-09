@@ -76,7 +76,7 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
         emissive: color,
         emissiveIntensity: 0.4,
         shininess: 120,
-        metalness: 0.7,
+        specular: new THREE.Color(0x1f1f30),
       });
       const brain = new THREE.Mesh(brainGeometry, brainMaterial);
       brain.position.x = x;
@@ -85,10 +85,11 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
 
       // Core glowing center - SIGNIFICANTLY ENLARGED
       const coreGeometry = new THREE.SphereGeometry(4, 32, 32);
-      const coreMaterial = new THREE.MeshBasicMaterial({
+      const coreMaterial = new THREE.MeshPhongMaterial({
         color,
         emissive: color,
         emissiveIntensity: 1.2,
+        shininess: 180,
       });
       const core = new THREE.Mesh(coreGeometry, coreMaterial);
       core.position.x = x;
@@ -172,10 +173,11 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
 
       // Glowing underside
       const underwearGeometry = new THREE.SphereGeometry(2.2, 16, 16);
-      const underMaterial = new THREE.MeshBasicMaterial({
+      const underMaterial = new THREE.MeshPhongMaterial({
         color,
         emissive: color,
-        emissiveIntensity: 1.2,
+        emissiveIntensity: 0.9,
+        shininess: 140,
         transparent: true,
         opacity: 0.3,
       });
@@ -280,10 +282,11 @@ export default function Hero3D({ height = 600 }: Hero3DProps) {
     const dataPackets: any[] = [];
     for (let i = 0; i < 6; i++) {
       const packetGeometry = new THREE.SphereGeometry(0.3, 8, 8);
-      const packetMaterial = new THREE.MeshBasicMaterial({
+      const packetMaterial = new THREE.MeshPhongMaterial({
         color: i % 2 === 0 ? COLORS.primary : COLORS.secondary,
         emissive: i % 2 === 0 ? COLORS.primary : COLORS.secondary,
         emissiveIntensity: 1.5,
+        shininess: 200,
       });
       const packet = new THREE.Mesh(packetGeometry, packetMaterial);
       packet.userData = {

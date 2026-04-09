@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ToolCard from '../../components/tools/ToolCard.astro';
+import toolsData from '../../content/tools.json';
+
+export async function getStaticPaths() {
+  return toolsData.categories.map((category) => ({
+    params: { category: category.slug },
+  }));
+}
+
+const { category } = Astro.params;
+const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published');
+const categoryInfo = toolsData.categories.find((entry) => entry.slug === category);
+
+if (!categoryInfo) {
+  throw new Error(`Category ${category} not found.`);
+}
+
+const categoryTools = publishedTools.filter((tool) => tool.category === categoryInfo.slug);
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${categoryInfo.name} tools`,
+  description: categoryInfo.description,
+  url: `https://velnoraai.app/tools/${categoryInfo.slug}`,
+};
+---
+
+<BaseLayout
+  title={`${categoryInfo.name} Tools`}
+  description={`${categoryInfo.description} Explore deterministic tool pages by Velnora.`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <Header />
+
+  <main class="category-page">
+    <div class="breadcrumb">
+      <a href="/tools">Tools</a>
+      <span>/</span>
+      <span>{categoryInfo.name}</span>
+    </div>
+
+    <section class="category-hero">
+      <p class="eyebrow">Category</p>
+      <h1>{categoryInfo.name}</h1>
+      <p>{categoryInfo.description}</p>
+    </section>
+
+    {categoryTools.length > 0 ? (
+      <section class="category-grid">
+        {categoryTools.map((tool) => (
+          <ToolCard tool={tool} />
+        ))}
+      </section>
+    ) : (
+      <section class="coming-soon">
+        <h2>Tools for this category are in progress</h2>
+        <p>
+          This category is part of upcoming batches. You can explore currently published tools from Batch 1 in the main
+          hub while this section is being built.
+        </p>
+        <a href="/tools">Browse published tools</a>
+      </section>
+    )}
+
+    <section class="cross-links">
+      <h2>Keep learning</h2>
+      <p>
+        Pair these tools with practical guidance from the learning and blog sections for implementation examples and
+        workflow refinements.
+      </p>
+      <div class="cross-links-row">
+        <a href="/learning-hub">Learning Hub</a>
+        <a href="/blog">Blog</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .category-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem 4rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(230, 238, 255, 0.85);
+    font-size: 0.92rem;
+  }
+
+  .category-hero {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.85rem;
+    padding: 1.4rem;
+    background: rgba(17, 18, 30, 0.85);
+  }
+
+  .eyebrow {
+    color: var(--color-cyan);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .category-hero h1 {
+    margin-bottom: 0.65rem;
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  }
+
+  .category-hero p {
+    max-width: 70ch;
+    color: rgba(245, 245, 245, 0.9);
+    line-height: 1.6;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .coming-soon {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.85rem;
+    padding: 1.2rem;
+    background: rgba(12, 14, 24, 0.88);
+  }
+
+  .coming-soon h2 {
+    margin-bottom: 0.55rem;
+    font-size: 1.3rem;
+  }
+
+  .coming-soon p {
+    margin-bottom: 0.9rem;
+    color: rgba(220, 230, 247, 0.92);
+    line-height: 1.6;
+  }
+
+  .coming-soon a {
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    color: #fff;
+    display: inline-block;
+  }
+
+  .coming-soon a:hover {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+  }
+
+  .cross-links {
+    margin-top: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.85rem;
+    padding: 1.2rem;
+    background: rgba(12, 14, 24, 0.9);
+  }
+
+  .cross-links h2 {
+    margin-bottom: 0.55rem;
+    font-size: 1.3rem;
+  }
+
+  .cross-links p {
+    margin-bottom: 0.9rem;
+    color: rgba(220, 230, 247, 0.92);
+    line-height: 1.6;
+  }
+
+  .cross-links-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .cross-links-row a {
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    color: #fff;
+  }
+
+  .cross-links-row a:hover {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+  }
+</style>

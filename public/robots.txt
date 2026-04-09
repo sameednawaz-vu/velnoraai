@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://velnoraai.com/sitemap.xml
+Sitemap: https://velnoraai.app/sitemap.xml
 
 # Disallow crawling of private areas (if any)
 # Disallow: /admin/

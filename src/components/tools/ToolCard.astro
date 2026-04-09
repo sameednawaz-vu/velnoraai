@@ -1,0 +1,129 @@
+---
+interface ToolItem {
+  id: number;
+  name: string;
+  slug: string;
+  category: string;
+  mode: string;
+  status: string;
+  description: string;
+  valueProposition: string;
+  tags: string[];
+  lastUpdated: string;
+}
+
+interface Props {
+  tool: ToolItem;
+}
+
+const { tool } = Astro.props;
+---
+
+<article class="tool-card">
+  <div class="tool-card-top">
+    <p class="tool-mode">Mode {tool.mode}</p>
+    <p class="tool-updated">Updated {tool.lastUpdated}</p>
+  </div>
+
+  <h3>
+    <a href={`/tools/${tool.category}/${tool.slug}`}>{tool.name}</a>
+  </h3>
+
+  <p class="tool-description">{tool.description}</p>
+  <p class="tool-value">{tool.valueProposition}</p>
+
+  <ul class="tool-tags">
+    {tool.tags.map((tag) => <li>{tag}</li>)}
+  </ul>
+
+  <a class="tool-link" href={`/tools/${tool.category}/${tool.slug}`}>
+    Open tool
+  </a>
+</article>
+
+<style>
+  .tool-card {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.75rem;
+    background: rgba(18, 19, 29, 0.92);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    height: 100%;
+  }
+
+  .tool-card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.78rem;
+    color: rgba(238, 248, 255, 0.75);
+  }
+
+  .tool-mode {
+    font-weight: 700;
+    color: var(--color-cyan);
+  }
+
+  .tool-updated {
+    text-align: right;
+  }
+
+  .tool-card h3 {
+    font-size: 1.18rem;
+    line-height: 1.35;
+  }
+
+  .tool-card h3 a {
+    color: #ffffff;
+  }
+
+  .tool-card h3 a:hover {
+    color: var(--color-cyan);
+  }
+
+  .tool-description {
+    color: rgba(245, 245, 245, 0.85);
+    line-height: 1.55;
+  }
+
+  .tool-value {
+    color: rgba(214, 248, 250, 0.95);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .tool-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tool-tags li {
+    font-size: 0.76rem;
+    border: 1px solid rgba(6, 248, 217, 0.4);
+    color: #cafff8;
+    border-radius: 999px;
+    padding: 0.28rem 0.65rem;
+  }
+
+  .tool-link {
+    margin-top: auto;
+    width: fit-content;
+    padding: 0.55rem 0.95rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+
+  .tool-link:hover {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+  }
+</style>

@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ToolCard from '../../components/tools/ToolCard.astro';
+import toolsData from '../../content/tools.json';
+
+const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published');
+const categorySummaries = toolsData.categories
+  .map((category) => {
+    const count = publishedTools.filter((tool) => tool.category === category.slug).length;
+    return { ...category, count };
+  })
+  .filter((category) => category.count > 0);
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Velnora Tools',
+  itemListElement: publishedTools.map((tool, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: tool.name,
+    url: `https://velnoraai.app/tools/${tool.category}/${tool.slug}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Tools"
+  description="Client-side tools by Velnora. Deterministic frameworks for writing, messaging, SEO operations, and team execution."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+
+  <Header />
+
+  <main class="tools-page">
+    <section class="tools-hero">
+      <p class="eyebrow">Velnora Tools Hub</p>
+      <h1>Client-side tools you can run immediately</h1>
+      <p>
+        No account setup. No private API key requirement. Batch 1 is live with deterministic writing and messaging tools,
+        and each tool page includes metadata, related links, and implementation guidance.
+      </p>
+    </section>
+
+    <section class="category-strip">
+      {categorySummaries.map((category) => (
+        <a href={`/tools/${category.slug}`}>
+          <strong>{category.name}</strong>
+          <span>{category.count} tools</span>
+        </a>
+      ))}
+    </section>
+
+    <section class="tools-grid-section">
+      <div class="section-header">
+        <h2>Published tools</h2>
+        <p>{publishedTools.length} tools are currently live in Batch 1.</p>
+      </div>
+
+      <div class="tools-grid">
+        {publishedTools.map((tool) => (
+          <ToolCard tool={tool} />
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .tools-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.2rem 4rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .tools-hero {
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.9rem;
+    background: linear-gradient(160deg, rgba(217, 70, 239, 0.15), rgba(6, 248, 217, 0.08));
+  }
+
+  .eyebrow {
+    color: var(--color-cyan);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .tools-hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .tools-hero p {
+    max-width: 76ch;
+    color: rgba(244, 248, 252, 0.9);
+    line-height: 1.65;
+  }
+
+  .category-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .category-strip a {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.7rem;
+    padding: 0.85rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    background: rgba(15, 15, 24, 0.8);
+  }
+
+  .category-strip a:hover {
+    border-color: var(--color-cyan);
+  }
+
+  .category-strip span {
+    color: rgba(210, 220, 245, 0.9);
+    font-size: 0.86rem;
+  }
+
+  .tools-grid-section {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.9rem;
+    padding: 1.3rem;
+    background: rgba(12, 13, 22, 0.82);
+  }
+
+  .section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-header p {
+    color: rgba(210, 220, 245, 0.9);
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+</style>

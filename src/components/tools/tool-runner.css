@@ -1,0 +1,129 @@
+.tool-runner {
+  background: rgba(18, 18, 28, 0.9);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.tool-runner p.runner-intro {
+  color: rgba(245, 245, 245, 0.82);
+  margin-bottom: 1rem;
+}
+
+.tool-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field label {
+  font-weight: 600;
+  color: var(--color-cyan);
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: #f4f6fb;
+  font-size: 0.95rem;
+  padding: 0.75rem 0.85rem;
+}
+
+.field textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.runner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.runner-actions button {
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.runner-actions .generate {
+  background: linear-gradient(135deg, var(--color-secondary), #d073ff);
+  color: #fff;
+}
+
+.runner-actions .reset {
+  background: transparent;
+  color: #d6e8ff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.runner-output {
+  margin-top: 1.25rem;
+  background: rgba(7, 9, 17, 0.92);
+  border: 1px solid rgba(6, 248, 217, 0.25);
+  border-radius: 0.65rem;
+  overflow: hidden;
+}
+
+.runner-output-header {
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.runner-output-header h3 {
+  font-size: 1rem;
+  color: var(--color-cyan);
+}
+
+.runner-output-header button {
+  font-size: 0.88rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 0.4rem;
+  background: rgba(6, 248, 217, 0.13);
+  color: #d6ffff;
+  border: 1px solid rgba(6, 248, 217, 0.4);
+}
+
+.runner-output pre {
+  margin: 0;
+  padding: 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.55;
+  color: #eef4ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.88rem;
+}
+
+.runner-note {
+  margin-top: 0.8rem;
+  color: rgba(245, 245, 245, 0.75);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .tool-runner {
+    padding: 1rem;
+  }
+
+  .runner-actions {
+    flex-direction: column;
+  }
+
+  .runner-actions button {
+    width: 100%;
+  }
+}

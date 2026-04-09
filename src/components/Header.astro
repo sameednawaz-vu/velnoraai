@@ -1,24 +1,24 @@
 ---
-import type { AstroComponentFactory } from 'astro';
 ---
 
 <header>
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <a href="./">
+        <a href="/">
           <span class="brand-name">Velnora</span>
           <span class="tagline">Elegant AI Intelligence Engine</span>
         </a>
       </div>
       
       <ul class="nav-menu">
-        <li><a href="./">Home</a></li>
-        <li><a href="./about">About</a></li>
-        <li><a href="./learning-hub">Learning Hub</a></li>
-        <li><a href="./library">Prompts</a></li>
-        <li><a href="./blog">Blog</a></li>
-        <li><a href="./contact">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools">Tools</a></li>
+        <li><a href="/learning-hub">Learning Hub</a></li>
+        <li><a href="/library">Prompts</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -74,7 +74,7 @@ import type { AstroComponentFactory } from 'astro';
   .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.2rem;
   }
   
   .nav-menu a {
@@ -90,8 +90,10 @@ import type { AstroComponentFactory } from 'astro';
   
   @media (max-width: 768px) {
     .nav-menu {
-      gap: 1rem;
-      font-size: 0.9rem;
+      gap: 0.7rem;
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     
     .nav-container {

@@ -1,0 +1,413 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BatchOneToolRunner from '../../../components/tools/BatchOneToolRunner';
+import toolsData from '../../../content/tools.json';
+
+export async function getStaticPaths() {
+  return toolsData.tools
+    .filter((tool) => tool.status === 'published')
+    .map((tool) => ({
+      params: {
+        category: tool.category,
+        slug: tool.slug,
+      },
+    }));
+}
+
+const { category, slug } = Astro.params;
+const allPublished = toolsData.tools.filter((tool) => tool.status === 'published');
+
+const tool = allPublished.find((entry) => entry.slug === slug && entry.category === category);
+if (!tool) {
+  throw new Error(`Tool not found for category ${category} and slug ${slug}`);
+}
+
+const categoryInfo = toolsData.categories.find((entry) => entry.slug === tool.category);
+if (!categoryInfo) {
+  throw new Error(`Category metadata missing for ${tool.category}`);
+}
+
+const relatedFromData = (tool.relatedTools ?? [])
+  .map((relatedSlug) => allPublished.find((entry) => entry.slug === relatedSlug))
+  .filter((entry): entry is (typeof allPublished)[number] => Boolean(entry) && entry.slug !== tool.slug);
+
+const fallbackSameCategory = allPublished.filter(
+  (entry) => entry.category === tool.category && entry.slug !== tool.slug && !relatedFromData.some((item) => item.slug === entry.slug)
+);
+
+const fallbackAnyCategory = allPublished.filter(
+  (entry) => entry.slug !== tool.slug && !relatedFromData.some((item) => item.slug === entry.slug)
+);
+
+const relatedTools = [...relatedFromData];
+for (const candidate of [...fallbackSameCategory, ...fallbackAnyCategory]) {
+  if (relatedTools.length >= 3) {
+    break;
+  }
+  if (!relatedTools.some((entry) => entry.slug === candidate.slug)) {
+    relatedTools.push(candidate);
+  }
+}
+
+const canonicalPath = `https://velnoraai.app/tools/${tool.category}/${tool.slug}`;
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: tool.name,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: tool.description,
+  url: canonicalPath,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Tools',
+      item: 'https://velnoraai.app/tools',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: categoryInfo.name,
+      item: `https://velnoraai.app/tools/${categoryInfo.slug}`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: tool.name,
+      item: canonicalPath,
+    },
+  ],
+};
+
+const faqSchema =
+  tool.faq && tool.faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: tool.faq.map((entry) => ({
+          '@type': 'Question',
+          name: entry.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: entry.answer,
+          },
+        })),
+      }
+    : null;
+---
+
+<BaseLayout title={tool.name} description={tool.seoDescription}>
+  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+
+  <Header />
+
+  <main class="tool-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/tools">Tools</a>
+      <span>/</span>
+      <a href={`/tools/${categoryInfo.slug}`}>{categoryInfo.name}</a>
+      <span>/</span>
+      <span>{tool.name}</span>
+    </nav>
+
+    <header class="tool-hero">
+      <p class="mode">Mode {tool.mode}</p>
+      <h1>{tool.name}</h1>
+      <p class="description">{tool.description}</p>
+      <p class="value-prop">{tool.valueProposition}</p>
+
+      <ul class="tags">
+        {tool.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </header>
+
+    <section class="runner-section" aria-label="Tool runner">
+      <h2>Run the tool</h2>
+      <BatchOneToolRunner client:load toolSlug={tool.slug} />
+    </section>
+
+    <section class="info-grid">
+      <article>
+        <h2>How it works</h2>
+        <ol>
+          {tool.howItWorks.map((step) => <li>{step}</li>)}
+        </ol>
+      </article>
+      <article>
+        <h2>Best for</h2>
+        <ul>
+          {tool.bestFor.map((item) => <li>{item}</li>)}
+        </ul>
+        <h3>Not for</h3>
+        <ul>
+          {tool.notFor.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </section>
+
+    <section class="example-block">
+      <h2>Example input</h2>
+      <pre>{tool.exampleInput}</pre>
+      <p class="updated">Last updated: {tool.lastUpdated}</p>
+    </section>
+
+    <section class="related-section">
+      <h2>Related tools</h2>
+      <div class="related-grid">
+        {relatedTools.map((entry) => (
+          <a href={`/tools/${entry.category}/${entry.slug}`}>
+            <strong>{entry.name}</strong>
+            <span>{entry.description}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="internal-cross-links">
+      <h2>Continue learning</h2>
+      <p>
+        Review practical implementation guides and workflow examples in the learning and blog sections, then return to
+        this tool to apply improvements.
+      </p>
+      <div class="cross-links-row">
+        <a href="/learning-hub">Learning Hub</a>
+        <a href="/blog">Blog</a>
+        <a href={`/tools/${categoryInfo.slug}`}>More in {categoryInfo.name}</a>
+      </div>
+    </section>
+
+    {tool.faq && tool.faq.length > 0 && (
+      <section class="faq-section">
+        <h2>FAQ</h2>
+        <div class="faq-items">
+          {tool.faq.map((entry) => (
+            <article>
+              <h3>{entry.question}</h3>
+              <p>{entry.answer}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .tool-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem 4rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    color: rgba(238, 247, 255, 0.86);
+  }
+
+  .tool-hero {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0.9rem;
+    padding: 1.4rem;
+    background: linear-gradient(150deg, rgba(18, 19, 30, 0.92), rgba(35, 19, 49, 0.8));
+  }
+
+  .mode {
+    display: inline-block;
+    margin-bottom: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-cyan);
+    letter-spacing: 0.06rem;
+    text-transform: uppercase;
+  }
+
+  .tool-hero h1 {
+    margin-bottom: 0.55rem;
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+  }
+
+  .description {
+    margin-bottom: 0.45rem;
+    color: rgba(245, 245, 245, 0.92);
+    line-height: 1.6;
+  }
+
+  .value-prop {
+    color: rgba(206, 246, 248, 0.96);
+    line-height: 1.6;
+  }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.9rem;
+  }
+
+  .tags li {
+    border: 1px solid rgba(6, 248, 217, 0.42);
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.78rem;
+    color: #cbffff;
+  }
+
+  .runner-section,
+  .info-grid article,
+  .example-block,
+  .related-section,
+  .internal-cross-links,
+  .faq-section {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.85rem;
+    padding: 1.2rem;
+    background: rgba(12, 14, 25, 0.9);
+  }
+
+  .runner-section h2,
+  .info-grid h2,
+  .example-block h2,
+  .related-section h2,
+  .internal-cross-links h2,
+  .faq-section h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.35rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .info-grid ol,
+  .info-grid ul {
+    margin-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+    line-height: 1.55;
+    color: rgba(236, 244, 255, 0.95);
+  }
+
+  .info-grid h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    color: var(--color-cyan);
+  }
+
+  .example-block pre {
+    background: rgba(5, 8, 14, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.6rem;
+    padding: 0.85rem;
+    white-space: pre-wrap;
+    line-height: 1.55;
+    color: #ecf4ff;
+    font-size: 0.9rem;
+  }
+
+  .updated {
+    margin-top: 0.65rem;
+    font-size: 0.86rem;
+    color: rgba(212, 226, 248, 0.92);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .related-grid a {
+    display: grid;
+    gap: 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 0.65rem;
+    padding: 0.8rem;
+    color: #fff;
+    background: rgba(19, 20, 31, 0.92);
+  }
+
+  .related-grid a:hover {
+    border-color: var(--color-cyan);
+  }
+
+  .related-grid span {
+    color: rgba(218, 228, 248, 0.95);
+    line-height: 1.5;
+    font-size: 0.9rem;
+  }
+
+  .internal-cross-links p {
+    color: rgba(218, 228, 248, 0.96);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .cross-links-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .cross-links-row a {
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 0.5rem;
+    padding: 0.52rem 0.85rem;
+    color: #fff;
+  }
+
+  .cross-links-row a:hover {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+  }
+
+  .faq-items {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .faq-items article {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.6rem;
+    padding: 0.85rem;
+    background: rgba(8, 10, 17, 0.95);
+  }
+
+  .faq-items h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1rem;
+    color: var(--color-cyan);
+  }
+
+  .faq-items p {
+    color: rgba(232, 241, 255, 0.95);
+    line-height: 1.55;
+  }
+</style>
