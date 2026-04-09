@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",
+    "pdf-lib": "^1.17.1",
     "preact": "^10.19.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"

@@ -39,41 +39,43 @@ const articleSchema = {
 
 <BaseLayout title={title} description={description} image={image} article={true} publishedDate={publishedDate} author={author}>
   <Header />
-  
+
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-  
-  <article class="blog-article">
-    <div class="article-container">
-      <div class="article-header">
-        <h1>{title}</h1>
-        <p class="article-description">{description}</p>
-        
-        <div class="article-meta">
-          <span class="author">By {author}</span>
-          <span class="separator">•</span>
-          <time datetime={publishedDate}>
-            {new Date(publishedDate).toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
-          </time>
-          <span class="separator">•</span>
-          <span class="reading-time">{readingTime} min read</span>
+
+  <main id="site-main" role="main">
+    <article class="blog-article">
+      <div class="article-container">
+        <div class="article-header">
+          <h1>{title}</h1>
+          <p class="article-description">{description}</p>
+          
+          <div class="article-meta">
+            <span class="author">By {author}</span>
+            <span class="separator">•</span>
+            <time datetime={publishedDate}>
+              {new Date(publishedDate).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </time>
+            <span class="separator">•</span>
+            <span class="reading-time">{readingTime} min read</span>
+          </div>
+        </div>
+
+        <div class="article-content">
+          <slot />
+        </div>
+
+        <div class="article-footer">
+          <nav class="article-nav">
+            <a href="/blog" class="back-link">← Back to Blog</a>
+          </nav>
         </div>
       </div>
-
-      <div class="article-content">
-        <slot />
-      </div>
-
-      <div class="article-footer">
-        <nav class="article-nav">
-          <a href="/blog" class="back-link">← Back to Blog</a>
-        </nav>
-      </div>
-    </div>
-  </article>
+    </article>
+  </main>
 
   <Footer />
 </BaseLayout>

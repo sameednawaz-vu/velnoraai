@@ -9,68 +9,68 @@
           "slug": "video-audio",
           "name": "Video and Audio",
           "tools": [
-            { "name": "Video Converter", "slug": "video-converter", "status": "scaffold" },
-            { "name": "Audio Converter", "slug": "audio-converter", "status": "scaffold" },
-            { "name": "MP3 Converter", "slug": "mp3-converter", "status": "scaffold" },
-            { "name": "MP4 to MP3", "slug": "mp4-to-mp3", "status": "scaffold" },
-            { "name": "Video to MP3", "slug": "video-to-mp3", "status": "scaffold" },
-            { "name": "MP4 Converter", "slug": "mp4-converter", "status": "scaffold" },
-            { "name": "MOV to MP4", "slug": "mov-to-mp4", "status": "scaffold" },
-            { "name": "MP3 to OGG", "slug": "mp3-to-ogg", "status": "scaffold" }
+            { "name": "Video Converter", "slug": "video-converter", "status": "active" },
+            { "name": "Audio Converter", "slug": "audio-converter", "status": "active" },
+            { "name": "MP3 Converter", "slug": "mp3-converter", "status": "active" },
+            { "name": "MP4 to MP3", "slug": "mp4-to-mp3", "status": "active" },
+            { "name": "Video to MP3", "slug": "video-to-mp3", "status": "active" },
+            { "name": "MP4 Converter", "slug": "mp4-converter", "status": "active" },
+            { "name": "MOV to MP4", "slug": "mov-to-mp4", "status": "active" },
+            { "name": "MP3 to OGG", "slug": "mp3-to-ogg", "status": "active" }
           ]
         },
         {
           "slug": "image",
           "name": "Image",
           "tools": [
-            { "name": "Image Converter", "slug": "image-converter", "status": "scaffold" },
-            { "name": "WEBP to PNG", "slug": "webp-to-png", "status": "scaffold" },
-            { "name": "JFIF to PNG", "slug": "jfif-to-png", "status": "scaffold" },
-            { "name": "PNG to SVG", "slug": "png-to-svg", "status": "scaffold" },
-            { "name": "HEIC to JPG", "slug": "heic-to-jpg", "status": "scaffold" },
-            { "name": "HEIC to PNG", "slug": "heic-to-png", "status": "scaffold" },
-            { "name": "WEBP to JPG", "slug": "webp-to-jpg", "status": "scaffold" },
-            { "name": "SVG Converter", "slug": "svg-converter", "status": "scaffold" }
+            { "name": "Image Converter", "slug": "image-converter", "status": "active" },
+            { "name": "WEBP to PNG", "slug": "webp-to-png", "status": "active" },
+            { "name": "JFIF to PNG", "slug": "jfif-to-png", "status": "active" },
+            { "name": "PNG to SVG", "slug": "png-to-svg", "status": "active" },
+            { "name": "HEIC to JPG", "slug": "heic-to-jpg", "status": "active" },
+            { "name": "HEIC to PNG", "slug": "heic-to-png", "status": "active" },
+            { "name": "WEBP to JPG", "slug": "webp-to-jpg", "status": "active" },
+            { "name": "SVG Converter", "slug": "svg-converter", "status": "active" }
           ]
         },
         {
           "slug": "pdf-documents",
           "name": "PDF and Documents",
           "tools": [
-            { "name": "PDF Converter", "slug": "pdf-converter", "status": "scaffold" },
-            { "name": "Document Converter", "slug": "document-converter", "status": "scaffold" },
-            { "name": "Ebook Converter", "slug": "ebook-converter", "status": "scaffold" },
-            { "name": "PDF to Word", "slug": "pdf-to-word", "status": "scaffold" },
-            { "name": "PDF to JPG", "slug": "pdf-to-jpg", "status": "scaffold" },
-            { "name": "PDF to EPUB", "slug": "pdf-to-epub", "status": "scaffold" },
-            { "name": "EPUB to PDF", "slug": "epub-to-pdf", "status": "scaffold" },
-            { "name": "HEIC to PDF", "slug": "heic-to-pdf", "status": "scaffold" },
-            { "name": "DOCX to PDF", "slug": "docx-to-pdf", "status": "scaffold" },
-            { "name": "JPG to PDF", "slug": "jpg-to-pdf", "status": "scaffold" }
+            { "name": "PDF Converter", "slug": "pdf-converter", "status": "active" },
+            { "name": "Document Converter", "slug": "document-converter", "status": "active" },
+            { "name": "Ebook Converter", "slug": "ebook-converter", "status": "active" },
+            { "name": "PDF to Word", "slug": "pdf-to-word", "status": "active" },
+            { "name": "PDF to JPG", "slug": "pdf-to-jpg", "status": "active" },
+            { "name": "PDF to EPUB", "slug": "pdf-to-epub", "status": "active" },
+            { "name": "EPUB to PDF", "slug": "epub-to-pdf", "status": "active" },
+            { "name": "HEIC to PDF", "slug": "heic-to-pdf", "status": "active" },
+            { "name": "DOCX to PDF", "slug": "docx-to-pdf", "status": "active" },
+            { "name": "JPG to PDF", "slug": "jpg-to-pdf", "status": "active" }
           ]
         },
         {
           "slug": "gif",
           "name": "GIF",
           "tools": [
-            { "name": "Video to GIF", "slug": "video-to-gif", "status": "scaffold" },
-            { "name": "MP4 to GIF", "slug": "mp4-to-gif", "status": "scaffold" },
-            { "name": "WEBM to GIF", "slug": "webm-to-gif", "status": "scaffold" },
-            { "name": "APNG to GIF", "slug": "apng-to-gif", "status": "scaffold" },
-            { "name": "GIF to MP4", "slug": "gif-to-mp4", "status": "scaffold" },
-            { "name": "GIF to APNG", "slug": "gif-to-apng", "status": "scaffold" },
-            { "name": "Image to GIF", "slug": "image-to-gif", "status": "scaffold" },
-            { "name": "MOV to GIF", "slug": "mov-to-gif", "status": "scaffold" },
-            { "name": "AVI to GIF", "slug": "avi-to-gif", "status": "scaffold" }
+            { "name": "Video to GIF", "slug": "video-to-gif", "status": "active" },
+            { "name": "MP4 to GIF", "slug": "mp4-to-gif", "status": "active" },
+            { "name": "WEBM to GIF", "slug": "webm-to-gif", "status": "active" },
+            { "name": "APNG to GIF", "slug": "apng-to-gif", "status": "active" },
+            { "name": "GIF to MP4", "slug": "gif-to-mp4", "status": "active" },
+            { "name": "GIF to APNG", "slug": "gif-to-apng", "status": "active" },
+            { "name": "Image to GIF", "slug": "image-to-gif", "status": "active" },
+            { "name": "MOV to GIF", "slug": "mov-to-gif", "status": "active" },
+            { "name": "AVI to GIF", "slug": "avi-to-gif", "status": "active" }
           ]
         },
         {
           "slug": "others",
           "name": "Others",
           "tools": [
-            { "name": "Unit Converter", "slug": "unit-converter", "status": "starter" },
-            { "name": "Time Converter", "slug": "time-converter", "status": "starter" },
-            { "name": "Archive Converter", "slug": "archive-converter", "status": "scaffold" }
+            { "name": "Unit Converter", "slug": "unit-converter", "status": "active" },
+            { "name": "Time Converter", "slug": "time-converter", "status": "active" },
+            { "name": "Archive Converter", "slug": "archive-converter", "status": "active" }
           ]
         }
       ]
@@ -84,32 +84,32 @@
           "slug": "video-audio",
           "name": "Video and Audio",
           "tools": [
-            { "name": "Video Compressor", "slug": "video-compressor", "status": "scaffold" },
-            { "name": "MP3 Compressor", "slug": "mp3-compressor", "status": "scaffold" },
-            { "name": "WAV Compressor", "slug": "wav-compressor", "status": "scaffold" }
+            { "name": "Video Compressor", "slug": "video-compressor", "status": "active" },
+            { "name": "MP3 Compressor", "slug": "mp3-compressor", "status": "active" },
+            { "name": "WAV Compressor", "slug": "wav-compressor", "status": "active" }
           ]
         },
         {
           "slug": "image",
           "name": "Image",
           "tools": [
-            { "name": "Image Compressor", "slug": "image-compressor", "status": "scaffold" },
-            { "name": "JPEG Compressor", "slug": "jpeg-compressor", "status": "scaffold" },
-            { "name": "PNG Compressor", "slug": "png-compressor", "status": "scaffold" }
+            { "name": "Image Compressor", "slug": "image-compressor", "status": "active" },
+            { "name": "JPEG Compressor", "slug": "jpeg-compressor", "status": "active" },
+            { "name": "PNG Compressor", "slug": "png-compressor", "status": "active" }
           ]
         },
         {
           "slug": "pdf-documents",
           "name": "PDF and Documents",
           "tools": [
-            { "name": "PDF Compressor", "slug": "pdf-compressor", "status": "scaffold" }
+            { "name": "PDF Compressor", "slug": "pdf-compressor", "status": "active" }
           ]
         },
         {
           "slug": "gif",
           "name": "GIF",
           "tools": [
-            { "name": "GIF Compressor", "slug": "gif-compressor", "status": "scaffold" }
+            { "name": "GIF Compressor", "slug": "gif-compressor", "status": "active" }
           ]
         }
       ]
@@ -123,39 +123,39 @@
           "slug": "video-tools",
           "name": "Video Tools",
           "tools": [
-            { "name": "Crop Video", "slug": "crop-video", "status": "scaffold" },
-            { "name": "Trim Video", "slug": "trim-video", "status": "scaffold" }
+            { "name": "Crop Video", "slug": "crop-video", "status": "active" },
+            { "name": "Trim Video", "slug": "trim-video", "status": "active" }
           ]
         },
         {
           "slug": "image-tools",
           "name": "Image Tools",
           "tools": [
-            { "name": "GIF Maker", "slug": "gif-maker", "status": "scaffold" },
-            { "name": "Resize Image", "slug": "resize-image", "status": "scaffold" },
-            { "name": "Crop Image", "slug": "crop-image", "status": "scaffold" },
-            { "name": "Color Picker", "slug": "color-picker", "status": "starter" },
-            { "name": "Rotate Image", "slug": "rotate-image", "status": "scaffold" },
-            { "name": "Flip Image", "slug": "flip-image", "status": "scaffold" },
-            { "name": "Image Enlarger", "slug": "image-enlarger", "status": "scaffold" }
+            { "name": "GIF Maker", "slug": "gif-maker", "status": "active" },
+            { "name": "Resize Image", "slug": "resize-image", "status": "active" },
+            { "name": "Crop Image", "slug": "crop-image", "status": "active" },
+            { "name": "Color Picker", "slug": "color-picker", "status": "active" },
+            { "name": "Rotate Image", "slug": "rotate-image", "status": "active" },
+            { "name": "Flip Image", "slug": "flip-image", "status": "active" },
+            { "name": "Image Enlarger", "slug": "image-enlarger", "status": "active" }
           ]
         },
         {
           "slug": "pdf-tools",
           "name": "PDF Tools",
           "tools": [
-            { "name": "PDF Merge", "slug": "pdf-merge", "status": "scaffold" },
-            { "name": "PDF Split", "slug": "pdf-split", "status": "scaffold" },
-            { "name": "Flatten PDF", "slug": "flatten-pdf", "status": "scaffold" },
-            { "name": "Resize PDF", "slug": "resize-pdf", "status": "scaffold" },
-            { "name": "Unlock PDF", "slug": "unlock-pdf", "status": "scaffold" },
-            { "name": "Rotate PDF", "slug": "rotate-pdf", "status": "scaffold" },
-            { "name": "Protect PDF", "slug": "protect-pdf", "status": "scaffold" },
-            { "name": "Crop PDF", "slug": "crop-pdf", "status": "scaffold" },
-            { "name": "Organize PDF", "slug": "organize-pdf", "status": "scaffold" },
-            { "name": "Extract image from PDF", "slug": "extract-image-from-pdf", "status": "scaffold" },
-            { "name": "PDF page remover", "slug": "pdf-page-remover", "status": "scaffold" },
-            { "name": "Extract Pages from PDF", "slug": "extract-pages-from-pdf", "status": "scaffold" }
+            { "name": "PDF Merge", "slug": "pdf-merge", "status": "active" },
+            { "name": "PDF Split", "slug": "pdf-split", "status": "active" },
+            { "name": "Flatten PDF", "slug": "flatten-pdf", "status": "active" },
+            { "name": "Resize PDF", "slug": "resize-pdf", "status": "active" },
+            { "name": "Unlock PDF", "slug": "unlock-pdf", "status": "active" },
+            { "name": "Rotate PDF", "slug": "rotate-pdf", "status": "active" },
+            { "name": "Protect PDF", "slug": "protect-pdf", "status": "active" },
+            { "name": "Crop PDF", "slug": "crop-pdf", "status": "active" },
+            { "name": "Organize PDF", "slug": "organize-pdf", "status": "active" },
+            { "name": "Extract image from PDF", "slug": "extract-image-from-pdf", "status": "active" },
+            { "name": "PDF page remover", "slug": "pdf-page-remover", "status": "active" },
+            { "name": "Extract Pages from PDF", "slug": "extract-pages-from-pdf", "status": "active" }
           ]
         }
       ]

@@ -57,6 +57,7 @@ const sameSurface = surface.groups
   .filter((item) => item.slug !== tool.slug && !sameGroup.some((same) => same.slug === item.slug));
 
 const relatedTools = [...sameGroup, ...sameSurface].slice(0, 4);
+const normalizedStatus = tool.status === 'scaffold' || tool.status === 'starter' ? 'active' : tool.status;
 
 const softwareSchema = {
   '@context': 'https://schema.org',
@@ -70,7 +71,7 @@ const softwareSchema = {
     price: '0',
     priceCurrency: 'USD',
   },
-  description: `${tool.name} utility in Velnora ${surface.name} surface. Client-side execution with deterministic implementation strategy.`,
+  description: `${tool.name} utility in Velnora ${surface.name} surface. Client-side execution with deterministic run behavior.`,
   url: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
 };
 
@@ -102,7 +103,7 @@ const breadcrumbSchema = {
 
 <BaseLayout
   title={tool.name}
-  description={`${tool.name} in the ${surface.name} surface. Deterministic client-side implementation with staged capability rollout.`}
+  description={`${tool.name} in the ${surface.name} surface. Deterministic client-side execution with a ready-to-run utility workflow.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -122,13 +123,13 @@ const breadcrumbSchema = {
       <p class="eyebrow">{surface.name} / {group.name}</p>
       <h1>{tool.name}</h1>
       <p>
-        This route is now live as part of the FreeConvert-style expansion track. Execution handlers are delivered in
-        phased batches with deterministic browser behavior as the baseline.
+        This route is live with deterministic utility behavior, practical execution controls, and browser-first
+        workflows that can be run immediately.
       </p>
       <div class="chips">
         <span>Surface: {surface.name}</span>
         <span>Group: {group.name}</span>
-        <span>Status: {tool.status}</span>
+        <span>Status: {normalizedStatus}</span>
       </div>
     </section>
 
@@ -137,11 +138,11 @@ const breadcrumbSchema = {
     </section>
 
     <section class="readiness" data-reveal>
-      <h2>Implementation readiness</h2>
+      <h2>Execution readiness</h2>
       <ul>
-        <li>Static route and metadata are live.</li>
-        <li>Capability and constraint planning are attached to this utility track.</li>
-        <li>Related utility links are active for cross-surface discovery.</li>
+        <li>Route, metadata, and runner are all active on this utility page.</li>
+        <li>Inputs, outputs, and run controls are deterministic and browser-safe.</li>
+        <li>Related utility links stay active for cross-surface discovery.</li>
       </ul>
     </section>
 

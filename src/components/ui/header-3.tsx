@@ -109,8 +109,8 @@ export function Header3() {
               </NavigationMenuItem>
 
               <NavigationMenuLink className="px-4" asChild>
-                <a href="/pricing" className="hover:bg-accent rounded-md p-2">
-                  Pricing
+                <a href="/tools" className="hover:bg-accent rounded-md p-2">
+                  Categories
                 </a>
               </NavigationMenuLink>
             </NavigationMenuList>
@@ -118,12 +118,8 @@ export function Header3() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="outline" asChild>
-            <a href="/login">Log In</a>
-          </Button>
-          <Button asChild>
-            <a href="/signup">Sign Up</a>
-          </Button>
+          <a href="/tools" className="px-3 py-2 rounded-md border bg-white text-sm font-semibold">Open Tools</a>
+          <a href="/contact" className="px-3 py-2 rounded-md border bg-[#eef2ff] text-sm font-semibold">Talk to Team</a>
         </div>
 
         <Button
@@ -156,12 +152,8 @@ export function Header3() {
           </div>
         </NavigationMenu>
         <div className="flex flex-col gap-2">
-          <Button variant="outline" className="w-full bg-transparent" asChild>
-            <a href="/login">Log In</a>
-          </Button>
-          <Button className="w-full" asChild>
-            <a href="/signup">Sign Up</a>
-          </Button>
+          <a href="/tools" className="w-full inline-flex justify-center px-4 py-2 rounded-md border bg-white font-semibold">Open Tools</a>
+          <a href="/contact" className="w-full inline-flex justify-center px-4 py-2 rounded-md border bg-[#eef2ff] font-semibold">Talk to Team</a>
         </div>
       </MobileMenu>
     </header>
@@ -251,16 +243,10 @@ const productLinks: LinkItem[] = [
     icon: BarChart,
   },
   {
-    title: 'API',
-    href: '/api',
-    description: 'Use platform endpoints and integrations',
-    icon: PlugIcon,
-  },
-  {
-    title: 'Pricing',
-    href: '/pricing',
-    description: 'Plans for teams and creators',
-    icon: CodeIcon,
+    title: 'Learning Hub',
+    href: '/learning-hub',
+    description: 'Guides and practical lessons',
+    icon: Users,
   },
 ];
 
