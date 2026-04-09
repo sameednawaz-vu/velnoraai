@@ -109,9 +109,9 @@ export default function AetherFlowHero({
 
     const drawBackdrop = () => {
       const background = context.createLinearGradient(0, 0, width, height);
-      background.addColorStop(0, '#09101f');
-      background.addColorStop(0.5, '#0f1c32');
-      background.addColorStop(1, '#10273b');
+      background.addColorStop(0, '#10253a');
+      background.addColorStop(0.5, '#253253');
+      background.addColorStop(1, '#103a58');
       context.fillStyle = background;
       context.fillRect(0, 0, width, height);
     };

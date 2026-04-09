@@ -6,7 +6,7 @@
   border-radius: 1rem;
   overflow: hidden;
   border: 1px solid rgba(210, 226, 235, 0.36);
-  box-shadow: 0 35px 70px rgba(8, 17, 35, 0.35);
+  box-shadow: 0 32px 62px rgba(11, 30, 58, 0.28);
 }
 
 .aether-canvas {
@@ -21,10 +21,10 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 22% 28%, rgba(93, 241, 224, 0.21), transparent 43%),
-    radial-gradient(circle at 76% 18%, rgba(255, 139, 98, 0.22), transparent 39%),
-    radial-gradient(circle at 56% 72%, rgba(164, 138, 255, 0.23), transparent 42%),
-    linear-gradient(170deg, rgba(5, 12, 25, 0.2), rgba(5, 12, 25, 0.62));
+    radial-gradient(circle at 22% 28%, rgba(113, 248, 232, 0.27), transparent 43%),
+    radial-gradient(circle at 76% 18%, rgba(255, 168, 119, 0.24), transparent 39%),
+    radial-gradient(circle at 56% 72%, rgba(161, 153, 255, 0.2), transparent 42%),
+    linear-gradient(170deg, rgba(11, 21, 40, 0.12), rgba(10, 22, 44, 0.38));
 }
 
 .aether-grid {
@@ -32,8 +32,8 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(195, 214, 228, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(195, 214, 228, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(195, 214, 228, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(195, 214, 228, 0.09) 1px, transparent 1px);
   background-size: 36px 36px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 96%);
 }
@@ -57,7 +57,7 @@
   gap: 0.5rem;
   border-radius: 999px;
   border: 1px solid rgba(144, 211, 242, 0.55);
-  background: rgba(9, 28, 48, 0.62);
+  background: rgba(14, 38, 66, 0.54);
   color: #dff3ff;
   font-size: 0.82rem;
   font-weight: 700;
@@ -91,7 +91,7 @@
   max-width: 720px;
   font-size: clamp(0.99rem, 1.7vw, 1.22rem);
   line-height: 1.65;
-  color: rgba(233, 246, 255, 0.93);
+  color: rgba(238, 249, 255, 0.95);
 }
 
 .aether-actions {
@@ -132,7 +132,7 @@
 
 .aether-btn-ghost {
   border: 1px solid rgba(194, 224, 242, 0.55);
-  background: rgba(10, 28, 49, 0.62);
+  background: rgba(14, 34, 60, 0.5);
   color: #eef8ff;
   backdrop-filter: blur(7px);
 }
