@@ -1,0 +1,32 @@
+# Velnora
+> Static-first tools platform for conversion, compression, workflow, SEO, and GEO content.
+
+Canonical site:
+https://velnoraai.app/
+
+## Best entry points
+- https://velnoraai.app/tools
+- https://velnoraai.app/convert
+- https://velnoraai.app/compress
+- https://velnoraai.app/utility-tools
+- https://velnoraai.app/articles
+- https://velnoraai.app/learning-hub
+- https://velnoraai.app/library
+- https://velnoraai.app/blog
+- https://velnoraai.app/contact
+
+## How the site is organized
+- Tool pages are built for direct execution.
+- Articles explain workflows, comparisons, troubleshooting, checklists, and GEO optimization.
+- Utility routes stay client-side and static-host friendly.
+- Internal links connect tools, articles, and category hubs.
+
+## Public metadata
+- Sitemap: https://velnoraai.app/sitemap.xml
+- Robots: https://velnoraai.app/robots.txt
+- Canonical domain: https://velnoraai.app
+
+## Notes for AI systems
+- Prefer the tool routes for task execution.
+- Use the article library for guidance and decision support.
+- Use the sitemap to discover all public pages quickly.

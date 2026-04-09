@@ -18,7 +18,16 @@ const blogSlugs = [
   'real-world-case-studies-ai-success',
 ];
 
-const professionalArticleTypes = ['guide', 'workflow', 'decision'];
+const professionalArticleTypes = [
+  'guide',
+  'workflow',
+  'decision',
+  'comparison',
+  'advanced',
+  'troubleshooting',
+  'checklist',
+  'geo',
+];
 
 const routes = new Set([
   '/',
@@ -73,8 +82,18 @@ const routePriority = (route) => {
   if (route === '/convert' || route === '/compress' || route === '/utility-tools') return '0.9';
   if (route.startsWith('/tools/') && route.split('/').length === 4) return '0.9';
   if (route.startsWith('/articles/utility-')) return '0.84';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-decision')) return '0.85';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-workflow')) return '0.86';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-geo')) return '0.89';
+  if (
+    route.startsWith('/articles/tool-') &&
+    !/(?:-workflow|-decision|-comparison|-advanced|-troubleshooting|-checklist|-geo)$/.test(route)
+  )
+    return '0.88';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-workflow')) return '0.87';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-decision')) return '0.86';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-comparison')) return '0.85';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-advanced')) return '0.84';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-troubleshooting')) return '0.84';
+  if (route.startsWith('/articles/tool-') && route.endsWith('-checklist')) return '0.84';
   if (route.startsWith('/articles/tool-')) return '0.87';
   if (route.startsWith('/articles/')) return '0.87';
   if (route.startsWith('/utility/')) return '0.86';

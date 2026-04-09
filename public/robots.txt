@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 
 Sitemap: https://velnoraai.app/sitemap.xml
+# LLM index: https://velnoraai.app/llm.txt
+# LLM index mirror: https://velnoraai.app/llms.txt
 
 # Disallow crawling of private areas (if any)
 # Disallow: /admin/
