@@ -126,14 +126,25 @@ const getCategoryBadge = (name: string) =>
           const surface = surfaceMap.get(menu.surfaceSlug);
 
           return (
-            <li class="menu-item has-mega">
-              <a href={menu.href} class="menu-link menu-link-trigger">
-                <span>{menu.label}</span>
-                <span class="caret" aria-hidden="true"></span>
-              </a>
+              <li class="menu-item has-mega">
+                <div class="menu-trigger-wrap">
+                  <a href={menu.href} class="menu-link menu-link-trigger">
+                    <span>{menu.label}</span>
+                  </a>
 
-              {surface && (
-                <div class="mega-panel" aria-label={`${menu.label} navigation`}>
+                  <button
+                    class="menu-caret"
+                    type="button"
+                    aria-expanded="false"
+                    aria-label={`Open ${menu.label} menu`}
+                    data-menu-toggle
+                  >
+                    <span class="caret" aria-hidden="true"></span>
+                  </button>
+                </div>
+
+                {surface && (
+                  <div class="mega-panel" aria-label={`${menu.label} navigation`}>
                   <div class="mega-heading">
                     <p>{surface.name}</p>
                     <a href={menu.href}>Open all {surface.name} tools</a>
@@ -162,10 +173,21 @@ const getCategoryBadge = (name: string) =>
         })}
 
         <li class="menu-item has-mega">
-          <a href="/tools" class="menu-link menu-link-trigger">
-            <span>All Categories</span>
-            <span class="caret" aria-hidden="true"></span>
-          </a>
+          <div class="menu-trigger-wrap">
+            <a href="/tools" class="menu-link menu-link-trigger">
+              <span>All Categories</span>
+            </a>
+
+            <button
+              class="menu-caret"
+              type="button"
+              aria-expanded="false"
+              aria-label={`Open All categories menu`}
+              data-menu-toggle
+            >
+              <span class="caret" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="mega-panel" aria-label="All category navigation">
             <div class="mega-heading">
@@ -212,10 +234,21 @@ const getCategoryBadge = (name: string) =>
         </li>
 
         <li class="menu-item has-mega">
-          <a href="/learning-hub" class="menu-link menu-link-trigger">
-            <span>Navigator</span>
-            <span class="caret" aria-hidden="true"></span>
-          </a>
+          <div class="menu-trigger-wrap">
+            <a href="/learning-hub" class="menu-link menu-link-trigger">
+              <span>Navigator</span>
+            </a>
+
+            <button
+              class="menu-caret"
+              type="button"
+              aria-expanded="false"
+              aria-label={`Open navigator menu`}
+              data-menu-toggle
+            >
+              <span class="caret" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="mega-panel navigator-panel" aria-label="Site navigator links">
             <div class="mega-heading">
@@ -323,6 +356,7 @@ const getCategoryBadge = (name: string) =>
     const panel = document.querySelector('[data-nav-panel]');
     const desktopNav = document.querySelector('.desktop-nav');
     const desktopMenus = Array.from(document.querySelectorAll('.desktop-nav .has-mega'));
+    const caretButtons = Array.from(document.querySelectorAll('[data-menu-toggle]'));
     const desktopMedia = window.matchMedia('(min-width: 1081px)');
 
     if (!(toggle instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) {
@@ -339,6 +373,14 @@ const getCategoryBadge = (name: string) =>
       desktopMenus.forEach((item) => {
         if (item instanceof HTMLElement) {
           item.classList.remove('is-open');
+        }
+      });
+
+      caretButtons.forEach((btn) => {
+        try {
+          btn.setAttribute('aria-expanded', 'false');
+        } catch (e) {
+          // ignore
         }
       });
     };
@@ -431,7 +473,7 @@ const getCategoryBadge = (name: string) =>
 
         closeTimer = window.setTimeout(() => {
           item.classList.remove('is-open');
-        }, 240);
+        }, 400);
       };
 
       const onPointerLeave = (event) => {
@@ -456,6 +498,27 @@ const getCategoryBadge = (name: string) =>
         }
 
         closeMenu(false);
+      });
+    });
+
+    // Click/tap handlers for caret toggle buttons (desktop only)
+    caretButtons.forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!desktopMedia.matches) return;
+
+        const item = btn.closest('.has-mega');
+        if (!(item instanceof HTMLElement)) return;
+
+        const opened = item.classList.toggle('is-open');
+        try {
+          btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        } catch (e) {}
+
+        if (opened) {
+          closeDesktopMenusExcept(item);
+        }
       });
     });
 
@@ -613,13 +676,34 @@ const getCategoryBadge = (name: string) =>
     position: relative;
   }
 
+  .menu-link-trigger {
+    position: relative;
+  }
+
   .has-mega .menu-link-trigger::after {
     content: '';
     position: absolute;
-    left: -0.35rem;
-    right: -0.35rem;
+    left: -0.6rem;
+    right: -0.6rem;
     top: 100%;
-    height: 2rem;
+    height: 3.6rem;
+  }
+
+  .menu-trigger-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+  }
+
+  .menu-caret {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 0.18rem;
+    border-radius: 0.36rem;
+    cursor: pointer;
   }
 
   .has-mega:focus-within .menu-link-trigger .caret,
@@ -1115,6 +1199,11 @@ const getCategoryBadge = (name: string) =>
       font-size: 0.54rem;
       letter-spacing: 0.07em;
     }
+  }
+
+  /* Show caret toggle on larger screens */
+  @media (min-width: 1081px) {
+    .menu-caret { display: inline-flex; }
   }
 
   @media (max-width: 640px) {

@@ -62,23 +62,7 @@ function extractLocEntries(xmlText) {
 async function findWorkingSitemap(origin) {
   const candidates = ['sitemap-index.xml', 'sitemap.xml'];
 
-  try {
-    const robotsUrl = new URL('robots.txt', origin).toString();
-    const robotsResponse = await fetchWithRetry(robotsUrl);
-    if (robotsResponse.ok) {
-      const robotsText = await robotsResponse.text();
-      const robotSitemaps = robotsText
-        .split(/\r?\n/)
-        .map((line) => line.trim())
-        .filter((line) => /^sitemap:/i.test(line))
-        .map((line) => line.replace(/^sitemap:\s*/i, '').trim())
-        .filter(Boolean);
-
-      candidates.push(...robotSitemaps);
-    }
-  } catch {
-    // Keep default sitemap candidates.
-  }
+  // robots.txt removed from the site; skip scanning robots.txt for sitemap entries.
 
   const dedupedCandidates = [...new Set(candidates)];
 

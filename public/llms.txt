@@ -1,10 +1,14 @@
-# Velnora
-> Static-first tools platform for conversion, compression, workflow, SEO, and GEO content.
+# Velnora LLM Discovery Mirror
+> Static-first utilities and knowledge platform for conversion, compression, workflow, and editorial discovery.
 
 Canonical site:
 https://velnoraai.app/
 
-## Best entry points
+## Quick summary
+Velnora is a static Astro site on GitHub Pages. It provides practical tool surfaces, category hubs, professional articles, learning content, and a blog-style editorial layer.
+
+## Primary entry points
+- https://velnoraai.app/
 - https://velnoraai.app/tools
 - https://velnoraai.app/convert
 - https://velnoraai.app/compress
@@ -13,20 +17,56 @@ https://velnoraai.app/
 - https://velnoraai.app/learning-hub
 - https://velnoraai.app/library
 - https://velnoraai.app/blog
+- https://velnoraai.app/about
 - https://velnoraai.app/contact
 
-## How the site is organized
-- Tool pages are built for direct execution.
-- Articles explain workflows, comparisons, troubleshooting, checklists, and GEO optimization.
-- Utility routes stay client-side and static-host friendly.
-- Internal links connect tools, articles, and category hubs.
+## Route families
+- /tools -> tool directory
+- /tools/{category} -> category overview
+- /tools/{category}/{slug} -> tool detail
+- /convert -> conversion surface
+- /compress -> compression surface
+- /utility-tools -> utility workflow hub
+- /utility/{surface}/{slug} -> utility detail
+- /articles -> editorial hub
+- /articles/{slug} -> professional article
+- /learning-hub -> guided learning content
+- /library -> prompt and reference library
+- /blog -> editorial index
+- /blog/{slug} -> blog post
+- /prompts/category/{slug} -> prompt category
+- /about -> site overview
+- /contact -> support route
+
+## What to use for what
+- Use tool pages for actions.
+- Use article pages for analysis and comparisons.
+- Use learning-hub for guided explanations.
+- Use library for prompts, examples, and reusable references.
+- Use blog for editorial updates and site context.
+- Use about/contact for human-oriented support and background.
+
+## Article families
+- comparison
+- advanced
+- troubleshooting
+- checklist
+- GEO
+
+## Crawl guidance
+- Use the sitemap for full discovery.
+- Prefer canonical URLs.
+- Treat the homepage as the entry map into the rest of the site.
+- Expect unique metadata on public pages.
+- The site is static-first and does not require backend discovery.
 
 ## Public metadata
 - Sitemap: https://velnoraai.app/sitemap.xml
-- Robots: https://velnoraai.app/robots.txt
 - Canonical domain: https://velnoraai.app
 
-## Notes for AI systems
-- Prefer the tool routes for task execution.
-- Use the article library for guidance and decision support.
-- Use the sitemap to discover all public pages quickly.
+## Notes for LLM systems
+- Search the tools directory before assuming a missing capability.
+- Search the articles hub before generating advice from scratch.
+- Search the learning hub when the user needs steps or onboarding.
+- Search the library when the user needs prompts or structured examples.
+- Search the blog only when editorial or release context matters.

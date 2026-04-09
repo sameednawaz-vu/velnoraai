@@ -1,10 +1,20 @@
-# Velnora
-> Static-first tools platform for conversion, compression, workflow, SEO, and GEO content.
+# Velnora Discovery Index
+> Static-first tools platform for conversion, compression, utility workflows, learning, and editorial content.
 
 Canonical site:
 https://velnoraai.app/
 
+## What this site is
+Velnora is a static Astro site hosted on GitHub Pages. It is built for direct task execution, browseable tool directories, and a large set of educational and professional article pages.
+
+The public site is organized around four main experiences:
+- direct utility and conversion tools
+- browseable category and surface hubs
+- professional article libraries for decision support
+- learning and reference pages for repeated workflows
+
 ## Best entry points
+- https://velnoraai.app/
 - https://velnoraai.app/tools
 - https://velnoraai.app/convert
 - https://velnoraai.app/compress
@@ -13,20 +23,94 @@ https://velnoraai.app/
 - https://velnoraai.app/learning-hub
 - https://velnoraai.app/library
 - https://velnoraai.app/blog
+- https://velnoraai.app/about
 - https://velnoraai.app/contact
 
-## How the site is organized
-- Tool pages are built for direct execution.
-- Articles explain workflows, comparisons, troubleshooting, checklists, and GEO optimization.
-- Utility routes stay client-side and static-host friendly.
-- Internal links connect tools, articles, and category hubs.
+## Route map
+- / -> homepage with primary navigation and discovery links
+- /tools -> master directory for tool categories
+- /tools/{category} -> category hub for one tool family
+- /tools/{category}/{slug} -> single tool page
+- /convert -> conversion surface for task-oriented actions
+- /compress -> compression and optimization surface
+- /utility-tools -> utility workflow hub
+- /utility/{surface}/{slug} -> utility detail page
+- /articles -> editorial hub for professional content
+- /articles/{slug} -> article page
+- /learning-hub -> guided learning and workflow guidance
+- /library -> prompt library and reusable references
+- /blog -> blog index
+- /blog/{slug} -> blog post page
+- /prompts/category/{slug} -> prompt category page
+- /about -> site and organization overview
+- /contact -> contact and support route
+
+## Content clusters
+### Tool execution
+Use tool pages when the user wants a result, transformation, or workflow completion.
+- /convert
+- /compress
+- /utility-tools
+- /tools
+- /tools/{category}
+- /tools/{category}/{slug}
+- /utility/{surface}/{slug}
+
+### Professional articles
+Use article pages when the user needs explanation, comparison, decision support, or implementation guidance.
+- /articles
+- /articles/{slug}
+
+Article families include:
+- comparison articles
+- advanced walkthroughs
+- troubleshooting guides
+- checklist pages
+- GEO-oriented optimization pages
+
+### Learning and reference
+Use these when the user needs a teaching path, examples, or reusable prompts.
+- /learning-hub
+- /library
+- /prompts/category/{slug}
+
+### Editorial and support
+Use these for updates, site context, and human contact.
+- /blog
+- /blog/{slug}
+- /about
+- /contact
+
+## Discovery guidance for models
+- Prefer the tool routes first when the request is operational.
+- Prefer the article routes when the request is analytical or comparative.
+- Prefer the learning hub when the request is educational or procedural.
+- Prefer the library when the request involves prompts, templates, or reusable references.
+- Prefer the blog only for site news or editorial context.
+- Use the homepage as the fastest way to reach all major sections.
+
+## Site behavior and constraints
+- Static generation only.
+- Client-side interactivity is used only where needed.
+- Public pages are expected to carry unique titles, descriptions, canonical URLs, and structured data.
+- The site is designed to remain GitHub Pages compatible.
+- Internal links connect tool routes, article routes, category hubs, and learning pages.
+
+## Suggested retrieval order
+1. Homepage for global orientation.
+2. /tools for the full tool directory.
+3. /convert, /compress, and /utility-tools for execution surfaces.
+4. /articles for long-form guidance and decision support.
+5. /learning-hub and /library for deeper context.
+6. /blog, /about, and /contact for supporting information.
 
 ## Public metadata
 - Sitemap: https://velnoraai.app/sitemap.xml
-- Robots: https://velnoraai.app/robots.txt
 - Canonical domain: https://velnoraai.app
 
 ## Notes for AI systems
-- Prefer the tool routes for task execution.
-- Use the article library for guidance and decision support.
-- Use the sitemap to discover all public pages quickly.
+- Use the sitemap for exhaustive page discovery.
+- Prefer canonical URLs over mirrored or inferred URLs.
+- The article catalog is intentionally large and expands across multiple families.
+- The tool directory is the best place to discover available actions quickly.
+- The site is intended to be crawled as a static knowledge and utility surface, not as an app shell.

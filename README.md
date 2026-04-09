@@ -7,7 +7,7 @@ A modern, SEO-optimized website built with Astro featuring 3D graphics, a compre
 - ✅ **3D Homepage** - Interactive Three.js animations with magnetic effects
 - ✅ **Prompt Library** - 12+ pre-built prompts across 4 categories
 - ✅ **7 Launch Articles** - Comprehensive blog content on AI and prompting
-- ✅ **SEO Optimized** - Schema.org markup, sitemap, meta tags, robots.txt
+- ✅ **SEO Optimized** - Schema.org markup, sitemap, meta tags
 - ✅ **GitHub Pages Ready** - Static generation, automated CI/CD deployment
 - ✅ **Contact Form** - Formspree integration with reCAPTCHA v3
 - ✅ **Analytics** - Google Analytics 4 integration
@@ -43,7 +43,6 @@ velnora-website/
 │   └── content/
 │       └── prompts.json                 # Prompts data
 ├── public/
-│   └── robots.txt
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml                   # GitHub Actions deployment
@@ -180,7 +179,7 @@ Update `src/content/prompts.json` to add new prompts:
 - ✅ Schema.org markup (Organization, BlogPosting, FAQPage)
 - ✅ Meta tags (title, description, OG tags)
 - ✅ Sitemap auto-generation
-- ✅ robots.txt configured
+
 - ✅ Canonical URLs
 - ✅ Structured breadcrumbs
 - ✅ Mobile-optimized responsive design
