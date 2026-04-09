@@ -1,30 +1,40 @@
 ---
+import { Boxes } from './ui/background-boxes';
 ---
 
-<footer>
+<footer class="site-footer">
+  <div class="footer-motion" aria-hidden="true">
+    <div class="footer-motion-mask"></div>
+    <Boxes client:only="preact" className="footer-boxes-layer" />
+  </div>
+
   <div class="footer-container">
-    <div class="footer-section">
+    <div class="footer-section brand">
       <h3>Velnora</h3>
-      <p>Elegant AI Intelligence Engine - Teaching people the art of using AI and crafting powerful prompts.</p>
+      <p>
+        Product-first AI utility platform focused on practical workflows, high-clarity UX, and browser-first
+        experiences.
+      </p>
     </div>
-    
+
     <div class="footer-section">
-      <h4>Quick Links</h4>
+      <h4>Navigate</h4>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/convert">Convert</a></li>
         <li><a href="/compress">Compress</a></li>
-        <li><a href="/utility-tools">Tools Surface</a></li>
-        <li><a href="/tools">All Tools Platform</a></li>
-        <li><a href="/api">API</a></li>
-        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/utility-tools">Tools</a></li>
+        <li><a href="/tools">All Categories</a></li>
         <li><a href="/learning-hub">Learning Hub</a></li>
+        <li><a href="/library">Library</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
-    
+
     <div class="footer-section">
-      <h4>Tool Categories</h4>
+      <h4>Tool Surfaces</h4>
       <ul>
         <li><a href="/convert">Video and Audio Convert</a></li>
         <li><a href="/convert">Image Convert</a></li>
@@ -32,83 +42,116 @@
         <li><a href="/utility-tools">Image and PDF Utility Tools</a></li>
       </ul>
     </div>
-    
+
     <div class="footer-section">
       <h4>Connect</h4>
       <ul>
-        <li><a href="https://twitter.com/velnora" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-        <li><a href="https://linkedin.com/company/velnora" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        <li><a href="https://github.com/velnora" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a></li>
+        <li>
+          <a href="https://linkedin.com/in/sameed-nawaz-pak" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        <li><a href="https://sameednawaz.tech/" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
       </ul>
     </div>
   </div>
-  
+
   <div class="footer-bottom">
-    <p>&copy; 2026 Velnora. All rights reserved.</p>
+    <p>&copy; 2026 Velnora. Built by Sameed Nawaz.</p>
   </div>
 </footer>
 
 <style>
-  footer {
-    background: linear-gradient(145deg, #fef4dc 0%, #f4e6c6 100%);
-    color: var(--color-primary);
+  .site-footer {
+    position: relative;
     margin-top: 4rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid rgba(209, 187, 152, 0.5);
+    background: linear-gradient(145deg, #fdf4de 0%, #f4e5c4 100%);
+    color: var(--color-primary);
+    overflow: hidden;
+    isolation: isolate;
   }
-  
+
+  .footer-motion {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .footer-motion-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(circle at 22% 25%, rgba(255, 244, 222, 0.1), rgba(255, 244, 222, 0.95) 72%);
+  }
+
+  .footer-boxes-layer {
+    opacity: 0.55;
+    z-index: 1;
+    position: absolute;
+  }
+
   .footer-container {
-    max-width: 1200px;
+    max-width: 1220px;
     margin: 0 auto;
     padding: 3rem 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+    position: relative;
+    z-index: 3;
   }
-  
+
   .footer-section h3 {
     font-family: var(--font-display);
     font-size: 1.6rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, #1a2f4b, #0a8a82);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   .footer-section h4 {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.08rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
     color: #8a531f;
   }
-  
+
   .footer-section p {
-    line-height: 1.6;
-    color: #41506c;
+    line-height: 1.62;
+    color: #40506c;
   }
-  
+
   .footer-section ul {
     list-style: none;
+    display: grid;
+    gap: 0.34rem;
   }
-  
-  .footer-section ul li {
-    margin: 0.5rem 0;
-  }
-  
+
   .footer-section a {
     color: #2b3f5c;
-    transition: color 0.2s ease;
+    font-size: 0.92rem;
   }
-  
+
   .footer-section a:hover {
     color: var(--color-accent);
   }
-  
+
   .footer-bottom {
+    position: relative;
+    z-index: 3;
     text-align: center;
-    padding: 2rem;
+    padding: 1.1rem 2rem 1.5rem;
     border-top: 1px solid rgba(35, 53, 82, 0.14);
-    color: #41506c;
+    color: #435776;
+  }
+
+  @media (max-width: 800px) {
+    .footer-container {
+      padding: 2.2rem 1rem;
+    }
   }
 </style>

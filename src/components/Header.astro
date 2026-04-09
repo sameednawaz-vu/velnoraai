@@ -1,5 +1,6 @@
 ---
 import catalog from '../content/data/freeconvert-catalog.json';
+import toolsData from '../content/data/tools.json';
 
 const primaryMenus = [
   { label: 'Convert', href: '/convert', surfaceSlug: 'convert' },
@@ -8,43 +9,112 @@ const primaryMenus = [
 ];
 
 const secondaryLinks = [
-  { label: 'API', href: '/api' },
-  { label: 'Pricing', href: '/pricing' },
+  { label: 'Learning Hub', href: '/learning-hub' },
+  { label: 'Library', href: '/library' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '/about' },
 ];
 
+const quickLinks: Array<{ label: string; href: string }> = [];
+
 const surfaceMap = new Map(catalog.surfaces.map((surface) => [surface.slug, surface]));
+
+const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published');
+const categoryColumns = toolsData.categories
+  .map((category) => {
+    const categoryTools = publishedTools.filter((tool) => tool.category === category.slug);
+
+    return {
+      slug: category.slug,
+      name: category.name,
+      href: `/tools/${category.slug}`,
+      count: categoryTools.length,
+      tools: categoryTools.slice(0, 5).map((tool) => ({
+        name: tool.name,
+        href: `/tools/${tool.category}/${tool.slug}`,
+      })),
+    };
+  })
+  .filter((category) => category.count > 0);
+
+const groupBadgeMap: Record<string, string> = {
+  'video-audio': 'VA',
+  image: 'IM',
+  'pdf-documents': 'PD',
+  gif: 'GF',
+  others: 'OT',
+  'video-tools': 'VT',
+  'image-tools': 'IT',
+  'pdf-tools': 'PT',
+};
+
+const getGroupBadge = (groupSlug: string) => groupBadgeMap[groupSlug] ?? 'TL';
+const getCategoryBadge = (name: string) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 ---
 
-<header>
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <a href="/">
-          <span class="brand-name">Velnora</span>
-          <span class="tagline">Tools that ship ideas</span>
-        </a>
-      </div>
-      
-      <ul class="nav-menu">
+<header class="site-header">
+  <nav class="nav-shell" aria-label="Primary navigation">
+    <a class="brand" href="/" aria-label="Velnora home">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span class="brand-text">
+        <strong>Velnora</strong>
+        <small>AI Utility Workspace</small>
+      </span>
+    </a>
+
+    <button
+      class="mobile-toggle"
+      type="button"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="site-mobile-nav"
+      aria-label="Toggle navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="desktop-nav">
+      <ul class="menu-list">
         {primaryMenus.map((menu) => {
           const surface = surfaceMap.get(menu.surfaceSlug);
 
           return (
-            <li class="nav-item has-mega">
-              <a href={menu.href} class="top-link">{menu.label}</a>
+            <li class="menu-item has-mega">
+              <a href={menu.href} class="menu-link menu-link-trigger">
+                <span>{menu.label}</span>
+                <span class="caret" aria-hidden="true"></span>
+              </a>
 
               {surface && (
-                <div class="mega-menu" aria-label={`${menu.label} menu`}>
-                  <div class="mega-columns">
+                <div class="mega-panel" aria-label={`${menu.label} navigation`}>
+                  <div class="mega-heading">
+                    <p>{surface.name}</p>
+                    <a href={menu.href}>Open all {surface.name} tools</a>
+                  </div>
+
+                  <div class="mega-grid">
                     {surface.groups.map((group) => (
-                      <section class="mega-column">
-                        <h4>{group.name}</h4>
+                      <section class="tool-group">
+                        <h3>
+                          <span class="group-badge">{getGroupBadge(group.slug)}</span>
+                          {group.name}
+                        </h3>
+
                         <ul>
-                          {group.tools.slice(0, 6).map((tool) => (
+                          {group.tools.map((tool) => (
                             <li><a href={`/utility/${surface.slug}/${tool.slug}`}>{tool.name}</a></li>
                           ))}
                         </ul>
-                        <a href={menu.href} class="view-all">View all</a>
                       </section>
                     ))}
                   </div>
@@ -54,272 +124,759 @@ const surfaceMap = new Map(catalog.surfaces.map((surface) => [surface.slug, surf
           );
         })}
 
+        <li class="menu-item has-mega">
+          <a href="/tools" class="menu-link menu-link-trigger">
+            <span>Categories</span>
+            <span class="caret" aria-hidden="true"></span>
+          </a>
+
+          <div class="mega-panel" aria-label="All categories navigation">
+            <div class="mega-heading">
+              <p>All Tool Categories</p>
+              <a href="/tools">Browse full 120-tool index</a>
+            </div>
+
+            <div class="mega-grid categories-grid">
+              {categoryColumns.map((category) => (
+                <section class="tool-group category-group">
+                  <h3>
+                    <span class="group-badge">{getCategoryBadge(category.name)}</span>
+                    <a href={category.href}>{category.name}</a>
+                  </h3>
+
+                  <p class="category-count">{category.count} published tools</p>
+
+                  <ul>
+                    {category.tools.map((tool) => (
+                      <li><a href={tool.href}>{tool.name}</a></li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </div>
+        </li>
+
         {secondaryLinks.map((item) => (
-          <li class="nav-item">
-            <a href={item.href} class="top-link">{item.label}</a>
+          <li class="menu-item">
+            <a href={item.href} class="menu-link">{item.label}</a>
           </li>
         ))}
       </ul>
 
-      <div class="auth-actions">
-        <a class="search-chip" href="/tools" aria-label="Search all tools">Search</a>
-        <a class="auth-link" href="/login">Log In</a>
-        <a class="auth-link auth-signup" href="/signup">Sign Up</a>
+      <div class="nav-actions">
+        <a class="search-pill" href="/tools" aria-label="Search all tools">
+          <span class="search-icon" aria-hidden="true"></span>
+          Search
+        </a>
+        <a class="login-link" href="/login">Log In</a>
+        <a class="signup-link" href="/signup">Sign Up</a>
       </div>
     </div>
   </nav>
+
+  <div class="mobile-nav" id="site-mobile-nav" data-nav-panel hidden>
+    <div class="mobile-nav-scroll">
+      {primaryMenus.map((menu) => {
+        const surface = surfaceMap.get(menu.surfaceSlug);
+
+        if (!surface) {
+          return null;
+        }
+
+        return (
+          <details class="mobile-item">
+            <summary>{menu.label}</summary>
+
+            {surface.groups.map((group) => (
+              <section class="mobile-group">
+                <h4>{group.name}</h4>
+                <ul>
+                  {group.tools.map((tool) => (
+                    <li><a href={`/utility/${surface.slug}/${tool.slug}`}>{tool.name}</a></li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+
+            <a class="mobile-view-all" href={menu.href}>Open all {menu.label} tools</a>
+          </details>
+        );
+      })}
+
+      <details class="mobile-item">
+        <summary>Categories</summary>
+
+        <ul class="mobile-categories">
+          {categoryColumns.map((category) => (
+            <li>
+              <a href={category.href}>
+                <span>{category.name}</span>
+                <strong>{category.count}</strong>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <a class="mobile-view-all" href="/tools">Browse full 120-tool index</a>
+      </details>
+
+      <div class="mobile-links">
+        {[...secondaryLinks, ...quickLinks].map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </div>
+
+      <div class="mobile-auth">
+        <a class="mobile-login" href="/login">Log In</a>
+        <a class="mobile-signup" href="/signup">Sign Up</a>
+      </div>
+    </div>
+  </div>
 </header>
 
+<script>
+  const setupHeaderNav = () => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const panel = document.querySelector('[data-nav-panel]');
+
+    if (!(toggle instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) {
+      return;
+    }
+
+    const close = () => {
+      panel.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('mobile-nav-open');
+    };
+
+    const open = () => {
+      panel.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('mobile-nav-open');
+    };
+
+    toggle.addEventListener('click', () => {
+      if (panel.hidden) {
+        open();
+      } else {
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (window.innerWidth > 1080 || panel.hidden) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (!panel.contains(target) && !toggle.contains(target)) {
+        close();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1080) {
+        close();
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHeaderNav, { once: true });
+  } else {
+    setupHeaderNav();
+  }
+</script>
+
 <style>
-  header {
-    background: rgba(255, 249, 237, 0.88);
-    border-bottom: 1px solid var(--color-border);
+  .site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    backdrop-filter: blur(12px);
+    z-index: 120;
+    border-bottom: 1px solid rgba(34, 57, 86, 0.14);
+    background: rgba(255, 252, 245, 0.95);
+    backdrop-filter: blur(10px);
   }
-  
-  .navbar {
-    max-width: 1200px;
+
+  .nav-shell {
+    width: min(1320px, 100% - 1.6rem);
     margin: 0 auto;
-    padding: 0.35rem 1.2rem;
-  }
-  
-  .nav-container {
+    min-height: 72px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    min-height: 78px;
   }
-  
-  .logo a {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    gap: 0.12rem;
-    color: var(--color-primary);
-  }
-  
-  .brand-name {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    font-weight: 800;
-    letter-spacing: -0.015em;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .tagline {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #ab5f22;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  
-  .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 0.25rem;
+
+  .brand {
+    display: inline-flex;
     align-items: center;
-    flex: 1;
-    justify-content: center;
+    gap: 0.62rem;
+    color: #1f3556;
+    min-width: fit-content;
   }
-  
-  .nav-item {
+
+  .brand:hover {
+    color: #1f3556;
+  }
+
+  .brand-mark {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: white;
+    background: linear-gradient(140deg, #506bf4 0%, #40b0d8 100%);
+  }
+
+  .brand-text {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 0.18rem;
+  }
+
+  .brand-text strong {
+    color: #2a3b59;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-text small {
+    color: #677a97;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.57rem;
+    font-weight: 700;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 0.8rem;
     position: relative;
   }
 
-  .top-link {
-    font-weight: 600;
-    transition: all 0.22s ease;
-    color: #2d3d58;
-    border-radius: 999px;
-    padding: 0.5rem 0.8rem;
+  .menu-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.06rem;
+    flex-wrap: wrap;
+  }
+
+  .menu-item {
+    position: static;
+  }
+
+  .menu-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-  }
-  
-  .top-link:hover {
-    color: var(--color-primary);
-    background: rgba(255, 93, 61, 0.13);
+    gap: 0.38rem;
+    border-radius: 0.56rem;
+    color: #1f314f;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.44rem 0.62rem;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
   }
 
-  .mega-menu {
+  .menu-link:hover,
+  .menu-link:focus-visible {
+    color: #1d2d49;
+    border-color: rgba(60, 82, 110, 0.16);
+    background: rgba(236, 241, 248, 0.85);
+  }
+
+  .menu-link-trigger .caret {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 1.6px solid currentColor;
+    border-bottom: 1.6px solid currentColor;
+    transform: rotate(45deg) translateY(-1px);
+    transition: transform 0.18s ease;
+    margin-left: 0.08rem;
+  }
+
+  .has-mega:hover .menu-link-trigger .caret,
+  .has-mega:focus-within .menu-link-trigger .caret {
+    transform: rotate(225deg) translateY(-1px);
+  }
+
+  .mega-panel {
     position: absolute;
-    top: calc(100% + 0.4rem);
-    left: 50%;
-    transform: translate(-50%, 8px);
+    top: calc(100% + 0.45rem);
+    left: 0;
+    width: min(1280px, 100vw - 1.6rem);
+    background: #f8fafc;
+    border: 1px solid #d9e1eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 26px 48px rgba(22, 40, 66, 0.2);
+    padding: 0.75rem;
     opacity: 0;
-    visibility: hidden;
     pointer-events: none;
+    visibility: hidden;
+    transform: translateY(8px);
     transition: opacity 0.2s ease, transform 0.2s ease;
-    min-width: min(1080px, calc(100vw - 1.6rem));
-    width: max-content;
-    max-width: min(1080px, calc(100vw - 1.6rem));
-    border: 1px solid var(--color-border);
-    border-radius: 0.82rem;
-    background: rgba(255, 250, 240, 0.97);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 26px 44px rgba(18, 39, 63, 0.18);
-    padding: 0.8rem;
-    z-index: 130;
+    z-index: 180;
   }
 
-  .has-mega:hover .mega-menu,
-  .has-mega:focus-within .mega-menu {
+  .has-mega:hover > .mega-panel,
+  .has-mega:focus-within > .mega-panel {
     opacity: 1;
-    visibility: visible;
     pointer-events: auto;
-    transform: translate(-50%, 0);
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .mega-columns {
+  .mega-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.7rem;
+    border-bottom: 1px solid #d9e1eb;
+    padding: 0.2rem 0.3rem 0.68rem;
+    margin-bottom: 0.62rem;
+  }
+
+  .mega-heading p {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #1f304d;
+  }
+
+  .mega-heading a {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3e5fd9;
+  }
+
+  .mega-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 0;
   }
 
-  .mega-column {
-    border-right: 1px solid rgba(34, 58, 91, 0.08);
-    padding-right: 0.6rem;
+  .tool-group {
+    padding: 0.35rem 0.64rem 0.52rem;
+    border-right: 1px solid #dce3ed;
   }
 
-  .mega-column:last-child {
+  .tool-group:last-child {
     border-right: none;
-    padding-right: 0;
   }
 
-  .mega-column h4 {
+  .tool-group h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-size: 0.79rem;
+    letter-spacing: 0.015em;
+    color: #1f334f;
+    margin-bottom: 0.52rem;
+  }
+
+  .tool-group h3 a {
+    color: inherit;
+  }
+
+  .group-badge {
+    min-width: 1.52rem;
+    height: 1.25rem;
+    border: 1px solid #c7d1df;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.58rem;
+    font-weight: 800;
+    color: #415777;
+    background: #edf2f8;
+    letter-spacing: 0.04em;
+    padding: 0 0.18rem;
+  }
+
+  .tool-group ul {
+    list-style: none;
+    display: grid;
+    gap: 0.12rem;
+    max-height: 45vh;
+    overflow: auto;
+    padding-right: 0.12rem;
+  }
+
+  .tool-group li a {
+    display: block;
+    border-radius: 0.38rem;
+    padding: 0.3rem 0.37rem;
+    color: #1f304d;
+    font-size: 0.89rem;
+    line-height: 1.28;
+  }
+
+  .tool-group li a:hover,
+  .tool-group li a:focus-visible {
+    background: #ebf0f7;
+    color: #16233a;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .category-group {
+    padding-top: 0.15rem;
+  }
+
+  .category-group .category-count {
+    font-size: 0.74rem;
+    color: #607491;
+    margin: -0.2rem 0 0.4rem 1.94rem;
+  }
+
+  .nav-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .search-pill {
+    border: 1px solid #ced8e6;
+    border-radius: 999px;
+    background: #f7f9fd;
+    color: #2f4362;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    padding: 0.4rem 0.64rem;
+  }
+
+  .search-pill:hover {
+    color: #1e304c;
+    border-color: #b7c6dc;
+  }
+
+  .search-icon {
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 50%;
+    border: 1.7px solid currentColor;
+    position: relative;
+    display: inline-flex;
+  }
+
+  .search-icon::after {
+    content: '';
+    width: 0.43rem;
+    height: 1.7px;
+    border-radius: 999px;
+    background: currentColor;
+    position: absolute;
+    right: -0.29rem;
+    bottom: -0.18rem;
+    transform: rotate(45deg);
+  }
+
+  .login-link,
+  .signup-link {
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    padding: 0.42rem 0.72rem;
+    border: 1px solid #ced8e6;
+  }
+
+  .login-link {
+    color: #1f334f;
+    background: #f9fbfe;
+  }
+
+  .signup-link {
+    color: #3f58c8;
+    background: #eef2ff;
+    border-color: #b9c4ee;
+  }
+
+  .mobile-toggle {
+    display: none;
+    margin-left: auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.52rem;
+    border: 1px solid #d2deeb;
+    background: #f8fbff;
+    padding: 0.46rem;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: #2b405f;
+  }
+
+  .mobile-nav {
+    border-top: 1px solid #d6dfeb;
+    background: #f8fbff;
+  }
+
+  .mobile-nav[hidden] {
+    display: none;
+  }
+
+  .mobile-nav-scroll {
+    max-height: calc(100vh - 72px);
+    overflow: auto;
+    padding: 0.75rem 0.8rem 1rem;
+  }
+
+  .mobile-item {
+    border: 1px solid #d6dfeb;
+    border-radius: 0.62rem;
+    background: #ffffff;
+    margin-bottom: 0.62rem;
+    padding: 0.35rem 0.55rem 0.52rem;
+  }
+
+  .mobile-item summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #213652;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.28rem 0;
+  }
+
+  .mobile-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-item summary::after {
+    content: '+';
+    color: #546988;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .mobile-item[open] summary::after {
+    content: '-';
+  }
+
+  .mobile-group {
+    border-top: 1px solid #e2e9f2;
+    padding-top: 0.5rem;
+    margin-top: 0.45rem;
+  }
+
+  .mobile-group h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5b6f8d;
+    margin-bottom: 0.35rem;
+  }
+
+  .mobile-group ul {
+    list-style: none;
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .mobile-group li a {
+    display: block;
+    border-radius: 0.42rem;
+    padding: 0.28rem 0.38rem;
+    color: #213652;
     font-size: 0.88rem;
-    margin-bottom: 0.4rem;
-    color: #1e3554;
   }
 
-  .mega-column ul {
+  .mobile-group li a:hover {
+    background: #edf2f8;
+  }
+
+  .mobile-view-all {
+    display: inline-flex;
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3b59c8;
+  }
+
+  .mobile-categories {
     list-style: none;
     display: grid;
     gap: 0.2rem;
-    margin-bottom: 0.3rem;
+    margin-top: 0.4rem;
   }
 
-  .mega-column li a {
-    border-radius: 0.44rem;
-    padding: 0.28rem 0.42rem;
-    color: #274260;
-    display: inline-flex;
-    width: 100%;
-    font-size: 0.86rem;
-  }
-
-  .mega-column li a:hover {
-    background: rgba(255, 93, 61, 0.12);
-    color: #17304f;
-  }
-
-  .view-all {
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-
-  .auth-actions {
+  .mobile-categories a {
+    border-radius: 0.42rem;
+    padding: 0.3rem 0.36rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.55rem;
+    color: #233a57;
   }
 
-  .search-chip {
-    border: 1px solid rgba(36, 56, 83, 0.16);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.6);
-    color: #2a3f5d;
-    font-weight: 600;
-    padding: 0.45rem 0.7rem;
-    font-size: 0.85rem;
+  .mobile-categories a:hover {
+    background: #edf2f8;
   }
 
-  .auth-link {
-    border-radius: 0.45rem;
-    border: 1px solid rgba(36, 56, 83, 0.24);
-    color: #223853;
+  .mobile-categories strong {
+    font-size: 0.77rem;
+    color: #4c6283;
     font-weight: 700;
-    font-size: 0.92rem;
-    padding: 0.45rem 0.72rem;
-    background: #fffdf7;
   }
 
-  .auth-link:hover {
-    border-color: #bea47f;
-    color: #162f4b;
+  .mobile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.44rem;
+    margin-top: 0.3rem;
   }
 
-  .auth-signup {
-    border-color: rgba(10, 138, 130, 0.36);
-    color: #0b6f68;
-    background: rgba(10, 138, 130, 0.08);
+  .mobile-links a {
+    border: 1px solid #d6dfeb;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: #213652;
+    text-align: center;
+    padding: 0.48rem 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 700;
   }
-  
-  @media (max-width: 1100px) {
-    .mega-menu {
+
+  .mobile-auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    margin-top: 0.7rem;
+  }
+
+  .mobile-login,
+  .mobile-signup {
+    border-radius: 0.55rem;
+    text-align: center;
+    padding: 0.56rem 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .mobile-login {
+    border: 1px solid #d0d9e7;
+    color: #233a57;
+    background: #ffffff;
+  }
+
+  .mobile-signup {
+    border: 1px solid #b8c3eb;
+    color: #3b56c3;
+    background: #ecf0ff;
+  }
+
+  :global(body.mobile-nav-open) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 1240px) {
+    .menu-list {
+      gap: 0;
+    }
+
+    .menu-link {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.5rem;
+    }
+
+    .nav-actions {
+      gap: 0.38rem;
+    }
+
+    .search-pill {
+      padding-inline: 0.5rem;
+    }
+
+    .login-link,
+    .signup-link {
+      font-size: 0.84rem;
+      padding: 0.38rem 0.58rem;
+    }
+  }
+
+  @media (max-width: 1080px) {
+    .nav-shell {
+      min-height: 66px;
+    }
+
+    .desktop-nav {
       display: none;
     }
 
-    .nav-container {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.55rem;
-      padding: 0.3rem 0;
+    .mobile-toggle {
+      display: inline-flex;
     }
 
-    .nav-menu {
-      order: 3;
-      width: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
+    .brand-text strong {
+      font-size: 1.2rem;
     }
 
-    .auth-actions {
-      margin-left: auto;
+    .brand-text small {
+      font-size: 0.54rem;
+      letter-spacing: 0.07em;
     }
   }
 
-  @media (max-width: 768px) {
-    .navbar {
-      padding: 0.4rem 0.8rem;
+  @media (max-width: 640px) {
+    .nav-shell {
+      width: calc(100% - 1rem);
+      min-height: 62px;
+      gap: 0.6rem;
     }
 
-    .brand-name {
-      font-size: 1.42rem;
+    .brand-mark {
+      width: 1.8rem;
+      height: 1.8rem;
     }
 
-    .tagline {
-      font-size: 0.64rem;
-      letter-spacing: 0.08rem;
+    .brand-text small {
+      display: none;
     }
 
-    .nav-menu {
-      gap: 0.2rem;
-      font-size: 0.82rem;
+    .mobile-nav-scroll {
+      max-height: calc(100vh - 62px);
+      padding-inline: 0.65rem;
     }
 
-    .top-link {
-      padding: 0.38rem 0.56rem;
-    }
-
-    .auth-actions {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .auth-link,
-    .search-chip {
-      font-size: 0.82rem;
-      padding: 0.36rem 0.56rem;
+    .mobile-links {
+      grid-template-columns: 1fr;
     }
   }
 </style>

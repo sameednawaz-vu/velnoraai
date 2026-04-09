@@ -2,56 +2,66 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ContactForm from '../components/ContactForm.astro';
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Sameed Nawaz',
+  description: 'Direct contact channels for collaboration and product work.',
+};
 ---
 
-<BaseLayout title="Contact Us" description="Get in touch with Velnora. Have questions or feedback? We'd love to hear from you.">
+<BaseLayout
+  title="Contact"
+  description="Direct contact channels for Sameed Nawaz including email, LinkedIn, and portfolio links."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
+
   <Header />
-  
+
   <main class="contact-page">
-    <div class="container">
-      <h1>Get in Touch</h1>
-      <p class="subtitle">We'd love to hear from you. Send us a message!</p>
+    <section class="contact-hero" data-reveal>
+      <p class="eyebrow">Contact</p>
+      <h1>Let us talk about your next build</h1>
+      <p>
+        The contact form is currently paused. Use direct channels below for project inquiries, partnerships,
+        collaboration requests, or technical discussion.
+      </p>
+    </section>
 
-      <div class="contact-content">
-        <div class="contact-info">
-          <h2>Contact Information</h2>
-          
-          <div class="info-item">
-            <h3>Email</h3>
-            <p><a href="mailto:hello@velnoraai.com">hello@velnoraai.com</a></p>
-          </div>
+    <section class="contact-grid" data-reveal>
+      <article>
+        <h2>Email</h2>
+        <p>Fastest way to reach me for ongoing work and project questions.</p>
+        <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
+      </article>
 
-          <div class="info-item">
-            <h3>Response Time</h3>
-            <p>We typically respond within 24-48 hours during business days.</p>
-          </div>
+      <article>
+        <h2>LinkedIn</h2>
+        <p>Professional updates, collaborations, and communication.</p>
+        <a href="https://linkedin.com/in/sameed-nawaz-pak" target="_blank" rel="noopener noreferrer">
+          linkedin.com/in/sameed-nawaz-pak
+        </a>
+      </article>
 
-          <div class="info-item">
-            <h3>Follow Us</h3>
-            <div class="social-links">
-              <a href="https://twitter.com/velnoraai" target="_blank">Twitter</a>
-              <a href="https://linkedin.com/company/velnoraai" target="_blank">LinkedIn</a>
-              <a href="https://github.com/velnoraai" target="_blank">GitHub</a>
-            </div>
-          </div>
+      <article>
+        <h2>Portfolio</h2>
+        <p>Explore my recent technical and creative work.</p>
+        <a href="https://sameednawaz.tech/" target="_blank" rel="noopener noreferrer">sameednawaz.tech</a>
+      </article>
 
-          <div class="info-item">
-            <h3>What We're Looking For</h3>
-            <ul>
-              <li>Feedback on our content and prompts</li>
-              <li>Partnership and collaboration opportunities</li>
-              <li>Guest posting or contributor inquiries</li>
-              <li>General questions about our services</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="contact-form-wrapper">
-          <ContactForm />
-        </div>
-      </div>
-    </div>
+      <article>
+        <h2>Creative Showcase</h2>
+        <p>Selected visual and product creative references.</p>
+        <a
+          href="https://playbook.com/s/ranasameednawaz/9qCfdH2PS4nHT5J4cvUboY3t"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open showcase
+        </a>
+      </article>
+    </section>
   </main>
 
   <Footer />
@@ -59,125 +69,80 @@ import ContactForm from '../components/ContactForm.astro';
 
 <style>
   .contact-page {
-    padding: 3rem 2rem;
-  }
-
-  .container {
-    max-width: 1200px;
+    max-width: 1080px;
     margin: 0 auto;
+    padding: 2rem 1rem 3.2rem;
+    display: grid;
+    gap: 1rem;
   }
 
-  .contact-page h1 {
-    text-align: center;
-    font-size: 3rem;
+  .contact-hero {
+    border: 1px solid var(--color-border);
+    border-radius: 0.95rem;
+    background: linear-gradient(130deg, rgba(255, 134, 56, 0.15), rgba(73, 102, 214, 0.11));
+    box-shadow: var(--shadow-soft);
+    padding: 1.2rem;
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    font-weight: 800;
+    color: #4d64c8;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-hero h1 {
     margin-bottom: 0.5rem;
   }
 
-  .subtitle {
-    text-align: center;
-    font-size: 1.3rem;
-    color: var(--color-secondary);
-    margin-bottom: 3rem;
+  .contact-hero p {
+    color: #35506f;
+    line-height: 1.72;
+    max-width: 80ch;
   }
 
-  .contact-content {
+  .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
   }
 
-  .contact-info h2 {
-    font-size: 1.75rem;
-    margin-bottom: 2rem;
-    color: var(--color-primary);
+  .contact-grid article {
+    border: 1px solid rgba(36, 56, 83, 0.14);
+    border-radius: 0.8rem;
+    background: #fffef9;
+    padding: 0.95rem;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 0.5rem;
   }
 
-  .info-item {
-    margin-bottom: 2rem;
+  .contact-grid h2 {
+    font-size: 1.05rem;
+    color: #1f3554;
   }
 
-  .info-item h3 {
-    color: var(--color-secondary);
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
-  }
-
-  .info-item p {
-    color: #666;
+  .contact-grid p {
+    color: #47617f;
+    font-size: 0.94rem;
     line-height: 1.6;
   }
 
-  .info-item a {
-    color: var(--color-secondary);
-    font-weight: 600;
+  .contact-grid a {
+    color: #2c45ad;
+    word-break: break-word;
+    font-weight: 700;
   }
 
-  .info-item a:hover {
-    color: var(--color-accent);
+  .contact-grid a:hover {
+    color: #1f2f50;
   }
 
-  .social-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .social-links a {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #f9f9f9;
-    border: 1px solid var(--color-border);
-    border-radius: 0.25rem;
-    transition: all 0.2s ease;
-  }
-
-  .social-links a:hover {
-    background-color: var(--color-secondary);
-    color: white;
-    border-color: var(--color-secondary);
-  }
-
-  .info-item ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .info-item ul li {
-    padding: 0.5rem 0 0.5rem 1.5rem;
-    color: #666;
-    position: relative;
-  }
-
-  .info-item ul li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--color-secondary);
-    font-weight: bold;
-  }
-
-  .contact-form-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  @media (max-width: 768px) {
-    .contact-page h1 {
-      font-size: 2rem;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-    }
-
-    .contact-content {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .contact-info h2 {
-      font-size: 1.5rem;
+  @media (max-width: 680px) {
+    .contact-page {
+      padding: 1rem 0.8rem 2.6rem;
     }
   }
 </style>

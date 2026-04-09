@@ -1,0 +1,35 @@
+.velnora-boxes-grid {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transform: translate(-42%, -58%) skewX(-42deg) skewY(14deg) scale(0.72);
+  pointer-events: none;
+}
+
+.velnora-boxes-row {
+  width: 52px;
+  height: 26px;
+  border-left: 1px solid rgba(148, 163, 184, 0.45);
+  position: relative;
+}
+
+.velnora-boxes-cell {
+  width: 52px;
+  height: 26px;
+  border-right: 1px solid rgba(148, 163, 184, 0.45);
+  border-top: 1px solid rgba(148, 163, 184, 0.45);
+  position: relative;
+}
+
+.velnora-boxes-plus {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  left: -11px;
+  color: rgba(148, 163, 184, 0.6);
+  stroke-width: 1px;
+}
