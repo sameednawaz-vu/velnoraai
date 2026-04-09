@@ -150,6 +150,11 @@ declare module 'astro:content' {
   data: any;
 }>;
 "data": {
+"competitor-convertio-formats": {
+	id: "competitor-convertio-formats";
+  collection: "data";
+  data: any
+};
 "freeconvert-catalog": {
 	id: "freeconvert-catalog";
   collection: "data";

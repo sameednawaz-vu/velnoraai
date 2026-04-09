@@ -1,0 +1,3438 @@
+{
+  "generatedAt": "2026-04-09T20:06:51.151Z",
+  "source": {
+    "name": "Convertio File Formats (live)",
+    "url": "https://convertio.co/formats/",
+    "mode": "live"
+  },
+  "totals": {
+    "categories": 10,
+    "formats": 309,
+    "readEnabled": 307,
+    "writeEnabled": 244
+  },
+  "categories": [
+    {
+      "slug": "archives",
+      "name": "Archives",
+      "formatCount": 23,
+      "readCount": 23,
+      "writeCount": 17,
+      "formats": [
+        {
+          "extension": "7Z",
+          "description": "7-Zip Compressed File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/7z/"
+        },
+        {
+          "extension": "ACE",
+          "description": "WinAce Compressed File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ace/"
+        },
+        {
+          "extension": "ALZ",
+          "description": "ALZip Archive",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/alz/"
+        },
+        {
+          "extension": "ARC",
+          "description": "ARC Compressed Archive File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/arc/"
+        },
+        {
+          "extension": "ARJ",
+          "description": "Archiver Robert Jung",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/arj/"
+        },
+        {
+          "extension": "CAB",
+          "description": "Cabinet File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cab/"
+        },
+        {
+          "extension": "CPIO",
+          "description": "Copy Input/Output",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cpio/"
+        },
+        {
+          "extension": "DEB",
+          "description": "Debian Compressed Archive File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/deb/"
+        },
+        {
+          "extension": "JAR",
+          "description": "Java ARchive",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jar/"
+        },
+        {
+          "extension": "LHA",
+          "description": "LHArc",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/lha/"
+        },
+        {
+          "extension": "RAR",
+          "description": "WinRAR Compressed Archive",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rar/"
+        },
+        {
+          "extension": "RPM",
+          "description": "Red Hat Package Manager",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rpm/"
+        },
+        {
+          "extension": "TAR",
+          "description": "Tape Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar/"
+        },
+        {
+          "extension": "TAR.7Z",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.7z/"
+        },
+        {
+          "extension": "TAR.BZ",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.bz/"
+        },
+        {
+          "extension": "TAR.LZ",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.lz/"
+        },
+        {
+          "extension": "TAR.LZMA",
+          "description": "Lempel-Ziv-Markov chain-Algorithm",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.lzma/"
+        },
+        {
+          "extension": "TAR.LZO",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.lzo/"
+        },
+        {
+          "extension": "TAR.XZ",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.xz/"
+        },
+        {
+          "extension": "TAR.Z",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tar.z/"
+        },
+        {
+          "extension": "TBZ2",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tbz2/"
+        },
+        {
+          "extension": "TGZ",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tgz/"
+        },
+        {
+          "extension": "ZIP",
+          "description": "Compressed Archive File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/zip/"
+        }
+      ]
+    },
+    {
+      "slug": "audios",
+      "name": "Audios",
+      "formatCount": 62,
+      "readCount": 62,
+      "writeCount": 56,
+      "formats": [
+        {
+          "extension": "8SVX",
+          "description": "Amiga 8SVX",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/8svx/"
+        },
+        {
+          "extension": "AAC",
+          "description": "Advanced Audio Coding",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/aac/"
+        },
+        {
+          "extension": "AC3",
+          "description": "AC3 Audio File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ac3/"
+        },
+        {
+          "extension": "AIFF",
+          "description": "Audio Interchange File Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/aiff/"
+        },
+        {
+          "extension": "AMB",
+          "description": "Ambisonic B-Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/amb/"
+        },
+        {
+          "extension": "AMR",
+          "description": "Adaptive Multi Rate",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/amr/"
+        },
+        {
+          "extension": "APE",
+          "description": "Monkey's Audio",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ape/"
+        },
+        {
+          "extension": "AU",
+          "description": "Sun Microsystems AU files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/au/"
+        },
+        {
+          "extension": "AVR",
+          "description": "Audio Visual Research format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/avr/"
+        },
+        {
+          "extension": "CAF",
+          "description": "Core Audio Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/caf/"
+        },
+        {
+          "extension": "CDDA",
+          "description": "Compact Disc Digital Audio (raw audio)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cdda/"
+        },
+        {
+          "extension": "CVS",
+          "description": "Continuously Variable Slope Delta modulation",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cvs/"
+        },
+        {
+          "extension": "CVSD",
+          "description": "Continuously Variable Slope Delta modulation",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cvsd/"
+        },
+        {
+          "extension": "CVU",
+          "description": "Continuously Variable Slope Delta modulation (unfiltered)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cvu/"
+        },
+        {
+          "extension": "DSS",
+          "description": "Digital Speech Standard File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dss/"
+        },
+        {
+          "extension": "DTS",
+          "description": "Digital Theater Systems",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dts/"
+        },
+        {
+          "extension": "DVMS",
+          "description": "DVMS",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dvms/"
+        },
+        {
+          "extension": "FAP",
+          "description": "PARIS Audio File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/fap/"
+        },
+        {
+          "extension": "FLAC",
+          "description": "Free Lossless Audio Codec",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/flac/"
+        },
+        {
+          "extension": "FSSD",
+          "description": "FSSD - 8-bit unsigned integer PCM RAW Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/fssd/"
+        },
+        {
+          "extension": "GSM",
+          "description": "GSM 06.10 Lossy Speech Compression",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/gsm/"
+        },
+        {
+          "extension": "GSRT",
+          "description": "Grandstream ring-tone files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/gsrt/"
+        },
+        {
+          "extension": "HCOM",
+          "description": "Macintosh HCOM files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/hcom/"
+        },
+        {
+          "extension": "HTK",
+          "description": "HTK",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/htk/"
+        },
+        {
+          "extension": "IMA",
+          "description": "A headerless file of IMA ADPCM audio data",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ima/"
+        },
+        {
+          "extension": "IRCAM",
+          "description": "IRCAM SDIF",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ircam/"
+        },
+        {
+          "extension": "M4A",
+          "description": "Compressed Audio File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/m4a/"
+        },
+        {
+          "extension": "M4R",
+          "description": "MPEG 4 Ringtones Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/m4r/"
+        },
+        {
+          "extension": "MAUD",
+          "description": "MAUD",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/maud/"
+        },
+        {
+          "extension": "MP2",
+          "description": "MPEG-1/2 Audio Layer 2",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mp2/"
+        },
+        {
+          "extension": "MP3",
+          "description": "MP3 Audio Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mp3/"
+        },
+        {
+          "extension": "NIST",
+          "description": "NIST (National Institute of Standards and Technology)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/nist/"
+        },
+        {
+          "extension": "OGA",
+          "description": "OGG Vorbis Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/oga/"
+        },
+        {
+          "extension": "OGG",
+          "description": "Ogg Vorbis Compressed Audio File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ogg/"
+        },
+        {
+          "extension": "OPUS",
+          "description": "Opus (audio format)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/opus/"
+        },
+        {
+          "extension": "PAF",
+          "description": "PARIS Audio File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/paf/"
+        },
+        {
+          "extension": "PRC",
+          "description": "Psion Record",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/prc/"
+        },
+        {
+          "extension": "PVF",
+          "description": "Portable Voice Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pvf/"
+        },
+        {
+          "extension": "RA",
+          "description": "Real Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ra/"
+        },
+        {
+          "extension": "SD2",
+          "description": "Sound Designer 2 format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sd2/"
+        },
+        {
+          "extension": "SHN",
+          "description": "Shorten",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/shn/"
+        },
+        {
+          "extension": "SLN",
+          "description": "Asterisk PBX `signed linear’",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sln/"
+        },
+        {
+          "extension": "SMP",
+          "description": "Turtle Beach SampleVision files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/smp/"
+        },
+        {
+          "extension": "SND",
+          "description": "MS-DOS early ’90s .SND files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/snd/"
+        },
+        {
+          "extension": "SNDR",
+          "description": "MS-DOS early ’90s .SND(RT) files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sndr/"
+        },
+        {
+          "extension": "SNDT",
+          "description": "MS-DOS early ’90s .SND(RT) files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sndt/"
+        },
+        {
+          "extension": "SOU",
+          "description": "SOU - 8-bit unsigned integer PCM RAW Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sou/"
+        },
+        {
+          "extension": "SPH",
+          "description": "SPeech HEader Resources",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sph/"
+        },
+        {
+          "extension": "SPX",
+          "description": "Speex",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/spx/"
+        },
+        {
+          "extension": "TAK",
+          "description": "Tom's lossless Audio Kompressor",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tak/"
+        },
+        {
+          "extension": "TTA",
+          "description": "True Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tta/"
+        },
+        {
+          "extension": "TXW",
+          "description": "Yamaha TX-16W sampler",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/txw/"
+        },
+        {
+          "extension": "VMS",
+          "description": "VMS",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/vms/"
+        },
+        {
+          "extension": "VOC",
+          "description": "Sound Blaster VOC files",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/voc/"
+        },
+        {
+          "extension": "VOX",
+          "description": "A headerless file of Dialogic/OKI ADPCM audio data",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/vox/"
+        },
+        {
+          "extension": "VQF",
+          "description": "TwinVQ",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/vqf/"
+        },
+        {
+          "extension": "W64",
+          "description": "Sonic Foundry’s 64-bit RIFF/WAV format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/w64/"
+        },
+        {
+          "extension": "WAV",
+          "description": "Waveform Audio File Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wav/"
+        },
+        {
+          "extension": "WMA",
+          "description": "Windows Media Audio",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wma/"
+        },
+        {
+          "extension": "WV",
+          "description": "WavPack lossless audio compression",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wv/"
+        },
+        {
+          "extension": "WVE",
+          "description": "Psion 8-bit A-law",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wve/"
+        },
+        {
+          "extension": "XA",
+          "description": "Maxis XA files",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xa/"
+        }
+      ]
+    },
+    {
+      "slug": "cad",
+      "name": "CAD",
+      "formatCount": 1,
+      "readCount": 1,
+      "writeCount": 1,
+      "formats": [
+        {
+          "extension": "DXF",
+          "description": "Autocad Drawing Exchange",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dxf/"
+        }
+      ]
+    },
+    {
+      "slug": "documents",
+      "name": "Documents",
+      "formatCount": 23,
+      "readCount": 23,
+      "writeCount": 23,
+      "formats": [
+        {
+          "extension": "ABW",
+          "description": "AbiWord",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/abw/"
+        },
+        {
+          "extension": "AW",
+          "description": "Applix Words",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/aw/"
+        },
+        {
+          "extension": "CSV",
+          "description": "Comma-Separated Values",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/csv/"
+        },
+        {
+          "extension": "DBK",
+          "description": "DocBook XML",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dbk/"
+        },
+        {
+          "extension": "DJVU",
+          "description": "Deja Vu",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/djvu/"
+        },
+        {
+          "extension": "DOC",
+          "description": "Microsoft Word Document",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/doc/"
+        },
+        {
+          "extension": "DOCM",
+          "description": "Microsoft Word Document with Macros Enabled",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/docm/"
+        },
+        {
+          "extension": "DOCX",
+          "description": "Microsoft Office Open XML",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/docx/"
+        },
+        {
+          "extension": "DOT",
+          "description": "Microsoft Word 97-2003 Template File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dot/"
+        },
+        {
+          "extension": "DOTM",
+          "description": "Microsoft Word Template with Macros Enabled",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dotm/"
+        },
+        {
+          "extension": "DOTX",
+          "description": "Microsoft Word Template File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dotx/"
+        },
+        {
+          "extension": "HTML",
+          "description": "HyperText Markup Language",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/html/"
+        },
+        {
+          "extension": "KWD",
+          "description": "KWord native format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/kwd/"
+        },
+        {
+          "extension": "ODT",
+          "description": "ODF Text Document",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/odt/"
+        },
+        {
+          "extension": "OXPS",
+          "description": "Open XML Paper Specification",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/oxps/"
+        },
+        {
+          "extension": "PDF",
+          "description": "Portable Document Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pdf/"
+        },
+        {
+          "extension": "RTF",
+          "description": "Rich Text Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rtf/"
+        },
+        {
+          "extension": "SXW",
+          "description": "OpenOffice Writer 1.0",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sxw/"
+        },
+        {
+          "extension": "TXT",
+          "description": "Plaintext Text File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/txt/"
+        },
+        {
+          "extension": "WPS",
+          "description": "Microsoft Works Text Document",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wps/"
+        },
+        {
+          "extension": "XLS",
+          "description": "Microsoft Excel Worksheet Sheet (97-2003)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xls/"
+        },
+        {
+          "extension": "XLSX",
+          "description": "Office Open XML Worksheet Sheet",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xlsx/"
+        },
+        {
+          "extension": "XPS",
+          "description": "XML Paper Specification",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xps/"
+        }
+      ]
+    },
+    {
+      "slug": "ebooks",
+      "name": "EBooks",
+      "formatCount": 9,
+      "readCount": 9,
+      "writeCount": 9,
+      "formats": [
+        {
+          "extension": "AZW3",
+          "description": "Amazon Kindle",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/azw3/"
+        },
+        {
+          "extension": "EPUB",
+          "description": "Electronic Publication",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/epub/"
+        },
+        {
+          "extension": "FB2",
+          "description": "FictionBook",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/fb2/"
+        },
+        {
+          "extension": "LRF",
+          "description": "Sony Media",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/lrf/"
+        },
+        {
+          "extension": "MOBI",
+          "description": "Mobipocket eBook",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mobi/"
+        },
+        {
+          "extension": "PDB",
+          "description": "Palm Database ImageViewer Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pdb/"
+        },
+        {
+          "extension": "RB",
+          "description": "Rocket eBook",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rb/"
+        },
+        {
+          "extension": "SNB",
+          "description": "Shanda Bambook",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/snb/"
+        },
+        {
+          "extension": "TCR",
+          "description": "Text Compression for Reader",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tcr/"
+        }
+      ]
+    },
+    {
+      "slug": "fonts",
+      "name": "Fonts",
+      "formatCount": 16,
+      "readCount": 14,
+      "writeCount": 16,
+      "formats": [
+        {
+          "extension": "AFM",
+          "description": "Adobe Font Metrics",
+          "read": false,
+          "write": true,
+          "badges": [
+            "Write"
+          ],
+          "sourceUrl": "https://convertio.co/formats/afm/"
+        },
+        {
+          "extension": "BIN",
+          "description": "PostScript Type 1 (MacBin)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/bin/"
+        },
+        {
+          "extension": "CFF",
+          "description": "CFF (Bare)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cff/"
+        },
+        {
+          "extension": "CID",
+          "description": "Adobe CID Fonts",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cid/"
+        },
+        {
+          "extension": "DFONT",
+          "description": "Mac dfont",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dfont/"
+        },
+        {
+          "extension": "OTF",
+          "description": "OpenType (CFF) Font",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/otf/"
+        },
+        {
+          "extension": "PFA",
+          "description": "PostScript Type 1",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pfa/"
+        },
+        {
+          "extension": "PFB",
+          "description": "PostScript Type 1 (Binary)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pfb/"
+        },
+        {
+          "extension": "PS",
+          "description": "PostScript (Type 0)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ps/"
+        },
+        {
+          "extension": "PT3",
+          "description": "PostScript Type 3",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pt3/"
+        },
+        {
+          "extension": "SFD",
+          "description": "Spline Font Database",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sfd/"
+        },
+        {
+          "extension": "T11",
+          "description": "Type11 (CID 2)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/t11/"
+        },
+        {
+          "extension": "T42",
+          "description": "Type42",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/t42/"
+        },
+        {
+          "extension": "TTF",
+          "description": "TrueType Font",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ttf/"
+        },
+        {
+          "extension": "UFO",
+          "description": "Unified Font Object",
+          "read": false,
+          "write": true,
+          "badges": [
+            "Write"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ufo/"
+        },
+        {
+          "extension": "WOFF",
+          "description": "Web Open Font Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/woff/"
+        }
+      ]
+    },
+    {
+      "slug": "images",
+      "name": "Images",
+      "formatCount": 108,
+      "readCount": 108,
+      "writeCount": 69,
+      "formats": [
+        {
+          "extension": "3FR",
+          "description": "Hasselblad CFV/H3D39II",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/3fr/"
+        },
+        {
+          "extension": "ARW",
+          "description": "Sony Alpha Raw Image Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/arw/"
+        },
+        {
+          "extension": "AVIF",
+          "description": "AV1 Image File Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/avif/"
+        },
+        {
+          "extension": "BMP",
+          "description": "Bitmap Image File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/bmp/"
+        },
+        {
+          "extension": "CR2",
+          "description": "Canon Digital Camera Raw Image Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cr2/"
+        },
+        {
+          "extension": "CRW",
+          "description": "Canon Digital Camera Raw Image Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/crw/"
+        },
+        {
+          "extension": "CUR",
+          "description": "Cursor File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cur/"
+        },
+        {
+          "extension": "DCM",
+          "description": "DICOM (Digital Imaging and Communications in Medicine image)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dcm/"
+        },
+        {
+          "extension": "DCR",
+          "description": "Kodak Digital Camera Raw Image File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dcr/"
+        },
+        {
+          "extension": "DDS",
+          "description": "Microsoft DirectDraw Surface",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dds/"
+        },
+        {
+          "extension": "DNG",
+          "description": "Digital Negative",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dng/"
+        },
+        {
+          "extension": "ERF",
+          "description": "Epson RAW Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/erf/"
+        },
+        {
+          "extension": "EXR",
+          "description": "High Dynamic-range (HDR)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/exr/"
+        },
+        {
+          "extension": "FAX",
+          "description": "Group 3 FAX",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/fax/"
+        },
+        {
+          "extension": "FTS",
+          "description": "Flexible Image Transport System",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/fts/"
+        },
+        {
+          "extension": "G3",
+          "description": "Group 3 FAX",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/g3/"
+        },
+        {
+          "extension": "G4",
+          "description": "Group 4 FAX",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/g4/"
+        },
+        {
+          "extension": "GIF",
+          "description": "Graphics Interchange Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/gif/"
+        },
+        {
+          "extension": "GV",
+          "description": "Graphviz",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/gv/"
+        },
+        {
+          "extension": "HDR",
+          "description": "Radiance RGBE image format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/hdr/"
+        },
+        {
+          "extension": "HEIC",
+          "description": "High Efficiency Image Container",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/heic/"
+        },
+        {
+          "extension": "HEIF",
+          "description": "High Efficiency Image File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/heif/"
+        },
+        {
+          "extension": "HRZ",
+          "description": "Slow Scan TeleVision",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/hrz/"
+        },
+        {
+          "extension": "ICO",
+          "description": "Icon",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ico/"
+        },
+        {
+          "extension": "IIQ",
+          "description": "Phase One Raw Image",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/iiq/"
+        },
+        {
+          "extension": "IPL",
+          "description": "IPL Image Sequence",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ipl/"
+        },
+        {
+          "extension": "JBG",
+          "description": "Image JBIG 1-bit Raster",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jbg/"
+        },
+        {
+          "extension": "JBIG",
+          "description": "Joint Bi-level Image Experts Group",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jbig/"
+        },
+        {
+          "extension": "JFI",
+          "description": "JPEG File Interchange Image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jfi/"
+        },
+        {
+          "extension": "JFIF",
+          "description": "JPEG File Interchange Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jfif/"
+        },
+        {
+          "extension": "JIF",
+          "description": "JPEG Interchange Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jif/"
+        },
+        {
+          "extension": "JNX",
+          "description": "Garmin Tile Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jnx/"
+        },
+        {
+          "extension": "JP2",
+          "description": "JPEG 2000",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jp2/"
+        },
+        {
+          "extension": "JPE",
+          "description": "JPE Image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jpe/"
+        },
+        {
+          "extension": "JPEG",
+          "description": "Joint Photographic Experts Group",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jpeg/"
+        },
+        {
+          "extension": "JPG",
+          "description": "Joint Photographic Experts Group",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jpg/"
+        },
+        {
+          "extension": "JPS",
+          "description": "Stereo JPEG Image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/jps/"
+        },
+        {
+          "extension": "K25",
+          "description": "Kodak Digital Camera Raw Image Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/k25/"
+        },
+        {
+          "extension": "KDC",
+          "description": "Kodak Digital Camera Raw Image Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/kdc/"
+        },
+        {
+          "extension": "MAC",
+          "description": "MAC Paint",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mac/"
+        },
+        {
+          "extension": "MAP",
+          "description": "Colormap intensities and indices",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/map/"
+        },
+        {
+          "extension": "MEF",
+          "description": "Mamiya Raw Image File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mef/"
+        },
+        {
+          "extension": "MNG",
+          "description": "Multiple-image Network Graphics",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mng/"
+        },
+        {
+          "extension": "MRW",
+          "description": "Sony (Minolta) Raw Image File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mrw/"
+        },
+        {
+          "extension": "MTV",
+          "description": "MTV Raytracing image format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mtv/"
+        },
+        {
+          "extension": "NEF",
+          "description": "Nikon Digital SLR Camera Raw Image File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/nef/"
+        },
+        {
+          "extension": "NRW",
+          "description": "Nikon Digital SLR Camera Raw Image File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/nrw/"
+        },
+        {
+          "extension": "ORF",
+          "description": "Olympus Digital Camera Raw Image File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/orf/"
+        },
+        {
+          "extension": "OTB",
+          "description": "On-the-air bitmap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/otb/"
+        },
+        {
+          "extension": "PAL",
+          "description": "16bit/pixel interleaved YUV",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pal/"
+        },
+        {
+          "extension": "PALM",
+          "description": "Palm pixmap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/palm/"
+        },
+        {
+          "extension": "PAM",
+          "description": "Common 2-dimensional bitmap format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pam/"
+        },
+        {
+          "extension": "PBM",
+          "description": "Portable Bitmap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pbm/"
+        },
+        {
+          "extension": "PCD",
+          "description": "Photo CD",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pcd/"
+        },
+        {
+          "extension": "PCT",
+          "description": "Apple Macintosh QuickDraw/PICT",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pct/"
+        },
+        {
+          "extension": "PCX",
+          "description": "Personal Computer Exchange",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pcx/"
+        },
+        {
+          "extension": "PDB",
+          "description": "Palm Database ImageViewer Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pdb/"
+        },
+        {
+          "extension": "PEF",
+          "description": "Pentax Electronic File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pef/"
+        },
+        {
+          "extension": "PES",
+          "description": "Embrid Embroidery Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pes/"
+        },
+        {
+          "extension": "PFM",
+          "description": "Portable float format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pfm/"
+        },
+        {
+          "extension": "PGM",
+          "description": "Portable Graymap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pgm/"
+        },
+        {
+          "extension": "PGX",
+          "description": "JPEG-2000 VM Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pgx/"
+        },
+        {
+          "extension": "PICON",
+          "description": "Personal Icon",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/picon/"
+        },
+        {
+          "extension": "PICT",
+          "description": "Apple Macintosh QuickDraw/PICT",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pict/"
+        },
+        {
+          "extension": "PIX",
+          "description": "Alias/Wavefront RLE image format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pix/"
+        },
+        {
+          "extension": "PLASMA",
+          "description": "Plasma fractal image",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/plasma/"
+        },
+        {
+          "extension": "PNG",
+          "description": "Portable Network Graphic",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/png/"
+        },
+        {
+          "extension": "PNM",
+          "description": "Portable anymap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pnm/"
+        },
+        {
+          "extension": "PPM",
+          "description": "Portable Pixmap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ppm/"
+        },
+        {
+          "extension": "PSD",
+          "description": "Adobe Photoshop bitmap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/psd/"
+        },
+        {
+          "extension": "PWP",
+          "description": "Seattle Film Works",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pwp/"
+        },
+        {
+          "extension": "RAF",
+          "description": "Fuji CCD-RAW Graphic File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/raf/"
+        },
+        {
+          "extension": "RAS",
+          "description": "SUN Rasterfile",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ras/"
+        },
+        {
+          "extension": "RGB",
+          "description": "Raw red, green, and blue samples",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rgb/"
+        },
+        {
+          "extension": "RGBA",
+          "description": "Raw red, green, blue, and alpha samples",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rgba/"
+        },
+        {
+          "extension": "RGBO",
+          "description": "Raw red, green, blue, and opacity samples",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rgbo/"
+        },
+        {
+          "extension": "RGF",
+          "description": "LEGO Mindstorms EV3 Robot Graphic Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rgf/"
+        },
+        {
+          "extension": "RLA",
+          "description": "Alias/Wavefront image",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rla/"
+        },
+        {
+          "extension": "RLE",
+          "description": "Utah Run length encoded image",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rle/"
+        },
+        {
+          "extension": "RW2",
+          "description": "Panasonic Lumix Raw Image",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rw2/"
+        },
+        {
+          "extension": "SCT",
+          "description": "Scitex HandShake",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sct/"
+        },
+        {
+          "extension": "SFW",
+          "description": "Seattle Film Works",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sfw/"
+        },
+        {
+          "extension": "SGI",
+          "description": "Irix RGB image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sgi/"
+        },
+        {
+          "extension": "SIX",
+          "description": "DEC SIXEL Graphics Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/six/"
+        },
+        {
+          "extension": "SIXEL",
+          "description": "DEC SIXEL Graphics Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sixel/"
+        },
+        {
+          "extension": "SR2",
+          "description": "Sony Raw Format 2",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sr2/"
+        },
+        {
+          "extension": "SRF",
+          "description": "Sony Raw Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/srf/"
+        },
+        {
+          "extension": "SUN",
+          "description": "SUN Rasterfile",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sun/"
+        },
+        {
+          "extension": "SVG",
+          "description": "Scalable Vector Graphics",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/svg/"
+        },
+        {
+          "extension": "TGA",
+          "description": "Truevision TGA (Targa) Image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tga/"
+        },
+        {
+          "extension": "TIFF",
+          "description": "Tagged Image File Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tiff/"
+        },
+        {
+          "extension": "TIM",
+          "description": "PSX TIM",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tim/"
+        },
+        {
+          "extension": "TM2",
+          "description": "PlayStation 2 (PS2) TIM2",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tm2/"
+        },
+        {
+          "extension": "UYVY",
+          "description": "16bit/pixel interleaved YUV",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/uyvy/"
+        },
+        {
+          "extension": "VIFF",
+          "description": "Khoros Visualization image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/viff/"
+        },
+        {
+          "extension": "VIPS",
+          "description": "VIPS Image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/vips/"
+        },
+        {
+          "extension": "WBMP",
+          "description": "Wireless Bitmap",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wbmp/"
+        },
+        {
+          "extension": "WEBP",
+          "description": "WebP Image Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/webp/"
+        },
+        {
+          "extension": "WMZ",
+          "description": "Compressed Windows Meta File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wmz/"
+        },
+        {
+          "extension": "WPG",
+          "description": "Word Perfect Graphics",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wpg/"
+        },
+        {
+          "extension": "X3F",
+          "description": "Sigma Camera RAW Picture File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/x3f/"
+        },
+        {
+          "extension": "XBM",
+          "description": "X Windows system bitmap (black and white)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xbm/"
+        },
+        {
+          "extension": "XC",
+          "description": "Constant image uniform color",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xc/"
+        },
+        {
+          "extension": "XCF",
+          "description": "GIMP image",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xcf/"
+        },
+        {
+          "extension": "XPM",
+          "description": "X Windows system pixmap (color)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xpm/"
+        },
+        {
+          "extension": "XV",
+          "description": "Khoros Visualization image",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xv/"
+        },
+        {
+          "extension": "XWD",
+          "description": "X Windows system window dump (color)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xwd/"
+        },
+        {
+          "extension": "YUV",
+          "description": "CCIR 601 4:1:1 or 4:2:2",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/yuv/"
+        }
+      ]
+    },
+    {
+      "slug": "presentations",
+      "name": "Presentations",
+      "formatCount": 10,
+      "readCount": 10,
+      "writeCount": 10,
+      "formats": [
+        {
+          "extension": "ODP",
+          "description": "OpenDocument Presentation",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/odp/"
+        },
+        {
+          "extension": "POT",
+          "description": "Microsoft PowerPoint 97-2003 Template",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pot/"
+        },
+        {
+          "extension": "POTM",
+          "description": "Microsoft PowerPoint Template with Macros Enabled",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/potm/"
+        },
+        {
+          "extension": "POTX",
+          "description": "Microsoft PowerPoint Template",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/potx/"
+        },
+        {
+          "extension": "PPS",
+          "description": "PowerPoint Slide Show 97/2000/XP",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pps/"
+        },
+        {
+          "extension": "PPSM",
+          "description": "PowerPoint Slide Show with Macros Enabled",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ppsm/"
+        },
+        {
+          "extension": "PPSX",
+          "description": "PowerPoint Slide Show",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ppsx/"
+        },
+        {
+          "extension": "PPT",
+          "description": "Microsoft PowerPoint 97/2000/XP",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ppt/"
+        },
+        {
+          "extension": "PPTM",
+          "description": "Microsoft PowerPoint with Macros Enabled",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pptm/"
+        },
+        {
+          "extension": "PPTX",
+          "description": "Microsoft PowerPoint",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pptx/"
+        }
+      ]
+    },
+    {
+      "slug": "vectors",
+      "name": "Vectors",
+      "formatCount": 20,
+      "readCount": 20,
+      "writeCount": 11,
+      "formats": [
+        {
+          "extension": "AFF",
+          "description": "Acorn Draw",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/aff/"
+        },
+        {
+          "extension": "AI",
+          "description": "Adobe Illustrator",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ai/"
+        },
+        {
+          "extension": "CCX",
+          "description": "Corel Compressed Exchange files",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ccx/"
+        },
+        {
+          "extension": "CDR",
+          "description": "CorelDRAW Graphics files (7-X3,X4 versions)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cdr/"
+        },
+        {
+          "extension": "CDT",
+          "description": "CorelDRAW templates files (7-X3,X4 versions)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cdt/"
+        },
+        {
+          "extension": "CGM",
+          "description": "Computer Graphics Metafile",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cgm/"
+        },
+        {
+          "extension": "CMX",
+          "description": "Corel Presentation Exchange files (CMX1 format)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cmx/"
+        },
+        {
+          "extension": "DST",
+          "description": "Design format (Tajima)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dst/"
+        },
+        {
+          "extension": "EMF",
+          "description": "Enhanced Metafile",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/emf/"
+        },
+        {
+          "extension": "EPS",
+          "description": "Encapsulated PostScript",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/eps/"
+        },
+        {
+          "extension": "EXP",
+          "description": "Embroidery file format (Melco)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/exp/"
+        },
+        {
+          "extension": "FIG",
+          "description": "XFig file format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/fig/"
+        },
+        {
+          "extension": "PCS",
+          "description": "Design format (Pfaff home)",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pcs/"
+        },
+        {
+          "extension": "PES",
+          "description": "Embrid Embroidery Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/pes/"
+        },
+        {
+          "extension": "PLT",
+          "description": "HPGL for cutting plotter",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/plt/"
+        },
+        {
+          "extension": "PS",
+          "description": "PostScript (Type 0)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ps/"
+        },
+        {
+          "extension": "SK",
+          "description": "Sketch/Skencil format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sk/"
+        },
+        {
+          "extension": "SK1",
+          "description": "sK1 vector graphics",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/sk1/"
+        },
+        {
+          "extension": "SVG",
+          "description": "Scalable Vector Graphics",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/svg/"
+        },
+        {
+          "extension": "WMF",
+          "description": "Computer Graphics Metafile",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wmf/"
+        }
+      ]
+    },
+    {
+      "slug": "videos",
+      "name": "Videos",
+      "formatCount": 37,
+      "readCount": 37,
+      "writeCount": 32,
+      "formats": [
+        {
+          "extension": "3G2",
+          "description": "Third Generation Partnership Project",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/3g2/"
+        },
+        {
+          "extension": "3GP",
+          "description": "Third Generation Partnership Project",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/3gp/"
+        },
+        {
+          "extension": "AAF",
+          "description": "Advanced Authoring Format",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/aaf/"
+        },
+        {
+          "extension": "ASF",
+          "description": "Advanced Systems Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/asf/"
+        },
+        {
+          "extension": "AV1",
+          "description": "AOMedia Video 1",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/av1/"
+        },
+        {
+          "extension": "AVCHD",
+          "description": "Advanced Video Coding High Definition",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/avchd/"
+        },
+        {
+          "extension": "AVI",
+          "description": "Audio Video Interleave",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/avi/"
+        },
+        {
+          "extension": "CAVS",
+          "description": "Chinese AVS video",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/cavs/"
+        },
+        {
+          "extension": "DIVX",
+          "description": "DivX Networks",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/divx/"
+        },
+        {
+          "extension": "DV",
+          "description": "Digital Video",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/dv/"
+        },
+        {
+          "extension": "F4V",
+          "description": "Flash Video",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/f4v/"
+        },
+        {
+          "extension": "FLV",
+          "description": "Flash Video",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/flv/"
+        },
+        {
+          "extension": "HEVC",
+          "description": "High Efficiency Video Coding",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/hevc/"
+        },
+        {
+          "extension": "M2TS",
+          "description": "MPEG-2 Transport Stream",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/m2ts/"
+        },
+        {
+          "extension": "M2V",
+          "description": "MPEG-2 Video",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/m2v/"
+        },
+        {
+          "extension": "M4V",
+          "description": "MPEG-4 Video",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/m4v/"
+        },
+        {
+          "extension": "MJPEG",
+          "description": "Motion JPEG",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mjpeg/"
+        },
+        {
+          "extension": "MKV",
+          "description": "Matroska Multimedia Container",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mkv/"
+        },
+        {
+          "extension": "MOD",
+          "description": "JVC Recorded Video File",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mod/"
+        },
+        {
+          "extension": "MOV",
+          "description": "Apple QuickTime Movie",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mov/"
+        },
+        {
+          "extension": "MP4",
+          "description": "MPEG-4 Part 14",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mp4/"
+        },
+        {
+          "extension": "MPEG",
+          "description": "Moving Picture Experts Group Phase 1 (MPEG-1)",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mpeg/"
+        },
+        {
+          "extension": "MPEG-2",
+          "description": "MPEG-2",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mpeg2/"
+        },
+        {
+          "extension": "MPG",
+          "description": "Moving Picture Experts Group",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mpg/"
+        },
+        {
+          "extension": "MTS",
+          "description": "MPEG-2 Transport Stream",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mts/"
+        },
+        {
+          "extension": "MXF",
+          "description": "Material Exchange Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/mxf/"
+        },
+        {
+          "extension": "OGV",
+          "description": "Ogg Video File",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ogv/"
+        },
+        {
+          "extension": "RM",
+          "description": "RealMedia",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rm/"
+        },
+        {
+          "extension": "RMVB",
+          "description": "RealMedia Variable Bitrate",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/rmvb/"
+        },
+        {
+          "extension": "SWF",
+          "description": "Small Web Format",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/swf/"
+        },
+        {
+          "extension": "TOD",
+          "description": "JVC Transport stream On Disk",
+          "read": true,
+          "write": false,
+          "badges": [
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/tod/"
+        },
+        {
+          "extension": "TS",
+          "description": "Transport Stream",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/ts/"
+        },
+        {
+          "extension": "VOB",
+          "description": "DVD-Video Object",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/vob/"
+        },
+        {
+          "extension": "WEBM",
+          "description": "WEB Media",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/webm/"
+        },
+        {
+          "extension": "WMV",
+          "description": "Windows Media Video",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wmv/"
+        },
+        {
+          "extension": "WTV",
+          "description": "Windows Recorded TV Show",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/wtv/"
+        },
+        {
+          "extension": "XVID",
+          "description": "XviD",
+          "read": true,
+          "write": true,
+          "badges": [
+            "Write",
+            "Read"
+          ],
+          "sourceUrl": "https://convertio.co/formats/xvid/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { fetchFile, toBlobURL } from '@ffmpeg/util';
 import { PDFDocument, StandardFonts, degrees, rgb } from 'pdf-lib';
 import './starter-utility-runner.css';
 
@@ -23,10 +25,58 @@ type PdfOperation =
   | 'unlock'
   | 'protect';
 
+type WorkflowProfile = 'video' | 'audio' | 'image' | 'document' | 'archive' | 'gif' | 'generic';
+
 type DownloadState = {
   url: string;
   fileName: string;
   size: number;
+};
+
+type WorkflowBrowserPlan = {
+  runnable: boolean;
+  input: string;
+  output: string;
+  args: string[];
+  reason: string;
+};
+
+type ActionLabel = {
+  idle: string;
+  running: string;
+};
+
+const workflowFormatsByProfile: Record<WorkflowProfile, string[]> = {
+  video: ['mp4', 'mov', 'mkv', 'avi', 'webm', 'mpeg', 'wmv', 'flv', 'm4v'],
+  audio: ['mp3', 'wav', 'ogg', 'aac', 'flac', 'm4a', 'opus', 'wma'],
+  image: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'heic', 'heif', 'bmp', 'tiff', 'avif', 'jfif', 'ico', 'rgb', 'rgba'],
+  document: ['pdf', 'docx', 'doc', 'txt', 'rtf', 'epub', 'odt', 'html', 'jpg', 'png'],
+  archive: ['zip', '7z', 'rar', 'tar', 'gz', 'bz2', 'xz'],
+  gif: ['gif', 'mp4', 'webm', 'apng', 'mov', 'avi', 'png'],
+  generic: ['txt', 'json', 'xml', 'bin'],
+};
+
+const equivalentExtensionsByFormat: Record<string, string[]> = {
+  jpg: ['jpg', 'jpeg'],
+  jpeg: ['jpeg', 'jpg'],
+  tif: ['tif', 'tiff'],
+  tiff: ['tiff', 'tif'],
+  mpeg: ['mpeg', 'mpg'],
+  mpg: ['mpg', 'mpeg'],
+  htm: ['htm', 'html'],
+  html: ['html', 'htm'],
+};
+
+const workflowFormatAlias: Record<string, string> = {
+  video: 'mp4',
+  audio: 'mp3',
+  image: 'png',
+  document: 'docx',
+  ebook: 'epub',
+  archive: 'zip',
+  pdf: 'pdf',
+  gif: 'gif',
+  jpeg: 'jpg',
 };
 
 const lengthFactor: Record<string, number> = {
@@ -93,6 +143,9 @@ const fixedImageMimeBySlug: Record<string, string> = {
   'png-compressor': 'image/png',
 };
 
+const imageTargetFormatOptions = ['jpeg', 'png', 'webp', 'svg', 'rgba', 'rgb'] as const;
+type ImageTargetFormat = (typeof imageTargetFormatOptions)[number];
+
 const fileSizeLabel = (bytes: number): string => {
   if (!Number.isFinite(bytes) || bytes <= 0) {
     return '0 B';
@@ -128,6 +181,267 @@ const getBaseName = (name: string): string => {
     return trimmed || 'output';
   }
   return trimmed.slice(0, dotIndex);
+};
+
+const getFileExtension = (name: string): string => {
+  const trimmed = name.trim();
+  const dotIndex = trimmed.lastIndexOf('.');
+  if (dotIndex <= 0 || dotIndex === trimmed.length - 1) {
+    return '';
+  }
+  return trimmed.slice(dotIndex + 1).toLowerCase();
+};
+
+const normalizeFormatToken = (value: string): string => value.trim().replace(/^\./, '').toLowerCase();
+
+const normalizeWorkflowFormat = (raw: string, profile: WorkflowProfile, fallback: string): string => {
+  const token = normalizeFormatToken(raw);
+  const aliased = workflowFormatAlias[token] ?? token;
+  const options = workflowFormatsByProfile[profile] ?? workflowFormatsByProfile.generic;
+  if (options.includes(aliased)) {
+    return aliased;
+  }
+  return fallback;
+};
+
+const normalizeWorkflowFormatLoose = (raw: string, fallback: string): string => {
+  const token = normalizeFormatToken(raw);
+  const aliased = workflowFormatAlias[token] ?? token;
+  return aliased || fallback;
+};
+
+const getWorkflowFormatOptions = (toolSlug: string, profile: WorkflowProfile): string[] => {
+  const options = [...(workflowFormatsByProfile[profile] ?? workflowFormatsByProfile.generic)];
+  const seen = new Set(options);
+  const conversionMatch = toolSlug.match(/^(.+)-to-(.+)$/);
+
+  if (conversionMatch) {
+    const from = normalizeWorkflowFormatLoose(conversionMatch[1], options[0] ?? 'txt');
+    const to = normalizeWorkflowFormatLoose(conversionMatch[2], options[1] ?? from);
+
+    if (!seen.has(from)) {
+      options.unshift(from);
+      seen.add(from);
+    }
+
+    if (!seen.has(to)) {
+      options.push(to);
+      seen.add(to);
+    }
+  }
+
+  return options;
+};
+
+const detectWorkflowProfile = (toolSlug: string): WorkflowProfile => {
+  if (
+    toolSlug.includes('gif') ||
+    toolSlug === 'apng-to-gif' ||
+    toolSlug === 'gif-to-apng' ||
+    toolSlug === 'gif-to-mp4' ||
+    toolSlug === 'image-to-gif'
+  ) {
+    return 'gif';
+  }
+
+  if (
+    toolSlug.includes('video') ||
+    toolSlug.includes('mp4') ||
+    toolSlug.includes('mov') ||
+    toolSlug.includes('avi') ||
+    toolSlug.includes('webm') ||
+    toolSlug.includes('mkv')
+  ) {
+    return 'video';
+  }
+
+  if (toolSlug.includes('audio') || toolSlug.includes('mp3') || toolSlug.includes('wav') || toolSlug.includes('ogg')) {
+    return 'audio';
+  }
+
+  if (
+    toolSlug.includes('pdf') ||
+    toolSlug.includes('document') ||
+    toolSlug.includes('docx') ||
+    toolSlug.includes('ebook') ||
+    toolSlug.includes('epub')
+  ) {
+    return 'document';
+  }
+
+  if (toolSlug.includes('archive')) {
+    return 'archive';
+  }
+
+  if (toolSlug.includes('image') || toolSlug.includes('heic') || toolSlug.includes('webp') || toolSlug.includes('png') || toolSlug.includes('jpg')) {
+    return 'image';
+  }
+
+  return 'generic';
+};
+
+const getDefaultWorkflowFormats = (toolSlug: string, profile: WorkflowProfile): { from: string; to: string } => {
+  const options = getWorkflowFormatOptions(toolSlug, profile);
+  const first = options[0] ?? 'txt';
+  const second = options[1] ?? first;
+
+  const conversionMatch = toolSlug.match(/^(.+)-to-(.+)$/);
+  if (conversionMatch) {
+    return {
+      from: normalizeWorkflowFormatLoose(conversionMatch[1], first),
+      to: normalizeWorkflowFormatLoose(conversionMatch[2], second),
+    };
+  }
+
+  if (profile === 'audio') {
+    return { from: 'wav', to: 'mp3' };
+  }
+
+  if (profile === 'video') {
+    return { from: 'mov', to: 'mp4' };
+  }
+
+  if (profile === 'image') {
+    return { from: 'png', to: 'jpg' };
+  }
+
+  if (profile === 'document') {
+    return { from: 'docx', to: 'pdf' };
+  }
+
+  if (profile === 'archive') {
+    return { from: 'rar', to: 'zip' };
+  }
+
+  if (profile === 'gif') {
+    return { from: 'mp4', to: 'gif' };
+  }
+
+  return { from: first, to: second };
+};
+
+const getWorkflowAcceptString = (profile: WorkflowProfile): string => {
+  if (profile === 'video') return 'video/*';
+  if (profile === 'audio') return 'audio/*';
+  if (profile === 'image') return 'image/*,.svg';
+  if (profile === 'document') return '.pdf,.doc,.docx,.txt,.rtf,.odt,.epub,.html,.jpg,.jpeg,.png';
+  if (profile === 'archive') return '.zip,.7z,.rar,.tar,.gz,.bz2,.xz';
+  if (profile === 'gif') return 'image/gif,video/*,image/png';
+  return '*/*';
+};
+
+const getWorkflowAcceptHint = (profile: WorkflowProfile): string => {
+  if (profile === 'video') return 'Accepted: MP4, MOV, MKV, AVI, WEBM and more.';
+  if (profile === 'audio') return 'Accepted: MP3, WAV, OGG, AAC, FLAC and more.';
+  if (profile === 'image') return 'Accepted: PNG, JPG, WEBP, HEIC, SVG and more.';
+  if (profile === 'document') return 'Accepted: PDF, DOCX, DOC, TXT, EPUB and related files.';
+  if (profile === 'archive') return 'Accepted: ZIP, 7Z, RAR, TAR and compressed archives.';
+  if (profile === 'gif') return 'Accepted: GIF, MP4, WEBM, APNG, MOV, AVI and PNG.';
+  return 'Accepted: common file formats.';
+};
+
+const getAllowedExtensionsForFormat = (format: string): string[] => {
+  const normalized = normalizeFormatToken(format);
+  const aliases = equivalentExtensionsByFormat[normalized] ?? [normalized];
+  return dedupeExtensions(aliases.filter(Boolean));
+};
+
+const dedupeExtensions = (values: string[]): string[] => [...new Set(values.map((value) => normalizeFormatToken(value)).filter(Boolean))];
+
+const getStrictAcceptForFormat = (format: string): string =>
+  getAllowedExtensionsForFormat(format)
+    .map((extension) => `.${extension}`)
+    .join(',');
+
+const doesFileMatchFormat = (name: string, format: string): boolean => {
+  const extension = getFileExtension(name);
+  if (!extension) {
+    return false;
+  }
+  return getAllowedExtensionsForFormat(format).includes(extension);
+};
+
+const getFormatLabel = (format: string): string => getAllowedExtensionsForFormat(format).map((entry) => entry.toUpperCase()).join(' / ');
+
+const imageActionByOperation: Record<ImageOperation, ActionLabel> = {
+  convert: { idle: 'Convert', running: 'Converting...' },
+  compress: { idle: 'Compress', running: 'Compressing...' },
+  resize: { idle: 'Resize', running: 'Resizing...' },
+  crop: { idle: 'Crop', running: 'Cropping...' },
+  rotate: { idle: 'Rotate', running: 'Rotating...' },
+  flip: { idle: 'Flip', running: 'Flipping...' },
+  enlarge: { idle: 'Enlarge', running: 'Enlarging...' },
+  'png-to-svg': { idle: 'Convert', running: 'Converting...' },
+};
+
+const pdfActionByOperation: Record<PdfOperation, ActionLabel> = {
+  merge: { idle: 'Merge', running: 'Merging...' },
+  extract: { idle: 'Extract', running: 'Extracting...' },
+  remove: { idle: 'Remove pages', running: 'Removing pages...' },
+  rotate: { idle: 'Rotate', running: 'Rotating...' },
+  resize: { idle: 'Resize', running: 'Resizing...' },
+  crop: { idle: 'Crop', running: 'Cropping...' },
+  compress: { idle: 'Compress', running: 'Compressing...' },
+  'images-to-pdf': { idle: 'Create PDF', running: 'Creating PDF...' },
+  organize: { idle: 'Organize', running: 'Organizing...' },
+  flatten: { idle: 'Flatten', running: 'Flattening...' },
+  unlock: { idle: 'Unlock', running: 'Unlocking...' },
+  protect: { idle: 'Protect', running: 'Protecting...' },
+};
+
+const getPrimaryActionLabel = (
+  toolSlug: string,
+  mode: RunnerMode,
+  imageOperation?: ImageOperation,
+  pdfOperation?: PdfOperation
+): ActionLabel => {
+  if (mode === 'image' && imageOperation) {
+    return imageActionByOperation[imageOperation] ?? { idle: 'Run', running: 'Running...' };
+  }
+
+  if (mode === 'pdf' && pdfOperation) {
+    return pdfActionByOperation[pdfOperation] ?? { idle: 'Run', running: 'Running...' };
+  }
+
+  if (toolSlug === 'gif-maker') {
+    return { idle: 'Create GIF', running: 'Creating GIF...' };
+  }
+
+  if (toolSlug.includes('compress')) {
+    return { idle: 'Compress', running: 'Compressing...' };
+  }
+
+  if (toolSlug.startsWith('crop-')) {
+    return { idle: 'Crop', running: 'Cropping...' };
+  }
+
+  if (toolSlug.startsWith('trim-')) {
+    return { idle: 'Trim', running: 'Trimming...' };
+  }
+
+  if (toolSlug.includes('convert') || toolSlug.includes('converter') || toolSlug.includes('-to-')) {
+    return { idle: 'Convert', running: 'Converting...' };
+  }
+
+  return { idle: 'Run', running: 'Running...' };
+};
+
+const withInputExtension = (name: string, format: string): string => {
+  const normalized = normalizeFormatToken(format);
+  const trimmed = name.trim();
+  if (!trimmed) {
+    return `input.${normalized || 'file'}`;
+  }
+  if (getFileExtension(trimmed)) {
+    return trimmed;
+  }
+  return `${trimmed}.${normalized || 'file'}`;
+};
+
+const withOutputExtension = (name: string, format: string): string => {
+  const normalized = normalizeFormatToken(format);
+  const base = getBaseName(name.trim() || 'output');
+  return `${base}.${normalized || 'out'}`;
 };
 
 const extForMime = (mime: string): string => {
@@ -259,15 +573,197 @@ const qualityAudioArgs: Record<QualityPreset, string> = {
   small: '-c:a libmp3lame -b:a 96k',
 };
 
+const ffmpegCoreBaseUrl = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm';
+
+const workflowDesktopOnlyReasonBySlug: Record<string, string> = {
+  'pdf-converter': 'Desktop document engines are required for broad PDF format conversion.',
+  'document-converter': 'Desktop document engines are required for office document conversion.',
+  'ebook-converter': 'Desktop ebook toolchains are required for reliable ebook conversion.',
+  'pdf-to-word': 'PDF to Word currently requires desktop conversion tooling.',
+  'pdf-to-jpg': 'PDF rasterization currently requires desktop conversion tooling.',
+  'pdf-to-epub': 'PDF to EPUB currently requires desktop conversion tooling.',
+  'epub-to-pdf': 'EPUB to PDF currently requires desktop conversion tooling.',
+  'docx-to-pdf': 'DOCX to PDF currently requires desktop conversion tooling.',
+  'archive-converter': 'Archive conversion currently requires desktop archive tools.',
+};
+
+const mimeByExtension: Record<string, string> = {
+  mp4: 'video/mp4',
+  mov: 'video/quicktime',
+  mkv: 'video/x-matroska',
+  avi: 'video/x-msvideo',
+  webm: 'video/webm',
+  mpeg: 'video/mpeg',
+  mpg: 'video/mpeg',
+  wmv: 'video/x-ms-wmv',
+  flv: 'video/x-flv',
+  m4v: 'video/x-m4v',
+  mp3: 'audio/mpeg',
+  wav: 'audio/wav',
+  ogg: 'audio/ogg',
+  aac: 'audio/aac',
+  flac: 'audio/flac',
+  m4a: 'audio/mp4',
+  opus: 'audio/opus',
+  wma: 'audio/x-ms-wma',
+  gif: 'image/gif',
+  apng: 'image/apng',
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+};
+
+let sharedFfmpeg: FFmpeg | null = null;
+let sharedFfmpegLoad: Promise<FFmpeg> | null = null;
+
+const splitCliArgs = (value: string): string[] => value.trim().split(/\s+/).filter(Boolean);
+
+const bytesToBlob = (bytes: Uint8Array, mime: string): Blob => {
+  const copied = new Uint8Array(bytes.byteLength);
+  copied.set(bytes);
+  return new Blob([copied.buffer], { type: mime });
+};
+
+const deleteFfmpegFileSafe = async (ffmpeg: FFmpeg, fileName: string) => {
+  try {
+    await ffmpeg.deleteFile(fileName);
+  } catch {
+    // Ignore cleanup failures for files that may not exist.
+  }
+};
+
+const ensureBrowserFfmpeg = async (): Promise<FFmpeg> => {
+  if (sharedFfmpeg) {
+    return sharedFfmpeg;
+  }
+
+  if (!sharedFfmpegLoad) {
+    sharedFfmpegLoad = (async () => {
+      const ffmpeg = new FFmpeg();
+      await ffmpeg.load({
+        coreURL: await toBlobURL(`${ffmpegCoreBaseUrl}/ffmpeg-core.js`, 'text/javascript'),
+        wasmURL: await toBlobURL(`${ffmpegCoreBaseUrl}/ffmpeg-core.wasm`, 'application/wasm'),
+        workerURL: await toBlobURL(`${ffmpegCoreBaseUrl}/ffmpeg-core.worker.js`, 'text/javascript'),
+      });
+      sharedFfmpeg = ffmpeg;
+      return ffmpeg;
+    })();
+  }
+
+  try {
+    return await sharedFfmpegLoad;
+  } catch (error) {
+    sharedFfmpegLoad = null;
+    throw error;
+  }
+};
+
+const buildWorkflowBrowserPlan = (
+  toolSlug: string,
+  inputName: string,
+  outputName: string,
+  preset: QualityPreset,
+  extraArgs: string,
+  fromFormat: string,
+  toFormat: string
+): WorkflowBrowserPlan => {
+  const normalizedFrom = normalizeFormatToken(fromFormat) || 'file';
+  const normalizedTo = normalizeFormatToken(toFormat) || normalizedFrom;
+  const input = withInputExtension(inputName, normalizedFrom);
+  const output = withOutputExtension(outputName.trim() || `output-${toolSlug}`, normalizedTo);
+  const conversionMatch = toolSlug.match(/^(.+)-to-(.+)$/);
+  const desktopReason = workflowDesktopOnlyReasonBySlug[toolSlug];
+
+  if (desktopReason) {
+    return {
+      runnable: false,
+      input,
+      output,
+      args: [],
+      reason: desktopReason,
+    };
+  }
+
+  let args: string[] = [];
+
+  if (toolSlug === 'video-converter' || toolSlug === 'mp4-converter' || toolSlug === 'mov-to-mp4') {
+    args = ['-i', input, ...splitCliArgs(qualityVideoArgs[preset]), output];
+  } else if (
+    toolSlug === 'audio-converter' ||
+    toolSlug === 'mp3-converter' ||
+    toolSlug === 'video-to-mp3' ||
+    toolSlug === 'mp4-to-mp3' ||
+    toolSlug === 'mp3-to-ogg'
+  ) {
+    args = ['-i', input, ...splitCliArgs(qualityAudioArgs[preset]), output];
+  } else if (toolSlug === 'video-compressor') {
+    args = ['-i', input, ...splitCliArgs(qualityVideoArgs[preset]), output];
+  } else if (toolSlug === 'mp3-compressor' || toolSlug === 'wav-compressor') {
+    args = ['-i', input, ...splitCliArgs(qualityAudioArgs[preset]), output];
+  } else if (toolSlug === 'gif-compressor') {
+    args = ['-i', input, '-vf', 'fps=10,scale=640:-1:flags=lanczos', output];
+  } else if (
+    toolSlug === 'video-to-gif' ||
+    toolSlug === 'mp4-to-gif' ||
+    toolSlug === 'webm-to-gif' ||
+    toolSlug === 'mov-to-gif' ||
+    toolSlug === 'avi-to-gif' ||
+    toolSlug === 'image-to-gif' ||
+    toolSlug === 'gif-maker'
+  ) {
+    args = ['-i', input, '-vf', 'fps=12,scale=960:-1:flags=lanczos', output];
+  } else if (toolSlug === 'gif-to-mp4') {
+    args = ['-i', input, '-movflags', 'faststart', '-pix_fmt', 'yuv420p', output];
+  } else if (toolSlug === 'gif-to-apng') {
+    args = ['-i', input, '-plays', '0', output];
+  } else if (toolSlug === 'apng-to-gif') {
+    args = ['-i', input, output];
+  } else if (toolSlug === 'crop-video') {
+    args = ['-i', input, '-vf', 'crop=iw*0.8:ih*0.8', output];
+  } else if (toolSlug === 'trim-video') {
+    args = ['-i', input, '-ss', '00:00:00', '-to', '00:00:15', '-c', 'copy', output];
+  } else if (conversionMatch) {
+    args = ['-i', input, output];
+  } else {
+    return {
+      runnable: false,
+      input,
+      output,
+      args: [],
+      reason: 'No direct browser execution profile is configured for this utility yet.',
+    };
+  }
+
+  const extra = splitCliArgs(extraArgs);
+  if (extra.length > 0 && args.length > 1) {
+    const outputArg = args[args.length - 1];
+    args = [...args.slice(0, -1), ...extra, outputArg];
+  }
+
+  return {
+    runnable: true,
+    input,
+    output,
+    args,
+    reason: '',
+  };
+};
+
 const buildWorkflowOutput = (
   toolSlug: string,
   inputName: string,
   outputName: string,
   preset: QualityPreset,
-  extraArgs: string
+  extraArgs: string,
+  fromFormat: string,
+  toFormat: string
 ): string => {
-  const input = inputName.trim() || 'input.file';
-  const output = outputName.trim() || `output-${toolSlug}`;
+  const normalizedFrom = normalizeFormatToken(fromFormat) || 'file';
+  const normalizedTo = normalizeFormatToken(toFormat) || normalizedFrom;
+  const input = withInputExtension(inputName, normalizedFrom);
+  const output = withOutputExtension(outputName.trim() || `output-${toolSlug}`, normalizedTo);
+  const outputBase = getBaseName(output);
   const extra = extraArgs.trim();
 
   let command = '';
@@ -276,49 +772,48 @@ const buildWorkflowOutput = (
   const conversionMatch = toolSlug.match(/^(.+)-to-(.+)$/);
 
   if (toolSlug === 'video-converter' || toolSlug === 'mp4-converter' || toolSlug === 'mov-to-mp4') {
-    command = `ffmpeg -i "${input}" ${qualityVideoArgs[preset]} "${output}.mp4"`;
+    command = `ffmpeg -i "${input}" ${qualityVideoArgs[preset]} "${output}"`;
   } else if (toolSlug === 'audio-converter' || toolSlug === 'mp3-converter' || toolSlug === 'video-to-mp3' || toolSlug === 'mp4-to-mp3' || toolSlug === 'mp3-to-ogg') {
-    command = `ffmpeg -i "${input}" ${qualityAudioArgs[preset]} "${output}.mp3"`;
+    command = `ffmpeg -i "${input}" ${qualityAudioArgs[preset]} "${output}"`;
   } else if (toolSlug === 'video-compressor' || toolSlug === 'mp3-compressor' || toolSlug === 'wav-compressor') {
     command = `ffmpeg -i "${input}" ${toolSlug === 'video-compressor' ? qualityVideoArgs[preset] : qualityAudioArgs[preset]} "${output}"`;
   } else if (toolSlug === 'gif-compressor') {
-    command = `ffmpeg -i "${input}" -vf "fps=10,scale=640:-1:flags=lanczos" "${output}.gif"`;
+    command = `ffmpeg -i "${input}" -vf "fps=10,scale=640:-1:flags=lanczos" "${output}"`;
   } else if (toolSlug === 'video-to-gif' || toolSlug === 'mp4-to-gif' || toolSlug === 'webm-to-gif' || toolSlug === 'mov-to-gif' || toolSlug === 'avi-to-gif') {
-    command = `ffmpeg -i "${input}" -vf "fps=12,scale=960:-1:flags=lanczos" "${output}.gif"`;
+    command = `ffmpeg -i "${input}" -vf "fps=12,scale=960:-1:flags=lanczos" "${output}"`;
   } else if (toolSlug === 'gif-to-mp4') {
-    command = `ffmpeg -i "${input}" -movflags faststart -pix_fmt yuv420p "${output}.mp4"`;
+    command = `ffmpeg -i "${input}" -movflags faststart -pix_fmt yuv420p "${output}"`;
   } else if (toolSlug === 'gif-to-apng') {
-    command = `ffmpeg -i "${input}" -plays 0 "${output}.apng"`;
+    command = `ffmpeg -i "${input}" -plays 0 "${output}"`;
   } else if (toolSlug === 'apng-to-gif') {
-    command = `ffmpeg -i "${input}" "${output}.gif"`;
+    command = `ffmpeg -i "${input}" "${output}"`;
   } else if (toolSlug === 'gif-maker' || toolSlug === 'image-to-gif') {
-    command = `ffmpeg -framerate 10 -i "frames/frame_%03d.png" "${output}.gif"`;
+    command = `ffmpeg -framerate 10 -i "frames/frame_%03d.png" "${output}"`;
     notes = 'Place sequential frames inside frames/ then run this command.';
   } else if (toolSlug === 'crop-video') {
-    command = `ffmpeg -i "${input}" -vf "crop=iw*0.8:ih*0.8" "${output}.mp4"`;
+    command = `ffmpeg -i "${input}" -vf "crop=iw*0.8:ih*0.8" "${output}"`;
   } else if (toolSlug === 'trim-video') {
-    command = `ffmpeg -i "${input}" -ss 00:00:05 -to 00:00:20 -c copy "${output}.mp4"`;
+    command = `ffmpeg -i "${input}" -ss 00:00:05 -to 00:00:20 -c copy "${output}"`;
   } else if (toolSlug === 'pdf-converter' || toolSlug === 'document-converter' || toolSlug === 'ebook-converter') {
-    command = `libreoffice --headless --convert-to pdf "${input}" --outdir .`;
-    notes = 'Use LibreOffice for document conversion pipelines on desktop.';
+    command = `libreoffice --headless --convert-to ${normalizedTo} "${input}" --outdir .`;
+    notes = 'Use LibreOffice for document conversion pipelines on desktop. Check support for the selected target format.';
   } else if (toolSlug === 'pdf-to-word') {
     command = `libreoffice --headless --convert-to docx "${input}" --outdir .`;
     notes = 'This path preserves basic layout and text blocks for most documents.';
   } else if (toolSlug === 'pdf-to-jpg') {
-    command = `magick -density 220 "${input}" -quality 92 "${output}-%03d.jpg"`;
+    command = `magick -density 220 "${input}" -quality 92 "${outputBase}-%03d.jpg"`;
   } else if (toolSlug === 'pdf-to-epub') {
-    command = `ebook-convert "${input}" "${output}.epub"`;
+    command = `ebook-convert "${input}" "${output}"`;
   } else if (toolSlug === 'epub-to-pdf') {
-    command = `ebook-convert "${input}" "${output}.pdf"`;
+    command = `ebook-convert "${input}" "${output}"`;
   } else if (toolSlug === 'docx-to-pdf') {
     command = `libreoffice --headless --convert-to pdf "${input}" --outdir .`;
   } else if (toolSlug === 'archive-converter') {
-    command = `7z x "${input}" -o./archive_tmp && 7z a "${output}.zip" ./archive_tmp/*`;
+    command = `7z x "${input}" -o./archive_tmp && 7z a "${output}" ./archive_tmp/*`;
   } else if (toolSlug === 'pdf-tools' || toolSlug === 'extract-image-from-pdf') {
-    command = `pdfimages -all "${input}" "${output}"`;
+    command = `pdfimages -all "${input}" "${outputBase}"`;
   } else if (conversionMatch) {
-    const to = conversionMatch[2];
-    command = `ffmpeg -i "${input}" "${output}.${to}"`;
+    command = `ffmpeg -i "${input}" "${output}"`;
   } else {
     command = `ffmpeg -i "${input}" "${output}"`;
   }
@@ -339,6 +834,8 @@ const buildWorkflowOutput = (
     '',
     'Preset profile',
     `- Selected preset: ${preset}`,
+    `- Convert from: ${normalizedFrom.toUpperCase()}`,
+    `- Convert to: ${normalizedTo.toUpperCase()}`,
     `- Extra args: ${extra || 'none'}`,
     '',
     'Notes',
@@ -429,7 +926,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
 
   const [singleFile, setSingleFile] = useState<File | null>(null);
   const [multipleFiles, setMultipleFiles] = useState<File[]>([]);
-  const [targetFormat, setTargetFormat] = useState('jpeg');
+  const [targetFormat, setTargetFormat] = useState<ImageTargetFormat>('jpeg');
   const [quality, setQuality] = useState('82');
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
@@ -454,13 +951,42 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
   const [workflowOutputName, setWorkflowOutputName] = useState('output.file');
   const [workflowPreset, setWorkflowPreset] = useState<QualityPreset>('balanced');
   const [workflowExtra, setWorkflowExtra] = useState('');
+  const workflowProfile = useMemo<WorkflowProfile>(() => detectWorkflowProfile(toolSlug), [toolSlug]);
+  const workflowFormatOptions = useMemo(() => getWorkflowFormatOptions(toolSlug, workflowProfile), [toolSlug, workflowProfile]);
+  const [workflowFromFormat, setWorkflowFromFormat] = useState(() => getDefaultWorkflowFormats(toolSlug, workflowProfile).from);
+  const [workflowToFormat, setWorkflowToFormat] = useState(() => getDefaultWorkflowFormats(toolSlug, workflowProfile).to);
   const [workflowResult, setWorkflowResult] = useState('');
+  const [dragActive, setDragActive] = useState(false);
+  const uploadInputRef = useRef<HTMLInputElement | null>(null);
 
   const [running, setRunning] = useState(false);
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
   const [download, setDownload] = useState<DownloadState | null>(null);
+
+  const workflowBrowserPlan = useMemo(
+    () =>
+      buildWorkflowBrowserPlan(
+        toolSlug,
+        workflowInput,
+        workflowOutputName,
+        workflowPreset,
+        workflowExtra,
+        workflowFromFormat,
+        workflowToFormat
+      ),
+    [toolSlug, workflowInput, workflowOutputName, workflowPreset, workflowExtra, workflowFromFormat, workflowToFormat]
+  );
+
+  const primaryAction = useMemo(
+    () => getPrimaryActionLabel(toolSlug, mode, imageOperation, pdfOperation),
+    [toolSlug, mode, imageOperation, pdfOperation]
+  );
+
+  const isPdfMerge = pdfOperation === 'merge';
+  const isPdfImages = pdfOperation === 'images-to-pdf';
+  const acceptsMultiple = mode === 'pdf' && (isPdfMerge || isPdfImages);
 
   const unitResult = useMemo(() => {
     const parsed = Number(value);
@@ -511,19 +1037,195 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
   }, [download]);
 
   useEffect(() => {
+    const defaults = getDefaultWorkflowFormats(toolSlug, workflowProfile);
+
+    if (mode === 'image') {
+      if (toolSlug === 'png-to-svg') {
+        setTargetFormat('svg');
+      } else if (toolSlug === 'webp-to-png' || toolSlug === 'jfif-to-png' || toolSlug === 'heic-to-png') {
+        setTargetFormat('png');
+      } else if (toolSlug === 'webp-to-jpg' || toolSlug === 'heic-to-jpg') {
+        setTargetFormat('jpeg');
+      } else {
+        setTargetFormat('jpeg');
+      }
+    }
+
     setError('');
     setStatus('');
     setWorkflowResult('');
+    setWorkflowInput(withInputExtension('input', defaults.from));
+    setWorkflowOutputName(withOutputExtension(`output-${toolSlug}`, defaults.to));
+    setWorkflowFromFormat(defaults.from);
+    setWorkflowToFormat(defaults.to);
     setCopied(false);
     setSingleFile(null);
     setMultipleFiles([]);
+    setDragActive(false);
     setDownload((previous) => {
       if (previous) {
         URL.revokeObjectURL(previous.url);
       }
       return null;
     });
-  }, [toolSlug]);
+  }, [toolSlug, workflowProfile, mode]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const fromParam = params.get('from');
+    const toParam = params.get('to');
+
+    if (mode === 'image') {
+      if (toParam) {
+        const normalized = normalizeFormatToken(toParam);
+        const canonical = normalized === 'jpg' ? 'jpeg' : normalized;
+        if ((imageTargetFormatOptions as readonly string[]).includes(canonical)) {
+          setTargetFormat(canonical as ImageTargetFormat);
+        }
+      }
+      return;
+    }
+
+    if (mode !== 'workflow') {
+      return;
+    }
+
+    if (fromParam) {
+      const nextFrom = normalizeWorkflowFormat(fromParam, workflowProfile, workflowFormatOptions[0] ?? 'txt');
+      setWorkflowFromFormat(nextFrom);
+      setWorkflowInput((previous) => withInputExtension(previous, nextFrom));
+    }
+
+    if (toParam) {
+      const nextTo = normalizeWorkflowFormat(toParam, workflowProfile, workflowFormatOptions[0] ?? 'txt');
+      setWorkflowToFormat(nextTo);
+      setWorkflowOutputName((previous) => withOutputExtension(previous, nextTo));
+    }
+  }, [mode, toolSlug, workflowProfile, workflowFormatOptions]);
+
+  const uploadAccept =
+    mode === 'image' || (mode === 'pdf' && isPdfImages)
+      ? 'image/*,.svg'
+      : mode === 'pdf'
+        ? '.pdf,application/pdf'
+        : mode === 'workflow'
+          ? getStrictAcceptForFormat(workflowFromFormat)
+          : getWorkflowAcceptString(workflowProfile);
+
+  const uploadHint =
+    mode === 'image'
+      ? 'Accepted: PNG, JPG, WEBP, HEIC, SVG and other browser-decodable images.'
+      : mode === 'pdf'
+        ? isPdfImages
+          ? 'Accepted: image files that can be embedded into PDF pages.'
+          : 'Accepted: PDF files only.'
+        : mode === 'workflow'
+          ? `Allowed now: ${getFormatLabel(workflowFromFormat)} files only (based on selected source format).`
+          : getWorkflowAcceptHint(workflowProfile);
+
+  const selectedFileList = acceptsMultiple ? multipleFiles : singleFile ? [singleFile] : [];
+
+  const clearSelectedFiles = () => {
+    setSingleFile(null);
+    setMultipleFiles([]);
+    if (uploadInputRef.current) {
+      uploadInputRef.current.value = '';
+    }
+  };
+
+  const applySelectedFiles = (files: File[]) => {
+    if (files.length === 0) {
+      clearSelectedFiles();
+      return;
+    }
+
+    let selected = files;
+
+    if (mode === 'workflow') {
+      const matched = files.filter((file) => doesFileMatchFormat(file.name, workflowFromFormat));
+      if (matched.length === 0) {
+        setStatus('');
+        setError(`Please upload a ${getFormatLabel(workflowFromFormat)} file to match the selected source format.`);
+        if (uploadInputRef.current) {
+          uploadInputRef.current.value = '';
+        }
+        return;
+      }
+
+      selected = [matched[0]];
+      setError('');
+    }
+
+    if (acceptsMultiple) {
+      setMultipleFiles(selected);
+      setSingleFile(selected[0] ?? null);
+    } else {
+      setSingleFile(selected[0] ?? null);
+      setMultipleFiles([]);
+    }
+
+    if (mode === 'workflow') {
+      const first = selected[0];
+      if (first) {
+        setWorkflowInput(first.name);
+        setWorkflowOutputName(withOutputExtension(getBaseName(first.name), workflowToFormat));
+      }
+    }
+  };
+
+  const onUploadInputChange = (event: Event) => {
+    const files = (event.currentTarget as HTMLInputElement).files;
+    if (!files) {
+      clearSelectedFiles();
+      return;
+    }
+    applySelectedFiles(Array.from(files));
+  };
+
+  const onDropZoneDragOver = (event: DragEvent) => {
+    event.preventDefault();
+    setDragActive(true);
+  };
+
+  const onDropZoneDragEnter = (event: DragEvent) => {
+    event.preventDefault();
+    setDragActive(true);
+  };
+
+  const onDropZoneDragLeave = (event: DragEvent) => {
+    event.preventDefault();
+    const current = event.currentTarget as HTMLElement;
+    const related = event.relatedTarget;
+    if (related instanceof Node && current.contains(related)) {
+      return;
+    }
+    setDragActive(false);
+  };
+
+  const onDropZoneDrop = (event: DragEvent) => {
+    event.preventDefault();
+    setDragActive(false);
+    const files = event.dataTransfer?.files;
+    if (!files || files.length === 0) {
+      return;
+    }
+    applySelectedFiles(Array.from(files));
+  };
+
+  const openFilePicker = () => {
+    uploadInputRef.current?.click();
+  };
+
+  const onDropZoneKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openFilePicker();
+    }
+  };
 
   const getOutputMime = (): string => {
     const fixed = fixedImageMimeBySlug[toolSlug];
@@ -531,6 +1233,8 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
 
     if (targetFormat === 'png') return 'image/png';
     if (targetFormat === 'webp') return 'image/webp';
+    if (targetFormat === 'svg') return 'image/svg+xml';
+    if (targetFormat === 'rgba' || targetFormat === 'rgb') return 'application/octet-stream';
     return 'image/jpeg';
   };
 
@@ -539,7 +1243,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
       throw new Error('Upload an image file to run this utility.');
     }
 
-    if (imageOperation === 'png-to-svg') {
+    if (targetFormat === 'svg') {
       const sourceUrl = await fileToDataUrl(singleFile);
       const image = await loadImageFromUrl(sourceUrl);
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${image.width}" height="${image.height}" viewBox="0 0 ${image.width} ${image.height}"><image href="${sourceUrl}" width="${image.width}" height="${image.height}"/></svg>`;
@@ -622,6 +1326,33 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
       }
       context.drawImage(image, srcX, srcY, srcWidth, srcHeight, 0, 0, outWidth, outHeight);
       context.restore();
+    }
+
+    if (targetFormat === 'rgba' || targetFormat === 'rgb') {
+      const rgba = context.getImageData(0, 0, outWidth, outHeight).data;
+      let rawData: Uint8Array;
+
+      if (targetFormat === 'rgba') {
+        rawData = new Uint8Array(rgba);
+      } else {
+        rawData = new Uint8Array(outWidth * outHeight * 3);
+        for (let sourceIndex = 0, targetIndex = 0; sourceIndex < rgba.length; sourceIndex += 4) {
+          rawData[targetIndex] = rgba[sourceIndex];
+          rawData[targetIndex + 1] = rgba[sourceIndex + 1];
+          rawData[targetIndex + 2] = rgba[sourceIndex + 2];
+          targetIndex += 3;
+        }
+      }
+
+      const rawBuffer = new ArrayBuffer(rawData.byteLength);
+      new Uint8Array(rawBuffer).set(rawData);
+      const rawBlob = new Blob([rawBuffer], { type: 'application/octet-stream' });
+      publishBlob(
+        rawBlob,
+        `${getBaseName(singleFile.name)}-${toolSlug}.${targetFormat}`,
+        `Processed ${singleFile.name}: ${fileSizeLabel(singleFile.size)} -> ${fileSizeLabel(rawBlob.size)}.`
+      );
+      return;
     }
 
     const qualityValue = clamp(toNumberOr(quality, 82) / 100, 0.1, 1);
@@ -843,11 +1574,99 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
   };
 
   const onGenerateWorkflow = () => {
-    const output = buildWorkflowOutput(toolSlug, workflowInput, workflowOutputName, workflowPreset, workflowExtra);
+    const output = buildWorkflowOutput(
+      toolSlug,
+      workflowInput,
+      workflowOutputName,
+      workflowPreset,
+      workflowExtra,
+      workflowFromFormat,
+      workflowToFormat
+    );
     setWorkflowResult(output);
     setCopied(false);
     setStatus('Workflow generated successfully.');
     setError('');
+  };
+
+  const onRunWorkflowInBrowser = async () => {
+    if (!singleFile) {
+      setError('Upload a source file to run this conversion in-browser.');
+      return;
+    }
+
+    if (!doesFileMatchFormat(singleFile.name, workflowFromFormat)) {
+      setError(`Please upload a ${getFormatLabel(workflowFromFormat)} file before ${primaryAction.idle.toLowerCase()}.`);
+      return;
+    }
+
+    const sourceExtension = workflowFromFormat;
+    const sourceName = withInputExtension(getBaseName(singleFile.name), sourceExtension);
+
+    const plan = buildWorkflowBrowserPlan(
+      toolSlug,
+      sourceName,
+      workflowOutputName,
+      workflowPreset,
+      workflowExtra,
+      sourceExtension,
+      workflowToFormat
+    );
+
+    if (!plan.runnable) {
+      setError(plan.reason);
+      return;
+    }
+
+    setRunning(true);
+    setCopied(false);
+    setError('');
+    setStatus('Loading browser conversion engine...');
+
+    let ffmpeg: FFmpeg | null = null;
+
+    try {
+      ffmpeg = await ensureBrowserFfmpeg();
+
+      setStatus(`Preparing ${singleFile.name}...`);
+      await ffmpeg.writeFile(plan.input, await fetchFile(singleFile));
+
+      setStatus(`Converting ${singleFile.name}...`);
+      await ffmpeg.exec(plan.args);
+
+      const data = await ffmpeg.readFile(plan.output);
+      if (!(data instanceof Uint8Array)) {
+        throw new Error('Unexpected output payload from conversion engine.');
+      }
+
+      const outputExtension = getFileExtension(plan.output);
+      const outputMime = mimeByExtension[outputExtension] ?? 'application/octet-stream';
+      const outputBlob = bytesToBlob(data, outputMime);
+
+      publishBlob(outputBlob, plan.output, `Converted ${singleFile.name} to ${plan.output}.`);
+      setWorkflowOutputName(plan.output);
+      setWorkflowResult(
+        buildWorkflowOutput(
+          toolSlug,
+          plan.input,
+          plan.output,
+          workflowPreset,
+          workflowExtra,
+          sourceExtension,
+          workflowToFormat
+        )
+      );
+    } catch (runError) {
+      const message = runError instanceof Error ? runError.message : 'Browser conversion failed.';
+      setStatus('');
+      setError(message);
+    } finally {
+      if (ffmpeg) {
+        await deleteFfmpegFileSafe(ffmpeg, plan.input);
+        await deleteFfmpegFileSafe(ffmpeg, plan.output);
+      }
+      setRunning(false);
+    }
   };
 
   const copyOutput = async (valueToCopy: string) => {
@@ -857,6 +1676,52 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
     await navigator.clipboard.writeText(valueToCopy);
     setCopied(true);
   };
+
+  const renderUploadDropzone = () => (
+    <div className="upload-block">
+      <div
+        className={`upload-dropzone${dragActive ? ' is-drag-active' : ''}${selectedFileList.length > 0 ? ' has-files' : ''}`}
+        role="button"
+        tabIndex={0}
+        onClick={openFilePicker}
+        onKeyDown={onDropZoneKeyDown}
+        onDragEnter={onDropZoneDragEnter}
+        onDragOver={onDropZoneDragOver}
+        onDragLeave={onDropZoneDragLeave}
+        onDrop={onDropZoneDrop}
+        aria-label={acceptsMultiple ? 'Upload source files' : 'Upload source file'}
+      >
+        <input
+          ref={uploadInputRef}
+          className="upload-input-hidden"
+          type="file"
+          accept={uploadAccept}
+          multiple={acceptsMultiple}
+          onChange={onUploadInputChange}
+          aria-hidden="true"
+          tabIndex={-1}
+        />
+        <p className="upload-title">{acceptsMultiple ? 'Drop your files here' : 'Drop your file here'}</p>
+        <p className="upload-subtitle">or click to upload manually</p>
+        <p className="upload-hint">{uploadHint}</p>
+      </div>
+
+      {selectedFileList.length > 0 && (
+        <div className="upload-selection" aria-live="polite">
+          <ul>
+            {selectedFileList.slice(0, 5).map((file) => (
+              <li>
+                <span>{file.name}</span>
+                <strong>{fileSizeLabel(file.size)}</strong>
+              </li>
+            ))}
+          </ul>
+          {selectedFileList.length > 5 && <p className="upload-more">+{selectedFileList.length - 5} more file(s)</p>}
+          <button type="button" className="upload-clear" onClick={clearSelectedFiles}>Clear selection</button>
+        </div>
+      )}
+    </div>
+  );
 
   if (mode === 'unit') {
     const units = Object.keys(lengthFactor);
@@ -954,7 +1819,59 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
           This route generates a deterministic production command workflow for local execution, including command line,
           run checklist, and quality profile.
         </p>
+
+        {renderUploadDropzone()}
+
         <div className="fields-grid">
+          <label>
+            Convert from
+            <select
+              value={workflowFromFormat}
+              onInput={(event) => {
+                const next = normalizeWorkflowFormat(
+                  (event.currentTarget as HTMLSelectElement).value,
+                  workflowProfile,
+                  workflowFormatOptions[0] ?? 'txt'
+                );
+                setWorkflowFromFormat(next);
+                setWorkflowInput((previous) => withInputExtension(previous, next));
+
+                if (singleFile && !doesFileMatchFormat(singleFile.name, next)) {
+                  setSingleFile(null);
+                  if (uploadInputRef.current) {
+                    uploadInputRef.current.value = '';
+                  }
+                  setStatus('');
+                  setError(`Selected source file was cleared. Upload a ${getFormatLabel(next)} file to continue.`);
+                }
+              }}
+            >
+              {workflowFormatOptions.map((format) => (
+                <option value={format}>{format.toUpperCase()}</option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Convert to
+            <select
+              value={workflowToFormat}
+              onInput={(event) => {
+                const next = normalizeWorkflowFormat(
+                  (event.currentTarget as HTMLSelectElement).value,
+                  workflowProfile,
+                  workflowFormatOptions[0] ?? 'txt'
+                );
+                setWorkflowToFormat(next);
+                setWorkflowOutputName((previous) => withOutputExtension(previous, next));
+              }}
+            >
+              {workflowFormatOptions.map((format) => (
+                <option value={format}>{format.toUpperCase()}</option>
+              ))}
+            </select>
+          </label>
+
           <label>
             Input filename
             <input type="text" value={workflowInput} onInput={(event) => setWorkflowInput((event.currentTarget as HTMLInputElement).value)} />
@@ -982,10 +1899,38 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
         </div>
 
         <div className="runner-actions">
-          <button type="button" onClick={onGenerateWorkflow}>Generate Workflow</button>
+          <button
+            type="button"
+            onClick={() => {
+              setWorkflowFromFormat(workflowToFormat);
+              setWorkflowToFormat(workflowFromFormat);
+              setWorkflowInput((previous) => withInputExtension(previous, workflowToFormat));
+              setWorkflowOutputName((previous) => withOutputExtension(previous, workflowFromFormat));
+            }}
+          >
+            Switch formats
+          </button>
+          <button
+            type="button"
+            onClick={workflowBrowserPlan.runnable ? onRunWorkflowInBrowser : onGenerateWorkflow}
+            disabled={running || (workflowBrowserPlan.runnable && !singleFile)}
+          >
+            {running
+              ? primaryAction.running
+              : workflowBrowserPlan.runnable
+                ? primaryAction.idle
+                : `Show ${primaryAction.idle.toLowerCase()} steps`}
+          </button>
         </div>
 
+        <p className="meta">
+          {workflowBrowserPlan.runnable
+            ? 'This tool runs directly in your browser. Select a source format, upload the same format, then continue.'
+            : `${workflowBrowserPlan.reason} We will show clear desktop steps for this route.`}
+        </p>
+
         {status && <p className="status">{status}</p>}
+        {error && <p className="error">{error}</p>}
 
         {workflowResult && (
           <div className="output-block">
@@ -1000,10 +1945,6 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
     );
   }
 
-  const isPdfMerge = pdfOperation === 'merge';
-  const isPdfImages = pdfOperation === 'images-to-pdf';
-  const acceptsMultiple = isPdfMerge || isPdfImages;
-
   return (
     <section className="starter-runner">
       <h3>{slugLabel(toolSlug)}</h3>
@@ -1013,39 +1954,29 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
           : 'Run deterministic PDF operations in-browser with immediate downloadable output.'}
       </p>
 
-      <div className="fields-grid">
-        <label>
-          {acceptsMultiple ? 'Source files' : 'Source file'}
-          <input
-            type="file"
-            accept={mode === 'image' || isPdfImages ? 'image/*,.svg' : '.pdf,application/pdf'}
-            multiple={acceptsMultiple}
-            onChange={(event) => {
-              const list = (event.currentTarget as HTMLInputElement).files;
-              if (!list) {
-                setSingleFile(null);
-                setMultipleFiles([]);
-                return;
-              }
-              const files = Array.from(list);
-              if (acceptsMultiple) {
-                setMultipleFiles(files);
-                setSingleFile(files[0] ?? null);
-              } else {
-                setSingleFile(files[0] ?? null);
-                setMultipleFiles([]);
-              }
-            }}
-          />
-        </label>
+      {renderUploadDropzone()}
 
-        {mode === 'image' && imageOperation === 'convert' && (
+      <div className="fields-grid">
+
+        {mode === 'image' && (imageOperation === 'convert' || imageOperation === 'png-to-svg') && (
           <label>
             Output format
-            <select value={targetFormat} onInput={(event) => setTargetFormat((event.currentTarget as HTMLSelectElement).value)}>
+            <select
+              value={targetFormat}
+              onInput={(event) => {
+                const next = normalizeFormatToken((event.currentTarget as HTMLSelectElement).value);
+                const canonical = next === 'jpg' ? 'jpeg' : next;
+                if ((imageTargetFormatOptions as readonly string[]).includes(canonical)) {
+                  setTargetFormat(canonical as ImageTargetFormat);
+                }
+              }}
+            >
               <option value="jpeg">JPEG</option>
               <option value="png">PNG</option>
               <option value="webp">WEBP</option>
+              <option value="svg">SVG</option>
+              <option value="rgba">RGBA</option>
+              <option value="rgb">RGB</option>
             </select>
           </label>
         )}
@@ -1187,7 +2118,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
       </div>
 
       <div className="runner-actions">
-        <button type="button" onClick={onRunFileUtility}>{running ? 'Running...' : 'Run Utility'}</button>
+        <button type="button" onClick={onRunFileUtility}>{running ? primaryAction.running : primaryAction.idle}</button>
       </div>
 
       {status && <p className="status">{status}</p>}

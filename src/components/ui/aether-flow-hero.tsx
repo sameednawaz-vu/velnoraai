@@ -45,10 +45,10 @@ const fadeUpVariants = {
 
 export default function AetherFlowHero({
   title = 'Velnora',
-  subtitle = 'Client-side tools that ship outcomes',
-  description = 'Run 120 deterministic tools with no private API keys required. Search by category, execute instantly, and ship cleaner work faster.',
+  subtitle = 'World largest free tools library for practical execution',
+  description = 'Open free tools by category, run workflows immediately, and ship cleaner output without signup friction.',
   primaryHref = '/tools',
-  secondaryHref = '/tools/writing-messaging',
+  secondaryHref = '/articles',
   tertiaryHref = '/learning-hub',
 }: AetherFlowHeroProps) {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
@@ -254,15 +254,15 @@ export default function AetherFlowHero({
 
         <motion.div custom={4} variants={fadeUpVariants} initial="hidden" animate="visible" className="aether-actions">
           <a href={primaryHref} className="aether-btn aether-btn-primary">
-            Browse Tools
+            Open Free Tool Library
             <ArrowRight size={18} />
           </a>
           <a href={secondaryHref} className="aether-btn aether-btn-primary">
-            Open Writing Tools
+            Read Tool Articles
           </a>
           <a href={tertiaryHref} className="aether-btn aether-btn-ghost">
             <WandSparkles size={16} />
-            Start Learning
+            Open Learning Hub
           </a>
         </motion.div>
       </div>

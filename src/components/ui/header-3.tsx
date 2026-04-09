@@ -239,7 +239,7 @@ const productLinks: LinkItem[] = [
   {
     title: 'All Categories',
     href: '/tools',
-    description: 'Browse all 120 published categories and tools',
+    description: 'Browse all published categories and tools',
     icon: BarChart,
   },
   {

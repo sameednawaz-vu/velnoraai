@@ -17,6 +17,12 @@ interface Props {
 }
 
 const { tool } = Astro.props;
+const categoryLabel = tool.category
+  .split('-')
+  .filter(Boolean)
+  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+  .join(' ');
+const infoMessage = tool.valueProposition || tool.description;
 ---
 
 <article
@@ -32,15 +38,18 @@ const { tool } = Astro.props;
     <p class="tool-updated">Updated {tool.lastUpdated}</p>
   </div>
 
-  <h3>
-    <a href={`/tools/${tool.category}/${tool.slug}`}>{tool.name}</a>
-  </h3>
+  <div class="tool-name-row">
+    <h3>
+      <a href={`/tools/${tool.category}/${tool.slug}`}>{tool.name}</a>
+    </h3>
+    <button class="info-dot" type="button" aria-label={`Tool details for ${tool.name}`}>i</button>
+    <span class="info-tooltip" role="tooltip">{infoMessage}</span>
+  </div>
 
-  <p class="tool-description">{tool.description}</p>
-  <p class="tool-value">{tool.valueProposition}</p>
+  <p class="tool-category">{categoryLabel}</p>
 
-  <ul class="tool-tags">
-    {tool.tags.map((tag) => <li>{tag}</li>)}
+  <ul class="tool-tags" aria-label="Tool tags">
+    {tool.tags.slice(0, 3).map((tag) => <li>{tag}</li>)}
   </ul>
 
   <a class="tool-link" href={`/tools/${tool.category}/${tool.slug}`}>
@@ -52,11 +61,11 @@ const { tool } = Astro.props;
   .tool-card {
     border: 1px solid var(--color-border);
     border-radius: 0.82rem;
-    background: linear-gradient(165deg, #fffef9 0%, #fff6e8 100%);
-    padding: 1.25rem;
+    background: linear-gradient(165deg, #fffef9 0%, #fff8eb 100%);
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 0.62rem;
     height: 100%;
     box-shadow: var(--shadow-soft);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -88,8 +97,17 @@ const { tool } = Astro.props;
   }
 
   .tool-card h3 {
-    font-size: 1.18rem;
-    line-height: 1.35;
+    font-size: 1.02rem;
+    line-height: 1.32;
+    margin: 0;
+  }
+
+  .tool-name-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .tool-card h3 a {
@@ -100,15 +118,64 @@ const { tool } = Astro.props;
     color: var(--color-accent);
   }
 
-  .tool-description {
-    color: #425472;
-    line-height: 1.55;
+  .tool-category {
+    color: #3e5474;
+    font-size: 0.85rem;
+    margin: 0;
+    font-weight: 600;
   }
 
-  .tool-value {
-    color: #29466b;
-    font-size: 0.95rem;
-    line-height: 1.5;
+  .info-dot {
+    width: 1.28rem;
+    height: 1.28rem;
+    border-radius: 999px;
+    border: 1px solid #bfd0e7;
+    background: #edf3fb;
+    color: #27486d;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    padding: 0;
+  }
+
+  .info-dot:hover,
+  .info-dot:focus-visible {
+    border-color: #9eb6d3;
+    background: #e1ebf8;
+    outline: none;
+  }
+
+  .info-tooltip {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.32rem);
+    min-width: 220px;
+    max-width: min(320px, 92vw);
+    border: 1px solid #cfdcef;
+    border-radius: 0.55rem;
+    background: #ffffff;
+    padding: 0.56rem 0.62rem;
+    color: #364f6d;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    box-shadow: 0 12px 28px rgba(17, 34, 57, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    transform: translateY(4px);
+    z-index: 20;
+  }
+
+  .info-dot:hover + .info-tooltip,
+  .info-dot:focus-visible + .info-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .tool-tags {
@@ -132,17 +199,26 @@ const { tool } = Astro.props;
   .tool-link {
     margin-top: auto;
     width: fit-content;
-    padding: 0.55rem 0.95rem;
+    padding: 0.45rem 0.82rem;
     border-radius: 0.5rem;
     border: 1px solid #d5c2a2;
     color: var(--color-primary);
     background: #fffaf0;
     font-weight: 700;
+    font-size: 0.86rem;
     transition: all 0.2s ease;
   }
 
   .tool-link:hover {
     border-color: var(--color-accent);
     color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .info-tooltip {
+      left: 0;
+      right: auto;
+      max-width: min(88vw, 320px);
+    }
   }
 </style>

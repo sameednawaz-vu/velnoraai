@@ -1,6 +1,7 @@
 ---
 import catalog from '../content/data/freeconvert-catalog.json';
 import toolsData from '../content/data/tools.json';
+import competitorFormats from '../content/data/competitor-convertio-formats.json';
 
 const primaryMenus = [
   { label: 'Convert', href: '/convert', surfaceSlug: 'convert' },
@@ -11,6 +12,7 @@ const primaryMenus = [
 const secondaryLinks = [
   { label: 'Learning Hub', href: '/learning-hub' },
   { label: 'Library', href: '/library' },
+  { label: 'Articles', href: '/articles' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
   { label: 'About', href: '/about' },
@@ -21,6 +23,11 @@ const quickLinks: Array<{ label: string; href: string }> = [];
 const surfaceMap = new Map(catalog.surfaces.map((surface) => [surface.slug, surface]));
 
 const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published');
+const utilityToolCount = catalog.surfaces.reduce(
+  (count, surface) => count + surface.groups.reduce((groupCount, group) => groupCount + group.tools.length, 0),
+  0
+);
+const platformCapabilityCount = publishedTools.length + utilityToolCount + competitorFormats.totals.formats;
 const categoryColumns = toolsData.categories
   .map((category) => {
     const categoryTools = publishedTools.filter((tool) => tool.category === category.slug);
@@ -37,6 +44,34 @@ const categoryColumns = toolsData.categories
     };
   })
   .filter((category) => category.count > 0);
+
+const getSurfaceRoute = (surfaceSlug: string) => {
+  if (surfaceSlug === 'convert') {
+    return '/convert';
+  }
+
+  if (surfaceSlug === 'compress') {
+    return '/compress';
+  }
+
+  return '/utility-tools';
+};
+
+const utilityCategoryColumns = catalog.surfaces.flatMap((surface) =>
+  surface.groups.map((group) => ({
+    slug: `${surface.slug}-${group.slug}`,
+    groupSlug: group.slug,
+    name: `${surface.name} - ${group.name}`,
+    href: getSurfaceRoute(surface.slug),
+    count: group.tools.length,
+    tools: group.tools.slice(0, 5).map((tool) => ({
+      name: tool.name,
+      href: `/utility/${surface.slug}/${tool.slug}`,
+    })),
+  }))
+);
+
+const allCategoryCount = categoryColumns.length + utilityCategoryColumns.length;
 
 const groupBadgeMap: Record<string, string> = {
   'video-audio': 'VA',
@@ -128,14 +163,14 @@ const getCategoryBadge = (name: string) =>
 
         <li class="menu-item has-mega">
           <a href="/tools" class="menu-link menu-link-trigger">
-            <span>Categories</span>
+            <span>All Categories</span>
             <span class="caret" aria-hidden="true"></span>
           </a>
 
-          <div class="mega-panel" aria-label="All categories navigation">
+          <div class="mega-panel" aria-label="All category navigation">
             <div class="mega-heading">
-              <p>All Tool Categories</p>
-              <a href="/tools">Browse full 120-tool index</a>
+              <p>Unified Categories Across Professional and Utility Surfaces</p>
+              <a href="/tools">Browse {allCategoryCount} categories and {platformCapabilityCount.toLocaleString('en-US')} capabilities</a>
             </div>
 
             <div class="mega-grid categories-grid">
@@ -155,15 +190,49 @@ const getCategoryBadge = (name: string) =>
                   </ul>
                 </section>
               ))}
+
+              {utilityCategoryColumns.map((category) => (
+                <section class="tool-group category-group utility-category-group">
+                  <h3>
+                    <span class="group-badge">{getGroupBadge(category.groupSlug)}</span>
+                    <a href={category.href}>{category.name}</a>
+                  </h3>
+
+                  <p class="category-count">{category.count} utility tools</p>
+
+                  <ul>
+                    {category.tools.map((tool) => (
+                      <li><a href={tool.href}>{tool.name}</a></li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
             </div>
           </div>
         </li>
 
-        {secondaryLinks.map((item) => (
-          <li class="menu-item">
-            <a href={item.href} class="menu-link">{item.label}</a>
-          </li>
-        ))}
+        <li class="menu-item has-mega">
+          <a href="/learning-hub" class="menu-link menu-link-trigger">
+            <span>Navigator</span>
+            <span class="caret" aria-hidden="true"></span>
+          </a>
+
+          <div class="mega-panel navigator-panel" aria-label="Site navigator links">
+            <div class="mega-heading">
+              <p>Site Navigator</p>
+              <a href="/learning-hub">Open practical learning resources</a>
+            </div>
+
+            <div class="navigator-grid">
+              {secondaryLinks.map((item) => (
+                <a href={item.href} class="navigator-link">
+                  <strong>{item.label}</strong>
+                  <span>Open {item.label.toLowerCase()} page</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </li>
       </ul>
 
       <div class="nav-actions">
@@ -171,7 +240,8 @@ const getCategoryBadge = (name: string) =>
           <span class="search-icon" aria-hidden="true"></span>
           Search
         </a>
-        <a class="action-link" href="/tools">Open Tools</a>
+        <a class="action-link" href="/tools#all-tools-directory">Open Tools</a>
+        <a class="action-link" href="/articles">Open Articles</a>
         <a class="action-link action-link-accent" href="/contact">Talk to Team</a>
       </div>
     </div>
@@ -207,7 +277,7 @@ const getCategoryBadge = (name: string) =>
       })}
 
       <details class="mobile-item">
-        <summary>Categories</summary>
+        <summary>All Categories</summary>
 
         <ul class="mobile-categories">
           {categoryColumns.map((category) => (
@@ -218,9 +288,18 @@ const getCategoryBadge = (name: string) =>
               </a>
             </li>
           ))}
+
+          {utilityCategoryColumns.map((category) => (
+            <li>
+              <a href={category.href}>
+                <span>{category.name}</span>
+                <strong>{category.count}</strong>
+              </a>
+            </li>
+          ))}
         </ul>
 
-        <a class="mobile-view-all" href="/tools">Browse full 120-tool index</a>
+        <a class="mobile-view-all" href="/tools">Browse {allCategoryCount} categories and {platformCapabilityCount.toLocaleString('en-US')} capabilities</a>
       </details>
 
       <div class="mobile-links">
@@ -230,7 +309,8 @@ const getCategoryBadge = (name: string) =>
       </div>
 
       <div class="mobile-actions">
-        <a class="mobile-primary" href="/tools">Open Tools</a>
+        <a class="mobile-primary" href="/tools#all-tools-directory">Open Tools</a>
+        <a class="mobile-secondary" href="/articles">Open Articles</a>
         <a class="mobile-secondary" href="/contact">Talk to Team</a>
       </div>
     </div>
@@ -241,6 +321,9 @@ const getCategoryBadge = (name: string) =>
   const setupHeaderNav = () => {
     const toggle = document.querySelector('[data-nav-toggle]');
     const panel = document.querySelector('[data-nav-panel]');
+    const desktopNav = document.querySelector('.desktop-nav');
+    const desktopMenus = Array.from(document.querySelectorAll('.desktop-nav .has-mega'));
+    const desktopMedia = window.matchMedia('(min-width: 1081px)');
 
     if (!(toggle instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) {
       return;
@@ -250,6 +333,22 @@ const getCategoryBadge = (name: string) =>
       panel.hidden = true;
       toggle.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('mobile-nav-open');
+    };
+
+    const clearDesktopMenus = () => {
+      desktopMenus.forEach((item) => {
+        if (item instanceof HTMLElement) {
+          item.classList.remove('is-open');
+        }
+      });
+    };
+
+    const closeDesktopMenusExcept = (activeItem) => {
+      desktopMenus.forEach((item) => {
+        if (item instanceof HTMLElement && item !== activeItem) {
+          item.classList.remove('is-open');
+        }
+      });
     };
 
     const open = () => {
@@ -269,6 +368,7 @@ const getCategoryBadge = (name: string) =>
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         close();
+        clearDesktopMenus();
       }
     });
 
@@ -287,9 +387,85 @@ const getCategoryBadge = (name: string) =>
       }
     });
 
+    document.addEventListener('click', (event) => {
+      if (!desktopMedia.matches || !(desktopNav instanceof HTMLElement)) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (!desktopNav.contains(target)) {
+        clearDesktopMenus();
+      }
+    });
+
+    desktopMenus.forEach((item) => {
+      if (!(item instanceof HTMLElement)) {
+        return;
+      }
+
+      const panelNode = item.querySelector('.mega-panel');
+
+      let closeTimer = 0;
+
+      const openMenu = () => {
+        if (!desktopMedia.matches) {
+          return;
+        }
+
+        window.clearTimeout(closeTimer);
+        closeDesktopMenusExcept(item);
+        item.classList.add('is-open');
+      };
+
+      const closeMenu = (withDelay = true) => {
+        window.clearTimeout(closeTimer);
+
+        if (!desktopMedia.matches || !withDelay) {
+          item.classList.remove('is-open');
+          return;
+        }
+
+        closeTimer = window.setTimeout(() => {
+          item.classList.remove('is-open');
+        }, 240);
+      };
+
+      const onPointerLeave = (event) => {
+        const relatedTarget = event.relatedTarget;
+        if (relatedTarget instanceof Node && item.contains(relatedTarget)) {
+          return;
+        }
+        closeMenu(true);
+      };
+
+      item.addEventListener('pointerenter', openMenu);
+      item.addEventListener('pointerleave', onPointerLeave);
+      if (panelNode instanceof HTMLElement) {
+        panelNode.addEventListener('pointerenter', openMenu);
+        panelNode.addEventListener('pointerleave', onPointerLeave);
+      }
+      item.addEventListener('focusin', openMenu);
+      item.addEventListener('focusout', (event) => {
+        const relatedTarget = event.relatedTarget;
+        if (relatedTarget instanceof Node && item.contains(relatedTarget)) {
+          return;
+        }
+
+        closeMenu(false);
+      });
+    });
+
     window.addEventListener('resize', () => {
       if (window.innerWidth > 1080) {
         close();
+      }
+
+      if (!desktopMedia.matches) {
+        clearDesktopMenus();
       }
     });
   };
@@ -433,14 +609,27 @@ const getCategoryBadge = (name: string) =>
     margin-left: 0.08rem;
   }
 
-  .has-mega:hover .menu-link-trigger .caret,
-  .has-mega:focus-within .menu-link-trigger .caret {
+  .menu-link-trigger {
+    position: relative;
+  }
+
+  .has-mega .menu-link-trigger::after {
+    content: '';
+    position: absolute;
+    left: -0.35rem;
+    right: -0.35rem;
+    top: 100%;
+    height: 2rem;
+  }
+
+  .has-mega:focus-within .menu-link-trigger .caret,
+  .has-mega.is-open .menu-link-trigger .caret {
     transform: rotate(225deg) translateY(-1px);
   }
 
   .mega-panel {
     position: absolute;
-    top: calc(100% + 0.45rem);
+    top: calc(100% + 0.25rem);
     left: 0;
     width: min(1280px, 100vw - 1.6rem);
     background: #f8fafc;
@@ -456,8 +645,8 @@ const getCategoryBadge = (name: string) =>
     z-index: 180;
   }
 
-  .has-mega:hover > .mega-panel,
-  .has-mega:focus-within > .mega-panel {
+  .has-mega:focus-within > .mega-panel,
+  .has-mega.is-open > .mega-panel {
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
@@ -563,10 +752,51 @@ const getCategoryBadge = (name: string) =>
     padding-top: 0.15rem;
   }
 
+  .utility-category-group {
+    background: linear-gradient(180deg, rgba(237, 246, 255, 0.8), rgba(255, 255, 255, 0.72));
+  }
+
   .category-group .category-count {
     font-size: 0.74rem;
     color: #607491;
     margin: -0.2rem 0 0.4rem 1.94rem;
+  }
+
+  .navigator-panel {
+    max-width: 760px;
+  }
+
+  .navigator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.55rem;
+  }
+
+  .navigator-link {
+    border: 1px solid #d6e0ed;
+    border-radius: 0.6rem;
+    padding: 0.72rem 0.78rem;
+    background: #ffffff;
+    display: grid;
+    gap: 0.18rem;
+    color: #1f304d;
+  }
+
+  .navigator-link strong {
+    font-size: 0.92rem;
+    color: #1f304d;
+  }
+
+  .navigator-link span {
+    color: #607391;
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .navigator-link:hover,
+  .navigator-link:focus-visible {
+    border-color: #bfcedf;
+    background: #f8fbff;
   }
 
   .nav-actions {

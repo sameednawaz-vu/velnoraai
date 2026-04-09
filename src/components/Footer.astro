@@ -1,5 +1,19 @@
 ---
 import { Boxes } from './ui/background-boxes';
+import catalog from '../content/data/freeconvert-catalog.json';
+import toolsData from '../content/data/tools.json';
+import competitorFormats from '../content/data/competitor-convertio-formats.json';
+import { toolArticleCount } from '../lib/article-catalog';
+
+const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published').length;
+const utilityToolCount = catalog.surfaces.reduce(
+  (count, surface) => count + surface.groups.reduce((groupCount, group) => groupCount + group.tools.length, 0),
+  0
+);
+const utilityCategoryCount = catalog.surfaces.reduce((count, surface) => count + surface.groups.length, 0);
+const totalCategoryCount = toolsData.categories.length + utilityCategoryCount;
+const totalLiveTools = publishedTools + utilityToolCount;
+const capabilityCount = publishedTools + utilityToolCount + competitorFormats.totals.formats;
 ---
 
 <footer class="site-footer">
@@ -11,15 +25,18 @@ import { Boxes } from './ui/background-boxes';
   <div class="footer-shell">
     <section class="footer-banner" data-reveal>
       <div>
-        <p class="banner-kicker">Execution Workspace</p>
-        <h2>Tools that move ideas into shipped output.</h2>
+        <p class="banner-kicker">World Largest Free Tools Library</p>
+        <h2>Free tools for conversion, compression, productivity, and delivery.</h2>
         <p class="banner-copy">
-          Velnora keeps workflows practical: open a tool, run it, and continue delivery without signup friction.
+          Use {totalLiveTools.toLocaleString('en-US')} live tools across {totalCategoryCount} categories, plus
+          {` ${competitorFormats.totals.formats.toLocaleString('en-US')}`} conversion format pathways and
+          {` ${toolArticleCount.toLocaleString('en-US')}`} SEO and GEO article guides.
         </p>
       </div>
 
       <div class="banner-actions">
-        <a class="banner-primary" href="/tools">Launch 120 Tools</a>
+        <a class="banner-primary" href="/tools">Open {totalLiveTools.toLocaleString('en-US')} Free Tools</a>
+        <a class="banner-secondary" href="/articles">Read {toolArticleCount.toLocaleString('en-US')} Articles</a>
         <a class="banner-secondary" href="/contact">Discuss a Use Case</a>
       </div>
     </section>
@@ -43,6 +60,7 @@ import { Boxes } from './ui/background-boxes';
           <li><a href="/tools">All Categories</a></li>
           <li><a href="/learning-hub">Learning Hub</a></li>
           <li><a href="/library">Library</a></li>
+          <li><a href="/articles">Articles</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
@@ -75,9 +93,10 @@ import { Boxes } from './ui/background-boxes';
   <div class="footer-bottom">
     <p>&copy; 2026 Velnora. Built by Sameed Nawaz.</p>
     <div class="footer-status">
-      <span>Static-first</span>
-      <span>Client-side tools</span>
-      <span>SEO-ready routes</span>
+      <span>{totalLiveTools.toLocaleString('en-US')} free tools</span>
+      <span>{totalCategoryCount} managed categories</span>
+      <span>{toolArticleCount.toLocaleString('en-US')} SEO articles</span>
+      <span>{capabilityCount.toLocaleString('en-US')} capability index</span>
     </div>
   </div>
 </footer>

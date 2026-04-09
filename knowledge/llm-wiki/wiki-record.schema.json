@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VelnoraWikiIndex",
+  "type": "object",
+  "required": [
+    "generatedAt",
+    "model",
+    "sources",
+    "stats",
+    "categories",
+    "surfaces",
+    "contracts"
+  ],
+  "properties": {
+    "generatedAt": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "file",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "required": [
+        "categories",
+        "tools",
+        "publishedTools",
+        "surfaces",
+        "surfaceGroups",
+        "surfaceTools"
+      ],
+      "properties": {
+        "categories": {
+          "type": "number"
+        },
+        "tools": {
+          "type": "number"
+        },
+        "publishedTools": {
+          "type": "number"
+        },
+        "surfaces": {
+          "type": "number"
+        },
+        "surfaceGroups": {
+          "type": "number"
+        },
+        "surfaceTools": {
+          "type": "number"
+        }
+      }
+    },
+    "categories": {
+      "type": "array"
+    },
+    "surfaces": {
+      "type": "array"
+    },
+    "contracts": {
+      "type": "object"
+    }
+  }
+}

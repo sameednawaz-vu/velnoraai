@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import toolsData from '../../content/data/tools.json';
+import catalog from '../../content/data/freeconvert-catalog.json';
+import { toolArticles, toolArticleCount, toolArticleFamilySummary } from '../../lib/article-catalog';
+
+const publishedToolCount = toolsData.tools.filter((tool) => tool.status === 'published').length;
+const utilityToolCount = catalog.surfaces.reduce(
+  (count, surface) => count + surface.groups.reduce((groupCount, group) => groupCount + group.tools.length, 0),
+  0
+);
+const utilityCategoryCount = catalog.surfaces.reduce((count, surface) => count + surface.groups.length, 0);
+const totalCategoryCount = toolsData.categories.length + utilityCategoryCount;
+
+const sectionMap = new Map<
+  string,
+  {
+    familyLabel: string;
+    sectionLabel: string;
+    entries: typeof toolArticles;
+  }
+>();
+for (const article of toolArticles) {
+  const key = `${article.familyLabel}::${article.sectionLabel}`;
+  const existing = sectionMap.get(key);
+  if (existing) {
+    existing.entries.push(article);
+    continue;
+  }
+
+  sectionMap.set(key, {
+    familyLabel: article.familyLabel,
+    sectionLabel: article.sectionLabel,
+    entries: [article],
+  });
+}
+
+const sectionGroups = Array.from(sectionMap.values())
+  .map((section) => ({
+    ...section,
+    entries: section.entries.sort((first, second) => first.articleTitle.localeCompare(second.articleTitle)),
+  }))
+  .sort((first, second) => {
+    if (first.familyLabel === second.familyLabel) {
+      return first.sectionLabel.localeCompare(second.sectionLabel);
+    }
+    return first.familyLabel.localeCompare(second.familyLabel);
+  });
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Velnora Tool Articles',
+  itemListElement: toolArticles.map((article, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: article.articleTitle,
+    url: `https://velnoraai.app${article.articleHref}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Articles"
+  description={`Browse ${toolArticleCount.toLocaleString('en-US')} SEO and GEO optimized articles for Velnora tools, conversion workflows, and free utility operations.`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+
+  <Header />
+
+  <main class="articles-page">
+    <section class="articles-hero" data-reveal>
+      <p class="eyebrow">Velnora Article Library</p>
+      <h1>{toolArticleCount.toLocaleString('en-US')} tool articles for SEO and GEO growth</h1>
+      <p>
+        This index is article-first by design. Instead of browsing card blocks, you can open article names directly,
+        learn a workflow quickly, and move to the tool route in one click.
+      </p>
+    </section>
+
+    <section class="metrics-row" data-reveal>
+      <article>
+        <strong>{publishedToolCount + utilityToolCount}</strong>
+        <span>Free tools currently live</span>
+      </article>
+      <article>
+        <strong>{totalCategoryCount}</strong>
+        <span>Managed categories across all surfaces</span>
+      </article>
+      {toolArticleFamilySummary.map((family) => (
+        <article>
+          <strong>{family.count}</strong>
+          <span>{family.label} articles</span>
+        </article>
+      ))}
+    </section>
+
+    <section class="article-directory" data-reveal>
+      {sectionGroups.map((section) => (
+        <section class="article-section" id={section.sectionLabel.toLowerCase().replaceAll(' ', '-')}>
+          <header>
+            <p>{section.familyLabel}</p>
+            <h2>{section.sectionLabel}</h2>
+            <span>{section.entries.length} articles</span>
+          </header>
+
+          <ul>
+            {section.entries.map((entry) => (
+              <li>
+                <a href={entry.articleHref}>{entry.articleTitle}</a>
+                <small>
+                  <a href={entry.toolHref}>Open tool</a>
+                </small>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .articles-page {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 2.3rem 1.1rem 4rem;
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .articles-hero {
+    border: 1px solid var(--color-border);
+    border-radius: 0.92rem;
+    padding: 1.35rem;
+    background: linear-gradient(140deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.13));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .eyebrow {
+    color: #8a531f;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .articles-hero h1 {
+    font-size: clamp(1.85rem, 4vw, 2.9rem);
+    margin-bottom: 0.65rem;
+  }
+
+  .articles-hero p {
+    color: #35506f;
+    max-width: 76ch;
+    line-height: 1.64;
+  }
+
+  .metrics-row {
+    border: 1px solid var(--color-border);
+    border-radius: 0.92rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+    padding: 0.85rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .metrics-row article {
+    border: 1px solid #d9e4f0;
+    border-radius: 0.68rem;
+    background: #f6faff;
+    padding: 0.62rem 0.72rem;
+    display: grid;
+    gap: 0.18rem;
+  }
+
+  .metrics-row strong {
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    color: #143159;
+    line-height: 1;
+  }
+
+  .metrics-row span {
+    color: #4d6585;
+    font-size: 0.84rem;
+  }
+
+  .article-directory {
+    border: 1px solid var(--color-border);
+    border-radius: 0.92rem;
+    background: #fffefb;
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .article-section {
+    border-top: 1px solid #e8d8bf;
+    padding-top: 0.85rem;
+  }
+
+  .article-section:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .article-section header {
+    display: grid;
+    gap: 0.18rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-section header p {
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    font-weight: 700;
+    font-size: 0.74rem;
+    color: #7c4f2a;
+  }
+
+  .article-section h2 {
+    font-size: 1.25rem;
+    color: #193657;
+  }
+
+  .article-section header span {
+    color: #5f7493;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .article-section ul {
+    list-style: none;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .article-section li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.72rem;
+    border-bottom: 1px dashed #e7d7c1;
+    padding: 0.36rem 0;
+  }
+
+  .article-section li:last-child {
+    border-bottom: none;
+  }
+
+  .article-section li a {
+    color: #233e5e;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .article-section li a:hover {
+    color: var(--color-accent);
+  }
+
+  .article-section li small a {
+    color: #3f638f;
+    font-size: 0.79rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .articles-page {
+      padding: 1.45rem 0.8rem 3rem;
+      gap: 1rem;
+    }
+
+    .article-section li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.24rem;
+    }
+  }
+</style>

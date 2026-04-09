@@ -2,1297 +2,2425 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://velnoraai.app/</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/about</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
+    <loc>https://velnoraai.app/articles</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.93</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-accessibility-alt-text-template-helper</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-action-item-tracker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-anchor-text-variation-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-api-request-composer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-base64-utility</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-blog-outline-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-brand-voice-trait-mapper</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-break-even-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-budget-split-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-canonical-url-validator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-case-study-skeleton-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-cash-flow-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-changelog-draft-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-color-contrast-checker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-color-palette-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-concept-simplifier-lite</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-conclusion-composer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-conflict-resolution-message-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-content-brief-scaffold</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-cron-expression-helper</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-csv-cleaner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-csv-to-json-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-cta-phrase-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-curl-command-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-daily-planner-board</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-decision-log-formatter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-dev-unit-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-diff-compare-text-tool</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-email-subject-line-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-empty-state-copy-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-entity-coverage-checklist</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-error-state-copy-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-faq-block-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-feature-comparison-copy-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-feedback-rewrite-template</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-flashcard-set-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-focus-session-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-freelance-rate-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-git-commit-message-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-glossary-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-goal-breakdown-tree</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-gradient-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-habit-tracker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-hash-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-headline-variant-studio</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-hook-library-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-http-header-inspector</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-internal-link-mapper</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-interview-answer-structure-coach</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-interview-question-bank-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-intro-paragraph-frame-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-invoice-text-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-json-formatter-validator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-json-schema-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-json-to-csv-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-landing-page-section-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-lesson-plan-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-linkedin-post-framework</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-loan-emi-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-log-line-parser</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-margin-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-markdown-table-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-markdown-toc-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-markup-markdown-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-meeting-agenda-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-meeting-recap-template</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-meta-description-composer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-microcopy-tone-checker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-multilingual-message-adapter-lite</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-newsletter-section-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-number-base-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-og-tag-previewer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-persona-card-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-policy-explanation-template</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-priority-matrix</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-product-description-frame-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-professional-apology-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-proposal-outline-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-quiz-builder-manual</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-quotation-estimator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-radius-and-shadow-token-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-redirect-rule-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-regex-tester</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-related-tool-recommender</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-release-checklist-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-requirements-checklist-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-retrospective-prompt-board</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-revenue-projection-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-risk-register-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-robots-policy-assistant</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-roi-calculator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-savings-goal-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-schema-snippet-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-scope-of-work-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-seo-title-optimizer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-serp-snippet-previewer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-sitemap-coverage-checker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-slug-cleaner-and-normalizer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-sop-template-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-spacing-scale-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-sql-formatter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-sql-query-builder-template</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-study-schedule-maker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-subscription-pricing-matrix</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-team-announcement-draft-builder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-testimonial-polisher-lite</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-text-case-transformer</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-time-blocking-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-timestamp-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-tone-converter-lite</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-typescript-interface-generator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-typography-pairing-assistant</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-url-encoder-decoder</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-user-journey-mapper</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-uuid-nanoid-utility</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-weekly-sprint-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-wireframe-content-planner</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-x-thread-blueprint</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-xml-formatter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/tool-yaml-formatter-validator</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-gif-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-image-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-jpeg-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-mp3-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-pdf-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-png-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-video-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-compress-wav-compressor</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-apng-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-archive-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-audio-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-avi-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-document-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-docx-to-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-ebook-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-epub-to-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-gif-to-apng</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-gif-to-mp4</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-heic-to-jpg</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-heic-to-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-heic-to-png</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-image-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-image-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-jfif-to-png</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-jpg-to-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mov-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mov-to-mp4</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp3-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp3-to-ogg</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp4-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp4-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp4-to-mp3</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-pdf-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-pdf-to-epub</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-pdf-to-jpg</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-pdf-to-word</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-png-to-svg</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-svg-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-time-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-unit-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-video-converter</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-video-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-video-to-mp3</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webm-to-gif</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webp-to-jpg</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webp-to-png</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-color-picker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-crop-image</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-crop-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-crop-video</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-extract-image-from-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-extract-pages-from-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-flatten-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-flip-image</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-gif-maker</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-image-enlarger</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-organize-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-pdf-merge</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-pdf-page-remover</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-pdf-split</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-protect-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-resize-image</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-resize-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-rotate-image</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-rotate-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-trim-video</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-tools-unlock-pdf</loc>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
     <loc>https://velnoraai.app/blog</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/5-essential-ai-prompting-techniques</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/advanced-chain-of-thought-reasoning</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/ai-business-strategy-planning</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/ai-content-creators-beginners-guide</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/ai-prompt-organization-workflow</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/complete-guide-prompt-engineering</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/blog/real-world-case-studies-ai-success</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/compress</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/contact</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/convert</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/learning-hub</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/library</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/prompts/category/business</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/prompts/category/creative</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/prompts/category/marketing</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/prompts/category/technical</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/break-even-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/budget-split-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/cash-flow-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/freelance-rate-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/invoice-text-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/loan-emi-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/margin-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/markup-markdown-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/proposal-outline-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/quotation-estimator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/revenue-projection-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/roi-calculator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/savings-goal-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/scope-of-work-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/business-finance/subscription-pricing-matrix</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/accessibility-alt-text-template-helper</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/brand-voice-trait-mapper</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/color-palette-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/empty-state-copy-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/error-state-copy-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/feature-comparison-copy-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/gradient-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/landing-page-section-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/microcopy-tone-checker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/persona-card-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/radius-and-shadow-token-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/spacing-scale-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/typography-pairing-assistant</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/user-journey-mapper</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/design-ux-brand/wireframe-content-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/api-request-composer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/changelog-draft-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/color-contrast-checker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/curl-command-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/dev-unit-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/diff-compare-text-tool</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/git-commit-message-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/http-header-inspector</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/json-schema-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/log-line-parser</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/number-base-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/sql-formatter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/sql-query-builder-template</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/text-case-transformer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-advanced/typescript-interface-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/base64-utility</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/cron-expression-helper</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/csv-cleaner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/csv-to-json-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/hash-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/json-formatter-validator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/json-to-csv-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/markdown-table-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/markdown-toc-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/regex-tester</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/timestamp-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/url-encoder-decoder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/uuid-nanoid-utility</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/xml-formatter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/developer-data-core/yaml-formatter-validator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/concept-simplifier-lite</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/conflict-resolution-message-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/feedback-rewrite-template</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/flashcard-set-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/glossary-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/interview-answer-structure-coach</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/interview-question-bank-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/lesson-plan-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/meeting-recap-template</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/multilingual-message-adapter-lite</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/policy-explanation-template</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/professional-apology-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/quiz-builder-manual</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/study-schedule-maker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/education-team-communication/team-announcement-draft-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/action-item-tracker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/daily-planner-board</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/decision-log-formatter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/focus-session-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/goal-breakdown-tree</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/habit-tracker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/meeting-agenda-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/priority-matrix</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/release-checklist-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/requirements-checklist-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/retrospective-prompt-board</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/risk-register-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/sop-template-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/time-blocking-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/productivity-planning/weekly-sprint-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/anchor-text-variation-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/canonical-url-validator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/content-brief-scaffold</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/entity-coverage-checklist</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/internal-link-mapper</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/meta-description-composer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/og-tag-previewer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/redirect-rule-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/related-tool-recommender</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/robots-policy-assistant</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/schema-snippet-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/seo-title-optimizer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/serp-snippet-previewer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/sitemap-coverage-checker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/seo-content-ops/slug-cleaner-and-normalizer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/blog-outline-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/case-study-skeleton-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/conclusion-composer</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/cta-phrase-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/email-subject-line-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/faq-block-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/headline-variant-studio</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/hook-library-generator</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/intro-paragraph-frame-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/linkedin-post-framework</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/newsletter-section-planner</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/product-description-frame-builder</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/testimonial-polisher-lite</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/tone-converter-lite</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/tools/writing-messaging/x-thread-blueprint</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility-tools</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/gif-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/image-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/jpeg-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/mp3-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/pdf-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/png-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/video-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/compress/wav-compressor</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/apng-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/archive-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/audio-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/avi-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/document-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/docx-to-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/ebook-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/epub-to-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/gif-to-apng</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/gif-to-mp4</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/heic-to-jpg</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/heic-to-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/heic-to-png</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/image-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/image-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/jfif-to-png</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/jpg-to-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mov-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mov-to-mp4</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mp3-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mp3-to-ogg</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mp4-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mp4-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/mp4-to-mp3</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/pdf-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/pdf-to-epub</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/pdf-to-jpg</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/pdf-to-word</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/png-to-svg</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/svg-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/time-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/unit-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/video-converter</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/video-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/video-to-mp3</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/webm-to-gif</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/webp-to-jpg</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/convert/webp-to-png</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/color-picker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/crop-image</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/crop-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/crop-video</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/extract-image-from-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/extract-pages-from-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/flatten-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/flip-image</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/gif-maker</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/image-enlarger</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/organize-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/pdf-merge</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/pdf-page-remover</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/pdf-split</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/protect-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/resize-image</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/resize-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/rotate-image</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/rotate-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/trim-video</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>
   <url>
     <loc>https://velnoraai.app/utility/tools/unlock-pdf</loc>
-    <lastmod>2026-04-09T18:41:02.093Z</lastmod>
+    <lastmod>2026-04-09T21:33:26.763Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
   </url>

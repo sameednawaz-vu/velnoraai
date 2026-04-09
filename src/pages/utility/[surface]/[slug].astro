@@ -4,6 +4,7 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import StarterUtilityRunner from '../../../components/utility/StarterUtilityRunner';
 import catalog from '../../../content/data/freeconvert-catalog.json';
+import competitorFormats from '../../../content/data/competitor-convertio-formats.json';
 
 interface ToolEntry {
   name: string;
@@ -29,6 +30,85 @@ interface CatalogEntry {
   group: GroupEntry;
   tool: ToolEntry;
 }
+
+type FormatProfile = 'video' | 'audio' | 'image' | 'document' | 'archive' | 'gif' | 'generic';
+
+const dedupe = (values: string[]) => [...new Set(values.filter(Boolean))];
+const normalizeFormatToken = (value: string) => value.trim().replace(/^\./, '').toLowerCase();
+
+const formatAlias: Record<string, string> = {
+  video: 'mp4',
+  audio: 'mp3',
+  image: 'png',
+  document: 'docx',
+  ebook: 'epub',
+  pdf: 'pdf',
+  archive: 'zip',
+  jpeg: 'jpg',
+};
+
+const normalizeFormatChoice = (value: string) => formatAlias[normalizeFormatToken(value)] ?? normalizeFormatToken(value);
+
+const getCategoryFormats = (slug: string): string[] => {
+  const category = competitorFormats.categories.find((entry) => entry.slug === slug);
+  if (!category) {
+    return [];
+  }
+  return category.formats.map((format) => normalizeFormatToken(format.extension));
+};
+
+const formatPools = {
+  video: dedupe([...getCategoryFormats('videos'), ...getCategoryFormats('audios')]),
+  audio: dedupe(getCategoryFormats('audios')),
+  image: dedupe([...getCategoryFormats('images'), ...getCategoryFormats('vectors')]),
+  document: dedupe([...getCategoryFormats('documents'), ...getCategoryFormats('ebooks'), ...getCategoryFormats('presentations')]),
+  archive: dedupe(getCategoryFormats('archives')),
+  gif: dedupe(['gif', 'apng', 'mp4', 'webm', 'mov', 'avi', ...getCategoryFormats('videos').slice(0, 8)]),
+  generic: dedupe(['txt', 'json', 'xml', 'bin']),
+} as const;
+
+const detectFormatProfile = (toolSlug: string, groupSlug: string): FormatProfile => {
+  if (toolSlug.includes('gif') || groupSlug === 'gif') return 'gif';
+  if (toolSlug.includes('archive')) return 'archive';
+  if (toolSlug.includes('pdf') || toolSlug.includes('document') || toolSlug.includes('docx') || toolSlug.includes('ebook') || groupSlug.includes('pdf')) {
+    return 'document';
+  }
+  if (toolSlug.includes('image') || toolSlug.includes('heic') || toolSlug.includes('png') || toolSlug.includes('jpg') || toolSlug.includes('webp') || groupSlug.includes('image')) {
+    return 'image';
+  }
+  if (toolSlug.includes('audio') || toolSlug.includes('mp3') || toolSlug.includes('wav') || toolSlug.includes('ogg')) {
+    return 'audio';
+  }
+  if (toolSlug.includes('video') || toolSlug.includes('mp4') || toolSlug.includes('mov') || toolSlug.includes('avi') || toolSlug.includes('webm') || groupSlug.includes('video')) {
+    return 'video';
+  }
+  return 'generic';
+};
+
+const getDefaultPair = (toolSlug: string, profile: FormatProfile) => {
+  const options = formatPools[profile];
+  const first = options[0] ?? 'txt';
+  const second = options[1] ?? first;
+  const conversionMatch = toolSlug.match(/^(.+)-to-(.+)$/);
+
+  if (conversionMatch) {
+    const from = normalizeFormatChoice(conversionMatch[1]);
+    const to = normalizeFormatChoice(conversionMatch[2]);
+    return {
+      from: options.includes(from) ? from : first,
+      to: options.includes(to) ? to : second,
+    };
+  }
+
+  if (profile === 'video') return { from: 'mov', to: 'mp4' };
+  if (profile === 'audio') return { from: 'wav', to: 'mp3' };
+  if (profile === 'image') return { from: 'png', to: 'jpg' };
+  if (profile === 'document') return { from: 'docx', to: 'pdf' };
+  if (profile === 'archive') return { from: 'rar', to: 'zip' };
+  if (profile === 'gif') return { from: 'mp4', to: 'gif' };
+
+  return { from: first, to: second };
+};
 
 export async function getStaticPaths() {
   return catalog.surfaces.flatMap((surface) =>
@@ -58,6 +138,16 @@ const sameSurface = surface.groups
 
 const relatedTools = [...sameGroup, ...sameSurface].slice(0, 4);
 const normalizedStatus = tool.status === 'scaffold' || tool.status === 'starter' ? 'active' : tool.status;
+const surfaceToolSlugs = surface.groups.flatMap((entry) => entry.tools.map((item) => item.slug));
+const formatProfile = detectFormatProfile(tool.slug, group.slug);
+const formatOptions = formatPools[formatProfile];
+const defaultPair = getDefaultPair(tool.slug, formatProfile);
+const switchActionLabel =
+  surface.slug === 'convert'
+    ? 'Continue to convert'
+    : surface.slug === 'compress'
+      ? 'Continue to compress'
+      : 'Open selected tool';
 
 const softwareSchema = {
   '@context': 'https://schema.org',
@@ -133,6 +223,61 @@ const breadcrumbSchema = {
       </div>
     </section>
 
+    <section
+      class="format-switcher"
+      data-reveal
+      data-format-switcher
+      data-surface={surface.slug}
+      data-current-tool={tool.slug}
+      data-profile={formatProfile}
+      data-tool-slugs={JSON.stringify(surfaceToolSlugs)}
+    >
+      <div class="switcher-head">
+        <h2>Choose your file formats</h2>
+        <p>
+          Pick your source and output formats, then open the right tool page instantly.
+        </p>
+      </div>
+
+      <div class="switcher-grid">
+        <label>
+          From format
+          <select data-switch-from>
+            {formatOptions.map((entry) => (
+              <option value={entry} selected={entry === defaultPair.from}>{entry.toUpperCase()}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          To format
+          <select data-switch-to>
+            {formatOptions.map((entry) => (
+              <option value={entry} selected={entry === defaultPair.to}>{entry.toUpperCase()}</option>
+            ))}
+          </select>
+        </label>
+
+        <a
+          class="switch-action"
+          data-switch-open
+          href={`/utility/${surface.slug}/${tool.slug}?from=${defaultPair.from}&to=${defaultPair.to}`}
+        >
+          {switchActionLabel}
+        </a>
+      </div>
+
+      <p class="switch-status" data-switch-status>
+        Selected formats: {defaultPair.from.toUpperCase()} to {defaultPair.to.toUpperCase()}.
+      </p>
+
+      <div class="switch-links">
+        {sameGroup.slice(0, 8).map((entry) => (
+          <a href={`/utility/${surface.slug}/${entry.slug}`}>{entry.name}</a>
+        ))}
+      </div>
+    </section>
+
     <section data-reveal>
       <StarterUtilityRunner client:load toolSlug={tool.slug} />
     </section>
@@ -160,6 +305,84 @@ const breadcrumbSchema = {
       </div>
     </section>
   </main>
+
+  <script is:inline>
+    (() => {
+      const root = document.querySelector('[data-format-switcher]');
+      if (!(root instanceof HTMLElement)) {
+        return;
+      }
+
+      const fromSelect = root.querySelector('[data-switch-from]');
+      const toSelect = root.querySelector('[data-switch-to]');
+      const openLink = root.querySelector('[data-switch-open]');
+      const statusNode = root.querySelector('[data-switch-status]');
+
+      if (
+        !(fromSelect instanceof HTMLSelectElement) ||
+        !(toSelect instanceof HTMLSelectElement) ||
+        !(openLink instanceof HTMLAnchorElement) ||
+        !(statusNode instanceof HTMLElement)
+      ) {
+        return;
+      }
+
+      let toolSlugs = [];
+      try {
+        const parsed = JSON.parse(root.dataset.toolSlugs ?? '[]');
+        toolSlugs = Array.isArray(parsed) ? parsed : [];
+      } catch {
+        toolSlugs = [];
+      }
+
+      const surface = root.dataset.surface ?? 'convert';
+      const profile = root.dataset.profile ?? 'generic';
+      const currentTool = root.dataset.currentTool ?? '';
+
+      const profileFallback = {
+        video: 'video-converter',
+        audio: 'audio-converter',
+        image: 'image-converter',
+        document: 'document-converter',
+        archive: 'archive-converter',
+        gif: 'video-to-gif',
+        generic: currentTool,
+      };
+
+      const resolveTargetSlug = () => {
+        const from = (fromSelect.value || '').trim().toLowerCase();
+        const to = (toSelect.value || '').trim().toLowerCase();
+        const exact = `${from}-to-${to}`;
+        if (toolSlugs.includes(exact)) {
+          return exact;
+        }
+        const fallback = profileFallback[profile] ?? currentTool;
+        if (typeof fallback === 'string' && toolSlugs.includes(fallback)) {
+          return fallback;
+        }
+        return currentTool;
+      };
+
+      const update = () => {
+        const from = (fromSelect.value || '').trim().toLowerCase();
+        const to = (toSelect.value || '').trim().toLowerCase();
+        const targetSlug = resolveTargetSlug();
+        openLink.href = `/utility/${surface}/${targetSlug}?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+
+        if (targetSlug === `${from}-to-${to}`) {
+          statusNode.textContent = `Ready: ${from.toUpperCase()} to ${to.toUpperCase()}.`;
+        } else if (targetSlug === currentTool) {
+          statusNode.textContent = `No exact tool yet. Staying on this page with ${from.toUpperCase()} to ${to.toUpperCase()}.`;
+        } else {
+          statusNode.textContent = `Using closest tool for ${from.toUpperCase()} to ${to.toUpperCase()}.`;
+        }
+      };
+
+      fromSelect.addEventListener('change', update);
+      toSelect.addEventListener('change', update);
+      update();
+    })();
+  </script>
 
   <Footer />
 </BaseLayout>
@@ -220,6 +443,103 @@ const breadcrumbSchema = {
     font-weight: 700;
   }
 
+  .format-switcher {
+    border: 1px solid #d7e2ee;
+    border-radius: 0.88rem;
+    padding: 1rem;
+    background: linear-gradient(145deg, #fbfdff 0%, #f4f8ff 52%, #f9fdf8 100%);
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 0.72rem;
+  }
+
+  .switcher-head h2 {
+    margin-bottom: 0.35rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  }
+
+  .switcher-head p {
+    margin: 0;
+    color: #455f80;
+    line-height: 1.55;
+  }
+
+  .switcher-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 0.65rem;
+    align-items: end;
+  }
+
+  .switcher-grid label {
+    display: grid;
+    gap: 0.34rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+    font-size: 0.77rem;
+    font-weight: 700;
+    color: #705333;
+  }
+
+  .switcher-grid select {
+    border: 1px solid #d7c4a4;
+    border-radius: 0.54rem;
+    padding: 0.55rem 0.65rem;
+    background: #fffef9;
+    color: #28425f;
+    font-size: 0.93rem;
+  }
+
+  .switcher-grid select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(10, 138, 130, 0.12);
+  }
+
+  .switch-action {
+    border: 1px solid #c2d3ea;
+    border-radius: 0.52rem;
+    padding: 0.6rem 0.82rem;
+    background: #edf4ff;
+    color: #26486d;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .switch-action:hover {
+    border-color: #9eb7d6;
+    background: #e6effd;
+  }
+
+  .switch-status {
+    margin: 0;
+    color: #496281;
+    font-size: 0.87rem;
+    font-weight: 600;
+  }
+
+  .switch-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .switch-links a {
+    border: 1px solid #d4dded;
+    border-radius: 999px;
+    padding: 0.25rem 0.6rem;
+    color: #243f5f;
+    background: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .switch-links a:hover {
+    border-color: #aec4e1;
+    background: #f3f8ff;
+  }
+
   .readiness,
   .related {
     border: 1px solid var(--color-border);
@@ -264,6 +584,14 @@ const breadcrumbSchema = {
   @media (max-width: 768px) {
     .utility-page {
       padding: 1rem 0.8rem 2.6rem;
+    }
+
+    .switcher-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .switch-action {
+      width: 100%;
     }
   }
 </style>

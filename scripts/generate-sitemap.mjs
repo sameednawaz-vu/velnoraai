@@ -21,6 +21,7 @@ const blogSlugs = [
 const routes = new Set([
   '/',
   '/about',
+  '/articles',
   '/compress',
   '/contact',
   '/learning-hub',
@@ -38,6 +39,7 @@ for (const category of tools.categories) {
 for (const tool of tools.tools) {
   if (tool.status === 'published') {
     routes.add(`/tools/${tool.category}/${tool.slug}`);
+    routes.add(`/articles/tool-${tool.slug}`);
   }
 }
 
@@ -53,6 +55,7 @@ for (const surface of utilityCatalog.surfaces) {
   for (const group of surface.groups) {
     for (const tool of group.tools) {
       routes.add(`/utility/${surface.slug}/${tool.slug}`);
+      routes.add(`/articles/utility-${surface.slug}-${tool.slug}`);
     }
   }
 }
@@ -60,8 +63,10 @@ for (const surface of utilityCatalog.surfaces) {
 const routePriority = (route) => {
   if (route === '/') return '1.0';
   if (route === '/tools') return '0.95';
+  if (route === '/articles') return '0.93';
   if (route === '/convert' || route === '/compress' || route === '/utility-tools') return '0.9';
   if (route.startsWith('/tools/') && route.split('/').length === 4) return '0.9';
+  if (route.startsWith('/articles/')) return '0.87';
   if (route.startsWith('/utility/')) return '0.86';
   if (route.startsWith('/tools/')) return '0.8';
   if (route.startsWith('/blog/')) return '0.7';

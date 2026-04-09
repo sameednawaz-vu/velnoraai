@@ -4,8 +4,16 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ToolCard from '../../components/tools/ToolCard.astro';
 import toolsData from '../../content/data/tools.json';
+import catalog from '../../content/data/freeconvert-catalog.json';
+import competitorFormats from '../../content/data/competitor-convertio-formats.json';
+import { toolArticleCount } from '../../lib/article-catalog';
 
 const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published');
+const utilityToolCount = catalog.surfaces.reduce(
+  (count, surface) => count + surface.groups.reduce((groupCount, group) => groupCount + group.tools.length, 0),
+  0
+);
+const capabilityCount = publishedTools.length + utilityToolCount + competitorFormats.totals.formats;
 const allCategories = toolsData.categories;
 const categorySummaries = toolsData.categories
   .map((category) => {
@@ -14,22 +22,100 @@ const categorySummaries = toolsData.categories
   })
   .filter((category) => category.count > 0);
 
+const getSurfaceRoute = (surfaceSlug: string) => {
+  if (surfaceSlug === 'convert') {
+    return '/convert';
+  }
+
+  if (surfaceSlug === 'compress') {
+    return '/compress';
+  }
+
+  return '/utility-tools';
+};
+
+const utilityCategorySummaries = catalog.surfaces.flatMap((surface) =>
+  surface.groups.map((group) => ({
+    slug: `${surface.slug}-${group.slug}`,
+    name: `${surface.name} - ${group.name}`,
+    count: group.tools.length,
+    href: getSurfaceRoute(surface.slug),
+    type: 'Utility Surface',
+  }))
+);
+
+const unifiedCategorySummaries = [
+  ...categorySummaries.map((category) => ({
+    slug: category.slug,
+    name: category.name,
+    count: category.count,
+    href: `/tools/${category.slug}`,
+    type: 'Professional',
+  })),
+  ...utilityCategorySummaries,
+];
+
+const totalCategoryCount = unifiedCategorySummaries.length;
+
+const directoryCategories = categorySummaries.map((category) => ({
+  name: category.name,
+  count: category.count,
+  type: 'Professional',
+  tools: publishedTools
+    .filter((tool) => tool.category === category.slug)
+    .map((tool) => ({
+      name: `${tool.name} article`,
+      href: `/articles/tool-${tool.slug}`,
+      feature: tool.valueProposition ?? tool.description,
+    })),
+}));
+
+const utilityDirectoryCategories = catalog.surfaces.flatMap((surface) =>
+  surface.groups.map((group) => ({
+    name: `${surface.name} - ${group.name}`,
+    count: group.tools.length,
+    type: 'Utility Surface',
+    tools: group.tools.map((tool) => ({
+      name: `${tool.name} article`,
+      href: `/articles/utility-${surface.slug}-${tool.slug}`,
+      feature: `${tool.name} workflow guide for the ${surface.name} ${group.name} category.`,
+    })),
+  }))
+);
+
+const unifiedDirectoryCategories = [...directoryCategories, ...utilityDirectoryCategories];
+
+const utilityTools = catalog.surfaces.flatMap((surface) =>
+  surface.groups.flatMap((group) =>
+    group.tools.map((tool) => ({
+      name: tool.name,
+      url: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
+    }))
+  )
+);
+
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Velnora Tools',
-  itemListElement: publishedTools.map((tool, index) => ({
+  itemListElement: [
+    ...publishedTools.map((tool) => ({
+      name: tool.name,
+      url: `https://velnoraai.app/tools/${tool.category}/${tool.slug}`,
+    })),
+    ...utilityTools,
+  ].map((tool, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: tool.name,
-    url: `https://velnoraai.app/tools/${tool.category}/${tool.slug}`,
+    url: tool.url,
   })),
 };
 ---
 
 <BaseLayout
   title="Tools"
-  description="Client-side tools by Velnora. Deterministic frameworks for writing, messaging, SEO operations, and team execution."
+  description={`Browse Velnora's free tools library with ${capabilityCount.toLocaleString('en-US')} mapped capabilities, unified categories, and article-first workflow guidance.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
 
@@ -37,21 +123,63 @@ const itemListSchema = {
 
   <main class="tools-page">
     <section class="tools-hero" data-reveal>
-      <p class="eyebrow">Velnora Tools Hub</p>
-      <h1>120 tools, one client-side platform</h1>
+      <p class="eyebrow">Velnora Free Tools and Articles Hub</p>
+      <h1>{capabilityCount.toLocaleString('en-US')} capabilities, {totalCategoryCount} managed categories, {toolArticleCount.toLocaleString('en-US')} articles</h1>
       <p>
-        Full catalog is now live with deterministic fallbacks, category routes, internal linking, and indexable tool pages.
-        Search by name, tags, mode, and category to find exactly what you need.
+        Professional categories and utility surface categories are managed together here.
+        Open article names directly, then move into the live tool route without switching platforms.
       </p>
     </section>
 
     <section class="category-strip" data-reveal>
-      {categorySummaries.map((category) => (
-        <a href={`/tools/${category.slug}`}>
+      {unifiedCategorySummaries.map((category) => (
+        <a href={category.href}>
           <strong>{category.name}</strong>
+          <small>{category.type}</small>
           <span>{category.count} tools</span>
         </a>
       ))}
+    </section>
+
+    <section class="directory-panel" id="all-tools-directory" data-reveal>
+      <div class="section-header">
+        <h2>Open Tool Articles Directory</h2>
+        <p>Article names are listed directly. Open an article to learn the workflow, then jump into the tool.</p>
+      </div>
+
+      <p class="info-message" id="tool-info-message" role="status" aria-live="polite">
+        Select an info button to preview what the article and linked tool are best for.
+      </p>
+
+      <div class="directory-grid">
+        {unifiedDirectoryCategories.map((category) => (
+          <article class="directory-category">
+            <header>
+              <h3>{category.name} <small>({category.type})</small></h3>
+              <span>{category.count}</span>
+            </header>
+
+            <ul>
+              {category.tools.map((tool) => (
+                <li class="directory-tool-item">
+                  <a href={tool.href}>{tool.name}</a>
+                  <button
+                    class="info-dot"
+                    type="button"
+                    aria-label={`Feature details for ${tool.name}`}
+                    data-info-button
+                    data-tool-name={tool.name}
+                    data-tool-message={tool.feature}
+                  >
+                    i
+                  </button>
+                  <span class="info-tooltip" role="tooltip">{tool.feature}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
     </section>
 
     <section class="search-panel" data-reveal>
@@ -67,7 +195,7 @@ const itemListSchema = {
 
       <div class="search-filters">
         <div>
-          <label for="tool-category-filter">Category</label>
+          <label for="tool-category-filter">Professional category</label>
           <select id="tool-category-filter" aria-label="Filter by category">
             <option value="all">All categories</option>
             {allCategories.map((category) => (
@@ -92,7 +220,7 @@ const itemListSchema = {
 
     <section class="tools-grid-section" data-reveal>
       <div class="section-header">
-        <h2>Published tools</h2>
+        <h2>Published professional tool pages</h2>
         <p>
           <span id="tools-visible-count">{publishedTools.length}</span> of {publishedTools.length} tools visible.
         </p>
@@ -121,6 +249,8 @@ const itemListSchema = {
     const resetButton = document.getElementById('tool-filter-reset');
     const countNode = document.getElementById('tools-visible-count');
     const noResultsNode = document.getElementById('tools-no-results');
+    const infoMessageNode = document.getElementById('tool-info-message');
+    const infoButtons = Array.from(document.querySelectorAll('[data-info-button]'));
     const cards = Array.from(document.querySelectorAll('[data-tool-card]'));
 
     if (!(searchInput instanceof HTMLInputElement) || !(categoryFilter instanceof HTMLSelectElement) || !(modeFilter instanceof HTMLSelectElement) || !(resetButton instanceof HTMLButtonElement) || !(countNode instanceof HTMLElement) || !(noResultsNode instanceof HTMLElement)) {
@@ -163,6 +293,23 @@ const itemListSchema = {
       modeFilter.value = 'all';
       update();
     });
+
+    if (infoMessageNode instanceof HTMLElement) {
+      for (const button of infoButtons) {
+        if (!(button instanceof HTMLButtonElement)) {
+          continue;
+        }
+
+        const applyMessage = () => {
+          const toolName = button.dataset.toolName ?? 'Selected tool';
+          const detail = button.dataset.toolMessage ?? 'No details available yet.';
+          infoMessageNode.textContent = `${toolName}: ${detail}`;
+        };
+
+        button.addEventListener('click', applyMessage);
+        button.addEventListener('focus', applyMessage);
+      }
+    }
   };
 
   if (document.readyState === 'loading') {
@@ -220,12 +367,29 @@ const itemListSchema = {
     border: 1px solid var(--color-border);
     border-radius: 0.7rem;
     padding: 0.85rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'title count'
+      'type count';
+    align-items: baseline;
+    column-gap: 0.65rem;
     color: #294161;
     background: #fffdf7;
     box-shadow: var(--shadow-soft);
+  }
+
+  .category-strip strong {
+    grid-area: title;
+  }
+
+  .category-strip small {
+    grid-area: type;
+    font-size: 0.73rem;
+    color: #6f7e95;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+    font-weight: 700;
   }
 
   .category-strip a:hover {
@@ -233,8 +397,10 @@ const itemListSchema = {
   }
 
   .category-strip span {
+    grid-area: count;
     color: #60728f;
     font-size: 0.86rem;
+    font-weight: 700;
   }
 
   .search-panel {
@@ -245,6 +411,149 @@ const itemListSchema = {
     display: grid;
     gap: 0.9rem;
     box-shadow: var(--shadow-soft);
+  }
+
+  .directory-panel {
+    border: 1px solid var(--color-border);
+    border-radius: 0.9rem;
+    padding: 1.1rem;
+    background: linear-gradient(180deg, #fffef9 0%, #fff6ea 100%);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .directory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.85rem;
+  }
+
+  .info-message {
+    margin: 0 0 0.78rem;
+    border: 1px solid #d4e0f1;
+    border-radius: 0.58rem;
+    background: #f4f8ff;
+    color: #334f72;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    padding: 0.56rem 0.68rem;
+  }
+
+  .directory-category {
+    border: 1px solid #dfccb0;
+    border-radius: 0.72rem;
+    padding: 0.8rem;
+    background: #fffefb;
+    min-height: 220px;
+  }
+
+  .directory-category header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.65rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eadbc4;
+    margin-bottom: 0.55rem;
+  }
+
+  .directory-category h3 {
+    font-size: 0.98rem;
+    color: #213b59;
+  }
+
+  .directory-category h3 small {
+    color: #627694;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+  }
+
+  .directory-category header span {
+    font-size: 0.78rem;
+    color: #6a7d99;
+    font-weight: 700;
+  }
+
+  .directory-category ul {
+    list-style: none;
+    display: grid;
+    gap: 0.22rem;
+    max-height: 420px;
+    overflow: auto;
+    padding-right: 0.16rem;
+  }
+
+  .directory-tool-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.36rem;
+    border-radius: 0.46rem;
+  }
+
+  .directory-tool-item:hover {
+    background: #f6f9ff;
+  }
+
+  .directory-tool-item a {
+    color: #243d5a;
+    font-size: 0.88rem;
+    line-height: 1.32;
+  }
+
+  .info-dot {
+    width: 1.22rem;
+    height: 1.22rem;
+    border-radius: 999px;
+    border: 1px solid #bfd0e7;
+    background: #edf3fb;
+    color: #27486d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    padding: 0;
+  }
+
+  .info-dot:hover,
+  .info-dot:focus-visible {
+    border-color: #9eb6d3;
+    background: #e1ebf8;
+    outline: none;
+  }
+
+  .info-tooltip {
+    position: absolute;
+    left: calc(100% + 0.45rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    min-width: 220px;
+    max-width: 320px;
+    border: 1px solid #cfdcef;
+    border-radius: 0.55rem;
+    background: #ffffff;
+    padding: 0.56rem 0.62rem;
+    color: #364f6d;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    box-shadow: 0 12px 28px rgba(17, 34, 57, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    z-index: 24;
+  }
+
+  .info-dot:hover + .info-tooltip,
+  .info-dot:focus-visible + .info-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
   }
 
   .search-input-wrap {
@@ -345,6 +654,22 @@ const itemListSchema = {
     .tools-page {
       padding: 1.4rem 0.8rem 3rem;
       gap: 1rem;
+    }
+
+    .directory-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-tooltip {
+      left: 0;
+      top: calc(100% + 0.2rem);
+      transform: translateY(0);
+      max-width: min(92vw, 320px);
+    }
+
+    .info-dot:hover + .info-tooltip,
+    .info-dot:focus-visible + .info-tooltip {
+      transform: translateY(0);
     }
 
     .tools-grid {

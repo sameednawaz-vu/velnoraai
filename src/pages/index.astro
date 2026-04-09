@@ -3,6 +3,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AetherFlowHero from '../components/ui/aether-flow-hero';
+import { SplineSceneBasic } from '../components/ui/demo';
+import catalog from '../content/data/freeconvert-catalog.json';
+import toolsData from '../content/data/tools.json';
+import competitorFormats from '../content/data/competitor-convertio-formats.json';
+import { toolArticleCount } from '../lib/article-catalog';
+
+const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published').length;
+const utilityToolCount = catalog.surfaces.reduce(
+  (count, surface) => count + surface.groups.reduce((groupCount, group) => groupCount + group.tools.length, 0),
+  0
+);
+const utilityCategoryCount = catalog.surfaces.reduce((count, surface) => count + surface.groups.length, 0);
+const totalCategoryCount = toolsData.categories.length + utilityCategoryCount;
+const liveToolCount = publishedTools + utilityToolCount;
+const capabilityCount = publishedTools + utilityToolCount + competitorFormats.totals.formats;
+const liveToolCountLabel = liveToolCount.toLocaleString('en-US');
+const categoryCountLabel = totalCategoryCount.toLocaleString('en-US');
+const articleCountLabel = toolArticleCount.toLocaleString('en-US');
+const capabilityCountLabel = capabilityCount.toLocaleString('en-US');
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -17,84 +36,162 @@ const organizationSchema = {
     "https://github.com/velnora"
   ]
 };
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Velnora",
+  "url": "https://velnoraai.app",
+  "description": "Execution-first AI utility workspace with deterministic tools for conversion, compression, and professional operations.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://velnoraai.app/tools?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
 ---
 
-<BaseLayout title="Home - Velnora" description="Velnora is an execution-first workspace with 120 deterministic tools, searchable categories, and practical implementation routes.">
+<BaseLayout title="Home" description={`Velnora is a free tools library with ${liveToolCountLabel} live tools, ${categoryCountLabel} managed categories, and ${articleCountLabel} practical workflow articles.`}>
   <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   
   <Header />
   
   <main id="site-main" role="main">
-    <!-- Framer Motion Hero Section -->
-    <div data-reveal>
-      <AetherFlowHero client:only="preact" />
-    </div>
+    <!-- Layered Hero Stack -->
+    <section class="hero-stack" data-reveal>
+      <AetherFlowHero
+        client:only="preact"
+        subtitle="World largest free tools library for practical daily work"
+        description={`Open ${liveToolCountLabel} free tools across ${categoryCountLabel} managed categories, run workflows in-browser, and use ${articleCountLabel} SEO and GEO guides to ship faster.`}
+      />
 
-    <!-- Features Section -->
-    <section class="features" data-reveal>
-      <div class="container">
-        <h2>Ship Work, Not Demos</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🧩</div>
-            <h3>Run 120 Tools</h3>
-            <p>Writing, SEO, developer, finance, UX, and communication tools in one production-ready platform.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔎</div>
-            <h3>Search and Filter</h3>
-            <p>Find tools by name, tags, category, and mode from one searchable workspace index.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🗂️</div>
-            <h3>Category Hubs</h3>
-            <p>Each category includes dedicated hubs with crawlable tool routes for clear discovery.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📈</div>
-            <h3>SEO-ready Pages</h3>
-            <p>Canonical URLs, structured data, internal links, and static route coverage are built in.</p>
-          </div>
+      <div class="hero-robot-layer" aria-hidden="true">
+        <div class="hero-robot-shell">
+          <SplineSceneBasic client:visible />
         </div>
       </div>
     </section>
 
-    <!-- Categories Preview -->
-    <section class="categories-preview" data-reveal>
+    <section class="momentum-band" data-reveal>
+      <div class="container momentum-grid">
+        <article class="momentum-card">
+          <span class="metric-value">{liveToolCountLabel}</span>
+          <h3>Free Tools Live</h3>
+          <p>Professional and utility tools are live now for writing, conversion, compression, and operations.</p>
+        </article>
+        <article class="momentum-card">
+          <span class="metric-value">{categoryCountLabel}</span>
+          <h3>Managed Categories</h3>
+          <p>8 professional categories plus utility groups from convert, compress, and tools surfaces.</p>
+        </article>
+        <article class="momentum-card">
+          <span class="metric-value">{capabilityCountLabel}</span>
+          <h3>Capability Index</h3>
+          <p>Live tools and conversion format pathways mapped for route-level discovery and execution.</p>
+        </article>
+        <article class="momentum-card">
+          <span class="metric-value">{articleCountLabel}</span>
+          <h3>SEO and GEO Articles</h3>
+          <p>Article-first guidance for tool usage, search visibility, and generative retrieval readiness.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ops-architecture" data-reveal>
+      <div class="container architecture-grid">
+        <article class="architecture-panel">
+          <p class="section-kicker">Execution Blueprint</p>
+          <h2>From idea to delivery: one free library for real business and creator workflows.</h2>
+          <p class="section-lede">
+            Velnora combines tool routes, category navigation, and article guidance so humans can understand what to do,
+            run the right path quickly, and publish without guessing.
+          </p>
+          <ul class="blueprint-list">
+            <li>Use Convert and Compress surfaces for direct file operations and delivery prep.</li>
+            <li>Switch to Professional Tools for writing, SEO, dev, business, and design workflows.</li>
+            <li>Track outcomes via crawlable route architecture and index-driven discoverability.</li>
+          </ul>
+          <a href="/tools#all-tools-directory" class="inline-anchor">Open full tool directory</a>
+        </article>
+
+        <aside class="rail-panel">
+          <p class="section-kicker">Release Rail</p>
+          <ol class="rail-list">
+            <li>
+              <strong>1. Select Surface</strong>
+              <span>Start with Convert, Compress, Utility Tools, or Professional categories.</span>
+            </li>
+            <li>
+              <strong>2. Execute</strong>
+              <span>Run deterministic steps with transparent labels and expected outcomes.</span>
+            </li>
+            <li>
+              <strong>3. Verify</strong>
+              <span>Check output quality, metadata, and route integrity before shipment.</span>
+            </li>
+            <li>
+              <strong>4. Publish</strong>
+              <span>Ship static-ready pages and assets that remain indexable after deployment.</span>
+            </li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface-stage" data-reveal>
       <div class="container">
-        <h2>Choose a Surface, Start Running</h2>
-        <div class="categories-grid">
-          <div class="category-item">
-            <h3>✍️ Writing and Messaging</h3>
-            <p>Headlines, CTAs, outlines, tone adjustments, and messaging frameworks.</p>
-            <a href="/tools/writing-messaging">Explore →</a>
-          </div>
-          <div class="category-item">
-            <h3>📊 SEO and Content Ops</h3>
-            <p>Metadata, schema, link operations, and publishing readiness helpers.</p>
-            <a href="/tools/seo-content-ops">Explore →</a>
-          </div>
-          <div class="category-item">
-            <h3>⚙️ Developer and Data</h3>
-            <p>Formatters, converters, utilities, and technical workflow accelerators.</p>
-            <a href="/tools/developer-data-core">Explore →</a>
-          </div>
-          <div class="category-item">
-            <h3>💼 Business and Finance</h3>
-            <p>Calculators and planning tools for pricing, budget, revenue, and cash flow.</p>
-            <a href="/tools/business-finance">Explore →</a>
-          </div>
+        <div class="stage-heading">
+          <p class="section-kicker">Surface Navigator</p>
+          <h2>Choose your execution lane and move without friction.</h2>
+        </div>
+
+        <div class="surface-grid">
+          <a href="/convert" class="surface-card surface-convert">
+            <p>Convert</p>
+            <h3>Media and document conversion suites</h3>
+            <span>Open every conversion workflow</span>
+          </a>
+          <a href="/compress" class="surface-card surface-compress">
+            <p>Compress</p>
+            <h3>File-size reduction paths for faster delivery</h3>
+            <span>Launch compression operations</span>
+          </a>
+          <a href="/tools#all-tools-directory" class="surface-card surface-pro">
+            <p>Professional Tools</p>
+            <h3>Category-based utilities for daily execution</h3>
+            <span>Browse category and tool map</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
+    <section class="quality-band" data-reveal>
+      <div class="container quality-grid">
+        <article class="quality-panel">
+          <p class="section-kicker">Operational Quality</p>
+          <h2>Built for shipment confidence, not demo optics.</h2>
+          <p>
+            Architecture, metadata, and navigation patterns are tuned so every page stays useful, reachable, and
+            easy to validate before and after publication.
+          </p>
+        </article>
+        <ul class="quality-list">
+          <li>Static generation with route-level consistency checks.</li>
+          <li>Canonical-first metadata and schema on primary public pages.</li>
+          <li>Large upload-first utility UX for compressor and processor tools.</li>
+          <li>Navigation hierarchy designed around execution, not clutter.</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="cta-section" data-reveal>
       <div class="container">
-        <h2>Start in Minutes, Deliver in Hours</h2>
-        <p>Use the tool index to locate the exact utility, run it immediately, and move straight into execution.</p>
+        <p class="section-kicker">Start Shipping</p>
+        <h2>Run the right tool, verify output, and publish with confidence.</h2>
+        <p>Open the workspace index, pick the exact utility, and move straight from task to deliverable.</p>
         <div class="cta-buttons">
-          <a href="/tools" class="btn btn-primary">Open Tool Workspace</a>
+          <a href="/tools#all-tools-directory" class="btn btn-primary">Open Tool Workspace</a>
           <a href="/contact" class="btn btn-secondary">Talk to Velnora</a>
         </div>
       </div>
@@ -148,121 +245,302 @@ const organizationSchema = {
     padding: 0 2rem;
   }
 
-  .features {
-    padding: 4rem 2rem;
-    background: linear-gradient(180deg, #fffdf7 0%, #fff2df 100%);
-    border-radius: 1rem;
-    margin: 1.2rem;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    box-shadow: var(--shadow-soft);
+  .hero-stack {
+    position: relative;
   }
 
-  .features h2,
-  .categories-preview h2,
-  .cta-section h2 {
-    text-align: center;
+  .hero-robot-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 12;
+    pointer-events: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: clamp(0.35rem, 2.8vw, 2.2rem);
+    padding-bottom: clamp(0.2rem, 2.2vh, 1.4rem);
+  }
+
+  .hero-robot-shell {
+    position: relative;
+    width: min(44vw, 560px);
+    height: min(78vh, 620px);
+    max-height: calc(100% - 0.6rem);
+    min-height: 320px;
+    pointer-events: auto;
+  }
+
+  .section-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    color: #536a8b;
+    margin-bottom: 0.72rem;
+  }
+
+  .momentum-band {
+    padding: 1rem 1.2rem 0;
+    margin-bottom: 1.1rem;
+  }
+
+  .momentum-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .momentum-card {
+    border-radius: 0.92rem;
+    border: 1px solid #d8e3f0;
+    background: linear-gradient(145deg, #fefefe 0%, #f4f8fd 100%);
+    padding: 1.1rem 1rem;
+    box-shadow: 0 14px 30px rgba(16, 42, 70, 0.08);
+  }
+
+  .metric-value {
+    display: inline-flex;
+    align-items: baseline;
     font-family: var(--font-display);
-    font-size: 2.3rem;
-    margin-bottom: 3rem;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 1.9rem;
+    line-height: 1;
+    color: #11213a;
+    margin-bottom: 0.45rem;
   }
 
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+  .momentum-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.36rem;
+    color: #1f334f;
   }
 
-  .feature-card {
-    background: #fffef9;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid var(--color-border);
+  .momentum-card p {
+    font-size: 0.88rem;
+    color: #4f627d;
+    line-height: 1.45;
+  }
+
+  .ops-architecture {
+    margin: 0 1.2rem;
+    border-radius: 1.05rem;
+    border: 1px solid #d8e2ef;
+    background: linear-gradient(130deg, #fcfdfd 0%, #eff6ff 54%, #edf7f5 100%);
     box-shadow: var(--shadow-soft);
+    padding: 2.2rem 0;
   }
 
-  .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-medium);
-    border-color: #d5b78f;
+  .architecture-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 1.35rem;
   }
 
-  .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+  .architecture-panel,
+  .rail-panel {
+    border: 1px solid rgba(179, 198, 222, 0.78);
+    border-radius: 0.88rem;
+    background: rgba(255, 255, 255, 0.86);
+    padding: 1.25rem 1.25rem 1.15rem;
   }
 
-  .feature-card h3 {
-    margin-bottom: 1rem;
-    color: var(--color-cyan);
+  .architecture-panel h2,
+  .stage-heading h2,
+  .quality-panel h2,
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+    line-height: 1.16;
+    margin-bottom: 0.95rem;
+    color: #162741;
   }
 
-  .feature-card p {
-    color: #4f627e;
-    line-height: 1.6;
+  .section-lede {
+    color: #425873;
+    margin-bottom: 0.9rem;
+    max-width: 58ch;
   }
 
-  .categories-preview {
-    padding: 4rem 2rem;
-    border-radius: 1rem;
+  .blueprint-list {
+    margin: 0;
+    padding-left: 1.18rem;
+    display: grid;
+    gap: 0.45rem;
+    color: #364c68;
+  }
+
+  .blueprint-list li {
+    line-height: 1.5;
+  }
+
+  .inline-anchor {
+    display: inline-flex;
+    margin-top: 0.9rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: #0a6574;
+  }
+
+  .rail-list {
+    list-style: none;
+    display: grid;
+    gap: 0.62rem;
+  }
+
+  .rail-list li {
+    border: 1px solid #d8e0ef;
+    border-radius: 0.72rem;
+    background: #f7faff;
+    padding: 0.72rem 0.78rem;
+    display: grid;
+    gap: 0.16rem;
+  }
+
+  .rail-list strong {
+    font-size: 0.92rem;
+    color: #1a2f4d;
+  }
+
+  .rail-list span {
+    color: #4a5f7b;
+    font-size: 0.86rem;
+    line-height: 1.4;
+  }
+
+  .surface-stage {
     margin: 1.2rem;
-    background: linear-gradient(180deg, #fff9ed 0%, #fff3e1 100%);
-    border: 1px solid var(--color-border);
+    padding: 2.2rem 0;
+    border: 1px solid #dbe3ee;
+    border-radius: 1.05rem;
+    background: linear-gradient(120deg, #fffdf7 0%, #fff6ea 100%);
     box-shadow: var(--shadow-soft);
   }
 
-  .categories-grid {
+  .stage-heading {
+    margin-bottom: 1.2rem;
+  }
+
+  .surface-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.82rem;
   }
 
-  .category-item {
-    background: #fffef8;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--color-border);
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-soft);
+  .surface-card {
+    border-radius: 0.86rem;
+    border: 1px solid #d3ddea;
+    padding: 1.05rem;
+    color: #1f334f;
+    background: #ffffff;
+    box-shadow: 0 14px 30px rgba(18, 42, 70, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: grid;
+    gap: 0.5rem;
   }
 
-  .category-item:hover {
-    border-color: #d1b188;
+  .surface-card p {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #566f8f;
+  }
+
+  .surface-card h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    color: #132643;
+  }
+
+  .surface-card span {
+    font-size: 0.86rem;
+    color: #4f627e;
+    font-weight: 600;
+  }
+
+  .surface-card:hover {
+    transform: translateY(-3px);
+    border-color: #b9cde6;
+    box-shadow: 0 20px 36px rgba(15, 39, 66, 0.14);
+  }
+
+  .surface-convert {
+    background: linear-gradient(150deg, #ffffff 0%, #eef5ff 100%);
+  }
+
+  .surface-compress {
+    background: linear-gradient(150deg, #ffffff 0%, #f5f8ed 100%);
+  }
+
+  .surface-pro {
+    background: linear-gradient(150deg, #ffffff 0%, #fef1e4 100%);
+  }
+
+  .quality-band {
+    margin: 1.2rem;
+    padding: 2.2rem 0;
+    border-radius: 1.05rem;
+    border: 1px solid #cdd9e9;
+    background: linear-gradient(125deg, #172844 0%, #1f3556 55%, #20535a 100%);
     box-shadow: var(--shadow-medium);
   }
 
-  .category-item h3 {
-    margin-bottom: 1rem;
-    color: var(--color-purple);
+  .quality-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1rem;
+    align-items: center;
   }
 
-  .category-item p {
-    color: #4f627e;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+  .quality-panel,
+  .quality-list {
+    border-radius: 0.88rem;
+    border: 1px solid rgba(220, 233, 255, 0.2);
+    background: rgba(8, 15, 28, 0.3);
+    padding: 1.1rem 1.15rem;
   }
 
-  .category-item a {
-    font-weight: 600;
-    color: var(--color-cyan);
-    transition: all 0.3s ease;
+  .quality-panel .section-kicker {
+    color: #b5c7e6;
   }
 
-  .category-item a:hover {
-    color: var(--color-cyan);
+  .quality-panel h2 {
+    color: #f2f6ff;
+    margin-bottom: 0.52rem;
+  }
+
+  .quality-panel p {
+    color: #d7e2f4;
+  }
+
+  .quality-list {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .quality-list li {
+    padding-left: 1.05rem;
+    position: relative;
+    color: #e5eefc;
+    line-height: 1.4;
+  }
+
+  .quality-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 0.52rem;
+    height: 0.52rem;
+    border-radius: 50%;
+    background: #89e1d8;
   }
 
   .cta-section {
-    padding: 4rem 2rem;
-    background: linear-gradient(135deg, rgba(255, 93, 61, 0.12) 0%, rgba(10, 138, 130, 0.07) 100%);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
+    padding: 2.6rem 2rem;
+    background: linear-gradient(140deg, #fff8eb 0%, #fff1de 50%, #f3f7ff 100%);
+    border: 1px solid #d8e0ec;
+    border-radius: 1.05rem;
     margin: 1.2rem;
     color: var(--color-primary);
     text-align: center;
@@ -270,12 +548,11 @@ const organizationSchema = {
   }
 
   .cta-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
   }
 
   .cta-section p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     max-width: 600px;
     margin: 0 auto 2rem;
     color: #405572;
@@ -288,23 +565,60 @@ const organizationSchema = {
     flex-wrap: wrap;
   }
 
-  @media (max-width: 768px) {
-    .features h2,
-    .categories-preview h2,
-    .cta-section h2 {
-      font-size: 1.75rem;
+  @media (max-width: 1100px) {
+    .hero-robot-shell {
+      width: min(42vw, 500px);
+      height: min(72vh, 560px);
+      min-height: 280px;
     }
+  }
 
+  @media (max-width: 768px) {
     .btn {
       padding: 0.75rem 1.5rem;
       font-size: 0.9rem;
     }
 
-    .hero-section,
-    .features,
-    .categories-preview,
+    .hero-stack,
+    .momentum-band,
+    .ops-architecture,
+    .surface-stage,
+    .quality-band,
     .cta-section {
       margin: 0.7rem;
+    }
+
+    .momentum-band,
+    .ops-architecture,
+    .surface-stage,
+    .quality-band,
+    .cta-section {
+      padding-inline: 0.9rem;
+    }
+
+    .momentum-grid,
+    .surface-grid,
+    .architecture-grid,
+    .quality-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .architecture-panel,
+    .rail-panel,
+    .quality-panel,
+    .quality-list {
+      padding: 0.95rem;
+    }
+
+    .hero-robot-shell {
+      width: min(62vw, 360px);
+      height: min(56vh, 430px);
+      min-height: 220px;
+      opacity: 0.96;
+    }
+
+    .cta-section h2 {
+      font-size: 1.72rem;
     }
   }
 </style>

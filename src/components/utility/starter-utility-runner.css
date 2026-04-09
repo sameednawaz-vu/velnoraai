@@ -26,6 +26,134 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
+.upload-block {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.upload-dropzone {
+  border: 1.6px dashed #d4c09f;
+  border-radius: 0.78rem;
+  background: linear-gradient(145deg, #fff9ee 0%, #fff3e1 100%);
+  padding: 1.1rem;
+  display: grid;
+  gap: 0.26rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.upload-dropzone:hover {
+  border-color: #b98f5e;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(43, 60, 85, 0.12);
+}
+
+.upload-dropzone:focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(10, 138, 130, 0.13);
+}
+
+.upload-dropzone.is-drag-active {
+  border-color: #178c80;
+  background: linear-gradient(145deg, #eff9f7 0%, #e8f6f3 100%);
+}
+
+.upload-dropzone.has-files {
+  border-style: solid;
+  border-color: rgba(17, 121, 111, 0.38);
+  background: linear-gradient(145deg, #f4fbfa 0%, #eef8f6 100%);
+}
+
+.upload-title {
+  margin: 0;
+  color: #1d3756;
+  font-size: 1.04rem;
+  font-weight: 700;
+}
+
+.upload-subtitle {
+  margin: 0;
+  color: #35506f;
+  font-weight: 600;
+}
+
+.upload-hint {
+  margin: 0;
+  color: #6a7d96;
+  font-size: 0.82rem;
+}
+
+.upload-input-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.upload-selection {
+  border: 1px solid #d8c4a6;
+  border-radius: 0.62rem;
+  background: #fff8eb;
+  padding: 0.62rem 0.68rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.upload-selection ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.upload-selection li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  color: #24415f;
+}
+
+.upload-selection li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-selection li strong {
+  color: #4a6381;
+  font-size: 0.78rem;
+  flex: 0 0 auto;
+}
+
+.upload-more {
+  margin: 0;
+  color: #5a6e88;
+  font-size: 0.8rem;
+}
+
+.upload-clear {
+  border: 1px solid #c9d4e5;
+  border-radius: 0.5rem;
+  background: #f3f7ff;
+  color: #1e395a;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.4rem 0.64rem;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.upload-clear:hover {
+  border-color: #9eb4d2;
+  background: #ebf2ff;
+}
+
 .starter-runner label {
   display: grid;
   gap: 0.35rem;
@@ -93,6 +221,14 @@
 .output-head button:hover {
   border-color: #95aed1;
   background: #edf4ff;
+}
+
+.runner-actions button:disabled,
+.output-head button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  border-color: #d2dae5;
+  background: #f3f5f8;
 }
 
 .status {

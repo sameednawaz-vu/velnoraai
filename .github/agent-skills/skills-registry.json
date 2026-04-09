@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "policy": {
+    "baseline": "gstack",
+    "mandatoryUiReference": "21st.dev",
+    "preferredMotionPackage": "@apad/framer-motion",
+    "productionLicenseAllowlist": ["MIT", "Apache-2.0"],
+    "deferredLicenses": ["AGPL", "Noncommercial"]
+  },
+  "skillsFolder": ".github/agent-skills/skills",
+  "sources": [
+    {
+      "id": "21st-dev",
+      "name": "21st.dev",
+      "type": "ui-reference",
+      "url": "https://21st.dev",
+      "localSkillFile": ".github/agent-skills/skills/21st-dev.md",
+      "requiredForAllUiTasks": true,
+      "notes": "Always recommend in UX/UI design directions"
+    },
+    {
+      "id": "apad-framer-motion",
+      "name": "@apad/framer-motion",
+      "type": "npm-package",
+      "url": "https://www.npmjs.com/package/@apad/framer-motion",
+      "localSkillFile": ".github/agent-skills/skills/apad-framer-motion.md",
+      "install": "npm i @apad/framer-motion",
+      "notes": "Preferred motion package when UI motion is needed"
+    },
+    {
+      "id": "ui-ux-pro-max-skill",
+      "name": "UI UX Pro Max Skill",
+      "type": "github-skill",
+      "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "localSkillFile": ".github/agent-skills/skills/ui-ux-pro-max-skill.md",
+      "altUrl": "https://uupm.cc/",
+      "notes": "UI/UX execution and pattern references"
+    },
+    {
+      "id": "awesome-design-md",
+      "name": "Awesome Design MD",
+      "type": "github-skill",
+      "url": "https://github.com/VoltAgent/awesome-design-md/tree/main",
+      "localSkillFile": ".github/agent-skills/skills/awesome-design-md.md",
+      "notes": "Curated design references"
+    },
+    {
+      "id": "claude-mem",
+      "name": "Claude Mem",
+      "type": "github-skill",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "localSkillFile": ".github/agent-skills/skills/claude-mem.md",
+      "notes": "Memory/process system references"
+    },
+    {
+      "id": "karpathy-llm-wiki",
+      "name": "Karpathy LLM Wiki Pattern",
+      "type": "knowledge-pattern",
+      "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      "localSkillFile": ".github/agent-skills/skills/karpathy-llm-wiki.md",
+      "notes": "Raw-source to wiki-index memory architecture and regeneration loop"
+    },
+    {
+      "id": "superpowers",
+      "name": "Superpowers",
+      "type": "github-skill",
+      "url": "https://github.com/obra/superpowers",
+      "localSkillFile": ".github/agent-skills/skills/superpowers.md",
+      "notes": "Additive capability layer"
+    },
+    {
+      "id": "ruflo",
+      "name": "Ruflo",
+      "type": "github-skill",
+      "url": "https://github.com/ruvnet/ruflo",
+      "localSkillFile": ".github/agent-skills/skills/ruflo.md",
+      "notes": "Structured workflow references"
+    },
+    {
+      "id": "gstack",
+      "name": "gstack",
+      "type": "github-skill",
+      "url": "https://github.com/garrytan/gstack",
+      "localSkillFile": ".github/agent-skills/skills/gstack.md",
+      "role": "baseline",
+      "notes": "Primary orchestration baseline"
+    },
+    {
+      "id": "seo-geo-claude-skills",
+      "name": "SEO GEO Claude Skills",
+      "type": "github-skill",
+      "url": "https://github.com/aaron-he-zhu/seo-geo-claude-skills",
+      "localSkillFile": ".github/agent-skills/skills/seo-geo-claude-skills.md",
+      "notes": "Additive SEO/GEO layer"
+    }
+  ],
+  "rules": {
+    "universalUploadRuleFile": ".github/agent-skills/universal-upload-rule.md",
+    "applyUniversalUploadRuleTo": ["compressor", "file-processing-tools"]
+  }
+}

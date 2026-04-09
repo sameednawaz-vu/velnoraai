@@ -29,6 +29,20 @@
 
 ---
 
+## AI Agent System Rules (Saved For Future)
+
+Use these rules for every future UX/UI and tool-surface task:
+
+- Always review managed UX/UI sources from .github/agent-skills before making design decisions.
+- Always include 21st.dev as a suggested UI reference in UX/UI recommendations.
+- Prefer @apad/framer-motion for animation work where motion is needed.
+- Keep external sources organized in the managed skills folder with source links and usage notes.
+- Treat gstack as orchestration baseline, then apply UI/UX and SEO-GEO skill packs as additive layers.
+- For every compressor or file-processing tool, require a large drag-and-drop upload area plus click-to-upload fallback.
+- Keep this upload behavior as a universal reusable rule for all future tools.
+
+---
+
 ## 👨‍💻 What You DON'T Need to Do
 ❌ Write code  
 ❌ Install software (mostly already set up)  
