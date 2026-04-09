@@ -10,7 +10,7 @@ interface Props {
   author?: string;
 }
 
-const { title, description = "Velnora - Elegant AI Intelligence Engine", image, article = false, publishedDate, author } = Astro.props;
+const { title, description = "Velnora - Execution-first AI Utility Workspace", image, article = false, publishedDate, author } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const defaultOgImage = 'https://velnoraai.app/images/og-velnora.png';
@@ -81,65 +81,8 @@ const socialImage = image ?? defaultOgImage;
   <script>
     if (typeof window !== 'undefined') {
       window.addEventListener('DOMContentLoaded', () => {
-        const targets = document.querySelectorAll('[data-reveal]');
-        if (!('IntersectionObserver' in window) || targets.length === 0) {
-          targets.forEach((node) => node.classList.add('is-visible'));
-          return;
-        }
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-        );
-
-        targets.forEach((node) => observer.observe(node));
+        document.querySelectorAll('[data-reveal]').forEach((node) => node.classList.add('is-visible'));
       });
-    }
-  </script>
-
-  <script>
-    if (typeof window !== 'undefined') {
-      const showLoader = () => {
-        document.documentElement.classList.add('is-page-loading');
-      };
-
-      const hideLoader = () => {
-        document.documentElement.classList.remove('is-page-loading');
-      };
-
-      const isModifiedClick = (event) =>
-        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
-
-      const shouldTrackLink = (anchor) =>
-        anchor.origin === window.location.origin &&
-        anchor.target !== '_blank' &&
-        !anchor.hasAttribute('download') &&
-        !anchor.href.includes('#');
-
-      document.addEventListener('click', (event) => {
-        if (!(event.target instanceof Element) || isModifiedClick(event) || event.defaultPrevented) {
-          return;
-        }
-
-        const anchor = event.target.closest('a[href]');
-        if (!(anchor instanceof HTMLAnchorElement) || !shouldTrackLink(anchor)) {
-          return;
-        }
-
-        showLoader();
-      });
-
-      document.addEventListener('astro:before-preparation', showLoader);
-      document.addEventListener('astro:after-swap', hideLoader);
-      window.addEventListener('pageshow', hideLoader);
-      window.addEventListener('load', hideLoader, { once: true });
     }
   </script>
   
@@ -258,14 +201,14 @@ const socialImage = image ?? defaultOgImage;
     }
 
     [data-reveal] {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
     [data-reveal].is-visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -280,101 +223,9 @@ const socialImage = image ?? defaultOgImage;
       }
     }
 
-    #global-page-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      display: grid;
-      place-items: center;
-      transition: opacity 0.2s ease;
-      background: linear-gradient(180deg, rgba(255, 250, 239, 0.92), rgba(253, 243, 223, 0.94));
-      backdrop-filter: blur(5px);
-    }
-
-    :global(html.is-page-loading) #global-page-loader {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .loader-shell {
-      width: min(560px, calc(100vw - 2rem));
-      border: 1px solid rgba(40, 60, 90, 0.15);
-      border-radius: 0.95rem;
-      background: rgba(255, 255, 255, 0.75);
-      box-shadow: 0 20px 40px rgba(20, 42, 68, 0.16);
-      padding: 1rem;
-      display: grid;
-      gap: 0.7rem;
-    }
-
-    .loader-top,
-    .loader-line,
-    .loader-chip {
-      border-radius: 999px;
-      background: linear-gradient(
-        90deg,
-        rgba(237, 224, 201, 0.9) 0%,
-        rgba(255, 255, 255, 0.88) 45%,
-        rgba(237, 224, 201, 0.9) 100%
-      );
-      background-size: 220% 100%;
-      animation: loader-shimmer 1.2s linear infinite;
-    }
-
-    .loader-top {
-      height: 16px;
-      width: 48%;
-    }
-
-    .loader-line {
-      height: 12px;
-      width: 100%;
-    }
-
-    .loader-line.short {
-      width: 72%;
-    }
-
-    .loader-chip-row {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-top: 0.2rem;
-    }
-
-    .loader-chip {
-      height: 30px;
-      width: 108px;
-      border-radius: 0.55rem;
-    }
-
-    @keyframes loader-shimmer {
-      from {
-        background-position: 0% 0%;
-      }
-
-      to {
-        background-position: -220% 0%;
-      }
-    }
   </style>
 </head>
 <body>
-  <div id="global-page-loader" aria-hidden="true">
-    <div class="loader-shell">
-      <div class="loader-top"></div>
-      <div class="loader-line"></div>
-      <div class="loader-line short"></div>
-      <div class="loader-chip-row">
-        <div class="loader-chip"></div>
-        <div class="loader-chip"></div>
-        <div class="loader-chip"></div>
-      </div>
-    </div>
-  </div>
-
   <slot />
 </body>
 </html>

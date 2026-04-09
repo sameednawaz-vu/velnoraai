@@ -21,3 +21,9 @@
 - Use client islands only for interactive behavior.
 - Do not add backend dependencies for the public site.
 - Batch large content changes and verify build, links, metadata, and responsive behavior before publish.
+
+## Product Experience Policy
+- Build full production-ready surfaces, not MVP placeholder pages.
+- Do not expose navigation items or CTAs for features that are not currently usable.
+- Keep auth, API marketing, and pricing routes hidden until real workflows are live.
+- Prefer execution-focused copy that clearly states what users can do right now.

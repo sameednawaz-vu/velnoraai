@@ -169,8 +169,8 @@ const getCategoryBadge = (name: string) =>
           <span class="search-icon" aria-hidden="true"></span>
           Search
         </a>
-        <a class="login-link" href="/login">Log In</a>
-        <a class="signup-link" href="/signup">Sign Up</a>
+        <a class="action-link" href="/tools">Open Tools</a>
+        <a class="action-link action-link-accent" href="/contact">Talk to Team</a>
       </div>
     </div>
   </nav>
@@ -227,9 +227,9 @@ const getCategoryBadge = (name: string) =>
         ))}
       </div>
 
-      <div class="mobile-auth">
-        <a class="mobile-login" href="/login">Log In</a>
-        <a class="mobile-signup" href="/signup">Sign Up</a>
+      <div class="mobile-actions">
+        <a class="mobile-primary" href="/tools">Open Tools</a>
+        <a class="mobile-secondary" href="/contact">Talk to Team</a>
       </div>
     </div>
   </div>
@@ -598,24 +598,32 @@ const getCategoryBadge = (name: string) =>
     transform: rotate(45deg);
   }
 
-  .login-link,
-  .signup-link {
+  .action-link {
     font-size: 0.9rem;
     font-weight: 700;
     border-radius: 0.5rem;
     padding: 0.42rem 0.72rem;
     border: 1px solid #ced8e6;
-  }
-
-  .login-link {
     color: #1f334f;
     background: #f9fbfe;
   }
 
-  .signup-link {
-    color: #3f58c8;
+  .action-link:hover {
+    color: #15243b;
+    border-color: #b9c8dd;
+    background: #f2f6fb;
+  }
+
+  .action-link-accent {
+    color: #244c8a;
     background: #eef2ff;
     border-color: #b9c4ee;
+  }
+
+  .action-link-accent:hover {
+    color: #14396c;
+    border-color: #9faedf;
+    background: #e5ebff;
   }
 
   .mobile-toggle {
@@ -774,15 +782,15 @@ const getCategoryBadge = (name: string) =>
     font-weight: 700;
   }
 
-  .mobile-auth {
+  .mobile-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.55rem;
     margin-top: 0.7rem;
   }
 
-  .mobile-login,
-  .mobile-signup {
+  .mobile-primary,
+  .mobile-secondary {
     border-radius: 0.55rem;
     text-align: center;
     padding: 0.56rem 0.6rem;
@@ -790,13 +798,13 @@ const getCategoryBadge = (name: string) =>
     font-weight: 700;
   }
 
-  .mobile-login {
+  .mobile-primary {
     border: 1px solid #d0d9e7;
     color: #233a57;
     background: #ffffff;
   }
 
-  .mobile-signup {
+  .mobile-secondary {
     border: 1px solid #b8c3eb;
     color: #3b56c3;
     background: #ecf0ff;
@@ -824,8 +832,7 @@ const getCategoryBadge = (name: string) =>
       padding-inline: 0.5rem;
     }
 
-    .login-link,
-    .signup-link {
+    .action-link {
       font-size: 0.84rem;
       padding: 0.38rem 0.58rem;
     }
