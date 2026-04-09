@@ -4,7 +4,7 @@ import preact from '@astrojs/preact';
 export default defineConfig({
   site: 'https://velnoraai.app',
   integrations: [
-    preact(),
+    preact({ compat: true }),
   ],
   output: 'static',
   build: {

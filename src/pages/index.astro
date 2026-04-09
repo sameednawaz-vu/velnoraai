@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Hero3D from '../components/Hero3D';
+import AetherFlowHero from '../components/ui/aether-flow-hero';
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -24,22 +24,10 @@ const organizationSchema = {
   
   <Header />
   
-  <!-- 3D Hero Section -->
-  <section class="hero-section" data-reveal>
-    <Hero3D client:visible height={600} />
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h1>Velnora</h1>
-        <p class="tagline-large">Client-side tools that ship outcomes</p>
-        <p class="hero-description">Run 120 deterministic tools with no private API keys required. Search by category, execute instantly, and ship cleaner work faster.</p>
-        <div class="hero-buttons">
-          <a href="/tools" class="btn btn-primary">Browse Tools</a>
-          <a href="/tools/writing-messaging" class="btn btn-primary">Open Writing Tools</a>
-          <a href="./learning-hub" class="btn btn-secondary">Start Learning</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Framer Motion Hero Section -->
+  <div data-reveal>
+    <AetherFlowHero client:only="preact" />
+  </div>
 
   <!-- Features Section -->
   <section class="features" data-reveal>
@@ -115,68 +103,6 @@ const organizationSchema = {
 </BaseLayout>
 
 <style>
-  .hero-section {
-    position: relative;
-    height: 600px;
-    overflow: visible;
-    background: linear-gradient(130deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.1));
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    margin: 1.2rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 243, 223, 0.72) 100%);
-    pointer-events: none;
-  }
-
-  .hero-content {
-    text-align: center;
-    z-index: 10;
-    pointer-events: auto;
-  }
-
-  .hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .tagline-large {
-    font-size: 1.35rem;
-    color: #8a531f;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
-  }
-
-  .hero-description {
-    font-size: 1.1rem;
-    color: var(--color-text);
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    line-height: 1.6;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
   .btn {
     padding: 1rem 2rem;
     font-weight: 600;
@@ -361,18 +287,6 @@ const organizationSchema = {
   }
 
   @media (max-width: 768px) {
-    .hero-content h1 {
-      font-size: 2rem;
-    }
-
-    .tagline-large {
-      font-size: 1.2rem;
-    }
-
-    .hero-description {
-      font-size: 1rem;
-    }
-
     .features h2,
     .categories-preview h2,
     .cta-section h2 {
