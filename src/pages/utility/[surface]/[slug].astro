@@ -4,7 +4,7 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import StarterUtilityRunner from '../../../components/utility/StarterUtilityRunner';
 import catalog from '../../../content/data/freeconvert-catalog.json';
-import competitorFormats from '../../../content/data/competitor-convertio-formats.json';
+import keywordIntel from '../../../content/data/seo-keywords.generated.json';
 
 interface ToolEntry {
   name: string;
@@ -33,15 +33,14 @@ interface CatalogEntry {
 
 type FormatProfile = 'video' | 'audio' | 'image' | 'document' | 'archive' | 'gif' | 'generic';
 
-const dedupe = (values: string[]) => [...new Set(values.filter(Boolean))];
 const normalizeFormatToken = (value: string) => value.trim().replace(/^\./, '').toLowerCase();
 
 const formatAlias: Record<string, string> = {
   video: 'mp4',
   audio: 'mp3',
   image: 'png',
-  document: 'docx',
-  ebook: 'epub',
+  document: 'pdf',
+  ebook: 'pdf',
   pdf: 'pdf',
   archive: 'zip',
   jpeg: 'jpg',
@@ -49,22 +48,60 @@ const formatAlias: Record<string, string> = {
 
 const normalizeFormatChoice = (value: string) => formatAlias[normalizeFormatToken(value)] ?? normalizeFormatToken(value);
 
-const getCategoryFormats = (slug: string): string[] => {
-  const category = competitorFormats.categories.find((entry) => entry.slug === slug);
-  if (!category) {
-    return [];
+const cleanToken = (value: string) => value.trim().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').toLowerCase();
+
+const toTitleCase = (value: string) =>
+  value
+    .replace(/\b\w/g, (char) => char.toUpperCase())
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const deriveIntentKeyword = (toolSlug: string, toolName: string) => {
+  if (toolSlug.includes('-to-')) {
+    return `${toolSlug.replace(/-/g, ' ')} converter`;
   }
-  return category.formats.map((format) => normalizeFormatToken(format.extension));
+
+  if (toolSlug.endsWith('-converter') || toolSlug.endsWith('-compressor')) {
+    return `${toolSlug.replace(/-/g, ' ')}`;
+  }
+
+  return `${cleanToken(toolName)} tool`;
+};
+
+const buildSemanticKeywordSet = (intentKeyword: string, slug: string) => {
+  const reusableKeywords = Array.isArray(keywordIntel.reusableKeywords) ? keywordIntel.reusableKeywords : [];
+  const slugTemplates = keywordIntel.toolKeywordTemplates?.[slug] ?? [];
+
+  const ranked = [...new Set([intentKeyword, ...slugTemplates, ...reusableKeywords])]
+    .map((entry) => cleanToken(entry))
+    .filter(Boolean)
+    .slice(0, 10);
+
+  return ranked;
+};
+
+const truncateToMetaLength = (value: string, maxLength = 158) => {
+  if (value.length <= maxLength) {
+    return value;
+  }
+
+  const trimmed = value.slice(0, maxLength - 1).trim();
+  return `${trimmed}.`;
+};
+
+const buildSeoDescription = (toolName: string, primaryPhrase: string, secondaryPhrase: string) => {
+  const description = `${toolName}: ${primaryPhrase} and ${secondaryPhrase}. Secure browser-first workflow with private processing where supported.`;
+  return truncateToMetaLength(description);
 };
 
 const formatPools = {
-  video: dedupe([...getCategoryFormats('videos'), ...getCategoryFormats('audios')]),
-  audio: dedupe(getCategoryFormats('audios')),
-  image: dedupe([...getCategoryFormats('images'), ...getCategoryFormats('vectors')]),
-  document: dedupe([...getCategoryFormats('documents'), ...getCategoryFormats('ebooks'), ...getCategoryFormats('presentations')]),
-  archive: dedupe(getCategoryFormats('archives')),
-  gif: dedupe(['gif', 'apng', 'mp4', 'webm', 'mov', 'avi', ...getCategoryFormats('videos').slice(0, 8)]),
-  generic: dedupe(['txt', 'json', 'xml', 'bin']),
+  video: ['mp4', 'mov', 'mkv', 'avi', 'webm', 'mpeg'],
+  audio: ['mp3', 'wav', 'ogg', 'aac', 'flac', 'm4a'],
+  image: ['png', 'jpg', 'jpeg', 'webp', 'gif', 'svg', 'avif', 'bmp', 'jfif'],
+  document: ['pdf', 'jpg', 'jpeg', 'png'],
+  archive: ['zip'],
+  gif: ['gif', 'mp4', 'webm', 'apng', 'mov', 'avi', 'png', 'jpg', 'jpeg', 'webp'],
+  generic: ['txt', 'json', 'xml', 'csv'],
 } as const;
 
 const detectFormatProfile = (toolSlug: string, groupSlug: string): FormatProfile => {
@@ -73,7 +110,7 @@ const detectFormatProfile = (toolSlug: string, groupSlug: string): FormatProfile
   if (toolSlug.includes('pdf') || toolSlug.includes('document') || toolSlug.includes('docx') || toolSlug.includes('ebook') || groupSlug.includes('pdf')) {
     return 'document';
   }
-  if (toolSlug.includes('image') || toolSlug.includes('heic') || toolSlug.includes('png') || toolSlug.includes('jpg') || toolSlug.includes('webp') || groupSlug.includes('image')) {
+  if (toolSlug.includes('image') || toolSlug.includes('png') || toolSlug.includes('jpg') || toolSlug.includes('webp') || groupSlug.includes('image')) {
     return 'image';
   }
   if (toolSlug.includes('audio') || toolSlug.includes('mp3') || toolSlug.includes('wav') || toolSlug.includes('ogg')) {
@@ -103,8 +140,8 @@ const getDefaultPair = (toolSlug: string, profile: FormatProfile) => {
   if (profile === 'video') return { from: 'mov', to: 'mp4' };
   if (profile === 'audio') return { from: 'wav', to: 'mp3' };
   if (profile === 'image') return { from: 'png', to: 'jpg' };
-  if (profile === 'document') return { from: 'docx', to: 'pdf' };
-  if (profile === 'archive') return { from: 'rar', to: 'zip' };
+  if (profile === 'document') return { from: 'pdf', to: 'png' };
+  if (profile === 'archive') return { from: 'zip', to: 'zip' };
   if (profile === 'gif') return { from: 'mp4', to: 'gif' };
 
   return { from: first, to: second };
@@ -149,6 +186,39 @@ const switchActionLabel =
       ? 'Continue to compress'
       : 'Open selected tool';
 
+const intentKeyword = deriveIntentKeyword(tool.slug, tool.name);
+const semanticKeywords = buildSemanticKeywordSet(intentKeyword, tool.slug);
+const headlineKeyword = toTitleCase(semanticKeywords[0] ?? intentKeyword);
+const templateKeywords = Array.isArray(keywordIntel.toolKeywordTemplates?.[tool.slug])
+  ? keywordIntel.toolKeywordTemplates[tool.slug]
+  : [];
+const primarySemanticPhrase = cleanToken(templateKeywords[0] ?? semanticKeywords[0] ?? intentKeyword);
+const secondarySemanticPhrase = cleanToken(templateKeywords[1] ?? semanticKeywords[1] ?? `free ${intentKeyword}`);
+const mediaPrivacyPromise =
+  'Our secure, client-side converter extracts high-quality 320kbps audio from your MP4 videos. Because we use WebAssembly, your video never leaves your device, making this the most private way to transcode media in 2026.';
+const privacyPromise =
+  tool.slug === 'mp4-to-mp3' || tool.slug === 'video-to-mp3' || formatProfile === 'audio'
+    ? mediaPrivacyPromise
+    : 'Our secure, client-side utility runs in your browser and keeps your files on-device whenever the workflow allows browser-native processing.';
+
+const faqItems = [
+  {
+    question: `How does ${tool.name} handle privacy?`,
+    answer: privacyPromise,
+  },
+  {
+    question: `What is the best use case for ${tool.name}?`,
+    answer: `${tool.name} is best for ${intentKeyword} workflows when you need deterministic browser-first execution and repeatable outcomes.`,
+  },
+  {
+    question: `Can I discover related workflows from this page?`,
+    answer: 'Yes. Each tool page includes internal links to related utilities, execution guidance, and trusted external references for standards and best practices.',
+  },
+];
+
+const seoTitle = `${tool.name} | ${headlineKeyword}`;
+const seoDescription = buildSeoDescription(tool.name, primarySemanticPhrase, secondarySemanticPhrase);
+
 const softwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -161,8 +231,27 @@ const softwareSchema = {
     price: '0',
     priceCurrency: 'USD',
   },
-  description: `${tool.name} utility in Velnora ${surface.name} surface. Client-side execution with deterministic run behavior.`,
+  description: seoDescription,
+  keywords: semanticKeywords.slice(0, 8),
+  featureList: [
+    'Client-side execution',
+    'Deterministic output controls',
+    'SEO-aware workflow guidance',
+  ],
   url: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((entry) => ({
+    '@type': 'Question',
+    name: entry.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: entry.answer,
+    },
+  })),
 };
 
 const breadcrumbSchema = {
@@ -192,11 +281,12 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={tool.name}
-  description={`${tool.name} in the ${surface.name} surface. Deterministic client-side execution with a ready-to-run utility workflow.`}
+  title={seoTitle}
+  description={seoDescription}
 >
   <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <Header />
 
@@ -221,6 +311,24 @@ const breadcrumbSchema = {
         <span>Group: {group.name}</span>
         <span>Status: {normalizedStatus}</span>
       </div>
+    </section>
+
+    <section class="keyword-intent" data-reveal>
+      <h2>Semantic intent coverage for this tool</h2>
+      <p>
+        Primary search intent: <strong>{headlineKeyword}</strong>. This page targets practical execution intent with
+        reusable semantic keyword variants for discoverability.
+      </p>
+      <ul>
+        {semanticKeywords.slice(0, 8).map((keyword) => (
+          <li>{toTitleCase(keyword)}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="privacy-proof" data-reveal>
+      <h2>Privacy-first execution promise</h2>
+      <p>{privacyPromise}</p>
     </section>
 
     <section
@@ -304,6 +412,46 @@ const breadcrumbSchema = {
         <a href="/learning-hub">Open Learning Hub</a>
       </div>
     </section>
+
+    <section class="faq-block" data-reveal>
+      <h2>FAQ for {tool.name}</h2>
+      <div class="faq-grid">
+        {faqItems.map((entry) => (
+          <article>
+            <h3>{entry.question}</h3>
+            <p>{entry.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="reference-links" data-reveal>
+      <h2>Trusted technical references</h2>
+      <p>
+        These references support execution decisions, technical validation, and search-quality alignment.
+      </p>
+      <ul>
+        <li>
+          <a href="https://developer.mozilla.org/en-US/docs/WebAssembly" target="_blank" rel="noopener noreferrer">
+            WebAssembly documentation (MDN)
+          </a>
+        </li>
+        <li>
+          <a href="https://ffmpeg.org/ffmpeg.html" target="_blank" rel="noopener noreferrer">
+            FFmpeg command and processing reference
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Search technical SEO starter guide
+          </a>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <script is:inline>
@@ -340,11 +488,11 @@ const breadcrumbSchema = {
       const currentTool = root.dataset.currentTool ?? '';
 
       const profileFallback = {
-        video: 'video-converter',
-        audio: 'audio-converter',
-        image: 'image-converter',
-        document: 'document-converter',
-        archive: 'archive-converter',
+        video: 'mov-to-mp4',
+        audio: 'mp4-to-mp3',
+        image: 'webp-to-png',
+        document: 'pdf-merge',
+        archive: currentTool,
         gif: 'video-to-gif',
         generic: currentTool,
       };
@@ -540,13 +688,35 @@ const breadcrumbSchema = {
     background: #f3f8ff;
   }
 
+  .keyword-intent,
+  .privacy-proof,
   .readiness,
-  .related {
+  .related,
+  .faq-block,
+  .reference-links {
     border: 1px solid var(--color-border);
     border-radius: 0.85rem;
     padding: 1rem;
     background: #fffef9;
     box-shadow: var(--shadow-soft);
+  }
+
+  .keyword-intent p,
+  .privacy-proof p,
+  .faq-block p,
+  .reference-links p {
+    margin-top: 0.45rem;
+    color: #3f5674;
+    line-height: 1.6;
+  }
+
+  .keyword-intent ul,
+  .reference-links ul {
+    margin-top: 0.7rem;
+    display: grid;
+    gap: 0.35rem;
+    padding-left: 1.1rem;
+    color: #3f5674;
   }
 
   .readiness ul {
@@ -579,6 +749,29 @@ const breadcrumbSchema = {
     display: flex;
     gap: 0.68rem;
     flex-wrap: wrap;
+  }
+
+  .faq-grid {
+    margin-top: 0.7rem;
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .faq-grid article {
+    border: 1px solid #d6e1ef;
+    border-radius: 0.72rem;
+    background: #ffffff;
+    padding: 0.75rem;
+  }
+
+  .faq-grid h3 {
+    font-size: 0.98rem;
+  }
+
+  .reference-links a {
+    color: #184a70;
+    font-weight: 700;
   }
 
   @media (max-width: 768px) {

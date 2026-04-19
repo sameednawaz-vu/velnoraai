@@ -38,6 +38,7 @@ const routes = new Set([
   '/learning-hub',
   '/library',
   '/blog',
+  '/working-tools',
   '/utility-tools',
   '/convert',
   '/tools',

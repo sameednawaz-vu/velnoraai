@@ -1,0 +1,567 @@
+{
+  "generatedAt": "2026-04-19T00:14:52.136Z",
+  "sourceFiles": {
+    "keywordIntel": "src/content/data/seo-keywords.generated.json",
+    "utilityCatalog": "src/content/data/freeconvert-catalog.json",
+    "toolsCatalog": "src/content/data/tools.json"
+  },
+  "objectives": {
+    "performanceTarget": "Lighthouse Performance >= 95 on homepage and top utility routes.",
+    "indexingTarget": "Increase PASS verdict share in URL Inspection sample to >= 60% over next 6 weeks.",
+    "semanticTarget": "Each priority utility route includes primary + secondary semantic phrases in metadata and FAQ blocks."
+  },
+  "operatingCadence": {
+    "daily": [
+      "Monitor GSC coverage changes",
+      "Check route health script for non-200 responses"
+    ],
+    "weekly": [
+      "Refresh keywords via seo:keywords",
+      "Rebuild SEO plan via seo:plan",
+      "Run full test:seo suite locally"
+    ],
+    "monthly": [
+      "Competitor gap review",
+      "Thin-content and orphan-link audit",
+      "Image sitemap and schema validation"
+    ]
+  },
+  "keywordBuckets": {
+    "privateTerms": [
+      "localconvert - free online file converter 100 private no upload",
+      "svg to png converter – free private client-side",
+      "txt to tsv converter – free fast private client-side",
+      "free private online tool to convert files - danielle h",
+      "best client-side pdf tools no upload to protect your privacy",
+      "formatify ultimate free client side converter app",
+      "jfif to png converter - 100 free and secure",
+      "onlyjpg — convert any image to jpg privately",
+      "launched my first fully local privacy-first file converter no uploads",
+      "introducing pdf diff compare pdfs privately in your browser"
+    ],
+    "conversionTerms": [
+      "localconvert - free online file converter 100 private no upload",
+      "svg to png converter – free private client-side",
+      "txt to tsv converter – free fast private client-side",
+      "free mp4 to mp3 converter",
+      "free private online tool to convert files - danielle h",
+      "mp4 to mp3 converter - free online",
+      "mp4 to mp3 converter fast online free - kapwing",
+      "best client-side pdf tools no upload to protect your privacy",
+      "convert apng to gif free online",
+      "free mov to gif online converter",
+      "free online webp to jpg converter",
+      "free webp to jpg converter online",
+      "free webp to png converter online",
+      "mp4 to mp3 online free",
+      "tomvoet wasm-image-convert using webassembly to",
+      "video to mp3 converter free online",
+      "webm to gif converter online free",
+      "10 best online file converters in 2026 free fast picks",
+      "formatify ultimate free client side converter app",
+      "mp4 to mp3 converter",
+      "online case converter - free online convert case 2026",
+      "avi to gif - online-convert com",
+      "convert apng to gif animations online",
+      "convert mov files to gifs online",
+      "gif to mp4 - online-convert com",
+      "jfif to png - online-convert com",
+      "mp4 to mp3 converter - freeconvert com",
+      "online gif to mp4 video converter",
+      "online ogg converter",
+      "online webm to gif converter"
+    ],
+    "compressionTerms": [
+      "compress pdf - 100 free online",
+      "compress pdf files online for free",
+      "compress wav file size online free",
+      "compress jpg images online",
+      "compress pdf files online",
+      "compress pdf online",
+      "compress png images online",
+      "video compressor online",
+      "compress a png for free online adobe express",
+      "compress jpeg images online - freeconvert com",
+      "compress png - freeconvert com",
+      "compress png - reduce image size online for free",
+      "compress video mp4 file size online free",
+      "compress wav online - free fast no watermark",
+      "compress your wav files for free online",
+      "free mp3 compressor online — reduce mp3 file size",
+      "free video compressor online — reduce video file size",
+      "free video compressor resizer online - reduce file size"
+    ]
+  },
+  "competitorSignals": [
+    {
+      "slug": "freeconvert",
+      "domain": "freeconvert.com",
+      "mentionedInKeywordSet": true
+    },
+    {
+      "slug": "online-convert",
+      "domain": "online-convert.com",
+      "mentionedInKeywordSet": true
+    },
+    {
+      "slug": "adobe-express",
+      "domain": "adobe.com/express",
+      "mentionedInKeywordSet": true
+    },
+    {
+      "slug": "kapwing",
+      "domain": "kapwing.com",
+      "mentionedInKeywordSet": true
+    }
+  ],
+  "priorityRoutes": [
+    {
+      "slug": "mp4-to-mp3",
+      "name": "MP4 to MP3",
+      "surface": "convert",
+      "group": "video-audio",
+      "route": "/utility/convert/mp4-to-mp3"
+    },
+    {
+      "slug": "video-to-mp3",
+      "name": "Video to MP3",
+      "surface": "convert",
+      "group": "video-audio",
+      "route": "/utility/convert/video-to-mp3"
+    },
+    {
+      "slug": "mov-to-mp4",
+      "name": "MOV to MP4",
+      "surface": "convert",
+      "group": "video-audio",
+      "route": "/utility/convert/mov-to-mp4"
+    },
+    {
+      "slug": "mp3-to-ogg",
+      "name": "MP3 to OGG",
+      "surface": "convert",
+      "group": "video-audio",
+      "route": "/utility/convert/mp3-to-ogg"
+    },
+    {
+      "slug": "webp-to-png",
+      "name": "WEBP to PNG",
+      "surface": "convert",
+      "group": "image",
+      "route": "/utility/convert/webp-to-png"
+    },
+    {
+      "slug": "jfif-to-png",
+      "name": "JFIF to PNG",
+      "surface": "convert",
+      "group": "image",
+      "route": "/utility/convert/jfif-to-png"
+    },
+    {
+      "slug": "png-to-svg",
+      "name": "PNG to SVG",
+      "surface": "convert",
+      "group": "image",
+      "route": "/utility/convert/png-to-svg"
+    },
+    {
+      "slug": "webp-to-jpg",
+      "name": "WEBP to JPG",
+      "surface": "convert",
+      "group": "image",
+      "route": "/utility/convert/webp-to-jpg"
+    },
+    {
+      "slug": "video-to-gif",
+      "name": "Video to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/video-to-gif"
+    },
+    {
+      "slug": "mp4-to-gif",
+      "name": "MP4 to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/mp4-to-gif"
+    },
+    {
+      "slug": "webm-to-gif",
+      "name": "WEBM to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/webm-to-gif"
+    },
+    {
+      "slug": "apng-to-gif",
+      "name": "APNG to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/apng-to-gif"
+    },
+    {
+      "slug": "gif-to-mp4",
+      "name": "GIF to MP4",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/gif-to-mp4"
+    },
+    {
+      "slug": "gif-to-apng",
+      "name": "GIF to APNG",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/gif-to-apng"
+    },
+    {
+      "slug": "image-to-gif",
+      "name": "Image to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/image-to-gif"
+    },
+    {
+      "slug": "mov-to-gif",
+      "name": "MOV to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/mov-to-gif"
+    },
+    {
+      "slug": "avi-to-gif",
+      "name": "AVI to GIF",
+      "surface": "convert",
+      "group": "gif",
+      "route": "/utility/convert/avi-to-gif"
+    },
+    {
+      "slug": "video-compressor",
+      "name": "Video Compressor",
+      "surface": "compress",
+      "group": "video-audio",
+      "route": "/utility/compress/video-compressor"
+    },
+    {
+      "slug": "mp3-compressor",
+      "name": "MP3 Compressor",
+      "surface": "compress",
+      "group": "video-audio",
+      "route": "/utility/compress/mp3-compressor"
+    },
+    {
+      "slug": "wav-compressor",
+      "name": "WAV Compressor",
+      "surface": "compress",
+      "group": "video-audio",
+      "route": "/utility/compress/wav-compressor"
+    },
+    {
+      "slug": "image-compressor",
+      "name": "Image Compressor",
+      "surface": "compress",
+      "group": "image",
+      "route": "/utility/compress/image-compressor"
+    },
+    {
+      "slug": "jpeg-compressor",
+      "name": "JPEG Compressor",
+      "surface": "compress",
+      "group": "image",
+      "route": "/utility/compress/jpeg-compressor"
+    },
+    {
+      "slug": "png-compressor",
+      "name": "PNG Compressor",
+      "surface": "compress",
+      "group": "image",
+      "route": "/utility/compress/png-compressor"
+    },
+    {
+      "slug": "pdf-compressor",
+      "name": "PDF Compressor",
+      "surface": "compress",
+      "group": "pdf-documents",
+      "route": "/utility/compress/pdf-compressor"
+    },
+    {
+      "slug": "gif-compressor",
+      "name": "GIF Compressor",
+      "surface": "compress",
+      "group": "gif",
+      "route": "/utility/compress/gif-compressor"
+    },
+    {
+      "slug": "crop-video",
+      "name": "Crop Video",
+      "surface": "tools",
+      "group": "video-tools",
+      "route": "/utility/tools/crop-video"
+    },
+    {
+      "slug": "trim-video",
+      "name": "Trim Video",
+      "surface": "tools",
+      "group": "video-tools",
+      "route": "/utility/tools/trim-video"
+    },
+    {
+      "slug": "gif-maker",
+      "name": "GIF Maker",
+      "surface": "tools",
+      "group": "image-tools",
+      "route": "/utility/tools/gif-maker"
+    },
+    {
+      "slug": "resize-image",
+      "name": "Resize Image",
+      "surface": "tools",
+      "group": "image-tools",
+      "route": "/utility/tools/resize-image"
+    },
+    {
+      "slug": "crop-image",
+      "name": "Crop Image",
+      "surface": "tools",
+      "group": "image-tools",
+      "route": "/utility/tools/crop-image"
+    }
+  ],
+  "contentBacklog": [
+    {
+      "priority": 1,
+      "route": "/utility/convert/mp4-to-mp3",
+      "slug": "mp4-to-mp3",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "mp4 to mp3 converter",
+      "targetSecondaryKeyword": "free mp4 to mp3 online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "video-audio"
+    },
+    {
+      "priority": 2,
+      "route": "/utility/convert/video-to-mp3",
+      "slug": "video-to-mp3",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "video to mp3 converter",
+      "targetSecondaryKeyword": "free video to mp3 online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "video-audio"
+    },
+    {
+      "priority": 3,
+      "route": "/utility/convert/mov-to-mp4",
+      "slug": "mov-to-mp4",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "mov to mp4 converter",
+      "targetSecondaryKeyword": "free mov to mp4 online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "video-audio"
+    },
+    {
+      "priority": 4,
+      "route": "/utility/convert/mp3-to-ogg",
+      "slug": "mp3-to-ogg",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "mp3 to ogg converter",
+      "targetSecondaryKeyword": "free mp3 to ogg online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "video-audio"
+    },
+    {
+      "priority": 5,
+      "route": "/utility/convert/webp-to-png",
+      "slug": "webp-to-png",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "webp to png converter",
+      "targetSecondaryKeyword": "free webp to png online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "image"
+    },
+    {
+      "priority": 6,
+      "route": "/utility/convert/jfif-to-png",
+      "slug": "jfif-to-png",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "jfif to png converter",
+      "targetSecondaryKeyword": "free jfif to png online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "image"
+    },
+    {
+      "priority": 7,
+      "route": "/utility/convert/png-to-svg",
+      "slug": "png-to-svg",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "png to svg converter",
+      "targetSecondaryKeyword": "free png to svg online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "image"
+    },
+    {
+      "priority": 8,
+      "route": "/utility/convert/webp-to-jpg",
+      "slug": "webp-to-jpg",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "webp to jpg converter",
+      "targetSecondaryKeyword": "free webp to jpg online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "image"
+    },
+    {
+      "priority": 9,
+      "route": "/utility/convert/video-to-gif",
+      "slug": "video-to-gif",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "video to gif converter",
+      "targetSecondaryKeyword": "free video to gif online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    },
+    {
+      "priority": 10,
+      "route": "/utility/convert/mp4-to-gif",
+      "slug": "mp4-to-gif",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "mp4 to gif converter",
+      "targetSecondaryKeyword": "free mp4 to gif online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    },
+    {
+      "priority": 11,
+      "route": "/utility/convert/webm-to-gif",
+      "slug": "webm-to-gif",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "webm to gif converter",
+      "targetSecondaryKeyword": "free webm to gif online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    },
+    {
+      "priority": 12,
+      "route": "/utility/convert/apng-to-gif",
+      "slug": "apng-to-gif",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "apng to gif converter",
+      "targetSecondaryKeyword": "free apng to gif online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    },
+    {
+      "priority": 13,
+      "route": "/utility/convert/gif-to-mp4",
+      "slug": "gif-to-mp4",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "gif to mp4 converter",
+      "targetSecondaryKeyword": "free gif to mp4 online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    },
+    {
+      "priority": 14,
+      "route": "/utility/convert/gif-to-apng",
+      "slug": "gif-to-apng",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "gif to apng converter",
+      "targetSecondaryKeyword": "free gif to apng online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    },
+    {
+      "priority": 15,
+      "route": "/utility/convert/image-to-gif",
+      "slug": "image-to-gif",
+      "objective": "Expand semantic FAQ + entity-rich use-case section + internal links to 3 related routes.",
+      "targetPrimaryKeyword": "image to gif converter",
+      "targetSecondaryKeyword": "free image to gif online",
+      "publishGate": [
+        "Meta description <= 160 chars and includes semantic phrase.",
+        "JSON-LD includes SoftwareApplication + FAQPage.",
+        "At least one AVIF/WebP image mapped in image sitemap.",
+        "Minimum 3 internal links to same-surface tools or article support pages."
+      ],
+      "relatedCategory": "gif"
+    }
+  ],
+  "technicalBacklog": [
+    "Remove remaining unused JavaScript on homepage and navigation interactions.",
+    "Keep icon and hero image assets in AVIF/WebP with JPG fallback only where needed.",
+    "Track and reduce transfer size for homepage below 300 KiB.",
+    "Use sc-domain property in GSC scripts by default where URL-prefix access is restricted.",
+    "Automate indexing eligibility checks before calling Indexing API."
+  ],
+  "notes": [
+    "This file is generated and intended to be edited or regenerated as strategy changes.",
+    "Use with docs/velnora-seo-playbook.md for operational execution details."
+  ]
+}

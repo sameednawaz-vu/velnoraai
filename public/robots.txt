@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://velnoraai.app/sitemap.xml
+Sitemap: https://velnoraai.app/image-sitemap.xml
+
+Host: velnoraai.app

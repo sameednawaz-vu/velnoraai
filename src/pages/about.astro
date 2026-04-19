@@ -21,7 +21,7 @@ const personSchema = {
 <BaseLayout
   title="About Sameed Nawaz"
   description="Technical profile of Sameed Nawaz: AI product building, UX-forward web creation, and practical creative engineering."
-  image="https://velnoraai.app/images/about-sameed.jpg"
+  image="https://velnoraai.app/images/about-sameed.webp"
 >
   <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
@@ -30,7 +30,11 @@ const personSchema = {
   <main class="about-page">
     <section class="hero-card" data-reveal>
       <div class="hero-photo-wrap">
-        <img src="/images/about-sameed.jpg" alt="Sameed Nawaz" loading="eager" decoding="async" />
+        <picture>
+          <source srcset="/images/about-sameed.avif" type="image/avif" />
+          <source srcset="/images/about-sameed.webp" type="image/webp" />
+          <img src="/images/about-sameed.jpg" alt="Sameed Nawaz" loading="eager" decoding="async" width="420" height="420" />
+        </picture>
       </div>
 
       <div class="hero-copy">

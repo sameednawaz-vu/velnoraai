@@ -1,5 +1,4 @@
 ---
-import { Boxes } from './ui/background-boxes';
 import catalog from '../content/data/freeconvert-catalog.json';
 import toolsData from '../content/data/tools.json';
 import competitorFormats from '../content/data/competitor-convertio-formats.json';
@@ -18,8 +17,8 @@ const capabilityCount = publishedTools + utilityToolCount + competitorFormats.to
 
 <footer class="site-footer">
   <div class="footer-motion" aria-hidden="true">
+    <div class="footer-motion-pattern"></div>
     <div class="footer-motion-mask"></div>
-    <Boxes client:only="preact" className="footer-boxes-layer" />
   </div>
 
   <div class="footer-shell">
@@ -128,10 +127,17 @@ const capabilityCount = publishedTools + utilityToolCount + competitorFormats.to
       linear-gradient(180deg, rgba(255, 247, 232, 0.38), rgba(249, 228, 191, 0.82));
   }
 
-  .footer-boxes-layer {
-    opacity: 0.52;
-    z-index: 1;
+  .footer-motion-pattern {
     position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(30, 56, 88, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 56, 88, 0.07) 1px, transparent 1px),
+      radial-gradient(circle at 12% 24%, rgba(255, 186, 76, 0.2), transparent 34%),
+      radial-gradient(circle at 82% 16%, rgba(40, 104, 173, 0.14), transparent 36%);
+    background-size: 28px 28px, 28px 28px, auto, auto;
+    opacity: 0.8;
   }
 
   .footer-shell {

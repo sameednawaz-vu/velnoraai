@@ -9,12 +9,8 @@
           "slug": "video-audio",
           "name": "Video and Audio",
           "tools": [
-            { "name": "Video Converter", "slug": "video-converter", "status": "active" },
-            { "name": "Audio Converter", "slug": "audio-converter", "status": "active" },
-            { "name": "MP3 Converter", "slug": "mp3-converter", "status": "active" },
             { "name": "MP4 to MP3", "slug": "mp4-to-mp3", "status": "active" },
             { "name": "Video to MP3", "slug": "video-to-mp3", "status": "active" },
-            { "name": "MP4 Converter", "slug": "mp4-converter", "status": "active" },
             { "name": "MOV to MP4", "slug": "mov-to-mp4", "status": "active" },
             { "name": "MP3 to OGG", "slug": "mp3-to-ogg", "status": "active" }
           ]
@@ -23,30 +19,10 @@
           "slug": "image",
           "name": "Image",
           "tools": [
-            { "name": "Image Converter", "slug": "image-converter", "status": "active" },
             { "name": "WEBP to PNG", "slug": "webp-to-png", "status": "active" },
             { "name": "JFIF to PNG", "slug": "jfif-to-png", "status": "active" },
             { "name": "PNG to SVG", "slug": "png-to-svg", "status": "active" },
-            { "name": "HEIC to JPG", "slug": "heic-to-jpg", "status": "active" },
-            { "name": "HEIC to PNG", "slug": "heic-to-png", "status": "active" },
-            { "name": "WEBP to JPG", "slug": "webp-to-jpg", "status": "active" },
-            { "name": "SVG Converter", "slug": "svg-converter", "status": "active" }
-          ]
-        },
-        {
-          "slug": "pdf-documents",
-          "name": "PDF and Documents",
-          "tools": [
-            { "name": "PDF Converter", "slug": "pdf-converter", "status": "active" },
-            { "name": "Document Converter", "slug": "document-converter", "status": "active" },
-            { "name": "Ebook Converter", "slug": "ebook-converter", "status": "active" },
-            { "name": "PDF to Word", "slug": "pdf-to-word", "status": "active" },
-            { "name": "PDF to JPG", "slug": "pdf-to-jpg", "status": "active" },
-            { "name": "PDF to EPUB", "slug": "pdf-to-epub", "status": "active" },
-            { "name": "EPUB to PDF", "slug": "epub-to-pdf", "status": "active" },
-            { "name": "HEIC to PDF", "slug": "heic-to-pdf", "status": "active" },
-            { "name": "DOCX to PDF", "slug": "docx-to-pdf", "status": "active" },
-            { "name": "JPG to PDF", "slug": "jpg-to-pdf", "status": "active" }
+            { "name": "WEBP to JPG", "slug": "webp-to-jpg", "status": "active" }
           ]
         },
         {
@@ -62,15 +38,6 @@
             { "name": "Image to GIF", "slug": "image-to-gif", "status": "active" },
             { "name": "MOV to GIF", "slug": "mov-to-gif", "status": "active" },
             { "name": "AVI to GIF", "slug": "avi-to-gif", "status": "active" }
-          ]
-        },
-        {
-          "slug": "others",
-          "name": "Others",
-          "tools": [
-            { "name": "Unit Converter", "slug": "unit-converter", "status": "active" },
-            { "name": "Time Converter", "slug": "time-converter", "status": "active" },
-            { "name": "Archive Converter", "slug": "archive-converter", "status": "active" }
           ]
         }
       ]
@@ -153,7 +120,6 @@
             { "name": "Protect PDF", "slug": "protect-pdf", "status": "active" },
             { "name": "Crop PDF", "slug": "crop-pdf", "status": "active" },
             { "name": "Organize PDF", "slug": "organize-pdf", "status": "active" },
-            { "name": "Extract image from PDF", "slug": "extract-image-from-pdf", "status": "active" },
             { "name": "PDF page remover", "slug": "pdf-page-remover", "status": "active" },
             { "name": "Extract Pages from PDF", "slug": "extract-pages-from-pdf", "status": "active" }
           ]

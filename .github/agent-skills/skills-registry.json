@@ -92,6 +92,14 @@
       "url": "https://github.com/aaron-he-zhu/seo-geo-claude-skills",
       "localSkillFile": ".github/agent-skills/skills/seo-geo-claude-skills.md",
       "notes": "Additive SEO/GEO layer"
+    },
+    {
+      "id": "ghulam-ali-semantic-seo",
+      "name": "Ghulam Ali Semantic SEO",
+      "type": "custom-skill",
+      "url": "local-managed-skill",
+      "localSkillFile": ".github/agent-skills/skills/ghulam-ali-semantic-seo.md",
+      "notes": "Custom semantic SEO execution checklist for tool-directory pages"
     }
   ],
   "rules": {

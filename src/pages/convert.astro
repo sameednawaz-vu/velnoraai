@@ -34,7 +34,7 @@ const itemListSchema = {
 
 <BaseLayout
   title="Convert"
-  description="FreeConvert-style Convert surface for Velnora with grouped media and document conversion utilities."
+  description="Convert surface with browser-supported media/image routes powered by cached local conversion engines."
 >
   <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
 
@@ -42,6 +42,20 @@ const itemListSchema = {
 
   <main class="surface-page">
     <SurfaceHub surface={surface} eyebrow="Convert Surface" />
+
+    <section class="stack-panel" data-reveal>
+      <h2>Active conversion stack</h2>
+      <p>
+        Convert routes are now limited to the supported browser stack only. Heavy runtime engines are cached after first
+        load to speed up repeat conversions on the same device.
+      </p>
+      <ul>
+        <li>FFmpeg core bundle for media conversion and compression (cached after first run).</li>
+        <li>Lightweight browser utilities for image transformations and deterministic output generation.</li>
+        <li>Unsupported desktop-only conversion routes removed from this surface.</li>
+      </ul>
+      <a href="/working-tools">Open working-tools status page</a>
+    </section>
 
     <section class="intel-panel" data-reveal>
       <div class="intel-head">
@@ -113,12 +127,12 @@ const itemListSchema = {
     <section class="surface-note" data-reveal>
       <h2>Implementation track</h2>
       <p>
-        This surface is now route-ready and indexed. Starter deterministic handlers are live for selected utilities and
-        all remaining tools are scaffolded for upcoming implementation waves.
+        This surface is now restricted to actively supported browser-conversion routes from the current technical stack.
       </p>
       <div class="links-row">
         <a href="/compress">Open Compress Surface</a>
         <a href="/utility-tools">Open Tools Surface</a>
+        <a href="/working-tools">Open Working Tools</a>
         <a href="/tools">Browse Capability Index</a>
         <a href="/articles">Browse Tool Articles</a>
       </div>
@@ -196,6 +210,40 @@ const itemListSchema = {
     background: #fffdf7;
     padding: 1rem;
     box-shadow: var(--shadow-soft);
+  }
+
+  .stack-panel {
+    border: 1px solid #d8e4f2;
+    border-radius: 0.9rem;
+    background: linear-gradient(145deg, #fefefe 0%, #f1f8ff 62%, #f3fbf7 100%);
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .stack-panel p {
+    color: #466281;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .stack-panel ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: #3f5a78;
+    display: grid;
+    gap: 0.28rem;
+  }
+
+  .stack-panel a {
+    width: fit-content;
+    border: 1px solid #d6c3a4;
+    background: #fff7e8;
+    color: #25415f;
+    border-radius: 0.48rem;
+    padding: 0.45rem 0.68rem;
+    font-weight: 700;
   }
 
   .intel-panel,

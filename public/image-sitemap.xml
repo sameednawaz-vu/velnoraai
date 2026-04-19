@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://velnoraai.app/about</loc>
+    <lastmod>2026-04-19T01:04:55.594Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/about-sameed.avif</image:loc>
+      <image:title>about sameed</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/about</loc>
+    <lastmod>2026-04-19T01:04:55.478Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/about-sameed.webp</image:loc>
+      <image:title>about sameed</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/</loc>
+    <lastmod>2026-04-19T01:04:55.460Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/favicon-velnora.avif</image:loc>
+      <image:title>favicon velnora</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/</loc>
+    <lastmod>2026-04-19T01:04:55.394Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/favicon-velnora.webp</image:loc>
+      <image:title>favicon velnora</image:title>
+    </image:image>
+  </url>
+</urlset>

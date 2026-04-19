@@ -38,6 +38,7 @@ Use these rules for every future UX/UI and tool-surface task:
 - Prefer @apad/framer-motion for animation work where motion is needed.
 - Keep external sources organized in the managed skills folder with source links and usage notes.
 - Treat gstack as orchestration baseline, then apply UI/UX and SEO-GEO skill packs as additive layers.
+- Apply the custom Ghulam Ali semantic SEO skill pack for semantic topic coverage and pre-publish SEO QA.
 - For every compressor or file-processing tool, require a large drag-and-drop upload area plus click-to-upload fallback.
 - Keep this upload behavior as a universal reusable rule for all future tools.
 

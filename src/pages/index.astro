@@ -2,8 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import AetherFlowHero from '../components/ui/aether-flow-hero';
-import { SplineSceneBasic } from '../components/ui/demo';
 import catalog from '../content/data/freeconvert-catalog.json';
 import toolsData from '../content/data/tools.json';
 import competitorFormats from '../content/data/competitor-convertio-formats.json';
@@ -60,18 +58,43 @@ const websiteSchema = {
   <main id="site-main" role="main">
     <!-- Layered Hero Stack -->
     <section class="hero-stack" data-reveal>
-      <AetherFlowHero
-        client:only="preact"
-        subtitle="World largest free tools library for practical daily work"
-        description={`Open ${liveToolCountLabel} free tools across ${categoryCountLabel} managed categories, run workflows in-browser, and use ${articleCountLabel} SEO and GEO guides to ship faster.`}
-      />
-
-      <div class="hero-robot-layer" aria-hidden="true">
-        <div class="hero-robot-shell">
-          <SplineSceneBasic client:visible />
+      <div class="hero-static" id="hero-static">
+        <p class="hero-badge">Execution-First Utility Library</p>
+        <h1>Velnora: world largest free tools library for practical daily work.</h1>
+        <p class="hero-lede">
+          Open {liveToolCountLabel} free tools across {categoryCountLabel} managed categories, run workflows in-browser,
+          and use {articleCountLabel} SEO and GEO guides to ship faster.
+        </p>
+        <div class="hero-actions">
+          <a href="/tools#all-tools-directory" class="hero-action-primary">Open Free Tool Library</a>
+          <a href="/convert" class="hero-action-secondary">Open Convert Surface</a>
+          <a href="/compress" class="hero-action-secondary">Open Compress Surface</a>
         </div>
       </div>
     </section>
+
+    <script is:inline>
+      {`(function(){
+        const root = document.getElementById('hero-static');
+        if (!root) return;
+        let raf = 0;
+        function onPointerMove(e){
+          const rect = root.getBoundingClientRect();
+          const x = ((e.clientX - rect.left)/rect.width - 0.5) * 2; // -1..1
+          const y = ((e.clientY - rect.top)/rect.height - 0.5) * 2; // -1..1
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(()=>{
+            root.style.transform = `translate3d(${x*8}px, ${y*6}px, 0)`;
+          });
+        }
+        function onLeave(){ if (raf) cancelAnimationFrame(raf); raf=0; root.style.transform=''; }
+        if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.style.transition = 'transform 220ms cubic-bezier(.2,.9,.2,1)';
+          root.addEventListener('pointermove', onPointerMove, { passive: true });
+          root.addEventListener('pointerleave', onLeave);
+        }
+      })();`}
+    </script>
 
     <section class="momentum-band" data-reveal>
       <div class="container momentum-grid">
@@ -247,32 +270,82 @@ const websiteSchema = {
 
   .hero-stack {
     position: relative;
+    margin: 1.2rem;
   }
 
-  .hero-robot-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 12;
-    pointer-events: none;
+  .hero-static {
+    border: 1px solid #cfdced;
+    border-radius: 1.05rem;
+    background:
+      radial-gradient(circle at 82% 14%, rgba(255, 197, 61, 0.24), transparent 35%),
+      radial-gradient(circle at 18% 18%, rgba(10, 138, 130, 0.16), transparent 36%),
+      linear-gradient(140deg, #ffffff 0%, #eef4ff 48%, #fff4e2 100%);
+    box-shadow: var(--shadow-medium);
+    padding: clamp(1.4rem, 4vw, 2.6rem);
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .hero-badge {
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    color: #345172;
+    border: 1px solid #c4d4ea;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 0.3rem 0.65rem;
+  }
+
+  .hero-static h1 {
+    margin: 0;
+    max-width: 19ch;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5.2vw, 3.3rem);
+    line-height: 1.08;
+    color: #12253f;
+  }
+
+  .hero-lede {
+    margin: 0;
+    max-width: 64ch;
+    color: #425d79;
+    font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+    line-height: 1.68;
+  }
+
+  .hero-actions {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding-right: clamp(0.3rem, 2.4vw, 1.9rem);
-    padding-bottom: clamp(0.4rem, 2.4vh, 1.8rem);
+    flex-wrap: wrap;
+    gap: 0.65rem;
   }
 
-  .hero-robot-shell {
-    position: relative;
-    width: clamp(280px, 34vw, 500px);
-    height: clamp(420px, 86vh, 760px);
-    max-height: calc(100% - 0.45rem);
-    min-height: 360px;
-    pointer-events: auto;
+  .hero-action-primary,
+  .hero-action-secondary {
+    border-radius: 0.55rem;
+    padding: 0.62rem 0.85rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border: 1px solid transparent;
   }
 
-  :global(.hero-robot-shell canvas) {
-    transform: translateY(7%) scale(0.86);
-    transform-origin: center bottom;
+  .hero-action-primary {
+    background: linear-gradient(135deg, #ff6e45 0%, #ff9542 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(255, 109, 69, 0.26);
+  }
+
+  .hero-action-secondary {
+    background: #f1f7ff;
+    border-color: #c8d8ec;
+    color: #1d4568;
+  }
+
+  .hero-action-primary:hover,
+  .hero-action-secondary:hover {
+    transform: translateY(-2px);
   }
 
   .section-kicker {
@@ -595,6 +668,18 @@ const websiteSchema = {
     .quality-band,
     .cta-section {
       margin: 0.7rem;
+    }
+
+    .hero-static {
+      padding: 1rem;
+    }
+
+    .hero-static h1 {
+      max-width: 100%;
+    }
+
+    .hero-actions {
+      flex-direction: column;
     }
 
     .momentum-band,

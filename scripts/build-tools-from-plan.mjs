@@ -295,5 +295,25 @@ const output = {
   tools,
 };
 
+// Validation: ensure generated tools include a consistent SEO metadata structure
+const validationProblems = [];
+for (const tool of tools) {
+  if (!tool.seoTitle || typeof tool.seoTitle !== 'string' || !tool.seoTitle.includes('| Velnora')) {
+    validationProblems.push({ slug: tool.slug, issue: 'seoTitle missing or not using expected \'| Velnora\' suffix' });
+  }
+
+  if (!tool.seoDescription || typeof tool.seoDescription !== 'string') {
+    validationProblems.push({ slug: tool.slug, issue: 'seoDescription missing' });
+  } else if (tool.seoDescription.length > 160) {
+    validationProblems.push({ slug: tool.slug, issue: `seoDescription too long (${tool.seoDescription.length} > 160)` });
+  }
+}
+
+if (validationProblems.length > 0) {
+  console.error('\nERROR: SEO metadata validation failed for generated tools:');
+  validationProblems.slice(0, 40).forEach((p) => console.error(`- ${p.slug}: ${p.issue}`));
+  throw new Error(`SEO metadata validation failed for ${validationProblems.length} tool(s).`);
+}
+
 writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`, 'utf-8');
 console.log(`Generated ${tools.length} tools across ${categories.length} categories.`);

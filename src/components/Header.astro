@@ -3,6 +3,12 @@ import catalog from '../content/data/freeconvert-catalog.json';
 import toolsData from '../content/data/tools.json';
 import competitorFormats from '../content/data/competitor-convertio-formats.json';
 
+const imageCdnBase = (import.meta.env.PUBLIC_IMAGE_CDN_BASE ?? '').trim().replace(/\/+$/, '');
+const brandLogoAvifPath = imageCdnBase ? `${imageCdnBase}/images/favicon-velnora.avif` : '/images/favicon-velnora.avif';
+const brandLogoWebpPath = imageCdnBase ? `${imageCdnBase}/images/favicon-velnora.webp` : '/images/favicon-velnora.webp';
+const brandLogoFallbackPath = imageCdnBase ? `${imageCdnBase}/images/favicon-velnora.jpg` : '/images/favicon-velnora.jpg';
+const groupToolPreviewLimit = 8;
+
 const primaryMenus = [
   { label: 'Convert', href: '/convert', surfaceSlug: 'convert' },
   { label: 'Compress', href: '/compress', surfaceSlug: 'compress' },
@@ -10,6 +16,7 @@ const primaryMenus = [
 ];
 
 const secondaryLinks = [
+  { label: 'Working Tools', href: '/working-tools' },
   { label: 'Learning Hub', href: '/learning-hub' },
   { label: 'Library', href: '/library' },
   { label: 'Articles', href: '/articles' },
@@ -99,7 +106,11 @@ const getCategoryBadge = (name: string) =>
   <nav class="nav-shell" aria-label="Primary navigation">
     <a class="brand" href="/" aria-label="Velnora home">
       <span class="brand-mark" aria-hidden="true">
-        <img src="/images/favicon-velnora.jpg" alt="" loading="eager" decoding="async" />
+        <picture>
+          <source srcset={brandLogoAvifPath} type="image/avif" />
+          <source srcset={brandLogoWebpPath} type="image/webp" />
+          <img src={brandLogoFallbackPath} alt="" loading="eager" decoding="async" width="40" height="40" />
+        </picture>
       </span>
       <span class="brand-text">
         <strong>Velnora</strong>
@@ -159,9 +170,12 @@ const getCategoryBadge = (name: string) =>
                         </h3>
 
                         <ul>
-                          {group.tools.map((tool) => (
+                          {group.tools.slice(0, groupToolPreviewLimit).map((tool) => (
                             <li><a href={`/utility/${surface.slug}/${tool.slug}`}>{tool.name}</a></li>
                           ))}
+                          {group.tools.length > groupToolPreviewLimit && (
+                            <li><a class="more-link" href={getSurfaceRoute(surface.slug)}>View all {group.name} tools</a></li>
+                          )}
                         </ul>
                       </section>
                     ))}
@@ -274,6 +288,7 @@ const getCategoryBadge = (name: string) =>
           Search
         </a>
         <a class="action-link" href="/tools#all-tools-directory">Open Tools</a>
+        <a class="action-link" href="/working-tools">Working Tools</a>
         <a class="action-link" href="/articles">Open Articles</a>
         <a class="action-link action-link-accent" href="/contact">Talk to Team</a>
       </div>
@@ -297,9 +312,12 @@ const getCategoryBadge = (name: string) =>
               <section class="mobile-group">
                 <h4>{group.name}</h4>
                 <ul>
-                  {group.tools.map((tool) => (
+                  {group.tools.slice(0, groupToolPreviewLimit).map((tool) => (
                     <li><a href={`/utility/${surface.slug}/${tool.slug}`}>{tool.name}</a></li>
                   ))}
+                  {group.tools.length > groupToolPreviewLimit && (
+                    <li><a class="more-link" href={getSurfaceRoute(surface.slug)}>View all {group.name} tools</a></li>
+                  )}
                 </ul>
               </section>
             ))}
@@ -343,6 +361,7 @@ const getCategoryBadge = (name: string) =>
 
       <div class="mobile-actions">
         <a class="mobile-primary" href="/tools#all-tools-directory">Open Tools</a>
+        <a class="mobile-secondary" href="/working-tools">Working Tools</a>
         <a class="mobile-secondary" href="/articles">Open Articles</a>
         <a class="mobile-secondary" href="/contact">Talk to Team</a>
       </div>
@@ -354,10 +373,6 @@ const getCategoryBadge = (name: string) =>
   const setupHeaderNav = () => {
     const toggle = document.querySelector('[data-nav-toggle]');
     const panel = document.querySelector('[data-nav-panel]');
-    const desktopNav = document.querySelector('.desktop-nav');
-    const desktopMenus = Array.from(document.querySelectorAll('.desktop-nav .has-mega'));
-    const caretButtons = Array.from(document.querySelectorAll('[data-menu-toggle]'));
-    const desktopMedia = window.matchMedia('(min-width: 1081px)');
 
     if (!(toggle instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) {
       return;
@@ -367,30 +382,6 @@ const getCategoryBadge = (name: string) =>
       panel.hidden = true;
       toggle.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('mobile-nav-open');
-    };
-
-    const clearDesktopMenus = () => {
-      desktopMenus.forEach((item) => {
-        if (item instanceof HTMLElement) {
-          item.classList.remove('is-open');
-        }
-      });
-
-      caretButtons.forEach((btn) => {
-        try {
-          btn.setAttribute('aria-expanded', 'false');
-        } catch (e) {
-          // ignore
-        }
-      });
-    };
-
-    const closeDesktopMenusExcept = (activeItem) => {
-      desktopMenus.forEach((item) => {
-        if (item instanceof HTMLElement && item !== activeItem) {
-          item.classList.remove('is-open');
-        }
-      });
     };
 
     const open = () => {
@@ -410,7 +401,6 @@ const getCategoryBadge = (name: string) =>
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         close();
-        clearDesktopMenus();
       }
     });
 
@@ -429,106 +419,9 @@ const getCategoryBadge = (name: string) =>
       }
     });
 
-    document.addEventListener('click', (event) => {
-      if (!desktopMedia.matches || !(desktopNav instanceof HTMLElement)) {
-        return;
-      }
-
-      const target = event.target;
-      if (!(target instanceof Node)) {
-        return;
-      }
-
-      if (!desktopNav.contains(target)) {
-        clearDesktopMenus();
-      }
-    });
-
-    desktopMenus.forEach((item) => {
-      if (!(item instanceof HTMLElement)) {
-        return;
-      }
-
-      const panelNode = item.querySelector('.mega-panel');
-
-      let closeTimer = 0;
-
-      const openMenu = () => {
-        if (!desktopMedia.matches) {
-          return;
-        }
-
-        window.clearTimeout(closeTimer);
-        closeDesktopMenusExcept(item);
-        item.classList.add('is-open');
-      };
-
-      const closeMenu = (withDelay = true) => {
-        window.clearTimeout(closeTimer);
-
-        if (!desktopMedia.matches || !withDelay) {
-          item.classList.remove('is-open');
-          return;
-        }
-
-        closeTimer = window.setTimeout(() => {
-          item.classList.remove('is-open');
-        }, 400);
-      };
-
-      const onPointerLeave = (event) => {
-        const relatedTarget = event.relatedTarget;
-        if (relatedTarget instanceof Node && item.contains(relatedTarget)) {
-          return;
-        }
-        closeMenu(true);
-      };
-
-      item.addEventListener('pointerenter', openMenu);
-      item.addEventListener('pointerleave', onPointerLeave);
-      if (panelNode instanceof HTMLElement) {
-        panelNode.addEventListener('pointerenter', openMenu);
-        panelNode.addEventListener('pointerleave', onPointerLeave);
-      }
-      item.addEventListener('focusin', openMenu);
-      item.addEventListener('focusout', (event) => {
-        const relatedTarget = event.relatedTarget;
-        if (relatedTarget instanceof Node && item.contains(relatedTarget)) {
-          return;
-        }
-
-        closeMenu(false);
-      });
-    });
-
-    // Click/tap handlers for caret toggle buttons (desktop only)
-    caretButtons.forEach((btn) => {
-      btn.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        if (!desktopMedia.matches) return;
-
-        const item = btn.closest('.has-mega');
-        if (!(item instanceof HTMLElement)) return;
-
-        const opened = item.classList.toggle('is-open');
-        try {
-          btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
-        } catch (e) {}
-
-        if (opened) {
-          closeDesktopMenusExcept(item);
-        }
-      });
-    });
-
     window.addEventListener('resize', () => {
       if (window.innerWidth > 1080) {
         close();
-      }
-
-      if (!desktopMedia.matches) {
-        clearDesktopMenus();
       }
     });
   };
@@ -707,6 +600,7 @@ const getCategoryBadge = (name: string) =>
   }
 
   .has-mega:focus-within .menu-link-trigger .caret,
+  .has-mega:hover .menu-link-trigger .caret,
   .has-mega.is-open .menu-link-trigger .caret {
     transform: rotate(225deg) translateY(-1px);
   }
@@ -730,6 +624,7 @@ const getCategoryBadge = (name: string) =>
   }
 
   .has-mega:focus-within > .mega-panel,
+  .has-mega:hover > .mega-panel,
   .has-mega.is-open > .mega-panel {
     opacity: 1;
     pointer-events: auto;
@@ -826,6 +721,14 @@ const getCategoryBadge = (name: string) =>
   .tool-group li a:focus-visible {
     background: #ebf0f7;
     color: #16233a;
+  }
+
+  .tool-group .more-link {
+    font-weight: 700;
+    color: #3158c3;
+    border-top: 1px dashed #d5dfeb;
+    margin-top: 0.28rem;
+    padding-top: 0.48rem;
   }
 
   .categories-grid {
@@ -1199,11 +1102,6 @@ const getCategoryBadge = (name: string) =>
       font-size: 0.54rem;
       letter-spacing: 0.07em;
     }
-  }
-
-  /* Show caret toggle on larger screens */
-  @media (min-width: 1081px) {
-    .menu-caret { display: inline-flex; }
   }
 
   @media (max-width: 640px) {

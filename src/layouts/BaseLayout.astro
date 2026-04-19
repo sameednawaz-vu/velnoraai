@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import '../styles/tailwind.css';
 
 interface Props {
@@ -14,8 +13,28 @@ interface Props {
 const { title, description = "Velnora - Execution-first AI Utility Workspace", image, article = false, publishedDate, author } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID;
-const defaultOgImage = 'https://velnoraai.app/images/og-velnora.png';
+const shouldLoadAnalytics = Boolean(gaId) && canonicalURL.hostname === 'velnoraai.app';
+const imageCdnBase = (import.meta.env.PUBLIC_IMAGE_CDN_BASE ?? '').trim().replace(/\/+$/, '');
+const withImageCdn = (assetPath: string) => {
+  const normalizedPath = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
+  return imageCdnBase ? `${imageCdnBase}${normalizedPath}` : normalizedPath;
+};
+const imageCdnOrigin = (() => {
+  if (!imageCdnBase) {
+    return '';
+  }
+
+  try {
+    return new URL(imageCdnBase).origin;
+  } catch {
+    return '';
+  }
+})();
+const defaultOgImage = withImageCdn('/images/favicon-velnora.webp');
+const faviconSvgImage = withImageCdn('/images/favicon-velnora.svg');
+const faviconFallbackImage = withImageCdn('/images/favicon-velnora.webp');
 const socialImage = image ?? defaultOgImage;
+const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
 ---
 
 <!DOCTYPE html>
@@ -27,14 +46,7 @@ const socialImage = image ?? defaultOgImage;
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="generator" content="Astro" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Sora:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <ViewTransitions />
+  {imageCdnOrigin && <link rel="preconnect" href={imageCdnOrigin} crossorigin />}
 
   <title>{title} | Velnora</title>
   <meta name="description" content={description} />
@@ -46,6 +58,7 @@ const socialImage = image ?? defaultOgImage;
   <meta property="og:type" content={article ? "article" : "website"} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:image" content={socialImage} />
+  <meta property="og:image:alt" content={`${title} | Velnora`} />
   <meta property="og:site_name" content="Velnora" />
   
   <!-- Twitter Card -->
@@ -53,6 +66,7 @@ const socialImage = image ?? defaultOgImage;
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={socialImage} />
+  <meta name="twitter:image:alt" content={`${title} | Velnora`} />
   
   {article && publishedDate && (
     <meta property="article:published_time" content={publishedDate} />
@@ -62,11 +76,11 @@ const socialImage = image ?? defaultOgImage;
   )}
   
   <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="/images/favicon-velnora.jpg" />
-  <link rel="shortcut icon" type="image/jpeg" href="/images/favicon-velnora.jpg" />
-  <link rel="apple-touch-icon" href="/images/favicon-velnora.jpg" />
+  <link rel="icon" type="image/svg+xml" href={faviconSvgImage} />
+  <link rel="alternate icon" type="image/webp" href={faviconFallbackImage} />
+  <link rel="apple-touch-icon" href={faviconFallbackImage} />
   
-  {gaId && (
+  {shouldLoadAnalytics && (
     <>
       <!-- Google Analytics 4 (optional, controlled via PUBLIC_GA_ID) -->
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
@@ -79,11 +93,21 @@ const socialImage = image ?? defaultOgImage;
     </>
   )}
 
+  {shouldLoadDynamicSchema && <script type="module" src="/schema-generator.js"></script>}
+
   <script>
     if (typeof window !== 'undefined') {
       window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-reveal]').forEach((node) => node.classList.add('is-visible'));
       });
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {
+            // Ignore registration errors in unsupported/private modes.
+          });
+        });
+      }
     }
   </script>
   
@@ -106,8 +130,8 @@ const socialImage = image ?? defaultOgImage;
       --color-cyan: #0a8a82;
       --color-purple: #ff5d3d;
       --color-highlight: #ffc53d;
-      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-      --font-sans: 'Sora', 'Segoe UI', Tahoma, sans-serif;
+      --font-display: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+      --font-sans: 'Trebuchet MS', 'Segoe UI', Tahoma, sans-serif;
       --shadow-soft: 0 10px 30px rgba(20, 42, 68, 0.08);
       --shadow-medium: 0 20px 42px rgba(16, 40, 66, 0.14);
     }

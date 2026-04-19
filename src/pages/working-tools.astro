@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import catalog from '../content/data/freeconvert-catalog.json';
+
+const allTools = catalog.surfaces.flatMap((surface) =>
+  surface.groups.flatMap((group) =>
+    group.tools.map((tool) => ({
+      surface: surface.name,
+      surfaceSlug: surface.slug,
+      group: group.name,
+      groupSlug: group.slug,
+      name: tool.name,
+      slug: tool.slug,
+      href: `/utility/${surface.slug}/${tool.slug}`,
+    }))
+  )
+);
+
+const workingTools = allTools;
+const blockedToolRoutes: typeof allTools = [];
+
+const unsupportedRules = [
+  {
+    name: 'Desktop-only document conversion removed',
+    reason: 'Office/PDF/ebook conversion routes require desktop engines outside current browser-only stack.',
+  },
+  {
+    name: 'HEIC browser decode instability',
+    reason: 'HEIC/HEIF decode support is inconsistent across browsers and devices in pure browser workflows.',
+  },
+  {
+    name: 'Generic converter routes disabled',
+    reason: 'Broad converter routes were removed to avoid unsupported format pairs and unclear outcomes.',
+  },
+  {
+    name: 'Archive conversion disabled in-browser',
+    reason: 'Archive conversion still requires desktop-oriented tooling for reliable multi-format handling.',
+  },
+];
+
+const unsupportedFormats = [
+  'HEIC and HEIF conversion routes',
+  'PDF to DOCX direct browser conversion',
+  'DOCX to PDF office fidelity conversion',
+  'EPUB to PDF and PDF to EPUB conversion',
+  'General archive format conversion workflows',
+];
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Velnora Working Tools Board',
+  itemListElement: workingTools.map((entry, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: entry.name,
+    url: `https://velnoraai.app${entry.href}`,
+  })),
+};
+---
+
+<BaseLayout
+  title="Working Tools"
+  description="Internal working-tools board showing currently functioning routes, unsupported rules, and blocked format classes."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+
+  <Header />
+
+  <main class="working-page">
+    <section class="hero" data-reveal>
+      <p class="eyebrow">Owner Board</p>
+      <h1>Working tools status board</h1>
+      <p>
+        This page tracks every currently functioning tool route from the live catalog and highlights rules and formats
+        that are not functionable in the active browser stack.
+      </p>
+      <div class="metrics">
+        <span>{workingTools.length} active tools</span>
+        <span>{catalog.surfaces.length} active surfaces</span>
+        <span>{unsupportedFormats.length} blocked format classes</span>
+      </div>
+    </section>
+
+    <section class="surface-board" data-reveal>
+      {catalog.surfaces.map((surface) => (
+        <article class="surface-card">
+          <h2>{surface.name}</h2>
+          <p>{surface.description}</p>
+
+          <div class="group-grid">
+            {surface.groups
+              .map((group) => {
+                const groupWorkingTools = workingTools.filter(
+                  (tool) => tool.surfaceSlug === surface.slug && tool.groupSlug === group.slug
+                );
+
+                if (!groupWorkingTools.length) {
+                  return null;
+                }
+
+                return (
+                  <section class="group-block">
+                    <h3>{group.name}</h3>
+                    <ul>
+                      {groupWorkingTools.map((tool) => (
+                        <li>
+                          <a href={tool.href}>{tool.name}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                );
+              })}
+          </div>
+        </article>
+      ))}
+    </section>
+
+    {blockedToolRoutes.length > 0 && (
+      <section class="limits" data-reveal>
+        <h2>Mapped routes that are not browser-runnable yet</h2>
+        <ul>
+          {blockedToolRoutes.map((tool) => (
+            <li>
+              <strong>{tool.name}</strong>
+              <p>{tool.surface} / {tool.group} route remains mapped but not browser-runnable in current stack.</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section class="limits" data-reveal>
+      <h2>Rules not functioning properly right now</h2>
+      <ul>
+        {unsupportedRules.map((item) => (
+          <li>
+            <strong>{item.name}</strong>
+            <p>{item.reason}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="limits" data-reveal>
+      <h2>File formats currently not functionable</h2>
+      <ul>
+        {unsupportedFormats.map((formatName) => (
+          <li>{formatName}</li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .working-page {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 1.4rem 1rem 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero,
+  .surface-board,
+  .limits {
+    border: 1px solid var(--color-border);
+    border-radius: 0.95rem;
+    background: #fffef9;
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+  }
+
+  .eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #5d7290;
+  }
+
+  .hero h1 {
+    margin: 0.4rem 0;
+  }
+
+  .hero p {
+    margin: 0;
+    color: #4c6380;
+    line-height: 1.6;
+  }
+
+  .metrics {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+  }
+
+  .metrics span {
+    border: 1px solid #d4e1ef;
+    border-radius: 999px;
+    background: #f0f7ff;
+    color: #214463;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .surface-board {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .surface-card {
+    border: 1px solid #d7e4f2;
+    border-radius: 0.82rem;
+    background: linear-gradient(150deg, #ffffff 0%, #f4f9ff 100%);
+    padding: 0.9rem;
+  }
+
+  .surface-card h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .surface-card p {
+    margin: 0.35rem 0 0;
+    color: #4d6482;
+  }
+
+  .group-grid {
+    margin-top: 0.7rem;
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .group-block {
+    border: 1px solid #d5e2ef;
+    border-radius: 0.72rem;
+    background: #ffffff;
+    padding: 0.7rem;
+  }
+
+  .group-block h3 {
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  .group-block ul {
+    margin: 0.45rem 0 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.24rem;
+  }
+
+  .group-block a {
+    color: #244965;
+    font-weight: 600;
+  }
+
+  .limits h2 {
+    margin-bottom: 0.65rem;
+  }
+
+  .limits ul {
+    margin: 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .limits li p {
+    margin: 0.2rem 0 0;
+    color: #4f6785;
+  }
+
+  @media (max-width: 768px) {
+    .working-page {
+      padding: 1rem 0.8rem 2.5rem;
+    }
+
+    .hero,
+    .surface-board,
+    .limits,
+    .surface-card,
+    .group-block {
+      padding: 0.8rem;
+    }
+  }
+</style>

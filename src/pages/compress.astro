@@ -26,7 +26,7 @@ const itemListSchema = {
 
 <BaseLayout
   title="Compress"
-  description="FreeConvert-style Compress surface for Velnora with grouped media and document compression utilities."
+  description="Compress surface with browser-cached media and document compression routes built for deterministic output."
 >
   <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
 
@@ -35,15 +35,29 @@ const itemListSchema = {
   <main class="surface-page">
     <SurfaceHub surface={surface} eyebrow="Compress Surface" />
 
+    <section class="stack-panel" data-reveal>
+      <h2>Compression engine strategy</h2>
+      <p>
+        Compress utilities use browser-first execution with reusable local caching. First run loads conversion engines,
+        then repeat runs are faster because core assets are cached in the browser.
+      </p>
+      <ul>
+        <li>Media compression routes run through cached browser FFmpeg core.</li>
+        <li>Image and PDF compression uses deterministic in-browser processing.</li>
+        <li>No upload required for core compression flows in this surface.</li>
+      </ul>
+      <a href="/working-tools">Review current working compressors</a>
+    </section>
+
     <section class="surface-note" data-reveal>
       <h2>Compression roadmap</h2>
       <p>
-        Compression utilities are organized and route-live. Advanced media compression handlers will be delivered in
-        phased releases after capability and performance checks.
+        Compression utilities listed here are active routes from the current browser-supported stack.
       </p>
       <div class="links-row">
         <a href="/convert">Open Convert Surface</a>
         <a href="/utility-tools">Open Tools Surface</a>
+        <a href="/working-tools">Open Working Tools</a>
         <a href="/articles">Open Tool Articles</a>
         <a href="/tools/business-finance">See Existing Calculators</a>
       </div>
@@ -68,6 +82,40 @@ const itemListSchema = {
     background: #fffdf7;
     padding: 1rem;
     box-shadow: var(--shadow-soft);
+  }
+
+  .stack-panel {
+    border: 1px solid #d8e4f2;
+    border-radius: 0.9rem;
+    background: linear-gradient(145deg, #fefefe 0%, #f1f8ff 62%, #f3fbf7 100%);
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .stack-panel p {
+    color: #466281;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .stack-panel ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: #3f5a78;
+    display: grid;
+    gap: 0.28rem;
+  }
+
+  .stack-panel a {
+    width: fit-content;
+    border: 1px solid #d6c3a4;
+    background: #fff7e8;
+    color: #25415f;
+    border-radius: 0.48rem;
+    padding: 0.45rem 0.68rem;
+    font-weight: 700;
   }
 
   .surface-note p {

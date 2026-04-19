@@ -144,12 +144,7 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		"blog": Record<string, {
-  id: string;
-  collection: "blog";
-  data: any;
-}>;
-"data": {
+		"data": {
 "competitor-convertio-formats": {
 	id: "competitor-convertio-formats";
   collection: "data";
@@ -162,6 +157,16 @@ declare module 'astro:content' {
 };
 "prompts": {
 	id: "prompts";
+  collection: "data";
+  data: any
+};
+"seo-keywords.generated": {
+	id: "seo-keywords.generated";
+  collection: "data";
+  data: any
+};
+"seo-plan.generated": {
+	id: "seo-plan.generated";
   collection: "data";
   data: any
 };

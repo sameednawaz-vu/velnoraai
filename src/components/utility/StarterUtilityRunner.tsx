@@ -47,13 +47,13 @@ type ActionLabel = {
 };
 
 const workflowFormatsByProfile: Record<WorkflowProfile, string[]> = {
-  video: ['mp4', 'mov', 'mkv', 'avi', 'webm', 'mpeg', 'wmv', 'flv', 'm4v'],
-  audio: ['mp3', 'wav', 'ogg', 'aac', 'flac', 'm4a', 'opus', 'wma'],
-  image: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'heic', 'heif', 'bmp', 'tiff', 'avif', 'jfif', 'ico', 'rgb', 'rgba'],
-  document: ['pdf', 'docx', 'doc', 'txt', 'rtf', 'epub', 'odt', 'html', 'jpg', 'png'],
-  archive: ['zip', '7z', 'rar', 'tar', 'gz', 'bz2', 'xz'],
-  gif: ['gif', 'mp4', 'webm', 'apng', 'mov', 'avi', 'png'],
-  generic: ['txt', 'json', 'xml', 'bin'],
+  video: ['mp4', 'mov', 'mkv', 'avi', 'webm', 'mpeg'],
+  audio: ['mp3', 'wav', 'ogg', 'aac', 'flac', 'm4a'],
+  image: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg', 'avif', 'bmp', 'jfif'],
+  document: ['pdf', 'jpg', 'jpeg', 'png'],
+  archive: ['zip'],
+  gif: ['gif', 'mp4', 'webm', 'apng', 'mov', 'avi', 'png', 'jpg', 'jpeg', 'webp'],
+  generic: ['txt', 'json', 'xml', 'csv'],
 };
 
 const equivalentExtensionsByFormat: Record<string, string[]> = {
@@ -101,8 +101,6 @@ const imageOperationBySlug: Record<string, ImageOperation> = {
   'image-converter': 'convert',
   'webp-to-png': 'convert',
   'jfif-to-png': 'convert',
-  'heic-to-jpg': 'convert',
-  'heic-to-png': 'convert',
   'webp-to-jpg': 'convert',
   'svg-converter': 'convert',
   'image-compressor': 'compress',
@@ -126,7 +124,6 @@ const pdfOperationBySlug: Record<string, PdfOperation> = {
   'crop-pdf': 'crop',
   'pdf-compressor': 'compress',
   'jpg-to-pdf': 'images-to-pdf',
-  'heic-to-pdf': 'images-to-pdf',
   'organize-pdf': 'organize',
   'flatten-pdf': 'flatten',
   'unlock-pdf': 'unlock',
@@ -136,9 +133,7 @@ const pdfOperationBySlug: Record<string, PdfOperation> = {
 const fixedImageMimeBySlug: Record<string, string> = {
   'webp-to-png': 'image/png',
   'jfif-to-png': 'image/png',
-  'heic-to-png': 'image/png',
   'webp-to-jpg': 'image/jpeg',
-  'heic-to-jpg': 'image/jpeg',
   'jpeg-compressor': 'image/jpeg',
   'png-compressor': 'image/png',
 };
@@ -273,7 +268,7 @@ const detectWorkflowProfile = (toolSlug: string): WorkflowProfile => {
     return 'archive';
   }
 
-  if (toolSlug.includes('image') || toolSlug.includes('heic') || toolSlug.includes('webp') || toolSlug.includes('png') || toolSlug.includes('jpg')) {
+  if (toolSlug.includes('image') || toolSlug.includes('webp') || toolSlug.includes('png') || toolSlug.includes('jpg')) {
     return 'image';
   }
 
@@ -324,8 +319,8 @@ const getWorkflowAcceptString = (profile: WorkflowProfile): string => {
   if (profile === 'video') return 'video/*';
   if (profile === 'audio') return 'audio/*';
   if (profile === 'image') return 'image/*,.svg';
-  if (profile === 'document') return '.pdf,.doc,.docx,.txt,.rtf,.odt,.epub,.html,.jpg,.jpeg,.png';
-  if (profile === 'archive') return '.zip,.7z,.rar,.tar,.gz,.bz2,.xz';
+  if (profile === 'document') return '.pdf,.jpg,.jpeg,.png';
+  if (profile === 'archive') return '.zip';
   if (profile === 'gif') return 'image/gif,video/*,image/png';
   return '*/*';
 };
@@ -333,9 +328,9 @@ const getWorkflowAcceptString = (profile: WorkflowProfile): string => {
 const getWorkflowAcceptHint = (profile: WorkflowProfile): string => {
   if (profile === 'video') return 'Accepted: MP4, MOV, MKV, AVI, WEBM and more.';
   if (profile === 'audio') return 'Accepted: MP3, WAV, OGG, AAC, FLAC and more.';
-  if (profile === 'image') return 'Accepted: PNG, JPG, WEBP, HEIC, SVG and more.';
-  if (profile === 'document') return 'Accepted: PDF, DOCX, DOC, TXT, EPUB and related files.';
-  if (profile === 'archive') return 'Accepted: ZIP, 7Z, RAR, TAR and compressed archives.';
+  if (profile === 'image') return 'Accepted: PNG, JPG, WEBP, AVIF, GIF, SVG and JFIF.';
+  if (profile === 'document') return 'Accepted: PDF and image inputs used by the browser PDF stack.';
+  if (profile === 'archive') return 'Accepted: ZIP only in this browser-safe profile.';
   if (profile === 'gif') return 'Accepted: GIF, MP4, WEBM, APNG, MOV, AVI and PNG.';
   return 'Accepted: common file formats.';
 };
@@ -1042,9 +1037,9 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
     if (mode === 'image') {
       if (toolSlug === 'png-to-svg') {
         setTargetFormat('svg');
-      } else if (toolSlug === 'webp-to-png' || toolSlug === 'jfif-to-png' || toolSlug === 'heic-to-png') {
+      } else if (toolSlug === 'webp-to-png' || toolSlug === 'jfif-to-png') {
         setTargetFormat('png');
-      } else if (toolSlug === 'webp-to-jpg' || toolSlug === 'heic-to-jpg') {
+      } else if (toolSlug === 'webp-to-jpg') {
         setTargetFormat('jpeg');
       } else {
         setTargetFormat('jpeg');
@@ -1118,7 +1113,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
 
   const uploadHint =
     mode === 'image'
-      ? 'Accepted: PNG, JPG, WEBP, HEIC, SVG and other browser-decodable images.'
+      ? 'Accepted: PNG, JPG, WEBP, AVIF, GIF, SVG and other browser-decodable images.'
       : mode === 'pdf'
         ? isPdfImages
           ? 'Accepted: image files that can be embedded into PDF pages.'

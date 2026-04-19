@@ -14,6 +14,7 @@
 - Prefer permissive-only workflow packs for production work: MIT and Apache-2.0.
 - Defer AGPL and Noncommercial packs from production workflows.
 - Treat superpowers, UI/UX, and SEO-GEO as additive after gstack.
+- Apply the custom Ghulam Ali semantic SEO skill pack for tool-page semantic depth and technical SEO checks.
 - Keep the full rebuild plan in docs/velnora-rebuild-plan.md.
 
 ## UX/UI Skill Intake Policy
