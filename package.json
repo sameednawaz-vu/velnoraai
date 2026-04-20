@@ -40,6 +40,7 @@
     "gsc:enable-api": "node --env-file=.env.local scripts/seo/gsc-enable-api.mjs",
     "gsc:check": "node --env-file=.env.local scripts/seo/gsc-check.mjs",
     "gsc:indexing": "node --env-file=.env.local scripts/seo/gsc-request-indexing.mjs",
+    "gsc:submit-sitemaps": "node --env-file=.env.local scripts/seo/gsc-submit-sitemaps.mjs",
     "bing:check": "node --env-file=.env.local scripts/seo/bing-webmaster-check.mjs",
     "bing:submit": "node --env-file=.env.local scripts/seo/bing-submit-url.mjs",
     "audit:prod": "npm audit --omit=dev",
