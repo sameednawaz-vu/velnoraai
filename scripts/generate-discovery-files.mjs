@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const site = 'https://velnoraai.app';
@@ -205,9 +205,19 @@ function main() {
   const urls = parseLocEntries(sitemapXml);
   const stats = collectFamilyStats(urls);
 
-  writeFileSync(robotsPath, buildRobotsTxt(), 'utf-8');
-  writeFileSync(llmPath, buildLlmTxt(urls, stats), 'utf-8');
-  writeFileSync(llmsPath, buildLlmsTxt(urls, stats), 'utf-8');
+  const robotsContent = buildRobotsTxt();
+  const llmContent = buildLlmTxt(urls, stats);
+  const llmsContent = buildLlmsTxt(urls, stats);
+
+  writeFileSync(robotsPath, robotsContent, 'utf-8');
+  writeFileSync(llmPath, llmContent, 'utf-8');
+  writeFileSync(llmsPath, llmsContent, 'utf-8');
+
+  if (existsSync(resolve('dist'))) {
+    writeFileSync(resolve('dist/robots.txt'), robotsContent, 'utf-8');
+    writeFileSync(resolve('dist/llm.txt'), llmContent, 'utf-8');
+    writeFileSync(resolve('dist/llms.txt'), llmsContent, 'utf-8');
+  }
 
   console.log(`Discovery files generated from ${urls.length} sitemap URLs.`);
 }

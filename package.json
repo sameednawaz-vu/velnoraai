@@ -25,7 +25,7 @@
     "scrape:convertio": "node scripts/scrape-convertio-formats.mjs",
     "generate:wiki": "node scripts/generate-velnora-wiki.mjs",
     "refresh:intel": "npm run scrape:convertio && npm run generate:wiki",
-    "build": "npm run validate:tools && npm run validate:utility-support && npm run optimize:images && npm run generate:sitemap && npm run generate:image-sitemap && npm run generate:discovery && astro build",
+    "build": "npm run validate:tools && npm run validate:utility-support && npm run optimize:images && astro build && npm run generate:sitemap && npm run generate:image-sitemap && npm run generate:discovery",
     "check:routes": "node scripts/check-routes.mjs",
     "check:routes:deep": "node scripts/check-routes.mjs --deep",
     "check:security": "node scripts/check-security-headers.mjs",

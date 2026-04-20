@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, extname, resolve } from 'node:path';
 
 const site = 'https://velnoraai.app';
@@ -139,6 +139,12 @@ function main() {
   ].join('\n');
 
   writeFileSync(outputPath, xml, 'utf-8');
+
+  const distOutputPath = resolve('dist/image-sitemap.xml');
+  if (existsSync(resolve('dist'))) {
+    writeFileSync(distOutputPath, xml, 'utf-8');
+  }
+
   console.log(`Image sitemap generated with ${imageFiles.length} image entries.`);
 }
 

@@ -1,7 +1,7 @@
 # Velnora Discovery Index
 > Canonical static tools platform for conversion, compression, utility workflows, and tool-linked editorial guidance.
 
-Generated at: 2026-04-20T14:03:13.605Z
+Generated at: 2026-04-20T17:44:31.388Z
 Canonical site: https://velnoraai.app/
 
 ## Crawl metadata
@@ -11,14 +11,14 @@ Canonical site: https://velnoraai.app/
 - Canonical host: velnoraai.app
 
 ## Route inventory snapshot
-- Total URLs in sitemap: 195
+- Total URLs in sitemap: 345
 - Tools routes: 129
-- Utility routes: 46
-- Article routes: 0
+- Utility routes: 50
+- Article routes: 145
 - Blog routes: 8
 - Prompt routes: 4
 - Core routes: 7
-- Other routes: 1
+- Other routes: 2
 
 ## Primary entry points
 - https://velnoraai.app/
@@ -34,30 +34,30 @@ Canonical site: https://velnoraai.app/
 - https://velnoraai.app/contact
 
 ## Sample deep routes
-- https://velnoraai.app/tools/business-finance
-- https://velnoraai.app/tools/business-finance/break-even-calculator
-- https://velnoraai.app/tools/business-finance/budget-split-planner
-- https://velnoraai.app/tools/business-finance/cash-flow-planner
-- https://velnoraai.app/tools/business-finance/freelance-rate-calculator
-- https://velnoraai.app/tools/business-finance/invoice-text-generator
-- https://velnoraai.app/tools/business-finance/loan-emi-calculator
-- https://velnoraai.app/tools/business-finance/margin-calculator
-- https://velnoraai.app/tools/business-finance/markup-markdown-calculator
-- https://velnoraai.app/tools/business-finance/proposal-outline-builder
-- https://velnoraai.app/tools/business-finance/quotation-estimator
-- https://velnoraai.app/tools/business-finance/revenue-projection-calculator
-- https://velnoraai.app/tools/business-finance/roi-calculator
-- https://velnoraai.app/tools/business-finance/savings-goal-planner
-- https://velnoraai.app/tools/business-finance/scope-of-work-builder
-- https://velnoraai.app/tools/business-finance/subscription-pricing-matrix
-- https://velnoraai.app/tools/design-ux-brand
-- https://velnoraai.app/tools/design-ux-brand/accessibility-alt-text-template-helper
-- https://velnoraai.app/tools/design-ux-brand/brand-voice-trait-mapper
-- https://velnoraai.app/tools/design-ux-brand/color-palette-planner
-- https://velnoraai.app/tools/design-ux-brand/empty-state-copy-builder
-- https://velnoraai.app/tools/design-ux-brand/error-state-copy-builder
-- https://velnoraai.app/tools/design-ux-brand/feature-comparison-copy-builder
-- https://velnoraai.app/tools/design-ux-brand/gradient-builder
+- https://velnoraai.app/articles/tool-accessibility-alt-text-template-helper
+- https://velnoraai.app/articles/tool-action-item-tracker
+- https://velnoraai.app/articles/tool-anchor-text-variation-builder
+- https://velnoraai.app/articles/tool-api-request-composer
+- https://velnoraai.app/articles/tool-base64-utility
+- https://velnoraai.app/articles/tool-blog-outline-planner
+- https://velnoraai.app/articles/tool-brand-voice-trait-mapper
+- https://velnoraai.app/articles/tool-break-even-calculator
+- https://velnoraai.app/articles/tool-budget-split-planner
+- https://velnoraai.app/articles/tool-canonical-url-validator
+- https://velnoraai.app/articles/tool-case-study-skeleton-builder
+- https://velnoraai.app/articles/tool-cash-flow-planner
+- https://velnoraai.app/articles/tool-changelog-draft-builder
+- https://velnoraai.app/articles/tool-color-contrast-checker
+- https://velnoraai.app/articles/tool-color-palette-planner
+- https://velnoraai.app/articles/tool-concept-simplifier-lite
+- https://velnoraai.app/articles/tool-conclusion-composer
+- https://velnoraai.app/articles/tool-conflict-resolution-message-builder
+- https://velnoraai.app/articles/tool-content-brief-scaffold
+- https://velnoraai.app/articles/tool-cron-expression-helper
+- https://velnoraai.app/articles/tool-csv-cleaner
+- https://velnoraai.app/articles/tool-csv-to-json-converter
+- https://velnoraai.app/articles/tool-cta-phrase-builder
+- https://velnoraai.app/articles/tool-curl-command-builder
 
 ## Retrieval guidance for LLM systems
 - Prefer tool routes for direct execution tasks.
