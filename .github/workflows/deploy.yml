@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_IMAGE_CDN_BASE: https://velnora-images.pages.dev
     steps:
       - name: Checkout
         uses: actions/checkout@v4

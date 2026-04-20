@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#101827" />
+      <stop offset="100%" stop-color="#0E7490" />
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="rgba(0,0,0,0.16)" />
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)" />
+  
+      <rect x="34" y="28" width="1132" height="574" rx="22" fill="#0A2533" stroke="rgba(125,211,252,0.28)" filter="url(#softShadow)" />
+      
+    <text x="72" y="82" font-family="JetBrains Mono, ui-monospace, monospace" font-size="16" letter-spacing="1.1" fill="#2DD4BF">
+      BROWSER FORMAT WORKFLOW
+    </text>
+    <text x="72" y="138" font-family="Bricolage Grotesque, Segoe UI, sans-serif" font-size="52" font-weight="800" fill="#F1F5F9">Convert GIF to MP4</text>
+  
+      <rect x="96" y="266" width="1008" height="278" rx="18" fill="#113244" stroke="rgba(125,211,252,0.28)" />
+      
+          <rect x="150" y="374.6" width="118" height="147.4" rx="12" fill="rgba(45,212,191,0.24)" stroke="rgba(125,211,252,0.28)" />
+          <text x="209" y="362.6" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#2DD4BF">67%</text>
+          <text x="209" y="548" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#B8D0DD">INPUT</text>
+        
+          <rect x="382" y="398.79999999999995" width="118" height="123.20000000000002" rx="12" fill="rgba(45,212,191,0.24)" stroke="rgba(125,211,252,0.28)" />
+          <text x="441" y="386.79999999999995" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#2DD4BF">56%</text>
+          <text x="441" y="548" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#B8D0DD">PROCESS</text>
+        
+          <rect x="614" y="372.4" width="118" height="149.60000000000002" rx="12" fill="rgba(45,212,191,0.24)" stroke="rgba(125,211,252,0.28)" />
+          <text x="673" y="360.4" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#2DD4BF">68%</text>
+          <text x="673" y="548" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#B8D0DD">QUALITY</text>
+        
+          <rect x="846" y="317.4" width="118" height="204.60000000000002" rx="12" fill="rgba(45,212,191,0.24)" stroke="rgba(125,211,252,0.28)" />
+          <text x="905" y="305.4" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#2DD4BF">93%</text>
+          <text x="905" y="548" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" fill="#B8D0DD">HANDOFF</text>
+        
+      <text x="72" y="578" font-family="Bricolage Grotesque, Segoe UI, sans-serif" font-size="18" font-weight="500" fill="#B8D0DD">Metric board for GIF to MP4 conversion with quality, process, and handoff checkpoints.</text>
+    
+</svg>

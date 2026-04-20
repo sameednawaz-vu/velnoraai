@@ -1,0 +1,37 @@
+{
+  "pick-right-converter-tool-60-seconds": {
+    "image": "/images/blog/pick-right-converter-tool-60-seconds.svg",
+    "alt": "A format-routing visual for selecting the correct conversion tool quickly",
+    "caption": "Pick output first, validate with one sample, then run the full conversion workflow."
+  },
+  "batch-compression-workflow-faster-publishing": {
+    "image": "/images/blog/batch-compression-workflow-faster-publishing.svg",
+    "alt": "Batch compression workflow board with queues and QA checkpoints",
+    "caption": "Organize compression queues and quality checks for predictable publishing speed."
+  },
+  "file-format-decision-guide-teams": {
+    "image": "/images/blog/file-format-decision-guide-teams.svg",
+    "alt": "Decision matrix for choosing file formats by team use case",
+    "caption": "Use a shared matrix to reduce conversion mistakes across web, print, archive, and collaboration workflows."
+  },
+  "internal-linking-framework-tool-articles": {
+    "image": "/images/blog/internal-linking-framework-tool-articles.svg",
+    "alt": "Route triangle visual linking category pages, tools, and articles",
+    "caption": "Build intentional tool-to-article internal links to increase discovery and crawl depth."
+  },
+  "design-explanatory-tool-images-rank": {
+    "image": "/images/blog/design-explanatory-tool-images-rank.svg",
+    "alt": "Input-transform-output visual model for explanatory tool images",
+    "caption": "Design blog visuals that communicate workflow steps and improve image search relevance."
+  },
+  "tool-page-qa-checklist-before-publish": {
+    "image": "/images/blog/tool-page-qa-checklist-before-publish.svg",
+    "alt": "Pre-publish checklist visual for metadata, links, and runner QA",
+    "caption": "Run a practical QA checklist before publishing any tool page update."
+  },
+  "reducing-bounce-better-utility-page-copy": {
+    "image": "/images/blog/reducing-bounce-better-utility-page-copy.svg",
+    "alt": "Message hierarchy board for clearer utility page copy",
+    "caption": "Lead with actionable copy so users understand the tool before they leave the page."
+  }
+}

@@ -59,6 +59,15 @@ function extractLocEntries(xmlText) {
     .filter(Boolean);
 }
 
+function remapToOrigin(origin, routeUrl) {
+  try {
+    const parsed = new URL(routeUrl);
+    return new URL(`${parsed.pathname}${parsed.search}`, origin).toString();
+  } catch {
+    return new URL(routeUrl, origin).toString();
+  }
+}
+
 async function findWorkingSitemap(origin) {
   const candidates = ['sitemap-index.xml', 'sitemap.xml'];
 
@@ -217,17 +226,27 @@ async function main() {
   console.log(`Using sitemap: ${sitemap.sitemapUrl}`);
   const routeEntries = await collectRouteUrls(sitemap.sitemapUrl, sitemap.text);
 
-  const routeUrls = [...new Set(routeEntries.filter((entry) => typeof entry === 'string'))]
+  const discoveredUrls = [...new Set(routeEntries.filter((entry) => typeof entry === 'string'))]
     .map((entry) => entry.trim())
-    .filter(Boolean)
-    .filter((entry) => {
-      try {
-        const parsed = new URL(entry);
-        return parsed.origin === origin;
-      } catch {
-        return false;
-      }
-    });
+    .filter(Boolean);
+
+  const sourceOrigins = new Set(
+    discoveredUrls
+      .map((entry) => {
+        try {
+          return new URL(entry).origin;
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean)
+  );
+
+  if (sourceOrigins.size > 0 && !sourceOrigins.has(origin)) {
+    console.log(`Sitemap origins differ from check base (${origin}); remapping routes for validation.`);
+  }
+
+  const routeUrls = [...new Set(discoveredUrls.map((entry) => remapToOrigin(origin, entry)))];
 
   if (!routeUrls.length) {
     console.error('No same-origin route URLs found in sitemap.');

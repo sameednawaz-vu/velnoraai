@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Batch compression workflow for faster publishing</title>
+  <desc id="desc">Visual plan showing queue setup, profile presets, and QA loops.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#065f46" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="80" y="80" width="1040" height="470" rx="30" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" />
+  <text x="120" y="180" fill="#ecfeff" font-family="Georgia, Times New Roman, serif" font-size="54" font-weight="700">Batch compression workflow</text>
+  <text x="120" y="245" fill="#ecfeff" font-family="Georgia, Times New Roman, serif" font-size="54" font-weight="700">for faster publishing</text>
+  <text x="120" y="320" fill="#ccfbf1" font-family="Trebuchet MS, Arial, sans-serif" font-size="30">Queue by format. Apply presets. Validate quality before release.</text>
+  <g fill="#0ea5e9" opacity="0.9">
+    <rect x="120" y="380" width="180" height="120" rx="16" />
+    <rect x="330" y="380" width="180" height="120" rx="16" />
+    <rect x="540" y="380" width="180" height="120" rx="16" />
+  </g>
+  <g fill="#fefce8" font-family="Trebuchet MS, Arial, sans-serif" font-size="25" font-weight="700" text-anchor="middle">
+    <text x="210" y="450">Image queue</text>
+    <text x="420" y="450">PDF queue</text>
+    <text x="630" y="450">Asset queue</text>
+  </g>
+  <circle cx="930" cy="440" r="84" fill="#f59e0b" opacity="0.92" />
+  <text x="930" y="432" text-anchor="middle" fill="#3b1f00" font-family="Trebuchet MS, Arial, sans-serif" font-size="28" font-weight="700">QA</text>
+  <text x="930" y="468" text-anchor="middle" fill="#3b1f00" font-family="Trebuchet MS, Arial, sans-serif" font-size="22">before ship</text>
+</svg>

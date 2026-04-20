@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "pick-right-converter-tool-60-seconds",
+    "title": "The 60-Second Decision: Choosing Your Conversion Engine",
+    "designGoal": "A minimalist editorial header featuring #F2EAD8 background with sharp #0E0C09 typography. Accentuate decision points with #C8A84B borders.",
+    "layout": "split-hero-vertical",
+    "copyOverlay": "Efficiency meets precision. Master the art of the 60-second tool selection.",
+    "altText": "A sleek interface mockup showing a conversion selection tool in gold and black tones.",
+    "caption": "Rapid tool selection: where speed meets technical accuracy."
+  },
+  {
+    "slug": "batch-compression-workflow-faster-publishing",
+    "title": "Velocity at Scale: The Batch Compression Manifesto",
+    "designGoal": "High-contrast editorial layout. Use #0E0C09 for the main canvas with #C8A84B typographic highlights to signify speed and volume.",
+    "layout": "grid-overlay-feature",
+    "copyOverlay": "Scale your output without compromising the aesthetic. Batch workflows for the modern publisher.",
+    "altText": "Visual representation of multiple file icons merging into a compressed gold-accented lightning bolt.",
+    "caption": "Transforming bulk processing from a bottleneck into a competitive advantage."
+  },
+  {
+    "slug": "file-format-decision-guide-teams",
+    "title": "The Team Standard: A Unified Guide to File Formats",
+    "designGoal": "Structured editorial grid. Neutral #F2EAD8 base with #0E0C09 dividers and #C8A84B icons for different file types.",
+    "layout": "tri-column-clean",
+    "copyOverlay": "Alignment is the ultimate efficiency. Establish your team's format hierarchy.",
+    "altText": "A sophisticated flowchart showing team decision paths between WebP, PNG, and JPEG.",
+    "caption": "Standardization is the bridge between creative vision and technical delivery."
+  },
+  {
+    "slug": "internal-linking-framework-tool-articles",
+    "title": "The Architecture of Authority: Internal Linking for Tools",
+    "designGoal": "Abstract architectural style. Use #0E0C09 background with thin #C8A84B lines connecting content nodes.",
+    "layout": "asymmetric-editorial",
+    "copyOverlay": "Build a web of relevance. Connect your utility tools to your deep-dive insights.",
+    "altText": "Abstract gold lines connecting dark geometric shapes representing tool pages.",
+    "caption": "Mapping the user journey through technical utility and educational context."
+  },
+  {
+    "slug": "design-explanatory-tool-images-rank",
+    "title": "Visual Logic: Designing Tool Imagery That Ranks",
+    "designGoal": "Magazine-style spread. Large #F2EAD8 white space with bold #0E0C09 serif headlines and #C8A84B call-to-action elements.",
+    "layout": "full-bleed-visual",
+    "copyOverlay": "Images that explain. Visuals that dominate the search landscape.",
+    "altText": "A side-by-side comparison of a standard screenshot vs. a high-end editorial explanatory graphic.",
+    "caption": "Converting complex technical processes into intuitive visual narratives."
+  },
+  {
+    "slug": "tool-page-qa-checklist-before-publish",
+    "title": "The Pre-Flight Protocol: Tool Page QA Excellence",
+    "designGoal": "Technical but elegant. A #0E0C09 sidebar with a #F2EAD8 main body. Use #C8A84B for checkmark iconography.",
+    "layout": "checklist-sidebar-right",
+    "copyOverlay": "The final barrier between 'functional' and 'flawless'. Your pre-publication checklist.",
+    "altText": "A stylized checklist featuring gold embossed icons on a deep black background.",
+    "caption": "Rigorous quality assurance as the foundation of user trust."
+  },
+  {
+    "slug": "reducing-bounce-better-utility-page-copy",
+    "title": "The Hook of Utility: Reducing Bounce with Better Copy",
+    "designGoal": "Focus on readability. Soft #F2EAD8 background with elegant #0E0C09 body text and #C8A84B pulled quotes.",
+    "layout": "centered-typography-focus",
+    "copyOverlay": "Keep them for the tool, stay for the value. Refining the voice of utility.",
+    "altText": "Typography-driven design showcasing the transition from technical jargon to engaging editorial copy.",
+    "caption": "Merging functional instruction with compelling editorial narrative to retain users."
+  }
+]

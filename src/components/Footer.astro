@@ -1,328 +1,208 @@
 ---
-import catalog from '../content/data/freeconvert-catalog.json';
 import toolsData from '../content/data/tools.json';
-import competitorFormats from '../content/data/competitor-convertio-formats.json';
-import { toolArticleCount } from '../lib/article-catalog';
+import catalog from '../content/data/freeconvert-catalog.json';
+import { blogPosts } from '../content/data/blog-posts';
 
 const publishedTools = toolsData.tools.filter((tool) => tool.status === 'published').length;
 const utilityToolCount = catalog.surfaces.reduce(
   (count, surface) => count + surface.groups.reduce((groupCount, group) => groupCount + group.tools.length, 0),
   0
 );
-const utilityCategoryCount = catalog.surfaces.reduce((count, surface) => count + surface.groups.length, 0);
-const totalCategoryCount = toolsData.categories.length + utilityCategoryCount;
-const totalLiveTools = publishedTools + utilityToolCount;
-const capabilityCount = publishedTools + utilityToolCount + competitorFormats.totals.formats;
+const liveToolCount = publishedTools + utilityToolCount;
 ---
 
 <footer class="site-footer">
-  <div class="footer-motion" aria-hidden="true">
-    <div class="footer-motion-pattern"></div>
-    <div class="footer-motion-mask"></div>
-  </div>
-
-  <div class="footer-shell">
-    <section class="footer-banner" data-reveal>
-      <div>
-        <p class="banner-kicker">World Largest Free Tools Library</p>
-        <h2>Free tools for conversion, compression, productivity, and delivery.</h2>
-        <p class="banner-copy">
-          Use {totalLiveTools.toLocaleString('en-US')} live tools across {totalCategoryCount} categories, plus
-          {` ${competitorFormats.totals.formats.toLocaleString('en-US')}`} conversion format pathways and
-          {` ${toolArticleCount.toLocaleString('en-US')}`} SEO and GEO article guides.
-        </p>
+  <section class="footer-main">
+    <div class="footer-brand">
+      <p class="footer-kicker">Velnora Free Tools</p>
+      <h2>Velnora</h2>
+      <p>
+        A curated index of practical browser workflows with {liveToolCount} free tools and {blogPosts.length} blog
+        guides for conversion, compression, and utility execution.
+      </p>
+      <div class="footer-actions">
+        <a href="/tools#tool-search">Search all tools</a>
+        <a href="/blog">Read practical guides</a>
       </div>
-
-      <div class="banner-actions">
-        <a class="banner-primary" href="/tools">Open {totalLiveTools.toLocaleString('en-US')} Free Tools</a>
-        <a class="banner-secondary" href="/articles">Read {toolArticleCount.toLocaleString('en-US')} Articles</a>
-        <a class="banner-secondary" href="/contact">Discuss a Use Case</a>
-      </div>
-    </section>
-
-    <div class="footer-grid">
-      <div class="footer-section brand">
-        <h3>Velnora</h3>
-        <p>
-          Product-first AI utility platform focused on practical workflows, high-clarity UX, and browser-first
-          execution.
-        </p>
-      </div>
-
-      <div class="footer-section">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/convert">Convert</a></li>
-          <li><a href="/compress">Compress</a></li>
-          <li><a href="/utility-tools">Tools</a></li>
-          <li><a href="/tools">All Categories</a></li>
-          <li><a href="/learning-hub">Learning Hub</a></li>
-          <li><a href="/library">Library</a></li>
-          <li><a href="/articles">Articles</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Tool Surfaces</h4>
-        <ul>
-          <li><a href="/convert">Video and Audio Convert</a></li>
-          <li><a href="/convert">Image Convert</a></li>
-          <li><a href="/compress">Image and PDF Compress</a></li>
-          <li><a href="/utility-tools">Image and PDF Utility Tools</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a></li>
-          <li>
-            <a href="https://linkedin.com/in/sameed-nawaz-pak" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </li>
-          <li><a href="https://sameednawaz.tech/" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
-        </ul>
+      <div class="footer-dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <p>&copy; 2026 Velnora. Built by Sameed Nawaz.</p>
-    <div class="footer-status">
-      <span>{totalLiveTools.toLocaleString('en-US')} free tools</span>
-      <span>{totalCategoryCount} managed categories</span>
-      <span>{toolArticleCount.toLocaleString('en-US')} SEO articles</span>
-      <span>{capabilityCount.toLocaleString('en-US')} capability index</span>
+    <div class="footer-column">
+      <h3>Directory</h3>
+      <a href="/tools">Tools</a>
+      <a href="/convert">Convert</a>
+      <a href="/compress">Compress</a>
+      <a href="/utility-tools">Utility Tools</a>
     </div>
-  </div>
+
+    <div class="footer-column">
+      <h3>Insight</h3>
+      <a href="/blog">Blog</a>
+      <a href="/learning-hub">Learning Hub</a>
+      <a href="/library">Library</a>
+      <a href="/tools">Tool updates</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Company</h3>
+      <a href="/about">About</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </section>
+
+  <section class="footer-bottom">
+    <span>© 2026 velnoraai.app</span>
+    <span>Edition 2026 · Obsidian and Gold</span>
+    <span>Built for execution-first workflows</span>
+  </section>
 </footer>
 
 <style>
   .site-footer {
-    position: relative;
-    margin-top: 4rem;
-    border-top: 1px solid rgba(209, 187, 152, 0.5);
-    background: linear-gradient(145deg, #fff2d3 0%, #f4dfb4 100%);
+    margin-top: 2.6rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-background);
+    padding: 1.35rem 1rem 0.9rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .footer-main {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-card-bg) 95%, transparent);
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: minmax(320px, 1.55fr) repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .footer-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.21em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-secondary) 92%, var(--color-text));
+    margin-bottom: 0.52rem;
+  }
+
+  .footer-brand h2 {
+    font-size: clamp(2.1rem, 3.8vw, 2.75rem);
+    line-height: 1;
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--color-primary);
-    overflow: hidden;
-    isolation: isolate;
   }
 
-  .footer-motion {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
+  .footer-brand p {
+    color: color-mix(in srgb, var(--color-text) 88%, transparent);
+    line-height: 1.68;
+    font-size: 0.88rem;
+    max-width: 39ch;
   }
 
-  .footer-motion-mask {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background:
-      radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.18), rgba(255, 244, 222, 0.95) 64%),
-      linear-gradient(180deg, rgba(255, 247, 232, 0.38), rgba(249, 228, 191, 0.82));
-  }
-
-  .footer-motion-pattern {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background-image:
-      linear-gradient(rgba(30, 56, 88, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30, 56, 88, 0.07) 1px, transparent 1px),
-      radial-gradient(circle at 12% 24%, rgba(255, 186, 76, 0.2), transparent 34%),
-      radial-gradient(circle at 82% 16%, rgba(40, 104, 173, 0.14), transparent 36%);
-    background-size: 28px 28px, 28px 28px, auto, auto;
-    opacity: 0.8;
-  }
-
-  .footer-shell {
-    max-width: 1220px;
-    margin: 0 auto;
-    padding: 2.4rem 2rem 2.2rem;
-    position: relative;
-    z-index: 3;
-    display: grid;
-    gap: 1.3rem;
-  }
-
-  .footer-banner {
-    border: 1px solid rgba(40, 63, 94, 0.17);
-    border-radius: 0.98rem;
-    background: linear-gradient(135deg, rgba(24, 45, 76, 0.92), rgba(14, 115, 128, 0.88));
-    color: #f5f9ff;
-    padding: 1.15rem 1.1rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
-    box-shadow: 0 18px 38px rgba(20, 42, 68, 0.2);
-  }
-
-  .banner-kicker {
-    font-size: 0.74rem;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #ffc85f;
-    margin-bottom: 0.38rem;
-  }
-
-  .footer-banner h2 {
-    color: #ffffff;
-    font-size: clamp(1.2rem, 2.1vw, 1.7rem);
-    margin-bottom: 0.35rem;
-  }
-
-  .banner-copy {
-    color: rgba(238, 245, 255, 0.9);
-    max-width: 60ch;
-  }
-
-  .banner-actions {
+  .footer-actions {
+    margin-top: 0.9rem;
     display: flex;
-    align-items: center;
-    gap: 0.65rem;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    gap: 0.56rem;
   }
 
-  .banner-primary,
-  .banner-secondary {
-    border-radius: 0.58rem;
-    border: 1px solid transparent;
-    padding: 0.56rem 0.82rem;
-    font-weight: 700;
-    font-size: 0.86rem;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
-  }
-
-  .banner-primary {
-    background: #ffc53d;
-    color: #1f334f;
-  }
-
-  .banner-primary:hover {
-    color: #16263c;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(17, 31, 50, 0.24);
-  }
-
-  .banner-secondary {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.34);
-    color: #f6f9ff;
-  }
-
-  .banner-secondary:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.24);
-    transform: translateY(-1px);
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.4rem;
-  }
-
-  .footer-section h3 {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    margin-bottom: 0.6rem;
-    background: linear-gradient(135deg, #1a2f4b, #0a8a82);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .footer-section h4 {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    margin-bottom: 0.45rem;
-    color: #8a531f;
-  }
-
-  .footer-section p {
-    line-height: 1.62;
-    color: #40506c;
-  }
-
-  .footer-section ul {
-    list-style: none;
-    display: grid;
-    gap: 0.34rem;
-  }
-
-  .footer-section a {
-    color: #2b3f5c;
-    font-size: 0.92rem;
-    width: fit-content;
+  .footer-actions a {
+    border: 1px solid color-mix(in srgb, var(--color-border) 94%, transparent);
     border-radius: 0.35rem;
-    padding: 0.12rem 0.24rem;
-    margin-left: -0.24rem;
-    transition: color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
+    padding: 0.45rem 0.72rem;
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-card-bg) 96%, transparent);
   }
 
-  .footer-section a:hover {
-    color: #17385a;
-    background: rgba(255, 255, 255, 0.42);
-    transform: translateX(2px);
+  .footer-actions a:hover {
+    border-color: color-mix(in srgb, var(--color-secondary) 64%, transparent);
+    background: color-mix(in srgb, var(--color-secondary) 8%, transparent);
+  }
+
+  .footer-dots {
+    margin-top: 1rem;
+    display: inline-flex;
+    gap: 0.42rem;
+  }
+
+  .footer-dots span {
+    width: 0.76rem;
+    height: 0.76rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-secondary) 24%, transparent);
+  }
+
+  .footer-column {
+    display: grid;
+    align-content: start;
+    gap: 0.38rem;
+  }
+
+  .footer-column h3 {
+    margin: 0 0 0.34rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-family: var(--font-mono);
+    color: color-mix(in srgb, var(--color-secondary) 94%, var(--color-text));
+  }
+
+  .footer-column a {
+    font-size: 1rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    color: color-mix(in srgb, var(--color-text) 94%, transparent);
+  }
+
+  .footer-column a:hover {
+    color: color-mix(in srgb, var(--color-secondary) 90%, var(--color-text));
   }
 
   .footer-bottom {
-    position: relative;
-    z-index: 3;
-    padding: 1rem 2rem 1.3rem;
-    border-top: 1px solid rgba(35, 53, 82, 0.14);
-    color: #435776;
+    border-top: 1px solid var(--color-border);
+    padding-top: 0.72rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.9rem;
-    flex-wrap: wrap;
-    max-width: 1220px;
-    margin: 0 auto;
+    gap: 0.72rem;
+    font-size: 0.64rem;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
   }
 
-  .footer-status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-status span {
-    border: 1px solid rgba(43, 63, 92, 0.2);
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 999px;
-    padding: 0.22rem 0.55rem;
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: #2b3f5c;
-  }
-
-  @media (max-width: 980px) {
-    .footer-banner {
-      grid-template-columns: 1fr;
-    }
-
-    .banner-actions {
-      justify-content: flex-start;
-    }
-  }
-
-  @media (max-width: 800px) {
-    .footer-shell {
-      padding: 2rem 1rem 1.9rem;
+  @media (max-width: 960px) {
+    .footer-main {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .footer-bottom {
-      padding: 0.95rem 1rem 1.15rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-footer {
+      padding: 1rem 0.8rem;
+    }
+
+    .footer-main {
+      grid-template-columns: 1fr;
+      padding: 1rem;
     }
   }
 </style>

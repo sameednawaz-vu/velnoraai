@@ -48,7 +48,7 @@ export default function AetherFlowHero({
   subtitle = 'World largest free tools library for practical execution',
   description = 'Open free tools by category, run workflows immediately, and ship cleaner output without signup friction.',
   primaryHref = '/tools',
-  secondaryHref = '/articles',
+  secondaryHref = '/blog',
   tertiaryHref = '/learning-hub',
 }: AetherFlowHeroProps) {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
@@ -258,7 +258,7 @@ export default function AetherFlowHero({
             <ArrowRight size={18} />
           </a>
           <a href={secondaryHref} className="aether-btn aether-btn-primary">
-            Read Tool Articles
+            Read Blog Guides
           </a>
           <a href={tertiaryHref} className="aether-btn aether-btn-ghost">
             <WandSparkles size={16} />

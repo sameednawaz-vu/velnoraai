@@ -31,6 +31,10 @@ Use this catalog at the start of every UX/UI design task.
   - Repo: https://github.com/obra/superpowers
   - Usage: additive prompt/system capability layer.
 
+- OpenSpace
+  - Repo: https://github.com/HKUDS/OpenSpace
+  - Usage: host-skill integration, workflow grounding, and skill-evolution references.
+
 - Ruflo
   - Repo: https://github.com/ruvnet/ruflo
   - Usage: workflow acceleration and structured execution patterns.

@@ -1,0 +1,47 @@
+/* Reference homepage theme variables and helpers from Design-only-2 */
+:root {
+  --color-obsidian: #0E0C09;
+  --color-cream: #F2EAD8;
+  --color-gold: #C8A84B;
+
+  --color-app-bg: var(--bg);
+  --color-app-text: var(--text);
+  --color-app-sep: var(--sep);
+  --color-app-card-bg: var(--card-bg);
+  --color-app-line: var(--line);
+  --color-app-muted: var(--muted);
+
+  --font-display: "Georgia", serif;
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+}
+
+:root {
+  --bg: #0E0C09;
+  --text: #F2EAD8;
+  --sep: rgba(242, 234, 216, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --line: rgba(242, 234, 216, 0.1);
+  --muted: #7A6D5E;
+}
+
+.light {
+  --bg: #F2EAD8;
+  --text: #0E0C09;
+  --sep: rgba(14, 12, 9, 0.1);
+  --card-bg: rgba(14, 12, 9, 0.02);
+  --line: rgba(14, 12, 9, 0.1);
+  --muted: #5A5248;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.will-change-transform {
+  will-change: transform;
+}

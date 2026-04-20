@@ -20,6 +20,8 @@
    - npm run audit:prod
 
 2. Add security headers at the edge layer (recommended through Cloudflare, Nginx, or hosting proxy):
+   - Baseline file for Cloudflare Pages is now included at `public/_headers`.
+   - If serving through Cloudflare proxy in front of GitHub Pages, mirror the same values via Cloudflare Transform Rules.
    - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
    - Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
    - X-Content-Type-Options: nosniff

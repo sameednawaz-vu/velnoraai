@@ -251,7 +251,7 @@ Rebuild the current Astro site into a tools-first static platform that can scale
 60. All rules remain versioned in one governance document.
 
 ## Batch Plan
-- Batch A: core AI, SEO, and writing tools.
+- Batch A: core workflow, SEO, and writing tools.
 - Batch B: business and productivity tools.
 - Batch C: developer and data tools.
 - Batch D: education and communication tools.

@@ -1,12 +1,12 @@
-# Velnora - Elegant AI Intelligence Engine
+# Velnora - Free Tools Website
 
-A modern, SEO-optimized website built with Astro featuring 3D graphics, a comprehensive prompt library, and educational content on AI and prompt engineering.
+A modern, SEO-optimized Astro website focused on free conversion, compression, utility, and professional workflow tools with strong article support.
 
 ## Features
 
 - ✅ **3D Homepage** - Interactive Three.js animations with magnetic effects
-- ✅ **Prompt Library** - 12+ pre-built prompts across 4 categories
-- ✅ **7 Launch Articles** - Comprehensive blog content on AI and prompting
+- ✅ **Workflow Library** - Reusable templates and guided workflows
+- ✅ **Article System** - Tool-linked SEO and GEO article routes
 - ✅ **SEO Optimized** - Schema.org markup, sitemap, meta tags
 - ✅ **GitHub Pages Ready** - Static generation, automated CI/CD deployment
 - ✅ **Contact Form** - Formspree integration with reCAPTCHA v3
@@ -22,8 +22,8 @@ velnora-website/
 │   ├── pages/
 │   │   ├── index.astro                  # Homepage with 3D hero
 │   │   ├── about.astro                  # About page
-│   │   ├── learning-hub.astro           # AI learning guides
-│   │   ├── library.astro                # Prompts library overview
+│   │   ├── learning-hub.astro           # Tool workflow learning guides
+│   │   ├── library.astro                # Workflow library overview
 │   │   ├── contact.astro                # Contact page
 │   │   ├── blog/
 │   │   │   ├── index.astro              # Blog listing
@@ -153,9 +153,9 @@ const posts = [
 ];
 ```
 
-### Adding Prompts
+### Adding Workflow Templates
 
-Update `src/content/prompts.json` to add new prompts:
+Update `src/content/prompts.json` to add reusable templates:
 
 ```json
 {

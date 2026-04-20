@@ -2,5 +2,6 @@ node_modules/
 dist/
 .env
 .env.local
+celtic-list-431817-r3-70e47345c5a7.json
 *.log
 .DS_Store

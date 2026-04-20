@@ -6,6 +6,8 @@ import './starter-utility-runner.css';
 
 type Props = {
   toolSlug: string;
+  surfaceSlug?: string;
+  surfaceToolSlugs?: string[];
 };
 
 type QualityPreset = 'high' | 'balanced' | 'small';
@@ -154,6 +156,8 @@ const fileSizeLabel = (bytes: number): string => {
   }
   return `${value.toFixed(value >= 100 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
 };
+
+const isCompressionRoute = (slug: string): boolean => slug.includes('compress');
 
 const toNumberOr = (value: string, fallback: number): number => {
   const parsed = Number(value);
@@ -896,7 +900,7 @@ const rgbToHsl = (r: number, g: number, b: number) => {
   };
 };
 
-export default function StarterUtilityRunner({ toolSlug }: Props) {
+export default function StarterUtilityRunner({ toolSlug, surfaceSlug = 'convert', surfaceToolSlugs = [] }: Props) {
   const mode: RunnerMode = useMemo(() => {
     if (toolSlug === 'unit-converter') return 'unit';
     if (toolSlug === 'time-converter') return 'time';
@@ -908,6 +912,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
 
   const imageOperation = imageOperationBySlug[toolSlug];
   const pdfOperation = pdfOperationBySlug[toolSlug];
+  const compressionRoute = isCompressionRoute(toolSlug);
 
   const [value, setValue] = useState('1');
   const [fromUnit, setFromUnit] = useState('m');
@@ -948,6 +953,10 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
   const [workflowExtra, setWorkflowExtra] = useState('');
   const workflowProfile = useMemo<WorkflowProfile>(() => detectWorkflowProfile(toolSlug), [toolSlug]);
   const workflowFormatOptions = useMemo(() => getWorkflowFormatOptions(toolSlug, workflowProfile), [toolSlug, workflowProfile]);
+  const surfaceToolSlugSet = useMemo(
+    () => new Set((surfaceToolSlugs ?? []).map((entry) => String(entry).trim()).filter(Boolean)),
+    [surfaceToolSlugs]
+  );
   const [workflowFromFormat, setWorkflowFromFormat] = useState(() => getDefaultWorkflowFormats(toolSlug, workflowProfile).from);
   const [workflowToFormat, setWorkflowToFormat] = useState(() => getDefaultWorkflowFormats(toolSlug, workflowProfile).to);
   const [workflowResult, setWorkflowResult] = useState('');
@@ -982,6 +991,20 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
   const isPdfMerge = pdfOperation === 'merge';
   const isPdfImages = pdfOperation === 'images-to-pdf';
   const acceptsMultiple = mode === 'pdf' && (isPdfMerge || isPdfImages);
+
+  const navigateToSurfaceTool = (targetSlug: string, fromFormat: string, toFormat: string): boolean => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    if (!targetSlug || targetSlug === toolSlug || !surfaceToolSlugSet.has(targetSlug)) {
+      return false;
+    }
+
+    const nextUrl = `/utility/${surfaceSlug}/${targetSlug}?from=${encodeURIComponent(fromFormat)}&to=${encodeURIComponent(toFormat)}`;
+    window.location.assign(nextUrl);
+    return true;
+  };
 
   const unitResult = useMemo(() => {
     const parsed = Number(value);
@@ -1051,6 +1074,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
     setWorkflowResult('');
     setWorkflowInput(withInputExtension('input', defaults.from));
     setWorkflowOutputName(withOutputExtension(`output-${toolSlug}`, defaults.to));
+    setWorkflowPreset(compressionRoute ? 'small' : 'balanced');
     setWorkflowFromFormat(defaults.from);
     setWorkflowToFormat(defaults.to);
     setCopied(false);
@@ -1063,7 +1087,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
       }
       return null;
     });
-  }, [toolSlug, workflowProfile, mode]);
+  }, [toolSlug, workflowProfile, mode, compressionRoute]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -1141,10 +1165,27 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
     let selected = files;
 
     if (mode === 'workflow') {
-      const matched = files.filter((file) => doesFileMatchFormat(file.name, workflowFromFormat));
+      const firstDetected = files[0];
+      const detectedExtension = normalizeWorkflowFormatLoose(getFileExtension(firstDetected?.name ?? ''), workflowFromFormat);
+      let effectiveFrom = workflowFromFormat;
+
+      if (detectedExtension && detectedExtension !== workflowFromFormat) {
+        const directTargetSlug = `${detectedExtension}-to-${workflowToFormat}`;
+        if (navigateToSurfaceTool(directTargetSlug, detectedExtension, workflowToFormat)) {
+          return;
+        }
+
+        if (workflowFormatOptions.includes(detectedExtension)) {
+          effectiveFrom = detectedExtension;
+          setWorkflowFromFormat(detectedExtension);
+          setStatus(`Detected ${detectedExtension.toUpperCase()} source file. Updated source format automatically.`);
+        }
+      }
+
+      const matched = files.filter((file) => doesFileMatchFormat(file.name, effectiveFrom));
       if (matched.length === 0) {
         setStatus('');
-        setError(`Please upload a ${getFormatLabel(workflowFromFormat)} file to match the selected source format.`);
+        setError(`Please upload a ${getFormatLabel(effectiveFrom)} file to match the selected source format.`);
         if (uploadInputRef.current) {
           uploadInputRef.current.value = '';
         }
@@ -1168,6 +1209,7 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
       if (first) {
         setWorkflowInput(first.name);
         setWorkflowOutputName(withOutputExtension(getBaseName(first.name), workflowToFormat));
+        setError('');
       }
     }
   };
@@ -1355,6 +1397,15 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
     const extension = extForMime(outputMime);
     const outputName = `${getBaseName(singleFile.name)}-${toolSlug}.${extension}`;
 
+    if ((imageOperation === 'compress' || compressionRoute) && blob.size >= singleFile.size) {
+      publishBlob(
+        singleFile,
+        singleFile.name,
+        `Compression guard kept original file because output would increase size (${fileSizeLabel(singleFile.size)} -> ${fileSizeLabel(blob.size)}).`
+      );
+      return;
+    }
+
     publishBlob(
       blob,
       outputName,
@@ -1475,6 +1526,14 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
         output.addPage(page);
       }
       const bytes = await output.save({ useObjectStreams: true });
+      if (bytes.length >= singleFile.size) {
+        publishBlob(
+          singleFile,
+          singleFile.name,
+          `Compression guard kept original PDF because output would increase size (${fileSizeLabel(singleFile.size)} -> ${fileSizeLabel(bytes.length)}).`
+        );
+        return;
+      }
       publishBlob(pdfBlobFromBytes(bytes), `compressed-${toolSlug}.pdf`, `Rebuilt PDF object stream for optimized output size.`);
       return;
     }
@@ -1637,6 +1696,27 @@ export default function StarterUtilityRunner({ toolSlug }: Props) {
       const outputExtension = getFileExtension(plan.output);
       const outputMime = mimeByExtension[outputExtension] ?? 'application/octet-stream';
       const outputBlob = bytesToBlob(data, outputMime);
+
+      if (compressionRoute && outputBlob.size >= singleFile.size) {
+        publishBlob(
+          singleFile,
+          singleFile.name,
+          `Compression guard kept original file because output would increase size (${fileSizeLabel(singleFile.size)} -> ${fileSizeLabel(outputBlob.size)}).`
+        );
+        setWorkflowOutputName(singleFile.name);
+        setWorkflowResult(
+          buildWorkflowOutput(
+            toolSlug,
+            sourceName,
+            singleFile.name,
+            workflowPreset,
+            workflowExtra,
+            sourceExtension,
+            workflowToFormat
+          )
+        );
+        return;
+      }
 
       publishBlob(outputBlob, plan.output, `Converted ${singleFile.name} to ${plan.output}.`);
       setWorkflowOutputName(plan.output);

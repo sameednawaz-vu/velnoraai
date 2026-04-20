@@ -1,0 +1,294 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface RelatedItem {
+  slug: string;
+  title: string;
+  href: string;
+}
+
+interface RelatedToolItem {
+  name: string;
+  href: string;
+}
+
+interface VisualEntry {
+  imageWebp: string;
+  imageAvif: string;
+  imageFallback: string;
+  alt: string;
+  caption: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  toolName: string;
+  updatedDate: string;
+  familyLabel: string;
+  articleTypeLabel: string;
+  sectionLabel: string;
+  clusterLabel: string;
+  toolHref: string;
+  relatedTools: RelatedToolItem[];
+  relatedArticles: RelatedItem[];
+  visual: VisualEntry;
+}
+
+const {
+  title,
+  description,
+  toolName,
+  updatedDate,
+  familyLabel,
+  articleTypeLabel,
+  sectionLabel,
+  clusterLabel,
+  toolHref,
+  relatedTools,
+  relatedArticles,
+  visual,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} article={true} publishedDate={updatedDate}>
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <slot name="schemas" />
+
+  <Header />
+
+  <main class="page-shell article-page">
+    <div class="breadcrumb" data-reveal>
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/blog">Blog</a>
+      <span>/</span>
+      <span>{toolName}</span>
+    </div>
+
+    <article class="section-panel article-shell" data-reveal>
+      <header class="article-header">
+        <p class="eyebrow">{familyLabel}</p>
+        <h1>{title}</h1>
+        <p class="lede">{description}</p>
+        <p class="author-line">By Velnora Editorial Team · Updated {updatedDate}</p>
+        <div class="meta-row">
+          <span>{articleTypeLabel}</span>
+          <span>{sectionLabel}</span>
+          <span>{clusterLabel}</span>
+          <span>Updated {updatedDate}</span>
+          <span>Free to use</span>
+        </div>
+      </header>
+
+      <figure class="article-visual">
+        <picture>
+          <source srcset={visual.imageAvif} type="image/avif" />
+          <source srcset={visual.imageWebp} type="image/webp" />
+          <img src={visual.imageFallback} alt={visual.alt} width="1200" height="630" loading="lazy" decoding="async" />
+        </picture>
+        <figcaption>{visual.caption}</figcaption>
+      </figure>
+
+      <slot />
+
+      <section>
+        <h2>Related tools</h2>
+        <ul class="related-tool-list">
+          {relatedTools.map((entry) => (
+            <li>
+              <a href={entry.href}>{entry.name}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="article-actions">
+        <a class="btn-link primary" href={toolHref}>Open {toolName}</a>
+        <a class="btn-link" href="/blog">Browse blog guides</a>
+      </section>
+    </article>
+
+    <section class="section-panel related-articles" data-reveal>
+      <h2>Related guides</h2>
+      <ul>
+        {relatedArticles.map((entry) => (
+          <li>
+            <a href={entry.href}>{entry.title}</a>
+            <span>Related workflow</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .article-page {
+    max-width: 980px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+  }
+
+  .article-shell {
+    display: grid;
+    gap: 0.95rem;
+  }
+
+  .article-header {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 18%, transparent);
+    padding-bottom: 0.72rem;
+  }
+
+  .author-line {
+    margin-top: 0.46rem;
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+  }
+
+  .meta-row {
+    margin-top: 0.55rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .meta-row span {
+    border: 1px solid color-mix(in srgb, var(--color-accent) 34%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-accent) 11%, transparent);
+    color: color-mix(in srgb, var(--color-text) 88%, transparent);
+    font-size: 0.7rem;
+    padding: 0.18rem 0.48rem;
+  }
+
+  .article-visual {
+    margin: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 0.8rem;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-card-bg) 94%, transparent);
+  }
+
+  .article-visual picture,
+  .article-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .article-visual figcaption {
+    padding: 0.56rem 0.68rem;
+    font-size: 0.76rem;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    line-height: 1.5;
+  }
+
+  .article-shell section h2,
+  .related-articles h2 {
+    margin-bottom: 0.38rem;
+    font-size: 1.15rem;
+  }
+
+  .article-shell p {
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
+    line-height: 1.67;
+    margin-bottom: 0.46rem;
+  }
+
+  .article-shell ol,
+  .article-shell ul {
+    padding-left: 1.05rem;
+    display: grid;
+    gap: 0.34rem;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
+    line-height: 1.6;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.38rem;
+  }
+
+  .faq-list dt {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .faq-list dd {
+    margin: 0 0 0.3rem;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
+    line-height: 1.55;
+  }
+
+  .related-tool-list {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .related-tool-list li {
+    list-style: disc;
+  }
+
+  .related-tool-list a {
+    color: var(--color-secondary);
+    font-weight: 700;
+  }
+
+  .article-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .related-articles ul {
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .related-articles li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-bottom: 1px dashed color-mix(in srgb, var(--color-text) 18%, transparent);
+    padding-bottom: 0.28rem;
+  }
+
+  .related-articles li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .related-articles a {
+    color: var(--color-primary);
+    font-size: 0.82rem;
+  }
+
+  .related-articles span {
+    color: color-mix(in srgb, var(--color-text) 66%, transparent);
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 720px) {
+    .related-articles li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.12rem;
+    }
+  }
+</style>

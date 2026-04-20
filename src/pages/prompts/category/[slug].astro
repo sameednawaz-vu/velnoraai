@@ -18,149 +18,135 @@ const categoryData = promptsData.categories[slug as keyof typeof promptsData.cat
 if (!categoryData) {
   throw new Error(`Category ${slug} not found`);
 }
+
+const categorySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${categoryData.name} Prompts`,
+  description: categoryData.description,
+  url: `https://velnoraai.app/prompts/category/${slug}`,
+};
+
+const promptListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${categoryData.name} Prompt List`,
+  itemListElement: categoryData.prompts.map((prompt, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: prompt.title,
+    url: `https://velnoraai.app/prompts/category/${slug}`,
+  })),
+};
 ---
 
-<BaseLayout 
+<BaseLayout
   title={`${categoryData.name} Prompts`}
-  description={`Browse our ${categoryData.name.toLowerCase()} prompts. ${categoryData.description}`}
+  description={`Browse ${categoryData.name.toLowerCase()} prompts. ${categoryData.description}`}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(categorySchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(promptListSchema)} />
+
   <Header />
-  
-  <main class="prompts-page">
-    <div class="container">
+
+  <main class="page-shell prompts-page">
+    <section class="hero-panel" data-reveal>
       <div class="breadcrumb">
         <a href="/library">Prompts Library</a>
-        <span> / </span>
+        <span>/</span>
         <span>{categoryData.name}</span>
       </div>
-
+      <p class="eyebrow">Prompt category</p>
       <h1>{categoryData.name}</h1>
-      <p class="category-description">{categoryData.description}</p>
+      <p class="lede">{categoryData.description}</p>
+    </section>
 
-      <div class="prompts-grid">
-        {categoryData.prompts.map((prompt) => (
-          <PromptCard
-            title={prompt.title}
-            description={prompt.description}
-            example={prompt.example}
-            useCase={prompt.useCase}
-            category={prompt.category}
-          />
-        ))}
-      </div>
+    <section class="prompt-grid" data-reveal>
+      {categoryData.prompts.map((prompt) => (
+        <PromptCard
+          title={prompt.title}
+          description={prompt.description}
+          example={prompt.example}
+          useCase={prompt.useCase}
+          category={prompt.category}
+        />
+      ))}
+    </section>
 
-      <div class="explore-other">
-        <h2>Explore Other Categories</h2>
-        <div class="category-links">
-          {Object.entries(promptsData.categories).map(([key, cat]) => (
-            key !== slug && (
-              <a href={`/prompts/category/${key}`} class="category-link">
-                {cat.name}
-              </a>
-            )
-          ))}
-        </div>
+    <section class="section-panel other-categories" data-reveal>
+      <h2>Explore other categories</h2>
+      <div class="category-links">
+        {Object.entries(promptsData.categories).map(([key, cat]) =>
+          key !== slug ? (
+            <a href={`/prompts/category/${key}`} class="category-link">
+              <span>{cat.name}</span>
+              <small>Open prompts</small>
+            </a>
+          ) : null
+        )}
       </div>
-    </div>
+    </section>
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  .prompts-page {
-    padding: 3rem 2rem;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
   .breadcrumb {
-    margin-bottom: 2rem;
-    color: #666;
-    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.34rem;
+    color: color-mix(in srgb, var(--color-text) 64%, transparent);
+    font-size: 0.74rem;
+    font-family: var(--font-mono);
   }
 
-  .breadcrumb a {
-    color: var(--color-secondary);
-  }
-
-  .prompts-page h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-primary);
-  }
-
-  .category-description {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 3rem;
-    line-height: 1.6;
-  }
-
-  .prompts-grid {
+  .prompt-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.68rem;
   }
 
-  .explore-other {
-    background: #f9f9f9;
-    padding: 3rem;
-    border-radius: 0.5rem;
-    text-align: center;
+  .other-categories {
+    display: grid;
+    gap: 0.65rem;
   }
 
-  .explore-other h2 {
-    margin-bottom: 2rem;
-    color: var(--color-primary);
+  .other-categories h2 {
+    margin: 0;
+    font-size: 1.06rem;
   }
 
   .category-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.54rem;
   }
 
   .category-link {
-    padding: 0.75rem 1.5rem;
-    background-color: white;
-    border: 2px solid var(--color-secondary);
-    border-radius: 0.25rem;
-    color: var(--color-secondary);
-    font-weight: 600;
-    transition: all 0.2s ease;
+    border: 1px solid var(--color-border);
+    border-radius: 0.64rem;
+    padding: 0.54rem 0.62rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    display: grid;
+    gap: 0.16rem;
+    transition: transform var(--timing-medium), border-color var(--timing-medium);
+  }
+
+  .category-link span {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  .category-link small {
+    color: color-mix(in srgb, var(--color-text) 66%, transparent);
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
   }
 
   .category-link:hover {
-    background-color: var(--color-secondary);
-    color: white;
-  }
-
-  @media (max-width: 768px) {
-    .prompts-page h1 {
-      font-size: 1.75rem;
-    }
-
-    .prompts-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .explore-other {
-      padding: 2rem;
-    }
-
-    .category-links {
-      gap: 0.5rem;
-    }
-
-    .category-link {
-      font-size: 0.9rem;
-      padding: 0.5rem 1rem;
-    }
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-secondary) 55%, transparent);
   }
 </style>

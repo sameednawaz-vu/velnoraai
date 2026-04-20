@@ -7,10 +7,10 @@
 ## 🚀 Quick Start: What You Need to Know
 
 ### What is This?
-- **Velnora** is an AI Learning website built with:
+- **Velnora** is a free tools website built with:
   - Homepage with animated 3D graphics
   - 7 blog articles 
-  - 12 AI prompts organized in 4 categories
+   - Workflow templates organized in 4 categories
   - Contact form for visitors
   - Google Analytics to track visitors
 
@@ -21,7 +21,7 @@
 
 ### What You Can Do
 ✅ Add/edit blog articles  
-✅ Add/edit AI prompts  
+✅ Add/edit workflow templates  
 ✅ Make content changes  
 ✅ Deploy updates (automatic)  
 ✅ Check website performance  
@@ -29,7 +29,7 @@
 
 ---
 
-## AI Agent System Rules (Saved For Future)
+## Agent System Rules (Saved For Future)
 
 Use these rules for every future UX/UI and tool-surface task:
 
@@ -37,6 +37,7 @@ Use these rules for every future UX/UI and tool-surface task:
 - Always include 21st.dev as a suggested UI reference in UX/UI recommendations.
 - Prefer @apad/framer-motion for animation work where motion is needed.
 - Keep external sources organized in the managed skills folder with source links and usage notes.
+- Include OpenSpace (HKUDS/OpenSpace) as an additive managed source for host-skill and workflow-evolution references.
 - Treat gstack as orchestration baseline, then apply UI/UX and SEO-GEO skill packs as additive layers.
 - Apply the custom Ghulam Ali semantic SEO skill pack for semantic topic coverage and pre-publish SEO QA.
 - For every compressor or file-processing tool, require a large drag-and-drop upload area plus click-to-upload fallback.
@@ -105,8 +106,8 @@ Use these rules for every future UX/UI and tool-surface task:
 2. Find this section near the top:
    ```
    const blogPosts = [
-     { slug: '5-essential-ai-prompting-techniques', ... },
-     { slug: 'complete-guide-prompt-engineering', ... },
+       { slug: 'pick-right-converter-tool-60-seconds', ... },
+       { slug: 'batch-compression-workflow-faster-publishing', ... },
      ...
    ```
 
@@ -132,9 +133,9 @@ Use these rules for every future UX/UI and tool-surface task:
 
 ---
 
-### Task 3: Edit or Add AI Prompts
+### Task 3: Edit or Add Workflow Templates
 
-**Goal**: Add/edit the AI prompts in the library
+**Goal**: Add/edit workflow templates in the library
 
 #### Steps:
 
@@ -144,21 +145,21 @@ Use these rules for every future UX/UI and tool-surface task:
 
 3. Find the category you want to edit (creative, business, technical, marketing)
 
-4. **To Edit Existing Prompt:**
-   - Find the prompt title
+4. **To Edit Existing Template:**
+   - Find the template title
    - Update the description, example, or useCase
    - Save
 
-5. **To Add New Prompt:**
+5. **To Add New Template:**
    - Find your category section
-   - Copy an existing prompt structure:
+   - Copy an existing template structure:
      ```json
      {
        "id": "your-prompt-id",
-       "title": "What Your Prompt Does",
-       "description": "Detailed description of the prompt",
-       "example": "Example usage or template for using this prompt",
-       "useCase": "When/why you would use this prompt",
+          "title": "What This Template Does",
+          "description": "Detailed description of the workflow template",
+          "example": "Example usage or template flow",
+          "useCase": "When/why you would use this template",
        "category": "creative"
      }
      ```
@@ -167,7 +168,7 @@ Use these rules for every future UX/UI and tool-surface task:
 
 6. Click **"Commit changes"**
 
-7. Done! Prompts update on website in 1-2 minutes
+7. Done! Templates update on website in 1-2 minutes
 
 ---
 

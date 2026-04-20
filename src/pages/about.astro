@@ -2,102 +2,103 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { withImageCdn } from '../lib/image-cdn';
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Sameed Nawaz',
-  jobTitle: 'Product Builder and AI Workflow Creator',
+  jobTitle: 'Velnora Builder and Workflow Product Creator',
   description:
-    'Technical creator focused on AI-powered products, UX-centric web experiences, and practical automation workflows.',
-  url: 'https://sameednawaz.tech/',
-  sameAs: [
-    'https://linkedin.com/in/sameed-nawaz-pak',
-    'https://playbook.com/s/ranasameednawaz/9qCfdH2PS4nHT5J4cvUboY3t',
-  ],
+    'Builder of Velnora, a tools-first website focused on practical browser workflows, conversion utilities, and fast execution UX.',
+  url: 'https://velnoraai.app/about',
+  sameAs: ['https://linkedin.com/in/sameed-nawaz-pak'],
 };
+
+const aboutImageAvif = withImageCdn('/images/about-sameed.avif');
+const aboutImageWebp = withImageCdn('/images/about-sameed.webp');
+const aboutImageJpg = withImageCdn('/images/about-sameed.jpg');
 ---
 
 <BaseLayout
-  title="About Sameed Nawaz"
-  description="Technical profile of Sameed Nawaz: AI product building, UX-forward web creation, and practical creative engineering."
-  image="https://velnoraai.app/images/about-sameed.webp"
+  title="About Velnora"
+  description="About Velnora and its builder: a tools-first website focused on practical browser workflows, conversion utilities, and clear execution UX."
+  image={aboutImageWebp}
 >
   <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
   <Header />
 
-  <main class="about-page">
-    <section class="hero-card" data-reveal>
+  <main class="page-shell about-page">
+    <section class="hero-panel about-hero" data-reveal>
       <div class="hero-photo-wrap">
         <picture>
-          <source srcset="/images/about-sameed.avif" type="image/avif" />
-          <source srcset="/images/about-sameed.webp" type="image/webp" />
-          <img src="/images/about-sameed.jpg" alt="Sameed Nawaz" loading="eager" decoding="async" width="420" height="420" />
+          <source srcset={aboutImageAvif} type="image/avif" />
+          <source srcset={aboutImageWebp} type="image/webp" />
+          <img src={aboutImageJpg} alt="Sameed Nawaz" loading="eager" decoding="async" width="420" height="420" />
         </picture>
       </div>
 
       <div class="hero-copy">
-        <p class="eyebrow">About Me</p>
-        <h1>Sameed Nawaz</h1>
-        <p>
-          I build practical digital products where design clarity and technical execution move together. My core work is
-          centered on AI workflows, web interfaces, and conversion-oriented tool experiences that are fast, reliable,
-          and easy to use.
+        <p class="eyebrow">About Velnora</p>
+        <h1>Website and builder overview</h1>
+        <p class="lede">
+          Velnora is a free tools website designed for practical execution. The product direction is tools-first,
+          client-side processing, and clear navigation so users can convert, compress, and run utility workflows
+          quickly.
         </p>
 
-        <div class="hero-links">
-          <a href="https://sameednawaz.tech/" target="_blank" rel="noopener noreferrer">Portfolio</a>
-          <a href="https://linkedin.com/in/sameed-nawaz-pak" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:sameednawaz1@gmail.com">Email</a>
+        <div class="cta-row">
+          <a class="btn-link" href="https://velnoraai.app/">Website</a>
+          <a class="btn-link" href="https://linkedin.com/in/sameed-nawaz-pak" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </section>
 
-    <section class="about-section" data-reveal>
-      <h2>Technical Focus</h2>
+    <section class="section-panel" data-reveal>
+      <h2>Website focus</h2>
       <div class="focus-grid">
         <article>
-          <h3>AI Product Workflows</h3>
+          <h3>Free utility execution</h3>
           <p>
-            Designing and shipping AI-supported utility surfaces, prompt frameworks, and deterministic browser-first
-            tools that are useful in real production scenarios.
+            Velnora prioritizes usable browser workflows for conversion, compression, and practical utility tasks that
+            can run without account friction.
           </p>
         </article>
 
         <article>
-          <h3>Web Experience Engineering</h3>
+          <h3>Clear route architecture</h3>
           <p>
-            Building modern, responsive interfaces with strong navigation systems, scalable component patterns,
-            performance-aware rendering, and clear user flows.
+            Categories, tool routes, and blog guidance are organized for fast discovery and direct movement from search
+            intent to execution.
           </p>
         </article>
 
         <article>
-          <h3>Creative Systems Thinking</h3>
+          <h3>Builder direction</h3>
           <p>
-            Translating ideas into visual systems, reusable design language, and product narratives that improve both
-            usability and brand recall.
+            The builder direction is to keep Velnora practical, stable, and continuously improved through production QA,
+            SEO hygiene, and UX iteration.
           </p>
         </article>
       </div>
     </section>
 
-    <section class="about-section" data-reveal>
-      <h2>How I Build</h2>
+    <section class="section-panel" data-reveal>
+      <h2>How Velnora is built</h2>
       <ul class="workflow-list">
-        <li>Start with user journey mapping and define the smallest version that creates clear value.</li>
-        <li>Structure products with reusable components and data-driven routes for long-term scalability.</li>
-        <li>Balance aesthetics with speed, accessibility, and deterministic fallbacks.</li>
-        <li>Iterate quickly through measurable improvements in interaction clarity and conversion flow.</li>
+        <li>Start from user task clarity and keep each page focused on what users can do immediately.</li>
+        <li>Ship deterministic client-side workflows compatible with static deployment constraints.</li>
+        <li>Prioritize responsive rendering, metadata quality, and structured information architecture.</li>
+        <li>Iterate through measured improvements in search UX, page clarity, and route reliability.</li>
       </ul>
     </section>
 
-    <section class="about-section statement" data-reveal>
-      <h2>Current Direction</h2>
-      <p>
-        I am currently focused on turning Velnora into a complete tool-first platform with polished UX, category-first
-        discoverability, and production-ready client-side utility experiences.
+    <section class="section-panel" data-reveal>
+      <h2>Builder note</h2>
+      <p class="lede">
+        Velnora is built by Sameed Nawaz and focused on long-term growth as a free tools destination with practical
+        utility surfaces and a clean publishing workflow.
       </p>
     </section>
   </main>
@@ -106,179 +107,90 @@ const personSchema = {
 </BaseLayout>
 
 <style>
-  .about-page {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 2rem 1rem 3.5rem;
+  .about-hero {
     display: grid;
-    gap: 1.2rem;
-  }
-
-  .hero-card {
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    padding: 1rem;
-    background: linear-gradient(130deg, rgba(78, 113, 247, 0.08), rgba(255, 133, 40, 0.14));
-    box-shadow: var(--shadow-soft);
-    display: grid;
-    grid-template-columns: minmax(140px, 220px) minmax(0, 1fr);
-    gap: 1rem;
+    grid-template-columns: minmax(200px, 300px) minmax(0, 1fr);
+    gap: 0.9rem;
     align-items: center;
   }
 
   .hero-photo-wrap {
-    justify-self: center;
     width: 100%;
-    max-width: 210px;
     border-radius: 0.9rem;
     overflow: hidden;
-    border: 1px solid rgba(21, 43, 72, 0.2);
-    box-shadow: 0 14px 24px rgba(19, 34, 57, 0.2);
-    background: #d7ea74;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    box-shadow: var(--shadow-soft);
   }
 
   .hero-photo-wrap img {
-    display: block;
     width: 100%;
+    display: block;
     height: auto;
   }
 
-  .hero-copy h1 {
-    margin-top: 0.2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-copy p {
-    color: #344d6e;
-    line-height: 1.72;
-    max-width: 70ch;
-  }
-
-  .eyebrow {
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.08rem;
-    text-transform: uppercase;
-    color: #4f68ca;
-  }
-
-  .hero-links {
-    margin-top: 0.85rem;
-    display: flex;
-    gap: 0.55rem;
-    flex-wrap: wrap;
-  }
-
-  .hero-links a {
-    border: 1px solid #c4d1e7;
-    border-radius: 0.45rem;
-    color: #223a58;
-    background: rgba(255, 255, 255, 0.82);
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 0.45rem 0.62rem;
-  }
-
-  .hero-links a:hover {
-    border-color: #7e96e3;
-    color: #1c2f4a;
-  }
-
-  .about-section {
-    border: 1px solid var(--color-border);
-    border-radius: 0.9rem;
-    background: #fffdf8;
-    box-shadow: var(--shadow-soft);
-    padding: 1rem;
-  }
-
-  .about-section h2 {
-    font-size: clamp(1.35rem, 2.5vw, 1.9rem);
-    margin-bottom: 0.7rem;
+  .hero-copy {
+    display: grid;
+    gap: 0.65rem;
   }
 
   .focus-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
   .focus-grid article {
-    border: 1px solid rgba(36, 56, 83, 0.12);
-    border-radius: 0.7rem;
-    background: #ffffff;
-    padding: 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.72rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    padding: 0.7rem;
   }
 
   .focus-grid h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.3rem;
-    color: #1f3554;
+    font-size: 0.96rem;
+    margin-bottom: 0.28rem;
+    color: var(--color-primary);
   }
 
   .focus-grid p {
-    color: #445d7e;
-    line-height: 1.6;
-    font-size: 0.95rem;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    font-size: 0.84rem;
+    line-height: 1.58;
   }
 
   .workflow-list {
     list-style: none;
     display: grid;
-    gap: 0.45rem;
+    gap: 0.42rem;
     padding: 0;
   }
 
   .workflow-list li {
-    border: 1px solid rgba(36, 56, 83, 0.1);
-    border-radius: 0.55rem;
-    background: #ffffff;
-    padding: 0.62rem 0.72rem;
-    color: #364f70;
+    border: 1px solid var(--color-border);
+    border-radius: 0.62rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    padding: 0.58rem 0.68rem;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
     line-height: 1.55;
     position: relative;
-    padding-left: 2rem;
+    padding-left: 1.85rem;
   }
 
   .workflow-list li::before {
     content: '';
     position: absolute;
-    left: 0.72rem;
-    top: 0.92rem;
-    width: 0.75rem;
-    height: 0.75rem;
+    left: 0.66rem;
+    top: 0.82rem;
+    width: 0.64rem;
+    height: 0.64rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, #4a6bea, #ff7d2c);
-  }
-
-  .statement p {
-    color: #374f70;
-    line-height: 1.72;
-    max-width: 78ch;
+    background: linear-gradient(132deg, var(--color-secondary), var(--color-accent));
   }
 
   @media (max-width: 900px) {
-    .hero-card {
+    .about-hero {
       grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .hero-links {
-      justify-content: center;
-    }
-
-    .hero-copy p {
-      margin: 0 auto;
-    }
-  }
-
-  @media (max-width: 680px) {
-    .about-page {
-      padding: 1rem 0.8rem 2.8rem;
-    }
-
-    .hero-photo-wrap {
-      max-width: 180px;
     }
   }
 </style>

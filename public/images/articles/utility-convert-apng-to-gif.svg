@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#101827" />
+      <stop offset="100%" stop-color="#0E7490" />
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="rgba(0,0,0,0.16)" />
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)" />
+  
+      <rect x="34" y="28" width="1132" height="574" rx="22" fill="#0A2533" stroke="rgba(125,211,252,0.28)" filter="url(#softShadow)" />
+      
+    <text x="72" y="82" font-family="JetBrains Mono, ui-monospace, monospace" font-size="16" letter-spacing="1.1" fill="#2DD4BF">
+      BROWSER FORMAT WORKFLOW
+    </text>
+    <text x="72" y="138" font-family="Bricolage Grotesque, Segoe UI, sans-serif" font-size="52" font-weight="800" fill="#F1F5F9">Convert APNG to GIF</text>
+  
+      <rect x="72" y="250" width="1056" height="280" rx="18" fill="#113244" stroke="rgba(125,211,252,0.28)" />
+      <polyline points="96,361.91 194,325.53 292,339.45 390,393.14 488,445.97 586,457.95 684,420.02 782,360.89 880,325.30 978,340.19 1076,394.29" fill="none" stroke="#2DD4BF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="96" cy="361.91" r="6" fill="#67E8F9" /><circle cx="194" cy="325.53" r="6" fill="#67E8F9" /><circle cx="292" cy="339.45" r="6" fill="#67E8F9" /><circle cx="390" cy="393.14" r="6" fill="#67E8F9" /><circle cx="488" cy="445.97" r="6" fill="#67E8F9" /><circle cx="586" cy="457.95" r="6" fill="#67E8F9" /><circle cx="684" cy="420.02" r="6" fill="#67E8F9" /><circle cx="782" cy="360.89" r="6" fill="#67E8F9" /><circle cx="880" cy="325.30" r="6" fill="#67E8F9" /><circle cx="978" cy="340.19" r="6" fill="#67E8F9" /><circle cx="1076" cy="394.29" r="6" fill="#67E8F9" />
+      <text x="72" y="578" font-family="Bricolage Grotesque, Segoe UI, sans-serif" font-size="18" font-weight="500" fill="#B8D0DD">Signal-wave view for APNG to GIF conversion that tracks frame flow and output quality.</text>
+    
+</svg>

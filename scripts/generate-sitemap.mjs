@@ -9,30 +9,18 @@ const prompts = JSON.parse(readFileSync(resolve('src/content/data/prompts.json')
 const utilityCatalog = JSON.parse(readFileSync(resolve('src/content/data/freeconvert-catalog.json'), 'utf-8'));
 
 const blogSlugs = [
-  '5-essential-ai-prompting-techniques',
-  'complete-guide-prompt-engineering',
-  'ai-content-creators-beginners-guide',
-  'ai-business-strategy-planning',
-  'ai-prompt-organization-workflow',
-  'advanced-chain-of-thought-reasoning',
-  'real-world-case-studies-ai-success',
-];
-
-const professionalArticleTypes = [
-  'guide',
-  'workflow',
-  'decision',
-  'comparison',
-  'advanced',
-  'troubleshooting',
-  'checklist',
-  'geo',
+  'pick-right-converter-tool-60-seconds',
+  'batch-compression-workflow-faster-publishing',
+  'file-format-decision-guide-teams',
+  'internal-linking-framework-tool-articles',
+  'design-explanatory-tool-images-rank',
+  'tool-page-qa-checklist-before-publish',
+  'reducing-bounce-better-utility-page-copy',
 ];
 
 const routes = new Set([
   '/',
   '/about',
-  '/articles',
   '/compress',
   '/contact',
   '/learning-hub',
@@ -51,11 +39,6 @@ for (const category of tools.categories) {
 for (const tool of tools.tools) {
   if (tool.status === 'published') {
     routes.add(`/tools/${tool.category}/${tool.slug}`);
-
-    for (const articleType of professionalArticleTypes) {
-      const suffix = articleType === 'guide' ? '' : `-${articleType}`;
-      routes.add(`/articles/tool-${tool.slug}${suffix}`);
-    }
   }
 }
 
@@ -71,7 +54,6 @@ for (const surface of utilityCatalog.surfaces) {
   for (const group of surface.groups) {
     for (const tool of group.tools) {
       routes.add(`/utility/${surface.slug}/${tool.slug}`);
-      routes.add(`/articles/utility-${surface.slug}-${tool.slug}`);
     }
   }
 }
@@ -79,24 +61,8 @@ for (const surface of utilityCatalog.surfaces) {
 const routePriority = (route) => {
   if (route === '/') return '1.0';
   if (route === '/tools') return '0.95';
-  if (route === '/articles') return '0.93';
   if (route === '/convert' || route === '/compress' || route === '/utility-tools') return '0.9';
   if (route.startsWith('/tools/') && route.split('/').length === 4) return '0.9';
-  if (route.startsWith('/articles/utility-')) return '0.84';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-geo')) return '0.89';
-  if (
-    route.startsWith('/articles/tool-') &&
-    !/(?:-workflow|-decision|-comparison|-advanced|-troubleshooting|-checklist|-geo)$/.test(route)
-  )
-    return '0.88';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-workflow')) return '0.87';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-decision')) return '0.86';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-comparison')) return '0.85';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-advanced')) return '0.84';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-troubleshooting')) return '0.84';
-  if (route.startsWith('/articles/tool-') && route.endsWith('-checklist')) return '0.84';
-  if (route.startsWith('/articles/tool-')) return '0.87';
-  if (route.startsWith('/articles/')) return '0.87';
   if (route.startsWith('/utility/')) return '0.86';
   if (route.startsWith('/tools/')) return '0.8';
   if (route.startsWith('/blog/')) return '0.7';

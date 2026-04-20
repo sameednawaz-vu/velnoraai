@@ -10,30 +10,30 @@ interface Props {
   author: string;
   readingTime: number;
   image?: string;
+  imageAlt?: string;
+  imageCaption?: string;
 }
 
-const { title, description, publishedDate, author, readingTime, image } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, publishedDate, author, readingTime, image, imageAlt, imageCaption } = Astro.props;
 
 const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": title,
-  "description": description,
-  "image": image || undefined,
-  "datePublished": publishedDate,
-  "author": {
-    "@type": "Person",
-    "name": author
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  image: image || undefined,
+  datePublished: publishedDate,
+  dateModified: publishedDate,
+  author: {
+    '@type': 'Person',
+    name: author,
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Velnora",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://velnoraai.com/logo.png"
-    }
-  }
+  publisher: {
+    '@type': 'Organization',
+    name: 'Velnora',
+    url: 'https://velnoraai.app',
+  },
+  mainEntityOfPage: `https://velnoraai.app${Astro.url.pathname}`,
 };
 ---
 
@@ -42,38 +42,34 @@ const articleSchema = {
 
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
-  <main id="site-main" role="main">
-    <article class="blog-article">
-      <div class="article-container">
-        <div class="article-header">
-          <h1>{title}</h1>
-          <p class="article-description">{description}</p>
-          
-          <div class="article-meta">
-            <span class="author">By {author}</span>
-            <span class="separator">•</span>
-            <time datetime={publishedDate}>
-              {new Date(publishedDate).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </time>
-            <span class="separator">•</span>
-            <span class="reading-time">{readingTime} min read</span>
-          </div>
-        </div>
+  <main class="page-shell blogpost-page">
+    <article class="section-panel post-shell" data-reveal>
+      <header class="post-header">
+        <p class="eyebrow">Blog article</p>
+        <h1>{title}</h1>
+        <p class="lede">{description}</p>
 
-        <div class="article-content">
-          <slot />
+        <div class="post-meta">
+          <span>By {author}</span>
+          <span>Updated {new Date(publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>{readingTime} min read</span>
         </div>
+      </header>
 
-        <div class="article-footer">
-          <nav class="article-nav">
-            <a href="/blog" class="back-link">← Back to Blog</a>
-          </nav>
-        </div>
+      {image && (
+        <figure class="post-hero-image">
+          <img src={image} alt={imageAlt ?? `${title} illustration`} width="1200" height="630" loading="eager" decoding="async" />
+          {imageCaption && <figcaption>{imageCaption}</figcaption>}
+        </figure>
+      )}
+
+      <div class="article-content">
+        <slot />
       </div>
+
+      <footer class="post-footer">
+        <a href="/blog" class="btn-link">Back to blog</a>
+      </footer>
     </article>
   </main>
 
@@ -81,142 +77,127 @@ const articleSchema = {
 </BaseLayout>
 
 <style>
-  .blog-article {
-    padding: 3rem 2rem;
-    background-color: var(--color-background);
+  .blogpost-page {
+    max-width: 920px;
   }
 
-  .article-container {
-    max-width: 800px;
-    margin: 0 auto;
+  .post-shell {
+    display: grid;
+    gap: 0.95rem;
   }
 
-  .article-header {
-    margin-bottom: 3rem;
+  .post-header {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 16%, transparent);
+    padding-bottom: 0.72rem;
   }
 
-  .article-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-primary);
-  }
-
-  .article-description {
-    font-size: 1.25rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .article-meta {
+  .post-meta {
+    margin-top: 0.58rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    color: #888;
-    font-size: 0.9rem;
+    gap: 0.42rem;
   }
 
-  .separator {
-    opacity: 0.5;
+  .post-meta span {
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 38%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-secondary) 12%, transparent);
+    color: color-mix(in srgb, var(--color-text) 84%, transparent);
+    font-size: 0.7rem;
+    padding: 0.17rem 0.48rem;
+    font-family: var(--font-mono);
   }
 
   .article-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 3rem;
+    display: grid;
+    gap: 0.62rem;
+    color: color-mix(in srgb, var(--color-text) 83%, transparent);
+  }
+
+  .post-hero-image {
+    margin: 0;
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 26%, var(--color-border));
+    border-radius: 0.8rem;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+  }
+
+  .post-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .post-hero-image figcaption {
+    padding: 0.52rem 0.66rem;
+    font-size: 0.74rem;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    line-height: 1.55;
   }
 
   :global(.article-content h2) {
-    font-size: 1.75rem;
-    margin: 2rem 0 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid var(--color-border);
+    margin: 0.45rem 0 0.14rem;
+    font-size: 1.16rem;
+    color: var(--color-primary);
   }
 
   :global(.article-content h3) {
-    font-size: 1.35rem;
-    margin: 1.5rem 0 0.75rem;
+    margin: 0.34rem 0 0.1rem;
+    font-size: 0.98rem;
+    color: color-mix(in srgb, var(--color-text) 92%, transparent);
   }
 
   :global(.article-content p) {
-    margin-bottom: 1rem;
-    color: #333;
+    margin: 0;
+    line-height: 1.66;
+    font-size: 0.88rem;
+  }
+
+  :global(.article-content ul),
+  :global(.article-content ol) {
+    margin: 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.28rem;
+    line-height: 1.55;
+    font-size: 0.85rem;
   }
 
   :global(.article-content a) {
     color: var(--color-secondary);
     text-decoration: underline;
-  }
-
-  :global(.article-content a:hover) {
-    color: var(--color-accent);
-  }
-
-  :global(.article-content ul),
-  :global(.article-content ol) {
-    margin-left: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  :global(.article-content li) {
-    margin-bottom: 0.5rem;
+    text-decoration-thickness: 1px;
   }
 
   :global(.article-content code) {
-    background-color: #f5f5f5;
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.25rem;
-    font-family: 'Courier New', monospace;
-    color: #d63384;
+    background: color-mix(in srgb, var(--color-text) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
+    border-radius: 0.3rem;
+    padding: 0.05rem 0.26rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
   }
 
   :global(.article-content pre) {
-    background-color: #f5f5f5;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-    margin-bottom: 1rem;
+    margin: 0.2rem 0;
+    border-radius: 0.62rem;
+    border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
+    background: color-mix(in srgb, var(--color-card-bg) 90%, transparent);
+    padding: 0.62rem;
+    overflow: auto;
   }
 
   :global(.article-content blockquote) {
-    border-left: 4px solid var(--color-secondary);
-    padding-left: 1rem;
-    margin: 1.5rem 0;
-    color: #666;
-    font-style: italic;
+    margin: 0.25rem 0;
+    padding: 0.42rem 0.62rem;
+    border-left: 3px solid var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 9%, transparent);
+    border-radius: 0.46rem;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
   }
 
-  .article-footer {
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .back-link {
-    color: var(--color-secondary);
-    font-weight: 600;
-    transition: color 0.2s ease;
-  }
-
-  .back-link:hover {
-    color: var(--color-accent);
-  }
-
-  @media (max-width: 768px) {
-    .blog-article {
-      padding: 1.5rem 1rem;
-    }
-
-    .article-header h1 {
-      font-size: 1.75rem;
-    }
-
-    .article-description {
-      font-size: 1rem;
-    }
-
-    .article-content {
-      font-size: 1rem;
-    }
+  .post-footer {
+    border-top: 1px dashed color-mix(in srgb, var(--color-text) 18%, transparent);
+    padding-top: 0.55rem;
   }
 </style>

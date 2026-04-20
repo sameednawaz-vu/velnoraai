@@ -167,6 +167,14 @@ export async function getStaticPaths() {
 
 const { surface, group, tool } = Astro.props as CatalogEntry;
 const hubHref = surface.slug === 'tools' ? '/utility-tools' : `/${surface.slug}`;
+const toHubSlug = (groupSlug: string) => {
+  if (groupSlug.includes('image')) return 'images';
+  if (groupSlug.includes('video') || groupSlug.includes('audio')) return 'video-audio';
+  if (groupSlug.includes('gif')) return 'gif';
+  if (groupSlug.includes('pdf') || groupSlug.includes('document')) return 'pdf';
+  return groupSlug;
+};
+const groupHubHref = `/utility/${toHubSlug(group.slug)}`;
 
 const sameGroup = group.tools.filter((item) => item.slug !== tool.slug);
 const sameSurface = surface.groups
@@ -179,12 +187,164 @@ const surfaceToolSlugs = surface.groups.flatMap((entry) => entry.tools.map((item
 const formatProfile = detectFormatProfile(tool.slug, group.slug);
 const formatOptions = formatPools[formatProfile];
 const defaultPair = getDefaultPair(tool.slug, formatProfile);
+
+const convertSurface = catalog.surfaces.find((entry) => entry.slug === 'convert');
+const conversionPairs = (convertSurface?.groups ?? []).flatMap((entry) =>
+  entry.tools
+    .map((candidate) => {
+      const match = candidate.slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
+      if (!match) {
+        return null;
+      }
+
+      return {
+        name: candidate.name,
+        slug: candidate.slug,
+        href: `/utility/convert/${candidate.slug}`,
+        from: normalizeFormatChoice(match[1]),
+        to: normalizeFormatChoice(match[2]),
+      };
+    })
+    .filter(
+      (
+        candidate
+      ): candidate is { name: string; slug: string; href: string; from: string; to: string } => Boolean(candidate)
+    )
+);
+
+const currentPairMatch = tool.slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
+const currentFrom = normalizeFormatChoice(currentPairMatch?.[1] ?? defaultPair.from);
+const currentTo = normalizeFormatChoice(currentPairMatch?.[2] ?? defaultPair.to);
+
+const recommendedConversionPairs: Array<{ name: string; href: string; reason: string }> = [];
+const addRecommendedPair = (candidate: { name: string; slug: string; href: string; from: string; to: string }) => {
+  if (candidate.slug === tool.slug || recommendedConversionPairs.some((entry) => entry.href === candidate.href)) {
+    return;
+  }
+
+  if (recommendedConversionPairs.length >= 5) {
+    return;
+  }
+
+  const reason = candidate.from === currentFrom ? `From ${currentFrom.toUpperCase()}` : `To ${currentTo.toUpperCase()}`;
+  recommendedConversionPairs.push({
+    name: candidate.name,
+    href: candidate.href,
+    reason,
+  });
+};
+
+for (const candidate of conversionPairs) {
+  if (candidate.from === currentFrom || candidate.to === currentTo) {
+    addRecommendedPair(candidate);
+  }
+}
+
+for (const candidate of conversionPairs) {
+  if (recommendedConversionPairs.length >= 5) {
+    break;
+  }
+  if (candidate.from === currentTo || candidate.to === currentFrom) {
+    addRecommendedPair(candidate);
+  }
+}
+
+for (const candidate of conversionPairs) {
+  if (recommendedConversionPairs.length >= 5) {
+    break;
+  }
+  addRecommendedPair(candidate);
+}
+
 const switchActionLabel =
   surface.slug === 'convert'
     ? 'Continue to convert'
     : surface.slug === 'compress'
       ? 'Continue to compress'
       : 'Open selected tool';
+
+type SurfaceTemplate = {
+  key: 'conversion' | 'compression' | 'utility';
+  title: string;
+  summary: string;
+  checklist: string[];
+};
+
+type TrustedReference = {
+  label: string;
+  href: string;
+};
+
+const surfaceTemplate: SurfaceTemplate =
+  surface.slug === 'convert'
+    ? {
+        key: 'conversion',
+        title: 'How this converter page is organized',
+        summary:
+          'Pick your source and target format, then jump to the most accurate converter route without leaving your workflow.',
+        checklist: [
+          'The format switcher stays close to the main run area.',
+          'Related converters are grouped so you can switch quickly.',
+          'When an exact format pair exists, the page sends you there automatically.',
+        ],
+      }
+    : surface.slug === 'compress'
+      ? {
+          key: 'compression',
+          title: 'How this compression page is organized',
+          summary:
+            'This page keeps compression controls, quality checks, and related routes in one place so you can reduce file size with confidence.',
+          checklist: [
+            'Compression presets focus on size reduction and output quality.',
+            'You can test one sample first before running a full batch.',
+            'Helpful references are included for image, media, and document compression.',
+          ],
+        }
+      : {
+          key: 'utility',
+          title: 'How this utility page is organized',
+          summary:
+            'This layout keeps the runner, related routes, and practical guidance close together so you can complete the task faster.',
+          checklist: [
+            'Status and controls stay visible while you work.',
+            'Related tools are easy to open from the same screen.',
+            'References are available if you want deeper technical detail.',
+          ],
+        };
+
+const trustedReferences: TrustedReference[] =
+  surface.slug === 'convert'
+    ? [
+        {
+          label: 'IANA media type registry',
+          href: 'https://www.iana.org/assignments/media-types/media-types.xhtml',
+        },
+        {
+          label: 'Digital file format overview (Wikipedia)',
+          href: 'https://en.wikipedia.org/wiki/File_format',
+        },
+      ]
+    : surface.slug === 'compress'
+      ? [
+          {
+            label: 'Data compression fundamentals (Wikipedia)',
+            href: 'https://en.wikipedia.org/wiki/Data_compression',
+          },
+          {
+            label: 'Image compression techniques (web.dev)',
+            href: 'https://web.dev/learn/images/compression/',
+          },
+        ]
+      : [
+          {
+            label: 'W3C File API recommendation',
+            href: 'https://www.w3.org/TR/FileAPI/',
+          },
+          {
+            label: 'MDN File and Blob interfaces',
+            href: 'https://developer.mozilla.org/en-US/docs/Web/API/File',
+          },
+        ];
 
 const intentKeyword = deriveIntentKeyword(tool.slug, tool.name);
 const semanticKeywords = buildSemanticKeywordSet(intentKeyword, tool.slug);
@@ -194,25 +354,31 @@ const templateKeywords = Array.isArray(keywordIntel.toolKeywordTemplates?.[tool.
   : [];
 const primarySemanticPhrase = cleanToken(templateKeywords[0] ?? semanticKeywords[0] ?? intentKeyword);
 const secondarySemanticPhrase = cleanToken(templateKeywords[1] ?? semanticKeywords[1] ?? `free ${intentKeyword}`);
-const mediaPrivacyPromise =
-  'Our secure, client-side converter extracts high-quality 320kbps audio from your MP4 videos. Because we use WebAssembly, your video never leaves your device, making this the most private way to transcode media in 2026.';
 const privacyPromise =
-  tool.slug === 'mp4-to-mp3' || tool.slug === 'video-to-mp3' || formatProfile === 'audio'
-    ? mediaPrivacyPromise
-    : 'Our secure, client-side utility runs in your browser and keeps your files on-device whenever the workflow allows browser-native processing.';
+  formatProfile === 'audio' || formatProfile === 'video' || formatProfile === 'image' || formatProfile === 'gif'
+    ? 'For browser-native media routes, processing runs locally in your browser tab. Your file is not uploaded to a remote conversion server for these paths.'
+    : 'This utility is browser-first. If a route needs desktop tooling or a different flow, the page tells you before you run it.';
+
+const practicalBenefit =
+  surface.slug === 'compress'
+    ? `${tool.name} helps you reduce file size so uploads are faster, pages load quicker, and storage use stays lower.`
+    : surface.slug === 'convert'
+      ? `${tool.name} helps you move between file formats without switching tools, which keeps your workflow fast and predictable.`
+      : `${tool.name} helps you finish this task in one browser workflow with no account setup.`;
 
 const faqItems = [
   {
-    question: `How does ${tool.name} handle privacy?`,
+    question: `Is ${tool.name} free to use?`,
+    answer:
+      'Yes. This route is free to use and does not require signup. You can run a sample first, confirm the result, then process your full file set.',
+  },
+  {
+    question: `What is the main advantage of using ${tool.name}?`,
+    answer: `${practicalBenefit} Start with the recommended pair on this page (${currentFrom.toUpperCase()} to ${currentTo.toUpperCase()}) and switch formats if needed.`,
+  },
+  {
+    question: `Will my files stay private while using ${tool.name}?`,
     answer: privacyPromise,
-  },
-  {
-    question: `What is the best use case for ${tool.name}?`,
-    answer: `${tool.name} is best for ${intentKeyword} workflows when you need deterministic browser-first execution and repeatable outcomes.`,
-  },
-  {
-    question: `Can I discover related workflows from this page?`,
-    answer: 'Yes. Each tool page includes internal links to related utilities, execution guidance, and trusted external references for standards and best practices.',
   },
 ];
 
@@ -261,18 +427,30 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       position: 1,
+      name: 'Home',
+      item: 'https://velnoraai.app/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Utility',
+      item: 'https://velnoraai.app/utility-tools',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
       name: surface.name,
       item: `https://velnoraai.app${hubHref}`,
     },
     {
       '@type': 'ListItem',
-      position: 2,
+      position: 4,
       name: group.name,
-      item: `https://velnoraai.app${hubHref}`,
+      item: `https://velnoraai.app${groupHubHref}`,
     },
     {
       '@type': 'ListItem',
-      position: 3,
+      position: 5,
       name: tool.name,
       item: `https://velnoraai.app/utility/${surface.slug}/${tool.slug}`,
     },
@@ -290,45 +468,81 @@ const breadcrumbSchema = {
 
   <Header />
 
-  <main class="utility-page">
+  <main class={`utility-page surface-${surfaceTemplate.key}`}>
     <nav class="breadcrumb" aria-label="Breadcrumb" data-reveal>
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/utility-tools">Utility</a>
+      <span>/</span>
       <a href={hubHref}>{surface.name}</a>
       <span>/</span>
-      <span>{group.name}</span>
+      <a href={groupHubHref}>{group.name}</a>
       <span>/</span>
       <span>{tool.name}</span>
     </nav>
 
     <section class="hero" data-reveal>
-      <p class="eyebrow">{surface.name} / {group.name}</p>
-      <h1>{tool.name}</h1>
-      <p>
-        This route is live with deterministic utility behavior, practical execution controls, and browser-first
-        workflows that can be run immediately.
-      </p>
-      <div class="chips">
-        <span>Surface: {surface.name}</span>
-        <span>Group: {group.name}</span>
-        <span>Status: {normalizedStatus}</span>
+      <div class="hero-layout">
+        <div>
+          <p class="eyebrow">{surface.name} / {group.name}</p>
+          <h1>{tool.name}</h1>
+          <p>
+            Use this tool directly in your browser. Upload one file, choose your options, and run in a few clicks.
+          </p>
+          <div class="chips">
+            <span>Surface: {surface.name}</span>
+            <span>Group: {group.name}</span>
+            <span>Status: {normalizedStatus}</span>
+            <span>Profile: {toTitleCase(formatProfile)}</span>
+          </div>
+        </div>
+
+        <aside class="hero-board" aria-label="Execution profile">
+          <h2>{surfaceTemplate.title}</h2>
+          <ul>
+            <li>
+              <span>Primary flow</span>
+              <strong>{currentFrom.toUpperCase()} to {currentTo.toUpperCase()}</strong>
+            </li>
+            <li>
+              <span>Execution mode</span>
+              <strong>Browser-first and deterministic</strong>
+            </li>
+            <li>
+              <span>Active route</span>
+              <strong>/utility/{surface.slug}/{tool.slug}</strong>
+            </li>
+          </ul>
+        </aside>
       </div>
     </section>
 
-    <section class="keyword-intent" data-reveal>
-      <h2>Semantic intent coverage for this tool</h2>
-      <p>
-        Primary search intent: <strong>{headlineKeyword}</strong>. This page targets practical execution intent with
-        reusable semantic keyword variants for discoverability.
-      </p>
-      <ul>
-        {semanticKeywords.slice(0, 8).map((keyword) => (
-          <li>{toTitleCase(keyword)}</li>
-        ))}
-      </ul>
-    </section>
+    <section class="runner-layout" data-reveal>
+      <div class="runner-main">
+        <StarterUtilityRunner
+          client:load
+          toolSlug={tool.slug}
+          surfaceSlug={surface.slug}
+          surfaceToolSlugs={surfaceToolSlugs}
+        />
+      </div>
 
-    <section class="privacy-proof" data-reveal>
-      <h2>Privacy-first execution promise</h2>
-      <p>{privacyPromise}</p>
+      <aside class="recommended-rail" aria-label="Recommended tools">
+        <h2>Recommended Tools</h2>
+        <p>
+          Related conversion pairs based on {currentFrom.toUpperCase()} and {currentTo.toUpperCase()}.
+        </p>
+        <ul>
+          {recommendedConversionPairs.slice(0, 5).map((entry) => (
+            <li>
+              <a href={entry.href}>
+                <strong>{entry.name}</strong>
+                <span>{entry.reason}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
     </section>
 
     <section
@@ -341,9 +555,10 @@ const breadcrumbSchema = {
       data-tool-slugs={JSON.stringify(surfaceToolSlugs)}
     >
       <div class="switcher-head">
-        <h2>Choose your file formats</h2>
+        <h2>Switch formats and jump to the best route</h2>
         <p>
-          Pick your source and output formats, then open the right tool page instantly.
+          Select from/to formats, or upload one sample file to auto-detect the source format and route you to the most
+          precise tool.
         </p>
       </div>
 
@@ -375,6 +590,11 @@ const breadcrumbSchema = {
         </a>
       </div>
 
+      <label class="switch-upload" for="switch-upload-input">
+        Auto-detect source format from one file
+        <input id="switch-upload-input" type="file" data-switch-file />
+      </label>
+
       <p class="switch-status" data-switch-status>
         Selected formats: {defaultPair.from.toUpperCase()} to {defaultPair.to.toUpperCase()}.
       </p>
@@ -386,16 +606,27 @@ const breadcrumbSchema = {
       </div>
     </section>
 
-    <section data-reveal>
-      <StarterUtilityRunner client:load toolSlug={tool.slug} />
+    <section class="template-brief" data-reveal>
+      <h2>{surfaceTemplate.title}</h2>
+      <p>{surfaceTemplate.summary}</p>
+      <ul>
+        {surfaceTemplate.checklist.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="privacy-proof" data-reveal>
+      <h2>Privacy and processing clarity</h2>
+      <p>{privacyPromise}</p>
     </section>
 
     <section class="readiness" data-reveal>
-      <h2>Execution readiness</h2>
+      <h2>Before you run this tool</h2>
       <ul>
-        <li>Route, metadata, and runner are all active on this utility page.</li>
-        <li>Inputs, outputs, and run controls are deterministic and browser-safe.</li>
-        <li>Related utility links stay active for cross-surface discovery.</li>
+        <li>Start with one small sample file so you can check quality before full runs.</li>
+        <li>If output is not right, adjust settings and run again immediately.</li>
+        <li>Use the related links below when you need a nearby format or utility option.</li>
       </ul>
     </section>
 
@@ -408,13 +639,14 @@ const breadcrumbSchema = {
       </div>
       <div class="cross-links">
         <a href={hubHref}>Back to {surface.name}</a>
+        <a href={groupHubHref}>Browse {group.name} hub</a>
         <a href="/tools">Open Existing Tools Platform</a>
         <a href="/learning-hub">Open Learning Hub</a>
       </div>
     </section>
 
     <section class="faq-block" data-reveal>
-      <h2>FAQ for {tool.name}</h2>
+      <h2>Common questions users ask</h2>
       <div class="faq-grid">
         {faqItems.map((entry) => (
           <article>
@@ -428,7 +660,7 @@ const breadcrumbSchema = {
     <section class="reference-links" data-reveal>
       <h2>Trusted technical references</h2>
       <p>
-        These references support execution decisions, technical validation, and search-quality alignment.
+        These references explain file formats, browser processing, and quality best practices if you want deeper detail.
       </p>
       <ul>
         <li>
@@ -450,6 +682,13 @@ const breadcrumbSchema = {
             Google Search technical SEO starter guide
           </a>
         </li>
+        {trustedReferences.map((entry) => (
+          <li>
+            <a href={entry.href} target="_blank" rel="noopener noreferrer">
+              {entry.label}
+            </a>
+          </li>
+        ))}
       </ul>
     </section>
   </main>
@@ -465,6 +704,7 @@ const breadcrumbSchema = {
       const toSelect = root.querySelector('[data-switch-to]');
       const openLink = root.querySelector('[data-switch-open]');
       const statusNode = root.querySelector('[data-switch-status]');
+      const fileInput = root.querySelector('[data-switch-file]');
 
       if (
         !(fromSelect instanceof HTMLSelectElement) ||
@@ -497,13 +737,37 @@ const breadcrumbSchema = {
         generic: currentTool,
       };
 
-      const resolveTargetSlug = () => {
-        const from = (fromSelect.value || '').trim().toLowerCase();
-        const to = (toSelect.value || '').trim().toLowerCase();
-        const exact = `${from}-to-${to}`;
-        if (toolSlugs.includes(exact)) {
-          return exact;
+      const formatAliases = {
+        jpeg: 'jpg',
+        jpe: 'jpg',
+        jfif: 'jpg',
+        tif: 'tiff',
+        ogv: 'ogg',
+      };
+
+      const slugVariantMap = {
+        jpg: ['jpg', 'jpeg'],
+        tiff: ['tiff', 'tif'],
+      };
+
+      const normalizeFormat = (value) => {
+        const raw = (value || '').trim().toLowerCase();
+        return formatAliases[raw] ?? raw;
+      };
+
+      const resolveTargetSlug = (from, to) => {
+        const fromVariants = slugVariantMap[from] ?? [from];
+        const toVariants = slugVariantMap[to] ?? [to];
+
+        for (const fromVariant of fromVariants) {
+          for (const toVariant of toVariants) {
+            const exact = `${fromVariant}-to-${toVariant}`;
+            if (toolSlugs.includes(exact)) {
+              return exact;
+            }
+          }
         }
+
         const fallback = profileFallback[profile] ?? currentTool;
         if (typeof fallback === 'string' && toolSlugs.includes(fallback)) {
           return fallback;
@@ -511,24 +775,82 @@ const breadcrumbSchema = {
         return currentTool;
       };
 
-      const update = () => {
-        const from = (fromSelect.value || '').trim().toLowerCase();
-        const to = (toSelect.value || '').trim().toLowerCase();
-        const targetSlug = resolveTargetSlug();
+      const optionExists = (value) => {
+        return Array.from(fromSelect.options).some((entry) => entry.value === value);
+      };
+
+      const isExactRoute = (targetSlug, from, to) => {
+        const fromVariants = slugVariantMap[from] ?? [from];
+        const toVariants = slugVariantMap[to] ?? [to];
+        for (const fromVariant of fromVariants) {
+          for (const toVariant of toVariants) {
+            if (targetSlug === `${fromVariant}-to-${toVariant}`) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      const detectExtension = (name) => {
+        const parts = String(name || '').toLowerCase().split('.');
+        if (parts.length < 2) {
+          return '';
+        }
+        return normalizeFormat(parts[parts.length - 1]);
+      };
+
+      const update = ({ autoNavigate = false } = {}) => {
+        const from = normalizeFormat(fromSelect.value);
+        const to = normalizeFormat(toSelect.value);
+        const targetSlug = resolveTargetSlug(from, to);
         openLink.href = `/utility/${surface}/${targetSlug}?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
 
-        if (targetSlug === `${from}-to-${to}`) {
+        if (isExactRoute(targetSlug, from, to)) {
           statusNode.textContent = `Ready: ${from.toUpperCase()} to ${to.toUpperCase()}.`;
         } else if (targetSlug === currentTool) {
           statusNode.textContent = `No exact tool yet. Staying on this page with ${from.toUpperCase()} to ${to.toUpperCase()}.`;
         } else {
           statusNode.textContent = `Using closest tool for ${from.toUpperCase()} to ${to.toUpperCase()}.`;
         }
+
+        if (autoNavigate && targetSlug && targetSlug !== currentTool) {
+          window.location.assign(openLink.href);
+        }
       };
 
-      fromSelect.addEventListener('change', update);
-      toSelect.addEventListener('change', update);
-      update();
+      fromSelect.addEventListener('change', () => update({ autoNavigate: false }));
+      toSelect.addEventListener('change', () => update({ autoNavigate: false }));
+
+      openLink.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+          return;
+        }
+        event.preventDefault();
+        update({ autoNavigate: false });
+        window.location.assign(openLink.href);
+      });
+
+      if (fileInput instanceof HTMLInputElement) {
+        fileInput.addEventListener('change', () => {
+          const file = fileInput.files?.[0];
+          const ext = detectExtension(file?.name ?? '');
+          if (!ext) {
+            return;
+          }
+
+          if (optionExists(ext)) {
+            fromSelect.value = ext;
+          } else {
+            statusNode.textContent = `Detected ${ext.toUpperCase()}, but this route does not support it directly.`;
+            return;
+          }
+
+          update({ autoNavigate: true });
+        });
+      }
+
+      update({ autoNavigate: false });
     })();
   </script>
 
@@ -537,7 +859,7 @@ const breadcrumbSchema = {
 
 <style>
   .utility-page {
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 1.4rem 1rem 3rem;
     display: grid;
@@ -548,30 +870,81 @@ const breadcrumbSchema = {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    color: #60728e;
-    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
   }
 
   .hero {
-    border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 26%, var(--color-border));
+    border-radius: var(--radius-lg);
     padding: 1rem;
-    background: linear-gradient(145deg, rgba(255, 93, 61, 0.12), rgba(10, 138, 130, 0.12));
+    background:
+      radial-gradient(circle at 95% -15%, color-mix(in srgb, var(--color-secondary) 24%, transparent), transparent 60%),
+      color-mix(in srgb, var(--color-card-bg) 92%, transparent);
     box-shadow: var(--shadow-soft);
   }
 
-  .eyebrow {
-    font-size: 0.77rem;
-    letter-spacing: 0.08rem;
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    gap: 0.84rem;
+    align-items: start;
+  }
+
+  .hero-board {
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 22%, var(--color-border));
+    border-radius: 0.82rem;
+    background: color-mix(in srgb, var(--color-card-bg) 96%, transparent);
+    padding: 0.78rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hero-board h2 {
+    font-size: 1rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .hero-board ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  .hero-board li {
+    border-bottom: 1px dashed color-mix(in srgb, var(--color-text) 18%, transparent);
+    padding-bottom: 0.42rem;
+    display: grid;
+    gap: 0.18rem;
+  }
+
+  .hero-board li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .hero-board span {
+    font-size: 0.66rem;
     text-transform: uppercase;
-    color: #8a531f;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.08rem;
+    color: color-mix(in srgb, var(--color-text) 64%, transparent);
+    font-family: var(--font-mono);
+  }
+
+  .hero-board strong {
+    color: var(--color-primary);
+    font-size: 0.84rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.45rem;
   }
 
   .hero p {
-    color: #3f5674;
-    line-height: 1.6;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    line-height: 1.64;
   }
 
   .chips {
@@ -582,20 +955,42 @@ const breadcrumbSchema = {
   }
 
   .chips span {
-    border: 1px solid rgba(10, 138, 130, 0.28);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
     border-radius: 999px;
-    background: rgba(10, 138, 130, 0.08);
-    color: #23596e;
-    font-size: 0.76rem;
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: color-mix(in srgb, var(--color-text) 88%, transparent);
+    font-size: 0.72rem;
     padding: 0.24rem 0.56rem;
     font-weight: 700;
   }
 
+  .template-brief {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.9rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .template-brief p {
+    margin-top: 0.42rem;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    line-height: 1.58;
+  }
+
+  .template-brief ul {
+    margin-top: 0.62rem;
+    display: grid;
+    gap: 0.42rem;
+    padding-left: 1.1rem;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  }
+
   .format-switcher {
-    border: 1px solid #d7e2ee;
-    border-radius: 0.88rem;
-    padding: 1rem;
-    background: linear-gradient(145deg, #fbfdff 0%, #f4f8ff 52%, #f9fdf8 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.9rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
     box-shadow: var(--shadow-soft);
     display: grid;
     gap: 0.72rem;
@@ -608,7 +1003,7 @@ const breadcrumbSchema = {
 
   .switcher-head p {
     margin: 0;
-    color: #455f80;
+    color: color-mix(in srgb, var(--color-text) 74%, transparent);
     line-height: 1.55;
   }
 
@@ -624,47 +1019,73 @@ const breadcrumbSchema = {
     gap: 0.34rem;
     text-transform: uppercase;
     letter-spacing: 0.06rem;
-    font-size: 0.77rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    color: #705333;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
   }
 
   .switcher-grid select {
-    border: 1px solid #d7c4a4;
+    border: 1px solid var(--color-border);
     border-radius: 0.54rem;
     padding: 0.55rem 0.65rem;
-    background: #fffef9;
-    color: #28425f;
-    font-size: 0.93rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    color: var(--color-primary);
+    font-size: 0.9rem;
   }
 
   .switcher-grid select:focus {
     outline: none;
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(10, 138, 130, 0.12);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 24%, transparent);
   }
 
   .switch-action {
-    border: 1px solid #c2d3ea;
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 32%, transparent);
     border-radius: 0.52rem;
     padding: 0.6rem 0.82rem;
-    background: #edf4ff;
-    color: #26486d;
+    background: color-mix(in srgb, var(--color-secondary) 10%, transparent);
+    color: var(--color-primary);
     font-weight: 700;
     text-align: center;
     white-space: nowrap;
   }
 
   .switch-action:hover {
-    border-color: #9eb7d6;
-    background: #e6effd;
+    border-color: color-mix(in srgb, var(--color-secondary) 58%, transparent);
   }
 
   .switch-status {
     margin: 0;
-    color: #496281;
-    font-size: 0.87rem;
+    color: color-mix(in srgb, var(--color-text) 72%, transparent);
+    font-size: 0.82rem;
     font-weight: 600;
+  }
+
+  .switch-upload {
+    display: grid;
+    gap: 0.36rem;
+    border: 1px dashed color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    border-radius: 0.6rem;
+    padding: 0.62rem;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-family: var(--font-mono);
+  }
+
+  .switch-upload input {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 0.46rem;
+    padding: 0.45rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    color: var(--color-primary);
+    text-transform: none;
+    letter-spacing: normal;
+    font-family: var(--font-body);
+    font-size: 0.84rem;
   }
 
   .switch-links {
@@ -674,49 +1095,102 @@ const breadcrumbSchema = {
   }
 
   .switch-links a {
-    border: 1px solid #d4dded;
+    border: 1px solid var(--color-border);
     border-radius: 999px;
-    padding: 0.25rem 0.6rem;
-    color: #243f5f;
-    background: #ffffff;
-    font-size: 0.78rem;
+    padding: 0.23rem 0.56rem;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    font-size: 0.74rem;
     font-weight: 700;
   }
 
   .switch-links a:hover {
-    border-color: #aec4e1;
-    background: #f3f8ff;
+    border-color: color-mix(in srgb, var(--color-accent) 36%, transparent);
   }
 
-  .keyword-intent,
+  .runner-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    gap: 0.8rem;
+    align-items: start;
+  }
+
+  .runner-main {
+    min-width: 0;
+  }
+
+  .recommended-rail {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    box-shadow: var(--shadow-soft);
+    padding: 0.8rem;
+    position: sticky;
+    top: 6.2rem;
+  }
+
+  .recommended-rail h2 {
+    font-size: 1.05rem;
+  }
+
+  .recommended-rail p {
+    margin-top: 0.38rem;
+    color: color-mix(in srgb, var(--color-text) 74%, transparent);
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .recommended-rail ul {
+    list-style: none;
+    margin: 0.62rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  .recommended-rail li a {
+    border: 1px solid var(--color-border);
+    border-radius: 0.58rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    padding: 0.48rem 0.52rem;
+    display: grid;
+    gap: 0.1rem;
+    color: var(--color-primary);
+  }
+
+  .recommended-rail li a span {
+    font-size: 0.66rem;
+    font-family: var(--font-mono);
+    color: color-mix(in srgb, var(--color-text) 58%, transparent);
+  }
+
+  .template-brief,
   .privacy-proof,
   .readiness,
   .related,
   .faq-block,
   .reference-links {
     border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
-    padding: 1rem;
-    background: #fffef9;
+    border-radius: var(--radius-md);
+    padding: 0.92rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
     box-shadow: var(--shadow-soft);
   }
 
-  .keyword-intent p,
   .privacy-proof p,
   .faq-block p,
   .reference-links p {
     margin-top: 0.45rem;
-    color: #3f5674;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
     line-height: 1.6;
   }
 
-  .keyword-intent ul,
   .reference-links ul {
     margin-top: 0.7rem;
     display: grid;
     gap: 0.35rem;
     padding-left: 1.1rem;
-    color: #3f5674;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
   }
 
   .readiness ul {
@@ -724,7 +1198,7 @@ const breadcrumbSchema = {
     display: grid;
     gap: 0.45rem;
     padding-left: 1.1rem;
-    color: #3f5674;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
   }
 
   .related-grid {
@@ -736,12 +1210,13 @@ const breadcrumbSchema = {
 
   .related-grid a,
   .cross-links a {
-    border: 1px solid #dbc8ab;
-    border-radius: 0.48rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.58rem;
     padding: 0.52rem 0.7rem;
-    color: #23415f;
-    background: #fff8eb;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
     font-weight: 700;
+    font-size: 0.82rem;
   }
 
   .cross-links {
@@ -759,19 +1234,62 @@ const breadcrumbSchema = {
   }
 
   .faq-grid article {
-    border: 1px solid #d6e1ef;
+    border: 1px solid var(--color-border);
     border-radius: 0.72rem;
-    background: #ffffff;
+    background: color-mix(in srgb, var(--color-card-bg) 94%, transparent);
     padding: 0.75rem;
   }
 
   .faq-grid h3 {
     font-size: 0.98rem;
+    color: var(--color-accent);
   }
 
   .reference-links a {
-    color: #184a70;
+    color: var(--color-secondary);
     font-weight: 700;
+  }
+
+  .surface-conversion .hero {
+    background:
+      radial-gradient(circle at 92% -16%, color-mix(in srgb, var(--color-secondary) 28%, transparent), transparent 62%),
+      color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+  }
+
+  .surface-compression .hero {
+    background:
+      radial-gradient(circle at -4% 110%, color-mix(in srgb, var(--color-accent) 26%, transparent), transparent 58%),
+      color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+  }
+
+  .surface-compression .runner-layout {
+    grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+  }
+
+  .surface-compression .recommended-rail {
+    position: static;
+    order: 1;
+  }
+
+  .surface-compression .runner-main {
+    order: 2;
+  }
+
+  .surface-utility .hero {
+    background:
+      radial-gradient(circle at 95% -15%, color-mix(in srgb, var(--color-accent) 21%, transparent), transparent 60%),
+      color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+  }
+
+  .surface-conversion .switch-action {
+    background: color-mix(in srgb, var(--color-secondary) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-secondary) 36%, transparent);
+  }
+
+  .surface-compression .switch-action,
+  .surface-utility .switch-action {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
   }
 
   @media (max-width: 768px) {
@@ -779,8 +1297,20 @@ const breadcrumbSchema = {
       padding: 1rem 0.8rem 2.6rem;
     }
 
+    .hero-layout {
+      grid-template-columns: 1fr;
+    }
+
     .switcher-grid {
       grid-template-columns: 1fr;
+    }
+
+    .runner-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .recommended-rail {
+      position: static;
     }
 
     .switch-action {

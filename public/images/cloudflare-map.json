@@ -1,0 +1,327 @@
+{
+  "generatedAt": "2026-04-20T14:05:57.223Z",
+  "mode": "dry-run",
+  "total": 53,
+  "projectName": "velnora-images",
+  "branch": "main",
+  "images": [
+    {
+      "id": "",
+      "fileName": "about-sameed.jpg",
+      "relativePath": "about-sameed.jpg",
+      "variant": "https://velnora-images.pages.dev/about-sameed.jpg"
+    },
+    {
+      "id": "",
+      "fileName": "about-sameed.webp",
+      "relativePath": "about-sameed.webp",
+      "variant": "https://velnora-images.pages.dev/about-sameed.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-apng-to-gif.svg",
+      "relativePath": "articles/utility-convert-apng-to-gif.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-apng-to-gif.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-apng-to-gif.webp",
+      "relativePath": "articles/utility-convert-apng-to-gif.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-apng-to-gif.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-gif-to-mp4.svg",
+      "relativePath": "articles/utility-convert-gif-to-mp4.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-gif-to-mp4.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-gif-to-mp4.webp",
+      "relativePath": "articles/utility-convert-gif-to-mp4.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-gif-to-mp4.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-jfif-to-png.svg",
+      "relativePath": "articles/utility-convert-jfif-to-png.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-jfif-to-png.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-jfif-to-png.webp",
+      "relativePath": "articles/utility-convert-jfif-to-png.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-jfif-to-png.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-mov-to-mp4.svg",
+      "relativePath": "articles/utility-convert-mov-to-mp4.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-mov-to-mp4.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-mov-to-mp4.webp",
+      "relativePath": "articles/utility-convert-mov-to-mp4.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-mov-to-mp4.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-mp3-to-ogg.svg",
+      "relativePath": "articles/utility-convert-mp3-to-ogg.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-mp3-to-ogg.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-mp3-to-ogg.webp",
+      "relativePath": "articles/utility-convert-mp3-to-ogg.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-mp3-to-ogg.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-mp4-to-gif.svg",
+      "relativePath": "articles/utility-convert-mp4-to-gif.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-mp4-to-gif.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-mp4-to-gif.webp",
+      "relativePath": "articles/utility-convert-mp4-to-gif.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-mp4-to-gif.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-png-to-svg.svg",
+      "relativePath": "articles/utility-convert-png-to-svg.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-png-to-svg.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-png-to-svg.webp",
+      "relativePath": "articles/utility-convert-png-to-svg.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-png-to-svg.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-video-to-gif.svg",
+      "relativePath": "articles/utility-convert-video-to-gif.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-video-to-gif.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-video-to-gif.webp",
+      "relativePath": "articles/utility-convert-video-to-gif.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-video-to-gif.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-webp-to-jpg.svg",
+      "relativePath": "articles/utility-convert-webp-to-jpg.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-webp-to-jpg.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-webp-to-jpg.webp",
+      "relativePath": "articles/utility-convert-webp-to-jpg.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-webp-to-jpg.webp"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-webp-to-png.svg",
+      "relativePath": "articles/utility-convert-webp-to-png.svg",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-webp-to-png.svg"
+    },
+    {
+      "id": "",
+      "fileName": "utility-convert-webp-to-png.webp",
+      "relativePath": "articles/utility-convert-webp-to-png.webp",
+      "variant": "https://velnora-images.pages.dev/articles/utility-convert-webp-to-png.webp"
+    },
+    {
+      "id": "",
+      "fileName": "batch-compression-workflow-faster-publishing.svg",
+      "relativePath": "blog/batch-compression-workflow-faster-publishing.svg",
+      "variant": "https://velnora-images.pages.dev/blog/batch-compression-workflow-faster-publishing.svg"
+    },
+    {
+      "id": "",
+      "fileName": "design-explanatory-tool-images-rank.svg",
+      "relativePath": "blog/design-explanatory-tool-images-rank.svg",
+      "variant": "https://velnora-images.pages.dev/blog/design-explanatory-tool-images-rank.svg"
+    },
+    {
+      "id": "",
+      "fileName": "file-format-decision-guide-teams.svg",
+      "relativePath": "blog/file-format-decision-guide-teams.svg",
+      "variant": "https://velnora-images.pages.dev/blog/file-format-decision-guide-teams.svg"
+    },
+    {
+      "id": "",
+      "fileName": "internal-linking-framework-tool-articles.svg",
+      "relativePath": "blog/internal-linking-framework-tool-articles.svg",
+      "variant": "https://velnora-images.pages.dev/blog/internal-linking-framework-tool-articles.svg"
+    },
+    {
+      "id": "",
+      "fileName": "pick-right-converter-tool-60-seconds.svg",
+      "relativePath": "blog/pick-right-converter-tool-60-seconds.svg",
+      "variant": "https://velnora-images.pages.dev/blog/pick-right-converter-tool-60-seconds.svg"
+    },
+    {
+      "id": "",
+      "fileName": "reducing-bounce-better-utility-page-copy.svg",
+      "relativePath": "blog/reducing-bounce-better-utility-page-copy.svg",
+      "variant": "https://velnora-images.pages.dev/blog/reducing-bounce-better-utility-page-copy.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-page-qa-checklist-before-publish.svg",
+      "relativePath": "blog/tool-page-qa-checklist-before-publish.svg",
+      "variant": "https://velnora-images.pages.dev/blog/tool-page-qa-checklist-before-publish.svg"
+    },
+    {
+      "id": "",
+      "fileName": "favicon-velnora.jpg",
+      "relativePath": "favicon-velnora.jpg",
+      "variant": "https://velnora-images.pages.dev/favicon-velnora.jpg"
+    },
+    {
+      "id": "",
+      "fileName": "favicon-velnora.png",
+      "relativePath": "favicon-velnora.png",
+      "variant": "https://velnora-images.pages.dev/favicon-velnora.png"
+    },
+    {
+      "id": "",
+      "fileName": "favicon-velnora.svg",
+      "relativePath": "favicon-velnora.svg",
+      "variant": "https://velnora-images.pages.dev/favicon-velnora.svg"
+    },
+    {
+      "id": "",
+      "fileName": "favicon-velnora.webp",
+      "relativePath": "favicon-velnora.webp",
+      "variant": "https://velnora-images.pages.dev/favicon-velnora.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-break-even-calculator.svg",
+      "relativePath": "tools/tool-break-even-calculator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-break-even-calculator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-break-even-calculator.webp",
+      "relativePath": "tools/tool-break-even-calculator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-break-even-calculator.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-budget-split-planner.svg",
+      "relativePath": "tools/tool-budget-split-planner.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-budget-split-planner.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-budget-split-planner.webp",
+      "relativePath": "tools/tool-budget-split-planner.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-budget-split-planner.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-cash-flow-planner.svg",
+      "relativePath": "tools/tool-cash-flow-planner.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-cash-flow-planner.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-cash-flow-planner.webp",
+      "relativePath": "tools/tool-cash-flow-planner.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-cash-flow-planner.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-freelance-rate-calculator.svg",
+      "relativePath": "tools/tool-freelance-rate-calculator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-freelance-rate-calculator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-freelance-rate-calculator.webp",
+      "relativePath": "tools/tool-freelance-rate-calculator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-freelance-rate-calculator.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-invoice-text-generator.svg",
+      "relativePath": "tools/tool-invoice-text-generator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-invoice-text-generator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-invoice-text-generator.webp",
+      "relativePath": "tools/tool-invoice-text-generator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-invoice-text-generator.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-loan-emi-calculator.svg",
+      "relativePath": "tools/tool-loan-emi-calculator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-loan-emi-calculator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-loan-emi-calculator.webp",
+      "relativePath": "tools/tool-loan-emi-calculator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-loan-emi-calculator.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-margin-calculator.svg",
+      "relativePath": "tools/tool-margin-calculator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-margin-calculator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-margin-calculator.webp",
+      "relativePath": "tools/tool-margin-calculator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-margin-calculator.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-markup-markdown-calculator.svg",
+      "relativePath": "tools/tool-markup-markdown-calculator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-markup-markdown-calculator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-markup-markdown-calculator.webp",
+      "relativePath": "tools/tool-markup-markdown-calculator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-markup-markdown-calculator.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-proposal-outline-builder.svg",
+      "relativePath": "tools/tool-proposal-outline-builder.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-proposal-outline-builder.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-proposal-outline-builder.webp",
+      "relativePath": "tools/tool-proposal-outline-builder.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-proposal-outline-builder.webp"
+    },
+    {
+      "id": "",
+      "fileName": "tool-quotation-estimator.svg",
+      "relativePath": "tools/tool-quotation-estimator.svg",
+      "variant": "https://velnora-images.pages.dev/tools/tool-quotation-estimator.svg"
+    },
+    {
+      "id": "",
+      "fileName": "tool-quotation-estimator.webp",
+      "relativePath": "tools/tool-quotation-estimator.webp",
+      "variant": "https://velnora-images.pages.dev/tools/tool-quotation-estimator.webp"
+    }
+  ]
+}

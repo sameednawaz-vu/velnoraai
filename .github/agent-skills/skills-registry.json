@@ -69,6 +69,16 @@
       "notes": "Additive capability layer"
     },
     {
+      "id": "openspace",
+      "name": "OpenSpace",
+      "type": "github-skill",
+      "url": "https://github.com/HKUDS/OpenSpace",
+      "localSkillFile": ".github/agent-skills/skills/openspace.md",
+      "localRepoPath": ".github/agent-skills/repos/openspace",
+      "license": "MIT",
+      "notes": "Host-skill integration and workflow evolution references"
+    },
+    {
       "id": "ruflo",
       "name": "Ruflo",
       "type": "github-skill",
@@ -100,6 +110,14 @@
       "url": "local-managed-skill",
       "localSkillFile": ".github/agent-skills/skills/ghulam-ali-semantic-seo.md",
       "notes": "Custom semantic SEO execution checklist for tool-directory pages"
+    },
+    {
+      "id": "velnora-image-ui-design",
+      "name": "Velnora Image UI Design",
+      "type": "custom-skill",
+      "url": "local-managed-skill",
+      "localSkillFile": ".github/agent-skills/skills/velnora-image-ui-design.md",
+      "notes": "Image-first UI and explanatory visual workflow for article and tool surfaces"
     }
   ],
   "rules": {

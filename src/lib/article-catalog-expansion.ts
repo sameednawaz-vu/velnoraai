@@ -340,8 +340,8 @@ function getExpandedProfessionalArticleContent(
       return {
         title: `${tool.name} GEO Playbook: SEO and Generative Engine Optimization`,
         description: `Position ${tool.name} for SEO and GEO visibility with entity-rich structure, clear intent, and answer-ready sections.`,
-        introParagraph: `Use this GEO playbook to publish ${tool.name} content that works for search engines, AI answer surfaces, and location-aware queries when the workflow depends on them.`,
-        summaryParagraph: `The page stays easy for crawlers and AI systems to parse by separating intent, steps, related tools, and FAQ answers.`,
+        introParagraph: `Use this GEO playbook to publish ${tool.name} content that works for search engines, answer surfaces, and location-aware queries when the workflow depends on them.`,
+        summaryParagraph: `The page stays easy for crawlers and answer systems to parse by separating intent, steps, related tools, and FAQ answers.`,
         steps: [
           'Define the target query and the intent behind it.',
           'Add entity names, tool nouns, and outcome language that match the task.',
@@ -363,7 +363,7 @@ function getExpandedProfessionalArticleContent(
         faq: [
           {
             question: `What does GEO mean for ${tool.name}?`,
-            answer: `It means structuring the page so ${tool.name} is easy to understand for both search engines and AI answer systems.`,
+            answer: `It means structuring the page so ${tool.name} is easy to understand for both search engines and answer systems.`,
           },
           {
             question: `How is GEO different from SEO?`,
@@ -371,7 +371,7 @@ function getExpandedProfessionalArticleContent(
           },
           {
             question: `Should I still use internal links?`,
-            answer: 'Yes. Internal links help both crawlers and AI systems understand the tool relationship graph.',
+            answer: 'Yes. Internal links help both crawlers and answer systems understand the tool relationship graph.',
           },
         ],
       };

@@ -52,20 +52,17 @@ const totalTools = surface.groups.reduce((count, group) => count + group.tools.l
 
 <style>
   .surface-hero {
-    border: 1px solid var(--color-border);
-    border-radius: 0.92rem;
-    padding: 1.25rem;
-    background: linear-gradient(145deg, rgba(255, 93, 61, 0.14), rgba(10, 138, 130, 0.12));
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    border-radius: var(--radius-lg);
+    padding: 1.1rem;
+    background:
+      radial-gradient(circle at 100% -18%, color-mix(in srgb, var(--color-secondary) 28%, transparent), transparent 60%),
+      color-mix(in srgb, var(--color-card-bg) 92%, transparent);
     box-shadow: var(--shadow-soft);
   }
 
   .eyebrow {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    color: #8a531f;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
   }
 
   .surface-hero h1 {
@@ -73,34 +70,36 @@ const totalTools = surface.groups.reduce((count, group) => count + group.tools.l
   }
 
   .description {
-    color: #374d6b;
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
     max-width: 72ch;
-    line-height: 1.62;
+    line-height: 1.68;
   }
 
   .meta {
-    margin-top: 0.7rem;
+    margin-top: 0.62rem;
     font-weight: 600;
-    color: #23415f;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
   }
 
   .surface-groups {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.78rem;
   }
 
   .group-card {
     border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
-    padding: 1rem;
-    background: #fffef9;
+    border-radius: var(--radius-md);
+    padding: 0.85rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
     box-shadow: var(--shadow-soft);
   }
 
   .group-card h2 {
-    margin-bottom: 0.8rem;
-    font-size: 1.24rem;
+    margin-bottom: 0.65rem;
+    font-size: 1.1rem;
   }
 
   .group-card ul {
@@ -114,23 +113,30 @@ const totalTools = surface.groups.reduce((count, group) => count + group.tools.l
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    padding-bottom: 0.28rem;
+    border-bottom: 1px dashed color-mix(in srgb, var(--color-text) 16%, transparent);
+  }
+
+  .group-card li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   .group-card a {
-    color: #223b59;
+    color: var(--color-primary);
     font-weight: 600;
   }
 
   .group-card a:hover {
-    color: var(--color-accent);
+    color: var(--color-secondary);
   }
 
   .starter-badge {
     display: inline-flex;
-    border: 1px solid rgba(10, 138, 130, 0.35);
-    background: rgba(10, 138, 130, 0.08);
-    color: #0b6f68;
-    font-size: 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    color: var(--color-accent);
+    font-size: 0.66rem;
     border-radius: 999px;
     padding: 0.18rem 0.5rem;
     font-weight: 700;

@@ -2,16 +2,32 @@ const defaultBaseUrl = 'https://velnoraai.app';
 
 function getArgValue(flag) {
   const index = process.argv.indexOf(flag);
-  if (index === -1) {
+  if (index !== -1) {
+    return process.argv[index + 1];
+  }
+
+  const prefixedFlag = `${flag}=`;
+  const inlineArg = process.argv.find((arg) => arg.startsWith(prefixedFlag));
+  if (!inlineArg) {
     return undefined;
   }
 
-  return process.argv[index + 1];
+  return inlineArg.slice(prefixedFlag.length);
+}
+
+function hasFlag(flag) {
+  return process.argv.includes(flag);
+}
+
+function envFlag(name) {
+  const value = String(process.env[name] ?? '').trim().toLowerCase();
+  return value === '1' || value === 'true' || value === 'yes' || value === 'on';
 }
 
 const baseUrl = getArgValue('--base') ?? process.env.BASE_URL ?? defaultBaseUrl;
 const timeoutMs = Number(getArgValue('--timeout') ?? process.env.CHECK_TIMEOUT_MS ?? 12000);
 const retryCount = Number(getArgValue('--retries') ?? process.env.CHECK_RETRIES ?? 2);
+const allowHighRiskMissing = hasFlag('--allow-high-risk-missing') || envFlag('SECURITY_ALLOW_HIGH_RISK_MISSING');
 
 const importantHeaders = [
   {
@@ -97,6 +113,8 @@ async function main() {
   console.log(`Security header check base: ${origin}`);
   let failedFetches = 0;
   const missingByHeader = new Map();
+  let cloudflareDetected = 0;
+  let nonCloudflareDetected = 0;
 
   for (const path of pathsToCheck) {
     const url = new URL(path, origin).toString();
@@ -104,6 +122,19 @@ async function main() {
     try {
       const response = await fetchWithRetry(url);
       console.log(`\n${response.status} ${url}`);
+
+      const server = response.headers.get('server') || '';
+      const cfRay = response.headers.get('cf-ray') || '';
+      const cfCacheStatus = response.headers.get('cf-cache-status') || '';
+      const cloudflare = Boolean(cfRay) || server.toLowerCase().includes('cloudflare');
+
+      if (cloudflare) {
+        cloudflareDetected += 1;
+        console.log(`- edge: Cloudflare${cfCacheStatus ? ` (${cfCacheStatus})` : ''}`);
+      } else {
+        nonCloudflareDetected += 1;
+        console.log(`- edge: Non-Cloudflare response${server ? ` (server=${server})` : ''}`);
+      }
 
       for (const header of importantHeaders) {
         const value = response.headers.get(header.key);
@@ -147,9 +178,18 @@ async function main() {
     console.log('\nAll configured security headers are present on tested routes.');
   }
 
+  console.log(`\nEdge detection summary: Cloudflare=${cloudflareDetected}, Non-Cloudflare=${nonCloudflareDetected}`);
+
   if (highRiskMissing.length) {
-    console.error(`\nHigh-risk missing headers detected: ${highRiskMissing.join(', ')}`);
-    process.exit(1);
+    const message = `High-risk missing headers detected: ${highRiskMissing.join(', ')}`;
+    if (allowHighRiskMissing) {
+      console.warn(`\n${message}`);
+      console.warn('Bypass enabled via --allow-high-risk-missing or SECURITY_ALLOW_HIGH_RISK_MISSING=true.');
+      console.warn('Keep this temporary and enforce headers at Cloudflare edge rules before production hardening.');
+    } else {
+      console.error(`\n${message}`);
+      process.exit(1);
+    }
   }
 
   console.log('\nSecurity header check completed.');

@@ -84,9 +84,10 @@ Required purge variables:
 
 Required image-hosting variables:
 
-- `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_IMAGES_API_TOKEN`
-- `CLOUDFLARE_IMAGE_DELIVERY_BASE`
+- `CLOUDFLARE_PAGES_IMAGES_PROJECT`
+- `CLOUDFLARE_PAGES_IMAGES_BRANCH` (optional, defaults to `main`)
+- `CLOUDFLARE_API_TOKEN` (recommended for CI/CD automation)
+- `PUBLIC_IMAGE_CDN_BASE`
 
 ## Recommended Release Sequence
 

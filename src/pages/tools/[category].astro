@@ -38,46 +38,51 @@ const collectionSchema = {
 
   <Header />
 
-  <main class="category-page">
-    <div class="breadcrumb">
+  <main class="page-shell category-page">
+    <div class="breadcrumb" data-reveal>
       <a href="/tools">Tools</a>
       <span>/</span>
       <span>{categoryInfo.name}</span>
     </div>
 
-    <section class="category-hero" data-reveal>
-      <p class="eyebrow">Category</p>
+    <section class="hero-panel" data-reveal>
+      <p class="eyebrow">Professional category</p>
       <h1>{categoryInfo.name}</h1>
-      <p>{categoryInfo.description}</p>
+      <p class="lede">{categoryInfo.description}</p>
+      <ul class="chip-list">
+        <li class="chip">{categoryTools.length} published tools</li>
+        <li class="chip">Execution-first workflows</li>
+      </ul>
     </section>
 
     {categoryTools.length > 0 ? (
-      <section class="category-grid" data-reveal>
-        {categoryTools.map((tool) => (
-          <ToolCard tool={tool} />
-        ))}
+      <section class="section-panel" data-reveal>
+        <div class="tools-grid">
+          {categoryTools.map((tool) => (
+            <ToolCard tool={tool} />
+          ))}
+        </div>
       </section>
     ) : (
-      <section class="coming-soon" data-reveal>
+      <section class="section-panel" data-reveal>
         <h2>Tools for this category are in progress</h2>
-        <p>
-          This category is part of upcoming batches. You can explore currently published tools from Batch 1 in the main
-          hub while this section is being built.
+        <p class="lede">
+          This category is queued for upcoming publishing batches. Browse currently available tools while we ship this track.
         </p>
-        <a href="/tools">Browse published tools</a>
+        <div class="cta-row">
+          <a class="btn-link" href="/tools">Browse published tools</a>
+        </div>
       </section>
     )}
 
-    <section class="cross-links" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Keep learning</h2>
-      <p>
-        Pair these tools with practical guidance from the learning and blog sections for implementation examples and
-        workflow refinements.
+      <p class="lede">
+        Pair these tools with practical guides and examples for faster implementation.
       </p>
-      <div class="cross-links-row">
-        <a href="/learning-hub">Learning Hub</a>
-        <a href="/articles">Articles</a>
-        <a href="/blog">Blog</a>
+      <div class="cta-row">
+        <a class="btn-link" href="/learning-hub">Learning Hub</a>
+        <a class="btn-link" href="/blog">Blog</a>
       </div>
     </section>
   </main>
@@ -86,125 +91,18 @@ const collectionSchema = {
 </BaseLayout>
 
 <style>
-  .category-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1.2rem 4rem;
-    display: grid;
-    gap: 1.25rem;
-  }
-
   .breadcrumb {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: #61718c;
-    font-size: 0.92rem;
+    gap: 0.44rem;
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
   }
 
-  .category-hero {
-    border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
-    padding: 1.4rem;
-    background: linear-gradient(145deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.1));
-    box-shadow: var(--shadow-soft);
-  }
-
-  .eyebrow {
-    color: #8a531f;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    font-size: 0.8rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .category-hero h1 {
-    margin-bottom: 0.65rem;
-    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
-  }
-
-  .category-hero p {
-    max-width: 70ch;
-    color: #37506f;
-    line-height: 1.6;
-  }
-
-  .category-grid {
+  .tools-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-
-  .coming-soon {
-    border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
-    padding: 1.2rem;
-    background: #fff8eb;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .coming-soon h2 {
-    margin-bottom: 0.55rem;
-    font-size: 1.3rem;
-  }
-
-  .coming-soon p {
-    margin-bottom: 0.9rem;
-    color: #4e627f;
-    line-height: 1.6;
-  }
-
-  .coming-soon a {
-    border: 1px solid #d6c19e;
-    border-radius: 0.5rem;
-    padding: 0.55rem 0.9rem;
-    color: #2b3f5c;
-    background: #fffdf7;
-    display: inline-block;
-  }
-
-  .coming-soon a:hover {
-    border-color: var(--color-cyan);
-    color: var(--color-cyan);
-  }
-
-  .cross-links {
-    margin-top: 0.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
-    padding: 1.2rem;
-    background: #fffef9;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .cross-links h2 {
-    margin-bottom: 0.55rem;
-    font-size: 1.3rem;
-  }
-
-  .cross-links p {
-    margin-bottom: 0.9rem;
-    color: #4f627e;
-    line-height: 1.6;
-  }
-
-  .cross-links-row {
-    display: flex;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 0.7rem;
-  }
-
-  .cross-links-row a {
-    border: 1px solid #d7c4a4;
-    border-radius: 0.5rem;
-    padding: 0.55rem 0.9rem;
-    color: #2a415f;
-    background: #fffaf1;
-  }
-
-  .cross-links-row a:hover {
-    border-color: var(--color-cyan);
-    color: var(--color-cyan);
   }
 </style>

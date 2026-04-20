@@ -47,14 +47,14 @@ git push
 
 ---
 
-## 🤖 Edit AI Prompts
+## 🧩 Edit Workflow Templates
 
 ### File: `src/content/prompts.json`
 
 **Edit on GitHub:**
 1. Go to: https://github.com/sameednawaz-vu/velnoraai/blob/main/src/content/prompts.json
 2. Click pencil icon
-3. Find your prompt
+3. Find your template
 4. Edit title, description, example, or useCase
 5. Click "Commit changes"
 
@@ -62,8 +62,8 @@ git push
 ```json
 {
   "id": "unique-id",
-  "title": "Prompt Title",
-  "description": "What this prompt does",
+  "title": "Template Title",
+  "description": "What this template does",
   "example": "How to use it",
   "useCase": "When to use it",
   "category": "creative"
@@ -88,7 +88,7 @@ Look for:
 |------|------|
 | Your Repository | https://github.com/sameednawaz-vu/velnoraai |
 | Edit Blog | https://github.com/sameednawaz-vu/velnoraai/edit/main/src/pages/blog/%5Bslug%5D.astro |
-| Edit Prompts | https://github.com/sameednawaz-vu/velnoraai/edit/main/src/content/prompts.json |
+| Edit Workflow Templates | https://github.com/sameednawaz-vu/velnoraai/edit/main/src/content/prompts.json |
 | Check Deployment | https://github.com/sameednawaz-vu/velnoraai/actions |
 | GitHub Pages Settings | https://github.com/sameednawaz-vu/velnoraai/settings/pages |
 | Your Website (staging) | https://sameednawaz-vu.github.io/velnoraai |

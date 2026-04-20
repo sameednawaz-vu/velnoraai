@@ -1,5 +1,6 @@
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { basename, extname, resolve } from 'node:path';
+import { existsSync, readdirSync, writeFileSync } from 'node:fs';
+import { basename, extname, relative, resolve } from 'node:path';
+import { spawn } from 'node:child_process';
 
 const allowedExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']);
 
@@ -15,109 +16,123 @@ function hasFlag(flag) {
   return process.argv.includes(flag);
 }
 
-function assertEnv(name) {
-  const value = process.env[name]?.trim();
+function getNpxCommand() {
+  return process.platform === 'win32' ? 'npx.cmd' : 'npx';
+}
+
+function requireValue(name, value) {
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new Error(`Missing required value: ${name}`);
   }
   return value;
 }
 
-async function uploadImage({ accountId, apiToken, deliveryBase, filePath }) {
-  const fileBuffer = readFileSync(filePath);
-  const fileName = basename(filePath);
-  const formData = new FormData();
+function runWranglerPagesDeploy({ directory, projectName, branch }) {
+  const args = ['wrangler', 'pages', 'deploy', directory, '--project-name', projectName, '--branch', branch];
 
-  formData.set('file', new Blob([fileBuffer]), fileName);
-  formData.set('requireSignedURLs', 'false');
-  formData.set('metadata', JSON.stringify({ source: 'velnora-static-site' }));
+  return new Promise((resolveRun, rejectRun) => {
+    const child = spawn(getNpxCommand(), args, {
+      stdio: 'inherit',
+      env: process.env,
+    });
 
-  const endpoint = `https://api.cloudflare.com/client/v4/accounts/${accountId}/images/v1`;
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiToken}`,
-    },
-    body: formData,
+    child.on('error', rejectRun);
+    child.on('exit', (code) => {
+      if (code === 0) {
+        resolveRun();
+        return;
+      }
+      rejectRun(new Error(`Wrangler deploy failed with exit code ${code}.`));
+    });
   });
+}
 
-  const payload = await response.json();
-  if (!response.ok || !payload.success) {
-    const message = payload?.errors?.[0]?.message || `Upload failed for ${fileName}`;
-    throw new Error(message);
+function collectImageFiles(rootDir, currentDir = rootDir) {
+  const entries = readdirSync(currentDir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const absolutePath = resolve(currentDir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...collectImageFiles(rootDir, absolutePath));
+      continue;
+    }
+
+    if (!entry.isFile()) {
+      continue;
+    }
+
+    if (!allowedExtensions.has(extname(entry.name).toLowerCase())) {
+      continue;
+    }
+
+    files.push({
+      absolutePath,
+      relativePath: relative(rootDir, absolutePath).replace(/\\/g, '/'),
+    });
   }
 
-  const id = payload?.result?.id;
-  const variants = Array.isArray(payload?.result?.variants) ? payload.result.variants : [];
-  const variant = variants[0] || (deliveryBase && id ? `${deliveryBase}/${id}/public` : '');
-
-  return { id, fileName, variant };
+  return files;
 }
 
 async function main() {
   const isDryRun = hasFlag('--dry-run');
   const inputDir = resolve(getArgValue('--dir') || 'public/images');
+  const projectName =
+    (getArgValue('--project') || process.env.CLOUDFLARE_PAGES_IMAGES_PROJECT || '').trim();
+  const branch = (getArgValue('--branch') || process.env.CLOUDFLARE_PAGES_IMAGES_BRANCH || 'main').trim();
+  const cdnBase = (process.env.PUBLIC_IMAGE_CDN_BASE || '').trim().replace(/\/+$/, '');
   const outputPath = resolve('public/images/cloudflare-map.json');
 
-  const fileNames = readdirSync(inputDir)
-    .filter((fileName) => allowedExtensions.has(extname(fileName).toLowerCase()))
-    .sort((first, second) => first.localeCompare(second));
+  if (!existsSync(inputDir)) {
+    throw new Error(`Input directory not found: ${inputDir}`);
+  }
 
-  if (!fileNames.length) {
+  const files = collectImageFiles(inputDir).sort((first, second) =>
+    first.relativePath.localeCompare(second.relativePath)
+  );
+
+  if (!files.length) {
     console.log('No supported image files found.');
     return;
   }
 
-  if (isDryRun) {
-    const dryMap = {
-      generatedAt: new Date().toISOString(),
-      mode: 'dry-run',
-      total: fileNames.length,
-      images: fileNames.map((fileName) => ({
-        id: '',
-        fileName,
-        variant: '',
-      })),
-    };
+  const map = {
+    generatedAt: new Date().toISOString(),
+    mode: isDryRun ? 'dry-run' : 'wrangler-pages-deploy',
+    total: files.length,
+    projectName: projectName || '(not set)',
+    branch,
+    images: files.map((file) => ({
+      id: '',
+      fileName: basename(file.relativePath),
+      relativePath: file.relativePath,
+      variant: cdnBase ? `${cdnBase}/${file.relativePath}` : '',
+    })),
+  };
 
-    writeFileSync(outputPath, JSON.stringify(dryMap, null, 2), 'utf-8');
-    console.log(`Dry run complete. ${fileNames.length} image(s) detected.`);
+  writeFileSync(outputPath, JSON.stringify(map, null, 2), 'utf-8');
+
+  if (isDryRun) {
+    console.log('Dry run complete.');
+    console.log(`Detected ${files.length} image(s) in ${inputDir}`);
+    console.log('No Cloudflare Images API calls were made.');
+    console.log(`Wrangler deploy target project: ${projectName || '(not set)'}`);
     console.log(`Wrote map file: ${outputPath}`);
     return;
   }
 
-  const accountId = assertEnv('CLOUDFLARE_ACCOUNT_ID');
-  const apiToken = assertEnv('CLOUDFLARE_IMAGES_API_TOKEN');
-  const deliveryBase = process.env.CLOUDFLARE_IMAGE_DELIVERY_BASE?.trim() || '';
+  requireValue('CLOUDFLARE_PAGES_IMAGES_PROJECT or --project', projectName);
 
-  const results = [];
+  console.log(`Deploying ${files.length} image(s) from ${inputDir} using Wrangler Pages...`);
+  await runWranglerPagesDeploy({
+    directory: inputDir,
+    projectName,
+    branch,
+  });
 
-  for (const fileName of fileNames) {
-    const filePath = resolve(inputDir, fileName);
-
-    try {
-      const uploaded = await uploadImage({
-        accountId,
-        apiToken,
-        deliveryBase,
-        filePath,
-      });
-      results.push(uploaded);
-      console.log(`Uploaded: ${fileName}`);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(`Failed: ${fileName} -> ${message}`);
-    }
-  }
-
-  const map = {
-    generatedAt: new Date().toISOString(),
-    mode: 'upload',
-    total: results.length,
-    images: results,
-  };
-
-  writeFileSync(outputPath, JSON.stringify(map, null, 2), 'utf-8');
+  console.log('Wrangler Pages image deploy complete.');
   console.log(`Wrote map file: ${outputPath}`);
 }
 

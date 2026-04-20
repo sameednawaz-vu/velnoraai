@@ -4,6 +4,9 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import UniversalToolRunner from '../../../components/tools/UniversalToolRunner';
 import toolsData from '../../../content/data/tools.json';
+import catalog from '../../../content/data/freeconvert-catalog.json';
+import toolVisuals from '../../../content/data/tool-page-visuals.json';
+import { withImageCdn } from '../../../lib/image-cdn';
 
 export async function getStaticPaths() {
   return toolsData.tools
@@ -51,7 +54,293 @@ for (const candidate of [...fallbackSameCategory, ...fallbackAnyCategory]) {
   }
 }
 
+const normalizeFormat = (value: string) => value.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+const convertSurface = catalog.surfaces.find((entry) => entry.slug === 'convert');
+const conversionEntries = (convertSurface?.groups ?? []).flatMap((group) =>
+  group.tools
+    .map((entry) => {
+      const match = entry.slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
+      if (!match) {
+        return null;
+      }
+
+      return {
+        name: entry.name,
+        slug: entry.slug,
+        href: `/utility/convert/${entry.slug}`,
+        from: normalizeFormat(match[1]),
+        to: normalizeFormat(match[2]),
+      };
+    })
+    .filter(
+      (
+        entry
+      ): entry is { name: string; slug: string; href: string; from: string; to: string } => Boolean(entry)
+    )
+);
+
+const knownFormats = new Set(conversionEntries.flatMap((entry) => [entry.from, entry.to]));
+const currentPair = tool.slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
+const slugTokens = tool.slug.split(/[^a-z0-9]+/g).map(normalizeFormat).filter(Boolean);
+const tagTokens = (tool.tags ?? []).map((entry) => normalizeFormat(entry));
+const formatHints = [...new Set([...slugTokens, ...tagTokens])].filter((entry) => knownFormats.has(entry));
+const currentFrom = normalizeFormat(currentPair?.[1] ?? formatHints[0] ?? '');
+const currentTo = normalizeFormat(currentPair?.[2] ?? formatHints[1] ?? '');
+
+const recommendedTools: Array<{ name: string; href: string; reason: string }> = [];
+const includeRecommended = (entry: { name: string; slug: string; href: string; from: string; to: string }) => {
+  if (recommendedTools.some((candidate) => candidate.href === entry.href) || recommendedTools.length >= 5) {
+    return;
+  }
+
+  const reason = entry.from === currentFrom && currentFrom
+    ? `From ${currentFrom.toUpperCase()}`
+    : entry.to === currentTo && currentTo
+      ? `To ${currentTo.toUpperCase()}`
+      : 'Related conversion pair';
+
+  recommendedTools.push({
+    name: entry.name,
+    href: entry.href,
+    reason,
+  });
+};
+
+for (const entry of conversionEntries) {
+  if ((currentFrom && entry.from === currentFrom) || (currentTo && entry.to === currentTo)) {
+    includeRecommended(entry);
+  }
+}
+
+for (const entry of conversionEntries) {
+  if (recommendedTools.length >= 5) {
+    break;
+  }
+  if ((currentFrom && entry.to === currentFrom) || (currentTo && entry.from === currentTo)) {
+    includeRecommended(entry);
+  }
+}
+
+for (const entry of conversionEntries) {
+  if (recommendedTools.length >= 5) {
+    break;
+  }
+  includeRecommended(entry);
+}
+
+const categoryNameBySlug = new Map(toolsData.categories.map((entry) => [entry.slug, entry.name]));
+const useConversionRecommendations = Boolean(currentFrom || currentTo);
+
+const recommendedRailEntries = useConversionRecommendations
+  ? recommendedTools.slice(0, 5)
+  : relatedTools.slice(0, 5).map((entry) => ({
+      name: entry.name,
+      href: `/tools/${entry.category}/${entry.slug}`,
+      reason: categoryNameBySlug.get(entry.category) ?? entry.category,
+    }));
+
+const recommendedRailSummary = useConversionRecommendations
+  ? `Related conversion pairs based on${currentFrom ? ` ${currentFrom.toUpperCase()}` : ''}${currentTo ? ` and ${currentTo.toUpperCase()}` : ''}.`
+  : `Related professional tools mapped for ${categoryInfo.name} workflows.`;
+
+type TemplateProfile = {
+  key: 'writing' | 'seo' | 'productivity' | 'developer' | 'finance' | 'design' | 'education' | 'general';
+  title: string;
+  summary: string;
+  bullets: string[];
+};
+
+const templateProfiles: Record<string, TemplateProfile> = {
+  'writing-messaging': {
+    key: 'writing',
+    title: 'Editorial Writing Template',
+    summary: 'Built for copy and messaging tasks where clarity, rapid drafting, and deterministic structure matter.',
+    bullets: [
+      'Runner prioritizes direct text input and fast iteration loops.',
+      'Related links focus on adjacent writing and messaging outputs.',
+      'References include writing standards and readability resources.',
+    ],
+  },
+  'seo-content-ops': {
+    key: 'seo',
+    title: 'SEO Operations Template',
+    summary: 'Focused on metadata quality, crawl-readiness, and technical publishing checks.',
+    bullets: [
+      'Operational checks appear alongside execution controls.',
+      'Related tools are grouped for search and content workflows.',
+      'Reference set leans toward search documentation and standards.',
+    ],
+  },
+  'productivity-planning': {
+    key: 'productivity',
+    title: 'Planning Workflow Template',
+    summary: 'Designed for planning and execution tools that need reliable structure and handoff clarity.',
+    bullets: [
+      'How-it-works and checklist sections stay prominent.',
+      'Related links prioritize planning continuity and templates.',
+      'Output examples are optimized for team collaboration handoffs.',
+    ],
+  },
+  'developer-data-core': {
+    key: 'developer',
+    title: 'Developer Utility Template',
+    summary: 'Optimized for technical workflows with validation, deterministic output, and repeatable transformations.',
+    bullets: [
+      'Runner and examples are tuned for technical precision.',
+      'Related links prioritize data and developer utility chains.',
+      'Reference links include implementation and platform docs.',
+    ],
+  },
+  'developer-advanced': {
+    key: 'developer',
+    title: 'Advanced Developer Template',
+    summary: 'Extended developer template for deeper parsing, request shaping, and advanced utility operations.',
+    bullets: [
+      'High-signal technical sections remain above the fold.',
+      'Related links emphasize complementary advanced tooling.',
+      'References focus on standards and implementation guidance.',
+    ],
+  },
+  'business-finance': {
+    key: 'finance',
+    title: 'Finance Decision Template',
+    summary: 'Built for business calculators and decision tools where auditability and interpretation are essential.',
+    bullets: [
+      'Input-output clarity is prioritized for operational decisions.',
+      'Related links connect to adjacent finance and planning tools.',
+      'Reference links include finance and business glossary standards.',
+    ],
+  },
+  'design-ux-brand': {
+    key: 'design',
+    title: 'Design and UX Template',
+    summary: 'Structured for design teams balancing UX decisions, communication quality, and implementation readiness.',
+    bullets: [
+      'Visual context and examples are weighted higher in layout.',
+      'Related links cluster around UX and brand systems workflows.',
+      'References include accessibility and interface standards.',
+    ],
+  },
+  'education-team-communication': {
+    key: 'education',
+    title: 'Learning and Team Template',
+    summary: 'Designed for educational and communication workflows where structured guidance improves consistency.',
+    bullets: [
+      'How-it-works section supports guided step-by-step usage.',
+      'Related links emphasize communication and learning continuity.',
+      'References include documentation and communication standards.',
+    ],
+  },
+};
+
+const templateProfile =
+  templateProfiles[categoryInfo.slug] ?? {
+    key: 'general',
+    title: 'General Utility Template',
+    summary: 'Balanced template for reliable execution, clear outputs, and practical adjacent discovery.',
+    bullets: [
+      'Execution controls remain primary above the fold.',
+      'Related links maintain topical continuity.',
+      'Reference links support implementation quality.',
+    ],
+  };
+
+const trustedReferences = [
+  {
+    label: 'Schema.org SoftwareApplication reference',
+    href: 'https://schema.org/SoftwareApplication',
+  },
+  ...(templateProfile.key === 'seo'
+    ? [
+        {
+          label: 'Google Search SEO starter guide',
+          href: 'https://developers.google.com/search/docs/fundamentals/seo-starter-guide',
+        },
+        {
+          label: 'Bing Webmaster guidelines',
+          href: 'https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a',
+        },
+      ]
+    : templateProfile.key === 'developer'
+      ? [
+          {
+            label: 'MDN Web Docs',
+            href: 'https://developer.mozilla.org/',
+          },
+          {
+            label: 'W3C Web standards',
+            href: 'https://www.w3.org/standards/',
+          },
+        ]
+      : templateProfile.key === 'finance'
+        ? [
+            {
+              label: 'Corporate finance primer (Wikipedia)',
+              href: 'https://en.wikipedia.org/wiki/Corporate_finance',
+            },
+            {
+              label: 'Investopedia finance dictionary',
+              href: 'https://www.investopedia.com/financial-term-dictionary-4769738',
+            },
+          ]
+        : templateProfile.key === 'design'
+          ? [
+              {
+                label: 'WCAG accessibility guidelines',
+                href: 'https://www.w3.org/WAI/standards-guidelines/wcag/',
+              },
+              {
+                label: 'Web.dev accessibility resources',
+                href: 'https://web.dev/accessibility',
+              },
+            ]
+          : [
+              {
+                label: 'MDN Web Docs',
+                href: 'https://developer.mozilla.org/',
+              },
+              {
+                label: 'File format overview (Wikipedia)',
+                href: 'https://en.wikipedia.org/wiki/File_format',
+              },
+            ]),
+  {
+    label: 'Founder profile: Sameed Nawaz',
+    href: 'https://www.linkedin.com/in/sameed-nawaz-pak/',
+  },
+];
+
 const canonicalPath = `https://velnoraai.app/tools/${tool.category}/${tool.slug}`;
+const visualEntry = (toolVisuals as Record<string, {
+  imageWebp: string;
+  imageAvif: string;
+  imageFallback: string;
+  alt: string;
+  caption: string;
+}>)[tool.slug];
+
+const toolImageAlt = visualEntry?.alt ?? `${tool.name} workflow overview for ${categoryInfo.name}`;
+const toolImageWebp = withImageCdn(visualEntry?.imageWebp ?? '/images/favicon-velnora.webp');
+const toolImageAvif = withImageCdn(visualEntry?.imageAvif ?? '/images/favicon-velnora.avif');
+const toolImageFallback = withImageCdn(visualEntry?.imageFallback ?? '/images/favicon-velnora.jpg');
+
+const faqItems = [
+  {
+    question: `Is ${tool.name} free to use?`,
+    answer:
+      'Yes. This tool is available as a free web workflow. You can run a quick sample first and then scale to your full task once the output looks right.',
+  },
+  {
+    question: `What is the main benefit of using ${tool.name}?`,
+    answer:
+      'It turns a multi-step manual task into one focused workflow with clear inputs and outputs. In most cases, you can move from draft input to a usable result in minutes.',
+  },
+  {
+    question: `Will Velnora store my input while I use ${tool.name}?`,
+    answer:
+      'For browser-native routes, processing stays in your browser tab. When a route needs a different flow, the page explains it clearly before you run anything.',
+  },
+];
 
 const softwareSchema = {
   '@context': 'https://schema.org',
@@ -75,50 +364,55 @@ const breadcrumbSchema = {
     {
       '@type': 'ListItem',
       position: 1,
+      name: 'Home',
+      item: 'https://velnoraai.app/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
       name: 'Tools',
       item: 'https://velnoraai.app/tools',
     },
     {
       '@type': 'ListItem',
-      position: 2,
+      position: 3,
       name: categoryInfo.name,
       item: `https://velnoraai.app/tools/${categoryInfo.slug}`,
     },
     {
       '@type': 'ListItem',
-      position: 3,
+      position: 4,
       name: tool.name,
       item: canonicalPath,
     },
   ],
 };
 
-const faqSchema =
-  tool.faq && tool.faq.length > 0
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: tool.faq.map((entry) => ({
-          '@type': 'Question',
-          name: entry.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: entry.answer,
-          },
-        })),
-      }
-    : null;
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((entry) => ({
+    '@type': 'Question',
+    name: entry.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: entry.answer,
+    },
+  })),
+};
 ---
 
-<BaseLayout title={tool.name} description={tool.seoDescription}>
+<BaseLayout title={tool.name} description={tool.seoDescription} image={toolImageWebp}>
   <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 
   <Header />
 
-  <main class="tool-page">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
+  <main class={`page-shell tool-page template-${templateProfile.key}`}>
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-reveal>
+      <a href="/">Home</a>
+      <span>/</span>
       <a href="/tools">Tools</a>
       <span>/</span>
       <a href={`/tools/${categoryInfo.slug}`}>{categoryInfo.name}</a>
@@ -126,30 +420,69 @@ const faqSchema =
       <span>{tool.name}</span>
     </nav>
 
-    <header class="tool-hero" data-reveal>
-      <p class="mode">Mode {tool.mode}</p>
-      <h1>{tool.name}</h1>
-      <p class="description">{tool.description}</p>
-      <p class="value-prop">{tool.valueProposition}</p>
+    <section class="hero-panel tool-hero" data-reveal>
+      <div class="hero-copy">
+        <p class="eyebrow">Mode {tool.mode} · {categoryInfo.name}</p>
+        <h1>{tool.name}</h1>
+        <p class="lede">{tool.description}</p>
+        <p class="value-prop">{tool.valueProposition}</p>
+        <p class="source-line">Published by Velnora Tool Team · Updated {tool.lastUpdated}</p>
+        <ul class="chip-list">
+          {tool.tags.map((tag) => <li class="chip">{tag}</li>)}
+        </ul>
+      </div>
 
-      <ul class="tags">
-        {tool.tags.map((tag) => <li>{tag}</li>)}
-      </ul>
-    </header>
-
-    <section class="runner-section" aria-label="Tool runner" data-reveal>
-      <h2>Run the tool</h2>
-      <UniversalToolRunner client:load tool={tool} />
+      <figure class="tool-visual">
+        <picture>
+          <source srcset={toolImageAvif} type="image/avif" />
+          <source srcset={toolImageWebp} type="image/webp" />
+          <img src={toolImageFallback} alt={toolImageAlt} width="1200" height="630" loading="lazy" decoding="async" />
+        </picture>
+        {visualEntry?.caption && <figcaption>{visualEntry.caption}</figcaption>}
+      </figure>
     </section>
 
-    <section class="info-grid" data-reveal>
-      <article>
+    <section class="runner-layout" data-reveal>
+      <article class="section-panel" aria-label="Tool runner">
+        <h2>Run the tool</h2>
+        <UniversalToolRunner client:load tool={tool} />
+      </article>
+
+      <aside class="section-panel recommended-rail" aria-label="Recommended tools">
+        <h2>{useConversionRecommendations ? 'Recommended Conversions' : 'Recommended Tools'}</h2>
+        <p class="lede">{recommendedRailSummary}</p>
+
+        <ul class="rail-list">
+          {recommendedRailEntries.map((entry) => (
+            <li>
+              <a href={entry.href}>
+                <strong>{entry.name}</strong>
+                <span>{entry.reason}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section-panel template-brief" data-reveal>
+      <h2>{templateProfile.title}</h2>
+      <p class="lede">{templateProfile.summary}</p>
+      <ul>
+        {templateProfile.bullets.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="split-grid" data-reveal>
+      <article class="section-panel">
         <h2>How it works</h2>
         <ol>
           {tool.howItWorks.map((step) => <li>{step}</li>)}
         </ol>
       </article>
-      <article>
+      <article class="section-panel">
         <h2>Best for</h2>
         <ul>
           {tool.bestFor.map((item) => <li>{item}</li>)}
@@ -161,13 +494,13 @@ const faqSchema =
       </article>
     </section>
 
-    <section class="example-block" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Example input</h2>
       <pre>{tool.exampleInput}</pre>
       <p class="updated">Last updated: {tool.lastUpdated}</p>
     </section>
 
-    <section class="related-section" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Related tools</h2>
       <div class="related-grid">
         {relatedTools.map((entry) => (
@@ -179,239 +512,273 @@ const faqSchema =
       </div>
     </section>
 
-    <section class="internal-cross-links" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Continue learning</h2>
-      <p>
-        Review practical implementation guides and workflow examples in the learning and blog sections, then return to
-        this tool to apply improvements.
+      <p class="lede">
+        Review practical implementation guides and workflow examples, then return to this tool to apply improvements.
       </p>
-      <div class="cross-links-row">
-        <a href="/learning-hub">Learning Hub</a>
-        <a href="/blog">Blog</a>
-        <a href={`/tools/${categoryInfo.slug}`}>More in {categoryInfo.name}</a>
+      <div class="cta-row">
+        <a class="btn-link" href="/learning-hub">Learning Hub</a>
+        <a class="btn-link" href="/blog">Blog</a>
+        <a class="btn-link" href={`/tools/${categoryInfo.slug}`}>More in {categoryInfo.name}</a>
       </div>
     </section>
 
-    {tool.faq && tool.faq.length > 0 && (
-      <section class="faq-section" data-reveal>
-        <h2>FAQ</h2>
-        <div class="faq-items">
-          {tool.faq.map((entry) => (
-            <article>
-              <h3>{entry.question}</h3>
-              <p>{entry.answer}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-    )}
+    <section class="section-panel" data-reveal>
+      <h2>Trusted references</h2>
+      <p class="lede">Use this documentation alongside the tool for implementation guidance.</p>
+      <ul>
+        {trustedReferences.map((reference) => (
+          <li>
+            <a href={reference.href} target="_blank" rel="noopener noreferrer">
+              {reference.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>Common questions</h2>
+      <div class="faq-items">
+        {faqItems.map((entry) => (
+          <article>
+            <h3>{entry.question}</h3>
+            <p>{entry.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
   </main>
 
   <Footer />
 </BaseLayout>
 
 <style>
-  .tool-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1.2rem 4rem;
-    display: grid;
-    gap: 1.25rem;
-  }
-
   .breadcrumb {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.92rem;
-    color: #5f6f8b;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    font-family: var(--font-mono);
   }
 
   .tool-hero {
-    border: 1px solid var(--color-border);
-    border-radius: 0.9rem;
-    padding: 1.4rem;
-    background: linear-gradient(145deg, rgba(255, 93, 61, 0.16), rgba(10, 138, 130, 0.12));
-    box-shadow: var(--shadow-soft);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr);
+    gap: 0.85rem;
   }
 
-  .mode {
-    display: inline-block;
-    margin-bottom: 0.45rem;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #0c6f68;
-    letter-spacing: 0.06rem;
-    text-transform: uppercase;
+  .template-brief {
+    border-color: color-mix(in srgb, var(--color-secondary) 24%, var(--color-border));
   }
 
-  .tool-hero h1 {
-    margin-bottom: 0.55rem;
-    font-size: clamp(1.8rem, 4vw, 2.7rem);
+  .template-brief ul {
+    margin-top: 0.56rem;
   }
 
-  .description {
-    margin-bottom: 0.45rem;
-    color: #3d4f6d;
-    line-height: 1.6;
+  .hero-copy {
+    display: grid;
+    gap: 0.62rem;
+    align-content: start;
   }
 
   .value-prop {
-    color: #27486d;
-    line-height: 1.6;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
+    line-height: 1.65;
   }
 
-  .tags {
-    list-style: none;
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 0.9rem;
+  .source-line {
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+    font-family: var(--font-mono);
   }
 
-  .tags li {
-    border: 1px solid rgba(10, 138, 130, 0.34);
-    border-radius: 999px;
-    padding: 0.28rem 0.7rem;
-    font-size: 0.78rem;
-    color: #28576c;
-    background: rgba(10, 138, 130, 0.08);
-  }
-
-  .runner-section,
-  .info-grid article,
-  .example-block,
-  .related-section,
-  .internal-cross-links,
-  .faq-section {
+  .tool-visual {
+    margin: 0;
     border: 1px solid var(--color-border);
-    border-radius: 0.85rem;
-    padding: 1.2rem;
-    background: #fffef9;
-    box-shadow: var(--shadow-soft);
+    border-radius: 0.8rem;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
   }
 
-  .runner-section h2,
-  .info-grid h2,
-  .example-block h2,
-  .related-section h2,
-  .internal-cross-links h2,
-  .faq-section h2 {
-    margin-bottom: 0.75rem;
-    font-size: 1.35rem;
+  .tool-visual picture,
+  .tool-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
-  .info-grid {
+  .tool-visual figcaption {
+    padding: 0.56rem 0.66rem;
+    font-size: 0.74rem;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    line-height: 1.5;
+  }
+
+  .runner-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 330px);
+    gap: 0.8rem;
+    align-items: start;
   }
 
-  .info-grid ol,
-  .info-grid ul {
-    margin-left: 1.2rem;
+  .tool-page.template-finance .tool-hero,
+  .tool-page.template-design .tool-hero {
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1fr);
+  }
+
+  .tool-page.template-developer .runner-layout,
+  .tool-page.template-seo .runner-layout {
+    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  }
+
+  .tool-page.template-developer .recommended-rail,
+  .tool-page.template-seo .recommended-rail {
+    position: static;
+    order: 1;
+  }
+
+  .tool-page.template-developer .runner-layout > article,
+  .tool-page.template-seo .runner-layout > article {
+    order: 2;
+  }
+
+  .tool-page.template-design .tool-visual {
+    transform: rotate(-0.45deg);
+  }
+
+  .tool-page.template-education .tool-hero {
+    background:
+      radial-gradient(circle at 92% -12%, color-mix(in srgb, var(--color-accent) 20%, transparent), transparent 62%),
+      color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+  }
+
+  .recommended-rail {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .rail-list {
+    list-style: none;
+    margin: 0.62rem 0 0;
+    padding: 0;
     display: grid;
-    gap: 0.5rem;
-    line-height: 1.55;
-    color: #2c3f5d;
+    gap: 0.4rem;
   }
 
-  .info-grid h3 {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.05rem;
+  .rail-list li a {
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    padding: 0.52rem 0.56rem;
+    display: grid;
+    gap: 0.12rem;
+    color: var(--color-primary);
+  }
+
+  .rail-list li a span {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  }
+
+  .split-grid article ol,
+  .split-grid article ul,
+  .section-panel ul,
+  .section-panel ol {
+    padding-left: 1.05rem;
+    display: grid;
+    gap: 0.35rem;
+    color: color-mix(in srgb, var(--color-text) 82%, transparent);
+    line-height: 1.58;
+  }
+
+  .split-grid h3 {
+    margin-top: 0.7rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
     color: var(--color-accent);
   }
 
-  .example-block pre {
-    background: #fffaf1;
-    border: 1px solid #dfc7a6;
-    border-radius: 0.6rem;
-    padding: 0.85rem;
+  pre {
+    background: color-mix(in srgb, var(--color-background) 82%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: 0.65rem;
+    padding: 0.74rem;
     white-space: pre-wrap;
-    line-height: 1.55;
-    color: #273954;
-    font-size: 0.9rem;
+    line-height: 1.58;
+    color: var(--color-primary);
+    font-size: 0.86rem;
   }
 
   .updated {
-    margin-top: 0.65rem;
-    font-size: 0.86rem;
-    color: #5f718f;
+    margin-top: 0.56rem;
+    font-size: 0.78rem;
+    color: color-mix(in srgb, var(--color-text) 64%, transparent);
+    font-family: var(--font-mono);
   }
 
   .related-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.6rem;
   }
 
   .related-grid a {
     display: grid;
-    gap: 0.35rem;
-    border: 1px solid #dfc9a8;
-    border-radius: 0.65rem;
-    padding: 0.8rem;
-    color: #233a58;
-    background: #fff9ef;
+    gap: 0.26rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.66rem;
+    padding: 0.66rem;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
   }
 
-  .related-grid a:hover {
-    border-color: var(--color-accent);
-  }
-
-  .related-grid span {
-    color: #4a5e7c;
+  .related-grid a span {
+    color: color-mix(in srgb, var(--color-text) 72%, transparent);
+    font-size: 0.82rem;
     line-height: 1.5;
-    font-size: 0.9rem;
-  }
-
-  .internal-cross-links p {
-    color: #4a5e7c;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-  }
-
-  .cross-links-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .cross-links-row a {
-    border: 1px solid #dac29f;
-    border-radius: 0.5rem;
-    padding: 0.52rem 0.85rem;
-    color: #26425f;
-    background: #fff5e5;
-  }
-
-  .cross-links-row a:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
   }
 
   .faq-items {
     display: grid;
-    gap: 0.8rem;
+    gap: 0.58rem;
   }
 
   .faq-items article {
-    border: 1px solid #ddc8aa;
-    border-radius: 0.6rem;
-    padding: 0.85rem;
-    background: #fff8ed;
+    border: 1px solid var(--color-border);
+    border-radius: 0.68rem;
+    padding: 0.66rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
   }
 
   .faq-items h3 {
-    margin-bottom: 0.35rem;
-    font-size: 1rem;
+    margin-bottom: 0.28rem;
+    font-size: 0.92rem;
     color: var(--color-accent);
   }
 
   .faq-items p {
-    color: #344c6c;
-    line-height: 1.55;
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
+    line-height: 1.56;
+    font-size: 0.84rem;
+  }
+
+  @media (max-width: 920px) {
+    .tool-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .runner-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .recommended-rail {
+      position: static;
+    }
   }
 </style>

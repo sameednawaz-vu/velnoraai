@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const privacySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Velnora Privacy Policy',
+  description: 'Privacy policy for velnoraai.app and its client-side free tools workflows.',
+  url: 'https://velnoraai.app/privacy-policy',
+};
+
+const updatedDate = '2026-04-18';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Read the Velnora privacy policy for client-side processing, local storage usage, and contact information."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(privacySchema)} />
+
+  <Header />
+
+  <main class="page-shell privacy-page">
+    <section class="hero-panel" data-reveal>
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy Policy</h1>
+      <p class="lede">
+        Velnora is a tools-first website. This policy explains what information is processed when you use
+        velnoraai.app and its utility routes.
+      </p>
+      <p class="updated">Last updated: {new Date(updatedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>1. Core privacy model</h2>
+      <p>
+        Velnora is built for browser-first execution. File processing on utility pages is designed to run client-side
+        whenever possible. We do not operate a public user account system for the main tool workflows.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>2. Information we may process</h2>
+      <ul>
+        <li>Basic analytics events when analytics is enabled on the production domain.</li>
+        <li>Local browser storage for theme preference and interface state.</li>
+        <li>Locally saved newsletter submission entries created on your own browser session.</li>
+      </ul>
+      <p>
+        We do not request payment information on the public free tools website and we do not require account sign-up
+        to use standard utility routes.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>3. File handling</h2>
+      <p>
+        Utility pages are intended for client-side processing. Your files should remain on your device during normal
+        usage of in-browser tools. If a specific route introduces different behavior in the future, that page will be
+        updated with explicit handling details.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>4. Cookies and local storage</h2>
+      <p>
+        Velnora may use browser storage and similar technologies for operational behavior such as theme mode,
+        search-state memory, and UI preferences. You can clear local storage anytime in your browser settings.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>5. Third-party services</h2>
+      <p>
+        We may rely on infrastructure and analytics providers for delivery and quality monitoring. These providers may
+        process limited technical metadata required to serve the website securely and efficiently.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>6. Contact</h2>
+      <p>
+        For privacy requests or questions, contact: <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
+      </p>
+      <p>
+        You can also use the contact page: <a href="/contact">/contact</a>
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    gap: 0.95rem;
+  }
+
+  .updated {
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: color-mix(in srgb, var(--color-text) 64%, transparent);
+  }
+
+  .privacy-page h2 {
+    font-size: 1.16rem;
+    margin-bottom: 0.42rem;
+  }
+
+  .privacy-page p {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    line-height: 1.64;
+    font-size: 0.86rem;
+  }
+
+  .privacy-page ul {
+    margin: 0.2rem 0 0.52rem;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.24rem;
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
+    font-size: 0.84rem;
+  }
+</style>

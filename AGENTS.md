@@ -4,6 +4,7 @@
 - Astro static site for GitHub Pages.
 - Keep the site static and client-side only; do not introduce a server runtime.
 - Preserve blog and learning content, but treat tools as the primary product area.
+- Position Velnora as a free tools website, not an AI platform.
 
 ## Canonical And SEO
 - Canonical domain target is https://velnoraai.app.

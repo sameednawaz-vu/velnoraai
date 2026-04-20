@@ -32,34 +32,36 @@ const itemListSchema = {
 
   <Header />
 
-  <main class="surface-page">
+  <main class="page-shell surface-page">
     <SurfaceHub surface={surface} eyebrow="Compress Surface" />
 
-    <section class="stack-panel" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Compression engine strategy</h2>
-      <p>
+      <p class="lede">
         Compress utilities use browser-first execution with reusable local caching. First run loads conversion engines,
-        then repeat runs are faster because core assets are cached in the browser.
+        then repeat runs are faster because core assets remain cached in the browser.
       </p>
       <ul>
         <li>Media compression routes run through cached browser FFmpeg core.</li>
         <li>Image and PDF compression uses deterministic in-browser processing.</li>
         <li>No upload required for core compression flows in this surface.</li>
       </ul>
-      <a href="/working-tools">Review current working compressors</a>
+      <div class="cta-row">
+        <a class="btn-link" href="/working-tools">Review current working compressors</a>
+      </div>
     </section>
 
-    <section class="surface-note" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Compression roadmap</h2>
-      <p>
+      <p class="lede">
         Compression utilities listed here are active routes from the current browser-supported stack.
       </p>
-      <div class="links-row">
-        <a href="/convert">Open Convert Surface</a>
-        <a href="/utility-tools">Open Tools Surface</a>
-        <a href="/working-tools">Open Working Tools</a>
-        <a href="/articles">Open Tool Articles</a>
-        <a href="/tools/business-finance">See Existing Calculators</a>
+      <div class="cta-row">
+        <a class="btn-link" href="/convert">Open Convert Surface</a>
+        <a class="btn-link" href="/utility-tools">Open Tools Surface</a>
+        <a class="btn-link" href="/working-tools">Open Working Tools</a>
+        <a class="btn-link" href="/blog">Open Blog Guides</a>
+        <a class="btn-link" href="/tools/business-finance">See Existing Calculators</a>
       </div>
     </section>
   </main>
@@ -68,80 +70,12 @@ const itemListSchema = {
 </BaseLayout>
 
 <style>
-  .surface-page {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 1.4rem 1rem 3rem;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .surface-note {
-    border: 1px solid var(--color-border);
-    border-radius: 0.86rem;
-    background: #fffdf7;
-    padding: 1rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .stack-panel {
-    border: 1px solid #d8e4f2;
-    border-radius: 0.9rem;
-    background: linear-gradient(145deg, #fefefe 0%, #f1f8ff 62%, #f3fbf7 100%);
-    padding: 1rem;
-    box-shadow: var(--shadow-soft);
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .stack-panel p {
-    color: #466281;
-    line-height: 1.6;
+  .surface-page ul {
     margin: 0;
-  }
-
-  .stack-panel ul {
-    margin: 0;
-    padding-left: 1.1rem;
-    color: #3f5a78;
+    padding-left: 1.05rem;
     display: grid;
-    gap: 0.28rem;
-  }
-
-  .stack-panel a {
-    width: fit-content;
-    border: 1px solid #d6c3a4;
-    background: #fff7e8;
-    color: #25415f;
-    border-radius: 0.48rem;
-    padding: 0.45rem 0.68rem;
-    font-weight: 700;
-  }
-
-  .surface-note p {
-    margin-top: 0.45rem;
-    color: #4e627f;
-  }
-
-  .links-row {
-    margin-top: 0.85rem;
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .links-row a {
-    border: 1px solid #d6c3a4;
-    background: #fff7e8;
-    color: #25415f;
-    border-radius: 0.48rem;
-    padding: 0.5rem 0.72rem;
-    font-weight: 700;
-  }
-
-  @media (max-width: 768px) {
-    .surface-page {
-      padding: 1rem 0.8rem 2.6rem;
-    }
+    gap: 0.34rem;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    line-height: 1.55;
   }
 </style>

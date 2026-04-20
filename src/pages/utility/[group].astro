@@ -1,0 +1,345 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import catalog from '../../content/data/freeconvert-catalog.json';
+
+interface HubTool {
+  name: string;
+  slug: string;
+  href: string;
+  surfaceName: string;
+  groupName: string;
+}
+
+interface HubDefinition {
+  slug: string;
+  label: string;
+  description: string;
+  surfaceLabel: string;
+  matchTokens: string[];
+}
+
+export async function getStaticPaths() {
+  const hubDefinitions: HubDefinition[] = [
+    {
+      slug: 'images',
+      label: 'Image Tools',
+      description:
+        'Image-focused conversion and utility pages with direct links for active workflows and long-tail permutations.',
+      surfaceLabel: 'Image discovery hub',
+      matchTokens: ['image'],
+    },
+    {
+      slug: 'video-audio',
+      label: 'Video and Audio Tools',
+      description:
+        'Video and audio conversion workflows grouped for fast discovery, including MP4 and MP3-focused routes.',
+      surfaceLabel: 'Media discovery hub',
+      matchTokens: ['video', 'audio'],
+    },
+    {
+      slug: 'gif',
+      label: 'GIF Tools',
+      description:
+        'All GIF-centric permutations and related media conversion routes surfaced in one searchable index.',
+      surfaceLabel: 'GIF discovery hub',
+      matchTokens: ['gif'],
+    },
+    {
+      slug: 'pdf',
+      label: 'PDF and Document Tools',
+      description:
+        'PDF and document utility routes for splitting, merging, compressing, and supporting document output workflows.',
+      surfaceLabel: 'Document discovery hub',
+      matchTokens: ['pdf', 'document'],
+    },
+  ];
+
+  const buildHubTools = (definition: HubDefinition): HubTool[] => {
+    const matched = catalog.surfaces.flatMap((surface) =>
+      surface.groups.flatMap((group) => {
+        const groupSlug = group.slug.toLowerCase();
+        const groupName = group.name.toLowerCase();
+        const inHub = definition.matchTokens.some((token) => groupSlug.includes(token) || groupName.includes(token));
+
+        if (!inHub) {
+          return [];
+        }
+
+        return group.tools.map((tool) => ({
+          name: tool.name,
+          slug: tool.slug,
+          href: `/utility/${surface.slug}/${tool.slug}`,
+          surfaceName: surface.name,
+          groupName: group.name,
+        }));
+      })
+    );
+
+    const deduped = new Map<string, HubTool>();
+    for (const tool of matched) {
+      if (!deduped.has(tool.href)) {
+        deduped.set(tool.href, tool);
+      }
+    }
+
+    return [...deduped.values()].sort((first, second) => first.name.localeCompare(second.name));
+  };
+
+  return hubDefinitions
+    .map((definition) => {
+      const tools = buildHubTools(definition);
+      return {
+        definition,
+        tools,
+      };
+    })
+    .filter((entry) => entry.tools.length > 0)
+    .map((entry) => ({
+      params: { group: entry.definition.slug },
+      props: {
+        definition: entry.definition,
+        tools: entry.tools,
+      },
+    }));
+}
+
+const { definition, tools } = Astro.props as {
+  definition: HubDefinition;
+  tools: HubTool[];
+};
+
+const topTools = tools.slice(0, 20);
+const remainingTools = tools.slice(20);
+const azSource = remainingTools.length > 0 ? remainingTools : tools;
+
+const letters = [...new Set(azSource.map((tool) => tool.name.charAt(0).toUpperCase()))].sort();
+const azSections = letters.map((letter) => ({
+  letter,
+  tools: azSource.filter((tool) => tool.name.charAt(0).toUpperCase() === letter),
+}));
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${definition.label} | Velnora Utility`,
+  description: definition.description,
+  url: `https://velnoraai.app/utility/${definition.slug}`,
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://velnoraai.app/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Utility',
+      item: 'https://velnoraai.app/utility-tools',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: definition.label,
+      item: `https://velnoraai.app/utility/${definition.slug}`,
+    },
+  ],
+};
+---
+
+<BaseLayout title={definition.label} description={definition.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <Header />
+
+  <main class="page-shell utility-hub-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-reveal>
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/utility-tools">Utility</a>
+      <span>/</span>
+      <span>{definition.label}</span>
+    </nav>
+
+    <section class="hero-panel" data-reveal>
+      <p class="eyebrow">{definition.surfaceLabel}</p>
+      <h1>{definition.label}</h1>
+      <p class="lede">{definition.description}</p>
+      <ul class="chip-list">
+        <li class="chip">{tools.length} total routes</li>
+        <li class="chip">Top 20 priority links</li>
+        <li class="chip">A-Z long-tail index</li>
+      </ul>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <div class="section-head">
+        <h2>Top 20 routes</h2>
+        <p>Priority links for the highest-value pages in this utility category.</p>
+      </div>
+
+      <div class="top-grid">
+        {topTools.map((tool) => (
+          <a class="top-card" href={tool.href}>
+            <strong>{tool.name}</strong>
+            <span>{tool.surfaceName} / {tool.groupName}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <div class="section-head">
+        <h2>A-Z index</h2>
+        <p>
+          {remainingTools.length > 0
+            ? 'All remaining permutations are listed below by first letter.'
+            : 'This category currently has fewer than 21 routes, so the full A-Z index is shown.'}
+        </p>
+      </div>
+
+      <div class="letter-nav">
+        {azSections.map((section) => (
+          <a href={`#letter-${section.letter}`}>{section.letter}</a>
+        ))}
+      </div>
+
+      <div class="az-sections">
+        {azSections.map((section) => (
+          <article id={`letter-${section.letter}`}>
+            <h3>{section.letter}</h3>
+            <ul>
+              {section.tools.map((tool) => (
+                <li>
+                  <a href={tool.href}>{tool.name}</a>
+                  <small>{tool.surfaceName} / {tool.groupName}</small>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    font-family: var(--font-mono);
+  }
+
+  .section-head {
+    display: grid;
+    gap: 0.2rem;
+    margin-bottom: 0.72rem;
+  }
+
+  .section-head p {
+    color: color-mix(in srgb, var(--color-text) 74%, transparent);
+    font-size: 0.84rem;
+  }
+
+  .top-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.56rem;
+  }
+
+  .top-card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.72rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    padding: 0.66rem;
+    display: grid;
+    gap: 0.2rem;
+    color: var(--color-primary);
+  }
+
+  .top-card span {
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  }
+
+  .letter-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.34rem;
+    margin-bottom: 0.62rem;
+  }
+
+  .letter-nav a {
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-primary);
+    padding: 0.2rem 0.52rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+
+  .az-sections {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .az-sections article {
+    border: 1px solid var(--color-border);
+    border-radius: 0.72rem;
+    background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+    padding: 0.7rem;
+  }
+
+  .az-sections h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .az-sections ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.34rem;
+  }
+
+  .az-sections li {
+    display: grid;
+    gap: 0.1rem;
+    border-bottom: 1px dashed color-mix(in srgb, var(--color-text) 20%, transparent);
+    padding-bottom: 0.34rem;
+  }
+
+  .az-sections li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .az-sections li a {
+    color: var(--color-primary);
+    font-size: 0.83rem;
+  }
+
+  .az-sections li small {
+    font-size: 0.66rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    font-family: var(--font-mono);
+  }
+</style>

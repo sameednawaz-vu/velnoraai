@@ -1,0 +1,92 @@
+{
+  "tool-break-even-calculator": {
+    "imageWebp": "/images/tools/tool-break-even-calculator.webp",
+    "imageAvif": "/images/tools/tool-break-even-calculator.avif",
+    "imageFallback": "/images/tools/tool-break-even-calculator.svg",
+    "alt": "Break-even calculator checklist board with scenario validation tasks",
+    "caption": "Break-even planning board with baseline inputs, scenario checks, and readiness scoring.",
+    "template": "checklist-board",
+    "themeGroup": "insight"
+  },
+  "tool-budget-split-planner": {
+    "imageWebp": "/images/tools/tool-budget-split-planner.webp",
+    "imageAvif": "/images/tools/tool-budget-split-planner.avif",
+    "imageFallback": "/images/tools/tool-budget-split-planner.svg",
+    "alt": "Budget split planner with three-lane workflow from input to review",
+    "caption": "Budget split workflow from category intake to final review-ready allocation output.",
+    "template": "flow-lane",
+    "themeGroup": "insight"
+  },
+  "tool-cash-flow-planner": {
+    "imageWebp": "/images/tools/tool-cash-flow-planner.webp",
+    "imageAvif": "/images/tools/tool-cash-flow-planner.avif",
+    "imageFallback": "/images/tools/tool-cash-flow-planner.svg",
+    "alt": "Cash flow planning process board with step-driven inflow and outflow checks",
+    "caption": "Cash flow planning process from intake to validation with clear non-overlapping execution steps.",
+    "template": "process-steps",
+    "themeGroup": "insight"
+  },
+  "tool-freelance-rate-calculator": {
+    "imageWebp": "/images/tools/tool-freelance-rate-calculator.webp",
+    "imageAvif": "/images/tools/tool-freelance-rate-calculator.avif",
+    "imageFallback": "/images/tools/tool-freelance-rate-calculator.svg",
+    "alt": "Freelance rate calculator checklist board for pricing assumptions and delivery targets",
+    "caption": "Freelance pricing checklist that avoids visual overlap while keeping setup and validation guidance readable.",
+    "template": "checklist-board",
+    "themeGroup": "insight"
+  },
+  "tool-invoice-text-generator": {
+    "imageWebp": "/images/tools/tool-invoice-text-generator.webp",
+    "imageAvif": "/images/tools/tool-invoice-text-generator.avif",
+    "imageFallback": "/images/tools/tool-invoice-text-generator.svg",
+    "alt": "Invoice text generator spotlight panel with drafting quality notes",
+    "caption": "Invoice drafting spotlight with concise notes and final quality verification status.",
+    "template": "text-spotlight",
+    "themeGroup": "insight"
+  },
+  "tool-loan-emi-calculator": {
+    "imageWebp": "/images/tools/tool-loan-emi-calculator.webp",
+    "imageAvif": "/images/tools/tool-loan-emi-calculator.avif",
+    "imageFallback": "/images/tools/tool-loan-emi-calculator.svg",
+    "alt": "Loan EMI timeline ribbon with milestones from principal setup to validation",
+    "caption": "Loan EMI planning timeline from principal setup to installment verification and handoff.",
+    "template": "timeline-ribbon",
+    "themeGroup": "insight"
+  },
+  "tool-margin-calculator": {
+    "imageWebp": "/images/tools/tool-margin-calculator.webp",
+    "imageAvif": "/images/tools/tool-margin-calculator.avif",
+    "imageFallback": "/images/tools/tool-margin-calculator.svg",
+    "alt": "Margin calculator ring infographic with profitability signal and validation marker",
+    "caption": "Margin readiness infographic showing profitability signal and output validation checkpoints.",
+    "template": "ring-infographic",
+    "themeGroup": "insight"
+  },
+  "tool-markup-markdown-calculator": {
+    "imageWebp": "/images/tools/tool-markup-markdown-calculator.webp",
+    "imageAvif": "/images/tools/tool-markup-markdown-calculator.avif",
+    "imageFallback": "/images/tools/tool-markup-markdown-calculator.svg",
+    "alt": "Markup and markdown comparison cards with input and output sections",
+    "caption": "Markup vs markdown comparison visual with aligned input and output formatting lanes.",
+    "template": "format-duel",
+    "themeGroup": "insight"
+  },
+  "tool-proposal-outline-builder": {
+    "imageWebp": "/images/tools/tool-proposal-outline-builder.webp",
+    "imageAvif": "/images/tools/tool-proposal-outline-builder.avif",
+    "imageFallback": "/images/tools/tool-proposal-outline-builder.svg",
+    "alt": "Proposal outline builder shown as layered cards for structure planning",
+    "caption": "Proposal structure visual with layered cards for scope, narrative, and final delivery flow.",
+    "template": "card-stack",
+    "themeGroup": "insight"
+  },
+  "tool-quotation-estimator": {
+    "imageWebp": "/images/tools/tool-quotation-estimator.webp",
+    "imageAvif": "/images/tools/tool-quotation-estimator.avif",
+    "imageFallback": "/images/tools/tool-quotation-estimator.svg",
+    "alt": "Quotation estimator process board with operational stages from intake to review",
+    "caption": "Quotation workflow board from intake to review, optimized for delivery-ready approval flow.",
+    "template": "process-steps",
+    "themeGroup": "insight"
+  }
+}

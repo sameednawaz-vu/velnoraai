@@ -25,75 +25,30 @@ const itemListSchema = {
 ---
 
 <BaseLayout
-  title="Tools"
+  title="Utility Tools"
   description="FreeConvert-style utility tools surface for Velnora with image, video, and PDF operations."
 >
   <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
 
   <Header />
 
-  <main class="surface-page">
+  <main class="page-shell surface-page">
     <SurfaceHub surface={surface} eyebrow="Tools Surface" />
 
-    <section class="surface-note" data-reveal>
+    <section class="section-panel" data-reveal>
       <h2>Tooling sequence</h2>
-      <p>
-        Utility operations are now categorized and route-live. Starter deterministic tools are active, and advanced
-        image/PDF transforms are queued for progressive implementation waves.
+      <p class="lede">
+        Utility operations are categorized and route-live. Starter deterministic tools are active, while advanced
+        image/PDF transforms are rolling out in progressive implementation waves.
       </p>
-      <div class="links-row">
-        <a href="/convert">Open Convert Surface</a>
-        <a href="/compress">Open Compress Surface</a>
-        <a href="/articles">Open Tool Articles</a>
-        <a href="/tools">Browse Existing Tools Platform</a>
+      <div class="cta-row">
+        <a class="btn-link" href="/convert">Open Convert Surface</a>
+        <a class="btn-link" href="/compress">Open Compress Surface</a>
+        <a class="btn-link" href="/blog">Open Blog Guides</a>
+        <a class="btn-link" href="/tools">Browse Existing Tools Platform</a>
       </div>
     </section>
   </main>
 
   <Footer />
 </BaseLayout>
-
-<style>
-  .surface-page {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 1.4rem 1rem 3rem;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .surface-note {
-    border: 1px solid var(--color-border);
-    border-radius: 0.86rem;
-    background: #fffdf7;
-    padding: 1rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .surface-note p {
-    margin-top: 0.45rem;
-    color: #4e627f;
-  }
-
-  .links-row {
-    margin-top: 0.85rem;
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .links-row a {
-    border: 1px solid #d6c3a4;
-    background: #fff7e8;
-    color: #25415f;
-    border-radius: 0.48rem;
-    padding: 0.5rem 0.72rem;
-    font-weight: 700;
-  }
-
-  @media (max-width: 768px) {
-    .surface-page {
-      padding: 1rem 0.8rem 2.6rem;
-    }
-  }
-</style>

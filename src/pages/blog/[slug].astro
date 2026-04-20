@@ -1,27 +1,62 @@
 ---
 import BlogPost from '../../layouts/BlogPost.astro';
+import blogVisuals from '../../content/data/blog-visuals.json';
+import { blogPosts, type BlogPostEntry } from '../../content/data/blog-posts';
+import { withImageCdn } from '../../lib/image-cdn';
+
+type BlogVisualEntry = {
+  image: string;
+  alt: string;
+  caption: string;
+};
 
 export async function getStaticPaths() {
-  const blogPosts = [
-    { slug: '5-essential-ai-prompting-techniques', title: '5 Essential AI Prompting Techniques', description: 'Master fundamental AI prompting techniques.', publishedDate: '2026-03-24', author: 'Velnora Team', readingTime: 8 },
-    { slug: 'complete-guide-prompt-engineering', title: 'The Complete Guide to Prompt Engineering', description: 'A comprehensive deep-dive into prompt engineering.', publishedDate: '2026-03-23', author: 'Velnora Team', readingTime: 15 },
-    { slug: 'ai-content-creators-beginners-guide', title: 'AI for Content Creators', description: 'Leverage AI for better content creation.', publishedDate: '2026-03-22', author: 'Velnora Team', readingTime: 10 },
-    { slug: 'ai-business-strategy-planning', title: 'AI for Business Strategy', description: 'Practical AI applications in business.', publishedDate: '2026-03-21', author: 'Velnora Team', readingTime: 12 },
-    { slug: 'ai-prompt-organization-workflow', title: 'Prompt Organization System', description: 'Build sustainable prompt management systems.', publishedDate: '2026-03-20', author: 'Velnora Team', readingTime: 9 },
-    { slug: 'advanced-chain-of-thought-reasoning', title: 'Chain-of-Thought Prompting', description: 'Master advanced AI reasoning techniques.', publishedDate: '2026-03-19', author: 'Velnora Team', readingTime: 14 },
-    { slug: 'real-world-case-studies-ai-success', title: 'Real-World AI Success Stories', description: 'Learn from successful AI implementations.', publishedDate: '2026-03-18', author: 'Velnora Team', readingTime: 11 }
-  ];
+  const visualBySlug = blogVisuals as Record<string, BlogVisualEntry>;
+  const postsWithVisuals = blogPosts.map((post) => ({
+    ...post,
+    image: withImageCdn(visualBySlug[post.slug]?.image ?? '/images/favicon-velnora.svg'),
+    imageAlt: visualBySlug[post.slug]?.alt ?? `${post.title} illustration`,
+    imageCaption: visualBySlug[post.slug]?.caption ?? post.description,
+  }));
 
-  return blogPosts.map(post => ({
+  return postsWithVisuals.map((post) => ({
     params: { slug: post.slug },
-    props: post
+    props: post,
   }));
 }
 
-const { title, description, publishedDate, author, readingTime } = Astro.props;
+const { title, description, publishedDate, author, readingTime, sections, checklist, image, imageAlt, imageCaption } =
+  Astro.props as BlogPostEntry & { image?: string; imageAlt?: string; imageCaption?: string };
 ---
 
-<BlogPost title={title} description={description} publishedDate={publishedDate} author={author} readingTime={readingTime}>
-  <h2>Article Content</h2>
-  <p>Full article content can be added here. Your blog infrastructure is fully configured with all 7 article routes ready.</p>
+<BlogPost
+  title={title}
+  description={description}
+  publishedDate={publishedDate}
+  author={author}
+  readingTime={readingTime}
+  image={image}
+  imageAlt={imageAlt}
+  imageCaption={imageCaption}
+>
+  {sections.map((section) => (
+    <>
+      <h2>{section.heading}</h2>
+      {section.body.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </>
+  ))}
+
+  <h2>Execution checklist</h2>
+  <ul>
+    {checklist.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+
+  <p>
+    Keep this framework connected to your tool pages and blog routes so users can move directly from guidance to
+    execution.
+  </p>
 </BlogPost>

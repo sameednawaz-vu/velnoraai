@@ -1,5 +1,6 @@
 ---
 import '../styles/tailwind.css';
+import { getImageCdnOrigin, withImageCdn } from '../lib/image-cdn';
 
 interface Props {
   title: string;
@@ -10,30 +11,27 @@ interface Props {
   author?: string;
 }
 
-const { title, description = "Velnora - Execution-first AI Utility Workspace", image, article = false, publishedDate, author } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description = "Velnora - Free tools workspace for conversion, compression, and practical workflows", image, article = false, publishedDate, author } = Astro.props;
+const canonicalPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '') || '/';
+const canonicalURL = new URL(canonicalPath, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const shouldLoadAnalytics = Boolean(gaId) && canonicalURL.hostname === 'velnoraai.app';
-const imageCdnBase = (import.meta.env.PUBLIC_IMAGE_CDN_BASE ?? '').trim().replace(/\/+$/, '');
-const withImageCdn = (assetPath: string) => {
-  const normalizedPath = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
-  return imageCdnBase ? `${imageCdnBase}${normalizedPath}` : normalizedPath;
-};
-const imageCdnOrigin = (() => {
-  if (!imageCdnBase) {
-    return '';
-  }
+const imageCdnOrigin = getImageCdnOrigin();
+const toAbsoluteImageUrl = (assetPath: string) => {
+  const rewrittenPath = withImageCdn(assetPath);
 
   try {
-    return new URL(imageCdnBase).origin;
+    return new URL(rewrittenPath, canonicalURL).toString();
   } catch {
-    return '';
+    return rewrittenPath;
   }
-})();
-const defaultOgImage = withImageCdn('/images/favicon-velnora.webp');
+};
+const defaultOgImage = toAbsoluteImageUrl('/images/favicon-velnora.webp');
 const faviconSvgImage = withImageCdn('/images/favicon-velnora.svg');
 const faviconFallbackImage = withImageCdn('/images/favicon-velnora.webp');
-const socialImage = image ?? defaultOgImage;
+const socialImage = image ? toAbsoluteImageUrl(image) : defaultOgImage;
 const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
 ---
 
@@ -42,9 +40,24 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#FFF9ED" />
+  <meta name="theme-color" content="#0e0c09" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="generator" content="Astro" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
 
   {imageCdnOrigin && <link rel="preconnect" href={imageCdnOrigin} crossorigin />}
 
@@ -95,10 +108,43 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
 
   {shouldLoadDynamicSchema && <script type="module" src="/schema-generator.js"></script>}
 
+  <script is:inline>
+    (() => {
+      const key = 'velnora-theme';
+      const root = document.documentElement;
+      const saved = window.localStorage.getItem(key);
+      const initial = saved === 'dark' || saved === 'light' ? saved : 'dark';
+      root.setAttribute('data-theme', initial);
+    })();
+  </script>
+
   <script>
     if (typeof window !== 'undefined') {
       window.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('[data-reveal]').forEach((node) => node.classList.add('is-visible'));
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!prefersReducedMotion) {
+          document.documentElement.classList.add('has-motion');
+
+          const revealNodes = Array.from(document.querySelectorAll('[data-reveal]'));
+          const observer = new IntersectionObserver(
+            (entries) => {
+              for (const entry of entries) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+                }
+              }
+            },
+            { threshold: 0.18 }
+          );
+
+          for (const node of revealNodes) {
+            observer.observe(node);
+          }
+        } else {
+          document.querySelectorAll('[data-reveal]').forEach((node) => node.classList.add('is-visible'));
+        }
       });
 
       if ('serviceWorker' in navigator) {
@@ -119,38 +165,70 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
     }
     
     :root {
-      --color-primary: #132239;
-      --color-secondary: #ff5d3d;
-      --color-accent: #0a8a82;
-      --color-background: #fff9ed;
-      --color-background-soft: #f8f3e4;
-      --color-text: #20314a;
-      --color-border: #e5d8bf;
-      --color-card-bg: #fffdf7;
-      --color-cyan: #0a8a82;
-      --color-purple: #ff5d3d;
-      --color-highlight: #ffc53d;
-      --font-display: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-      --font-sans: 'Trebuchet MS', 'Segoe UI', Tahoma, sans-serif;
-      --shadow-soft: 0 10px 30px rgba(20, 42, 68, 0.08);
-      --shadow-medium: 0 20px 42px rgba(16, 40, 66, 0.14);
+      --color-primary: #1f1810;
+      --color-secondary: #c8a84b;
+      --color-accent: #8f7640;
+      --color-background: #f2ead8;
+      --color-background-soft: #e8ddc5;
+      --color-text: #251d14;
+      --color-border: rgba(37, 29, 20, 0.16);
+      --color-card-bg: rgba(255, 248, 234, 0.72);
+      --color-highlight: #c8a84b;
+      --font-display: 'Fraunces', 'Iowan Old Style', 'Times New Roman', serif;
+      --font-sans: 'Outfit', 'Segoe UI', sans-serif;
+      --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+      --shadow-soft: 0 18px 34px rgba(40, 27, 12, 0.12);
+      --shadow-medium: 0 30px 64px rgba(40, 27, 12, 0.2);
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --panel-edge: rgba(143, 118, 64, 0.28);
+      --panel-glow: radial-gradient(circle at 82% -12%, rgba(200, 168, 75, 0.2), transparent 60%);
+      --body-grad-a: rgba(200, 168, 75, 0.26);
+      --body-grad-b: rgba(143, 118, 64, 0.12);
+    }
+
+    :root[data-theme='dark'] {
+      --color-primary: #f6ecda;
+      --color-secondary: #c8a84b;
+      --color-accent: #e1c77c;
+      --color-background: #0e0c09;
+      --color-background-soft: #14110c;
+      --color-text: #f2ead8;
+      --color-border: rgba(242, 234, 216, 0.16);
+      --color-card-bg: rgba(255, 246, 227, 0.03);
+      --shadow-soft: 0 20px 42px rgba(0, 0, 0, 0.4);
+      --shadow-medium: 0 34px 76px rgba(0, 0, 0, 0.56);
+      --panel-edge: rgba(200, 168, 75, 0.26);
+      --panel-glow: radial-gradient(circle at 84% -10%, rgba(200, 168, 75, 0.16), transparent 60%);
+      --body-grad-a: rgba(200, 168, 75, 0.18);
+      --body-grad-b: rgba(74, 56, 22, 0.3);
     }
     
     html {
       font-family: var(--font-sans);
-      background: radial-gradient(circle at 12% 10%, rgba(255, 197, 61, 0.35), transparent 45%),
-                  radial-gradient(circle at 85% 4%, rgba(10, 138, 130, 0.2), transparent 35%),
-                  linear-gradient(180deg, #fff9ed 0%, #fff3de 100%);
-      background-attachment: fixed;
+      background: var(--color-background);
       color: var(--color-text);
+      color-scheme: light;
+    }
+
+    :root[data-theme='dark'] html {
+      color-scheme: dark;
     }
     
     body {
-      line-height: 1.6;
+      line-height: 1.64;
       min-height: 100vh;
       position: relative;
       color: var(--color-text);
       overflow-x: hidden;
+      letter-spacing: 0.002em;
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at 8% 6%, var(--body-grad-a), transparent 44%),
+        radial-gradient(circle at 82% 12%, var(--body-grad-b), transparent 42%),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-background) 96%, #ffffff 4%) 0%, var(--color-background) 100%);
+      transition: background 0.35s ease, color 0.35s ease;
     }
 
     body::before {
@@ -158,11 +236,19 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: linear-gradient(rgba(19, 34, 57, 0.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(19, 34, 57, 0.05) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(28, 21, 14, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28, 21, 14, 0.06) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 76%);
+      opacity: 0.22;
       z-index: 0;
+    }
+
+    :root[data-theme='dark'] body::before {
+      background-image:
+        linear-gradient(rgba(242, 234, 216, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(242, 234, 216, 0.06) 1px, transparent 1px);
+      opacity: 0.18;
     }
 
     body > * {
@@ -171,25 +257,33 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
     }
     
     h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-weight: 600;
+      letter-spacing: -0.028em;
       color: var(--color-primary);
+      font-family: var(--font-display);
     }
     
     h1, .display-heading {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1.08;
+      font-size: clamp(2.1rem, 4.8vw, 4.4rem);
+      line-height: 1.02;
+    }
+
+    h1 em,
+    .display-heading em {
+      color: var(--color-secondary);
+      font-style: italic;
+      font-weight: 560;
     }
 
     h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
-      line-height: 1.15;
+      font-size: clamp(1.6rem, 3.3vw, 2.9rem);
+      line-height: 1.08;
     }
 
     h3 {
-      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      font-size: clamp(1.1rem, 2vw, 1.55rem);
       line-height: 1.25;
     }
     
@@ -200,35 +294,175 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
     }
     
     a:hover {
-      color: #066861;
+      color: color-mix(in srgb, var(--color-secondary) 88%, var(--color-primary));
     }
     
     button {
-      padding: 0.74rem 1.15rem;
+      padding: 0.7rem 1.1rem;
       border: 1px solid transparent;
-      border-radius: 0.55rem;
+      border-radius: 0.64rem;
       font-weight: 600;
       cursor: pointer;
       font-family: var(--font-sans);
-      transition: all 0.18s ease;
+      transition: all 0.24s ease;
     }
     
     button.primary {
-      background: linear-gradient(135deg, var(--color-secondary) 0%, #ff7f2f 100%);
-      color: white;
+      background: linear-gradient(128deg, color-mix(in srgb, var(--color-secondary) 88%, #f6d792 12%) 0%, var(--color-secondary) 100%);
+      color: #0e0c09;
       box-shadow: var(--shadow-soft);
     }
     
     button.primary:hover {
-      background: linear-gradient(135deg, #ff6a3f 0%, #ff963f 100%);
+      background: linear-gradient(128deg, color-mix(in srgb, var(--color-secondary) 76%, #f6d792 24%) 0%, color-mix(in srgb, var(--color-secondary) 92%, #8f7640 8%) 100%);
       box-shadow: var(--shadow-medium);
       transform: translateY(-1px);
+    }
+
+    .page-shell {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 1.65rem 1rem 3.4rem;
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .hero-panel,
+    .section-panel {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem;
+      background: var(--panel-glow), var(--color-card-bg);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero-panel {
+      border-color: var(--panel-edge);
+      padding: 1.3rem;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 0.18rem 0.02rem;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid color-mix(in srgb, var(--color-secondary) 40%, transparent);
+      color: color-mix(in srgb, var(--color-secondary) 86%, var(--color-text));
+      font-size: 0.66rem;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .lede {
+      color: color-mix(in srgb, var(--color-text) 82%, transparent);
+      line-height: 1.76;
+      max-width: 76ch;
+    }
+
+    .chip-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--color-secondary) 42%, transparent);
+      background: color-mix(in srgb, var(--color-secondary) 12%, transparent);
+      color: var(--color-text);
+      font-size: 0.74rem;
+      padding: 0.24rem 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.62rem;
+    }
+
+    .btn-link {
+      border: 1px solid var(--color-border);
+      border-radius: 0.65rem;
+      padding: 0.58rem 0.86rem;
+      background: color-mix(in srgb, var(--color-card-bg) 86%, transparent);
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.34rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .btn-link:hover {
+      border-color: color-mix(in srgb, var(--color-secondary) 50%, var(--color-border));
+      transform: translateY(-2px);
+    }
+
+    .btn-link.primary {
+      border-color: color-mix(in srgb, var(--color-secondary) 44%, transparent);
+      background: var(--color-secondary);
+      color: #0e0c09;
+      box-shadow: 0 10px 26px color-mix(in srgb, var(--color-secondary) 42%, transparent);
+    }
+
+    .split-grid {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .metric-grid {
+      display: grid;
+      gap: 0.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .metric-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: color-mix(in srgb, var(--color-card-bg) 92%, transparent);
+      padding: 0.75rem;
+      display: grid;
+      gap: 0.22rem;
+    }
+
+    .metric-card strong {
+      font-family: var(--font-display);
+      font-size: 1.46rem;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .metric-card span {
+      color: color-mix(in srgb, var(--color-text) 76%, transparent);
+      font-size: 0.82rem;
     }
 
     [data-reveal] {
       opacity: 1;
       transform: none;
-      transition: opacity 0.35s ease, transform 0.35s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .has-motion [data-reveal] {
+      opacity: 0;
+      transform: translateY(16px);
     }
 
     [data-reveal].is-visible {
@@ -245,6 +479,17 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
 
       * {
         scroll-behavior: auto !important;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .page-shell {
+        padding: 1rem 0.8rem 2.5rem;
+      }
+
+      .hero-panel,
+      .section-panel {
+        padding: 0.92rem;
       }
     }
 

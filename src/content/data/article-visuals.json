@@ -1,0 +1,92 @@
+{
+  "utility-convert-webp-to-png": {
+    "imageWebp": "/images/articles/utility-convert-webp-to-png.webp",
+    "imageAvif": "/images/articles/utility-convert-webp-to-png.avif",
+    "imageFallback": "/images/articles/utility-convert-webp-to-png.svg",
+    "alt": "WEBP to PNG conversion visual with source format card and output format card",
+    "caption": "Format map for converting WEBP files into PNG output while preserving visual quality.",
+    "template": "format-duel",
+    "themeGroup": "format"
+  },
+  "utility-convert-webp-to-jpg": {
+    "imageWebp": "/images/articles/utility-convert-webp-to-jpg.webp",
+    "imageAvif": "/images/articles/utility-convert-webp-to-jpg.avif",
+    "imageFallback": "/images/articles/utility-convert-webp-to-jpg.svg",
+    "alt": "WEBP to JPG conversion blueprint showing planning boxes and workflow checkpoints",
+    "caption": "Blueprint view for WEBP to JPG conversion with deterministic browser processing stages.",
+    "template": "blueprint-grid",
+    "themeGroup": "format"
+  },
+  "utility-convert-jfif-to-png": {
+    "imageWebp": "/images/articles/utility-convert-jfif-to-png.webp",
+    "imageAvif": "/images/articles/utility-convert-jfif-to-png.avif",
+    "imageFallback": "/images/articles/utility-convert-jfif-to-png.svg",
+    "alt": "JFIF to PNG timeline visual with four conversion milestones",
+    "caption": "Timeline for JFIF to PNG: capture, normalize, transform, and verify output.",
+    "template": "timeline-ribbon",
+    "themeGroup": "format"
+  },
+  "utility-convert-png-to-svg": {
+    "imageWebp": "/images/articles/utility-convert-png-to-svg.webp",
+    "imageAvif": "/images/articles/utility-convert-png-to-svg.avif",
+    "imageFallback": "/images/articles/utility-convert-png-to-svg.svg",
+    "alt": "PNG to SVG infographic with ring metrics for conversion readiness",
+    "caption": "Infographic summary for PNG to SVG conversion focused on clean vector-ready output.",
+    "template": "ring-infographic",
+    "themeGroup": "format"
+  },
+  "utility-convert-gif-to-mp4": {
+    "imageWebp": "/images/articles/utility-convert-gif-to-mp4.webp",
+    "imageAvif": "/images/articles/utility-convert-gif-to-mp4.avif",
+    "imageFallback": "/images/articles/utility-convert-gif-to-mp4.svg",
+    "alt": "GIF to MP4 bar-chart visual representing input quality and output stability",
+    "caption": "Metric board for GIF to MP4 conversion with quality, process, and handoff checkpoints.",
+    "template": "metric-bars",
+    "themeGroup": "format"
+  },
+  "utility-convert-mp4-to-gif": {
+    "imageWebp": "/images/articles/utility-convert-mp4-to-gif.webp",
+    "imageAvif": "/images/articles/utility-convert-mp4-to-gif.avif",
+    "imageFallback": "/images/articles/utility-convert-mp4-to-gif.svg",
+    "alt": "MP4 to GIF decision quadrant visual with speed and quality segments",
+    "caption": "Quadrant model for MP4 to GIF conversion balancing setup speed and output precision.",
+    "template": "quadrant-map",
+    "themeGroup": "format"
+  },
+  "utility-convert-video-to-gif": {
+    "imageWebp": "/images/articles/utility-convert-video-to-gif.webp",
+    "imageAvif": "/images/articles/utility-convert-video-to-gif.avif",
+    "imageFallback": "/images/articles/utility-convert-video-to-gif.svg",
+    "alt": "Video to GIF conversion card stack visual representing layered processing steps",
+    "caption": "Stacked workflow cards for converting video clips into optimized GIF deliverables.",
+    "template": "card-stack",
+    "themeGroup": "format"
+  },
+  "utility-convert-mov-to-mp4": {
+    "imageWebp": "/images/articles/utility-convert-mov-to-mp4.webp",
+    "imageAvif": "/images/articles/utility-convert-mov-to-mp4.avif",
+    "imageFallback": "/images/articles/utility-convert-mov-to-mp4.svg",
+    "alt": "MOV to MP4 process list with step markers from intake to review",
+    "caption": "Step-by-step board for MOV to MP4 conversion from intake through quality review.",
+    "template": "process-steps",
+    "themeGroup": "format"
+  },
+  "utility-convert-mp3-to-ogg": {
+    "imageWebp": "/images/articles/utility-convert-mp3-to-ogg.webp",
+    "imageAvif": "/images/articles/utility-convert-mp3-to-ogg.avif",
+    "imageFallback": "/images/articles/utility-convert-mp3-to-ogg.svg",
+    "alt": "MP3 to OGG spotlight visual with workflow notes and quality badge",
+    "caption": "Text-led conversion visual for MP3 to OGG with notes, checks, and publish-ready output.",
+    "template": "text-spotlight",
+    "themeGroup": "format"
+  },
+  "utility-convert-apng-to-gif": {
+    "imageWebp": "/images/articles/utility-convert-apng-to-gif.webp",
+    "imageAvif": "/images/articles/utility-convert-apng-to-gif.avif",
+    "imageFallback": "/images/articles/utility-convert-apng-to-gif.svg",
+    "alt": "APNG to GIF waveform visual showing conversion signal continuity",
+    "caption": "Signal-wave view for APNG to GIF conversion that tracks frame flow and output quality.",
+    "template": "signal-wave",
+    "themeGroup": "format"
+  }
+}

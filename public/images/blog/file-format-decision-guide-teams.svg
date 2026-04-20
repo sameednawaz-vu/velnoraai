@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">File format decision guide for teams</title>
+  <desc id="desc">Decision matrix illustration for selecting source and destination formats.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#7c2d12" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="70" y="70" width="1060" height="490" rx="28" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" />
+  <text x="110" y="175" fill="#fff7ed" font-family="Georgia, Times New Roman, serif" font-size="56" font-weight="700">File format decision guide</text>
+  <text x="110" y="240" fill="#fff7ed" font-family="Georgia, Times New Roman, serif" font-size="56" font-weight="700">for teams</text>
+  <text x="110" y="316" fill="#ffedd5" font-family="Trebuchet MS, Arial, sans-serif" font-size="30">Map each job to web, print, archive, or collaboration targets.</text>
+  <g stroke="#fed7aa" stroke-width="2" fill="none" opacity="0.85">
+    <rect x="110" y="360" width="460" height="170" rx="14" />
+    <line x1="110" y1="445" x2="570" y2="445" />
+    <line x1="340" y1="360" x2="340" y2="530" />
+  </g>
+  <text x="225" y="412" text-anchor="middle" fill="#ffedd5" font-family="Trebuchet MS, Arial, sans-serif" font-size="24" font-weight="700">Web</text>
+  <text x="455" y="412" text-anchor="middle" fill="#ffedd5" font-family="Trebuchet MS, Arial, sans-serif" font-size="24" font-weight="700">Print</text>
+  <text x="225" y="498" text-anchor="middle" fill="#ffedd5" font-family="Trebuchet MS, Arial, sans-serif" font-size="24" font-weight="700">Archive</text>
+  <text x="455" y="498" text-anchor="middle" fill="#ffedd5" font-family="Trebuchet MS, Arial, sans-serif" font-size="24" font-weight="700">Collaboration</text>
+  <circle cx="865" cy="445" r="120" fill="#22d3ee" opacity="0.85" />
+  <text x="865" y="437" text-anchor="middle" fill="#083344" font-family="Trebuchet MS, Arial, sans-serif" font-size="28" font-weight="700">Reduce</text>
+  <text x="865" y="474" text-anchor="middle" fill="#083344" font-family="Trebuchet MS, Arial, sans-serif" font-size="28" font-weight="700">rework</text>
+</svg>

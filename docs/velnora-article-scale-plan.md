@@ -4,13 +4,13 @@ Date: 2026-04-10
 Status: In progress
 
 ## Goal
-Publish more than 400 static, interconnected article pages that support the tools-first site, improve discoverability, and give search and generative engines clear semantic pathways into each tool route.
+Keep a focused set of 100-150 static, tightly interconnected article pages that directly support live tools and utility routes.
 
 ## Target Output
-- Professional tools: 120 tools x 3 article intents = 360 pages.
-- Utility tools: 67 tools x 1 workflow reference = 67 pages.
-- Total initial article set: 427 pages.
-- The article count must stay above 400 after future content pruning.
+- Professional tools: one high-intent guide per published tool.
+- Utility surfaces: a curated reference layer for highest-use utility routes.
+- Total retained article set: 100-150 pages.
+- Internal links must remain dense after every prune pass.
 
 ## Skills Baseline
 - Orchestration baseline: gstack.
@@ -24,10 +24,10 @@ Publish more than 400 static, interconnected article pages that support the tool
 ## Content Architecture
 
 ### Professional Tool Cluster
-Each published professional tool gets three article intents:
-1. Guide: how to use the tool.
-2. Workflow: step-by-step execution path.
-3. Decision: when to use the tool versus a nearby alternative.
+Each published professional tool keeps one high-value guide page focused on:
+1. How to use the tool correctly.
+2. When to use it versus nearby alternatives.
+3. How to validate output quality quickly.
 
 ### Utility Cluster
 Each utility tool gets one workflow reference article focused on:
@@ -60,23 +60,23 @@ Every article must connect to three layers of navigation:
 - Use FAQ schema when a page can answer common selection or usage questions.
 
 ## Build And Publish Flow
-1. Expand the article catalog generator to emit the full 427-page set.
+1. Keep the article catalog generator constrained to the 100-150 target range.
 2. Update the article index and article detail route to render related article and tool links.
 3. Run local build verification and route checks.
 4. Push to `main` so GitHub Pages publishes the update.
 5. Re-check the live article count and a sample of the new routes.
 
 ## Release Batches
-- Batch 1: article factory, article route metadata, and index navigation.
-- Batch 2: category and surface hub articles if additional expansion is needed.
-- Batch 3: editorial refinement and pruning pass for the highest-value clusters.
+- Batch 1: article pruning engine and route-level metadata updates.
+- Batch 2: internal-link density audit and utility reference balancing.
+- Batch 3: editorial refinement for highest-value conversion and compression clusters.
 
 ## Quality Gates
 - No duplicate slugs.
 - No duplicate titles or descriptions.
 - Every page has a canonical URL.
 - Every article has at least one live tool link.
-- Every professional article has at least two related article links.
+- Every article has at least three related article links.
 - Every utility article has at least three related tool links.
 - Build must pass before publish.
 

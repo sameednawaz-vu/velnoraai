@@ -40,3 +40,25 @@ Generate informative visual assets that summarize tools and articles, then publi
 3. Place optimized assets under `public/images/...`.
 4. Reference assets in target page with meaningful alt text.
 5. Run local SEO sandbox (`npm run test:seo`) and build checks before publish.
+
+## Gemini CLI Delegation (Image Ideation)
+
+Use Gemini CLI to delegate planning and prompt generation while keeping final rendering and publishing in the Velnora workflow.
+
+1. Generate SEO-aware visual brief set from keywords:
+
+	`gemini -p "Create 10 explanatory blog image briefs from src/content/data/seo-keywords.generated.json. Return JSON fields: slug, title, intent, visual_structure, caption, alt_text."`
+
+2. Generate production prompts for each selected brief:
+
+	`gemini -p "For slug design-explanatory-tool-images-rank, generate 3 production-ready image prompts for 1200x630 and 1200x1200, with typography hierarchy and warm obsidian/cream/gold palette constraints."`
+
+3. Store final selected prompts in your Imaginator project and render WebP assets.
+
+4. Publish final assets to `public/images/blog` and wire them in `src/content/data/blog-visuals.json`.
+
+5. Verify through build and SEO checks:
+
+	`npm run build`
+
+	`npm run test:seo`

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Reducing bounce with better utility page copy</title>
+  <desc id="desc">Message hierarchy visual for clearer utility page communication.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="70" y="70" width="1060" height="490" rx="28" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" />
+  <text x="110" y="178" fill="#ffe4e6" font-family="Georgia, Times New Roman, serif" font-size="52" font-weight="700">Reducing bounce with better</text>
+  <text x="110" y="240" fill="#ffe4e6" font-family="Georgia, Times New Roman, serif" font-size="52" font-weight="700">utility page copy</text>
+  <text x="110" y="314" fill="#fecdd3" font-family="Trebuchet MS, Arial, sans-serif" font-size="30">Lead with what users can do now, then guide the next click.</text>
+  <rect x="110" y="360" width="980" height="165" rx="18" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" />
+  <text x="150" y="416" fill="#fff1f2" font-family="Trebuchet MS, Arial, sans-serif" font-size="29" font-weight="700">1. Clear promise in headline</text>
+  <text x="150" y="460" fill="#fff1f2" font-family="Trebuchet MS, Arial, sans-serif" font-size="29" font-weight="700">2. Upload guidance near controls</text>
+  <text x="150" y="504" fill="#fff1f2" font-family="Trebuchet MS, Arial, sans-serif" font-size="29" font-weight="700">3. Trust signals before run action</text>
+</svg>

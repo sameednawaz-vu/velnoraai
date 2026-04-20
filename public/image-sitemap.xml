@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://velnoraai.app/about</loc>
-    <lastmod>2026-04-19T01:04:55.594Z</lastmod>
+    <lastmod>2026-04-20T14:03:11.727Z</lastmod>
     <image:image>
       <image:loc>https://velnoraai.app/images/about-sameed.avif</image:loc>
       <image:title>about sameed</image:title>
@@ -10,15 +10,231 @@
   </url>
   <url>
     <loc>https://velnoraai.app/about</loc>
-    <lastmod>2026-04-19T01:04:55.478Z</lastmod>
+    <lastmod>2026-04-20T14:03:11.630Z</lastmod>
     <image:image>
       <image:loc>https://velnoraai.app/images/about-sameed.webp</image:loc>
       <image:title>about sameed</image:title>
     </image:image>
   </url>
   <url>
+    <loc>https://velnoraai.app/articles/utility-convert-apng-to-gif</loc>
+    <lastmod>2026-04-19T12:41:49.620Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-apng-to-gif.avif</image:loc>
+      <image:title>utility convert apng to gif</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-apng-to-gif</loc>
+    <lastmod>2026-04-19T12:41:48.896Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-apng-to-gif.webp</image:loc>
+      <image:title>utility convert apng to gif</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-gif-to-mp4</loc>
+    <lastmod>2026-04-19T12:41:44.396Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-gif-to-mp4.avif</image:loc>
+      <image:title>utility convert gif to mp4</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-gif-to-mp4</loc>
+    <lastmod>2026-04-19T12:41:43.615Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-gif-to-mp4.webp</image:loc>
+      <image:title>utility convert gif to mp4</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-jfif-to-png</loc>
+    <lastmod>2026-04-19T12:41:42.262Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-jfif-to-png.avif</image:loc>
+      <image:title>utility convert jfif to png</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-jfif-to-png</loc>
+    <lastmod>2026-04-19T12:41:41.613Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-jfif-to-png.webp</image:loc>
+      <image:title>utility convert jfif to png</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mov-to-mp4</loc>
+    <lastmod>2026-04-19T12:41:47.446Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-mov-to-mp4.avif</image:loc>
+      <image:title>utility convert mov to mp4</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mov-to-mp4</loc>
+    <lastmod>2026-04-19T12:41:46.731Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-mov-to-mp4.webp</image:loc>
+      <image:title>utility convert mov to mp4</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp3-to-ogg</loc>
+    <lastmod>2026-04-19T12:41:48.481Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-mp3-to-ogg.avif</image:loc>
+      <image:title>utility convert mp3 to ogg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp3-to-ogg</loc>
+    <lastmod>2026-04-19T12:41:47.764Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-mp3-to-ogg.webp</image:loc>
+      <image:title>utility convert mp3 to ogg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp4-to-gif</loc>
+    <lastmod>2026-04-19T12:41:45.407Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-mp4-to-gif.avif</image:loc>
+      <image:title>utility convert mp4 to gif</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-mp4-to-gif</loc>
+    <lastmod>2026-04-19T12:41:44.726Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-mp4-to-gif.webp</image:loc>
+      <image:title>utility convert mp4 to gif</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-png-to-svg</loc>
+    <lastmod>2026-04-19T12:41:43.288Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-png-to-svg.avif</image:loc>
+      <image:title>utility convert png to svg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-png-to-svg</loc>
+    <lastmod>2026-04-19T12:41:42.649Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-png-to-svg.webp</image:loc>
+      <image:title>utility convert png to svg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-video-to-gif</loc>
+    <lastmod>2026-04-19T12:41:46.374Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-video-to-gif.avif</image:loc>
+      <image:title>utility convert video to gif</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-video-to-gif</loc>
+    <lastmod>2026-04-19T12:41:45.747Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-video-to-gif.webp</image:loc>
+      <image:title>utility convert video to gif</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webp-to-jpg</loc>
+    <lastmod>2026-04-19T12:41:41.210Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-webp-to-jpg.avif</image:loc>
+      <image:title>utility convert webp to jpg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webp-to-jpg</loc>
+    <lastmod>2026-04-19T12:41:40.154Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-webp-to-jpg.webp</image:loc>
+      <image:title>utility convert webp to jpg</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webp-to-png</loc>
+    <lastmod>2026-04-19T12:41:39.756Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-webp-to-png.avif</image:loc>
+      <image:title>utility convert webp to png</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/articles/utility-convert-webp-to-png</loc>
+    <lastmod>2026-04-19T12:41:38.720Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/articles/utility-convert-webp-to-png.webp</image:loc>
+      <image:title>utility convert webp to png</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/batch-compression-workflow-faster-publishing</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/batch-compression-workflow-faster-publishing.svg</image:loc>
+      <image:title>batch compression workflow faster publishing</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/design-explanatory-tool-images-rank</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/design-explanatory-tool-images-rank.svg</image:loc>
+      <image:title>design explanatory tool images rank</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/file-format-decision-guide-teams</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/file-format-decision-guide-teams.svg</image:loc>
+      <image:title>file format decision guide teams</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/internal-linking-framework-tool-articles</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/internal-linking-framework-tool-articles.svg</image:loc>
+      <image:title>internal linking framework tool articles</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/pick-right-converter-tool-60-seconds</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/pick-right-converter-tool-60-seconds.svg</image:loc>
+      <image:title>pick right converter tool 60 seconds</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/reducing-bounce-better-utility-page-copy</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/reducing-bounce-better-utility-page-copy.svg</image:loc>
+      <image:title>reducing bounce better utility page copy</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/blog/tool-page-qa-checklist-before-publish</loc>
+    <lastmod>2026-04-19T17:29:15.456Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/blog/tool-page-qa-checklist-before-publish.svg</image:loc>
+      <image:title>tool page qa checklist before publish</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://velnoraai.app/</loc>
-    <lastmod>2026-04-19T01:04:55.460Z</lastmod>
+    <lastmod>2026-04-20T14:03:11.616Z</lastmod>
     <image:image>
       <image:loc>https://velnoraai.app/images/favicon-velnora.avif</image:loc>
       <image:title>favicon velnora</image:title>
@@ -26,10 +242,170 @@
   </url>
   <url>
     <loc>https://velnoraai.app/</loc>
-    <lastmod>2026-04-19T01:04:55.394Z</lastmod>
+    <lastmod>2026-04-20T14:03:11.559Z</lastmod>
     <image:image>
       <image:loc>https://velnoraai.app/images/favicon-velnora.webp</image:loc>
       <image:title>favicon velnora</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/break-even-calculator</loc>
+    <lastmod>2026-04-19T12:41:51.079Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-break-even-calculator.avif</image:loc>
+      <image:title>tool break even calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/break-even-calculator</loc>
+    <lastmod>2026-04-19T12:41:50.029Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-break-even-calculator.webp</image:loc>
+      <image:title>tool break even calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/budget-split-planner</loc>
+    <lastmod>2026-04-19T12:41:52.934Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-budget-split-planner.avif</image:loc>
+      <image:title>tool budget split planner</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/budget-split-planner</loc>
+    <lastmod>2026-04-19T12:41:51.706Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-budget-split-planner.webp</image:loc>
+      <image:title>tool budget split planner</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/cash-flow-planner</loc>
+    <lastmod>2026-04-19T12:41:55.104Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-cash-flow-planner.avif</image:loc>
+      <image:title>tool cash flow planner</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/cash-flow-planner</loc>
+    <lastmod>2026-04-19T12:41:53.533Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-cash-flow-planner.webp</image:loc>
+      <image:title>tool cash flow planner</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/freelance-rate-calculator</loc>
+    <lastmod>2026-04-19T12:41:56.929Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-freelance-rate-calculator.avif</image:loc>
+      <image:title>tool freelance rate calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/freelance-rate-calculator</loc>
+    <lastmod>2026-04-19T12:41:55.808Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-freelance-rate-calculator.webp</image:loc>
+      <image:title>tool freelance rate calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/invoice-text-generator</loc>
+    <lastmod>2026-04-19T12:41:58.824Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-invoice-text-generator.avif</image:loc>
+      <image:title>tool invoice text generator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/invoice-text-generator</loc>
+    <lastmod>2026-04-19T12:41:57.638Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-invoice-text-generator.webp</image:loc>
+      <image:title>tool invoice text generator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/loan-emi-calculator</loc>
+    <lastmod>2026-04-19T12:42:00.318Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-loan-emi-calculator.avif</image:loc>
+      <image:title>tool loan emi calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/loan-emi-calculator</loc>
+    <lastmod>2026-04-19T12:41:59.418Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-loan-emi-calculator.webp</image:loc>
+      <image:title>tool loan emi calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/margin-calculator</loc>
+    <lastmod>2026-04-19T12:42:02.117Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-margin-calculator.avif</image:loc>
+      <image:title>tool margin calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/margin-calculator</loc>
+    <lastmod>2026-04-19T12:42:00.925Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-margin-calculator.webp</image:loc>
+      <image:title>tool margin calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/markup-markdown-calculator</loc>
+    <lastmod>2026-04-19T12:42:04.142Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-markup-markdown-calculator.avif</image:loc>
+      <image:title>tool markup markdown calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/markup-markdown-calculator</loc>
+    <lastmod>2026-04-19T12:42:02.835Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-markup-markdown-calculator.webp</image:loc>
+      <image:title>tool markup markdown calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/proposal-outline-builder</loc>
+    <lastmod>2026-04-19T12:42:05.608Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-proposal-outline-builder.avif</image:loc>
+      <image:title>tool proposal outline builder</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/proposal-outline-builder</loc>
+    <lastmod>2026-04-19T12:42:04.720Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-proposal-outline-builder.webp</image:loc>
+      <image:title>tool proposal outline builder</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/quotation-estimator</loc>
+    <lastmod>2026-04-19T12:42:07.954Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-quotation-estimator.avif</image:loc>
+      <image:title>tool quotation estimator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/tools/business-finance/quotation-estimator</loc>
+    <lastmod>2026-04-19T12:42:06.337Z</lastmod>
+    <image:image>
+      <image:loc>https://velnoraai.app/images/tools/tool-quotation-estimator.webp</image:loc>
+      <image:title>tool quotation estimator</image:title>
     </image:image>
   </url>
 </urlset>

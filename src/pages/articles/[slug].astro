@@ -1,8 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import ToolArticleLayout from '../../layouts/ToolArticleLayout.astro';
 import { toolArticles } from '../../lib/article-catalog';
+import articleVisuals from '../../content/data/article-visuals.json';
+import toolVisuals from '../../content/data/tool-page-visuals.json';
+import { withImageCdn } from '../../lib/image-cdn';
 
 export async function getStaticPaths() {
   return toolArticles.map((article) => ({
@@ -17,28 +18,58 @@ if (!article) {
   throw new Error(`Article ${slug} not found.`);
 }
 
-const relatedArticles = article.relatedArticles.length > 0
-  ? article.relatedArticles
-  : toolArticles
-      .filter(
-        (entry) =>
-          entry.slug !== article.slug &&
-          (entry.sectionLabel === article.sectionLabel || entry.familyLabel === article.familyLabel)
-      )
-      .map((entry) => ({
-        slug: entry.slug,
-        title: entry.articleTitle,
-        href: entry.articleHref,
-      }))
-      .slice(0, 8);
+const relatedArticles =
+  article.relatedArticles.length > 0
+    ? article.relatedArticles
+    : toolArticles
+        .filter(
+          (entry) =>
+            entry.slug !== article.slug &&
+            (entry.sectionLabel === article.sectionLabel || entry.familyLabel === article.familyLabel)
+        )
+        .map((entry) => ({
+          slug: entry.slug,
+          title: entry.articleTitle,
+          href: entry.articleHref,
+        }))
+        .slice(0, 8);
 
 const relatedTools = article.relatedTools;
+
+type VisualEntry = {
+  imageWebp: string;
+  imageAvif: string;
+  imageFallback: string;
+  alt: string;
+  caption: string;
+};
+
+const articleVisualMap = articleVisuals as Record<string, VisualEntry>;
+const toolVisualMap = toolVisuals as Record<string, VisualEntry>;
+
+const rawVisual =
+  articleVisualMap[article.slug] ??
+  toolVisualMap[article.slug] ?? {
+    imageWebp: '/images/favicon-velnora.webp',
+    imageAvif: '/images/favicon-velnora.avif',
+    imageFallback: '/images/favicon-velnora.jpg',
+    alt: `${article.articleTitle} visual`,
+    caption: article.articleDescription,
+  };
+
+const visual = {
+  ...rawVisual,
+  imageWebp: withImageCdn(rawVisual.imageWebp),
+  imageAvif: withImageCdn(rawVisual.imageAvif),
+  imageFallback: withImageCdn(rawVisual.imageFallback),
+};
 
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: article.articleTitle,
   description: article.articleDescription,
+  image: visual.imageWebp,
   author: {
     '@type': 'Organization',
     name: 'Velnora',
@@ -94,320 +125,82 @@ const faqSchema = {
 };
 ---
 
-<BaseLayout title={article.articleTitle} description={article.articleDescription} article={true} publishedDate={article.updatedDate}>
-  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<ToolArticleLayout
+  title={article.articleTitle}
+  description={article.articleDescription}
+  toolName={article.toolName}
+  updatedDate={article.updatedDate}
+  familyLabel={article.familyLabel}
+  articleTypeLabel={article.articleTypeLabel}
+  sectionLabel={article.sectionLabel}
+  clusterLabel={article.clusterLabel}
+  toolHref={article.toolHref}
+  relatedTools={relatedTools}
+  relatedArticles={relatedArticles}
+  visual={visual}
+>
+  <script slot="schemas" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script slot="schemas" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script slot="schemas" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
-  <Header />
+  <section>
+    <h2>What this tool helps you do</h2>
+    <p>{article.introParagraph}</p>
+    <p>{article.summaryParagraph}</p>
+  </section>
 
-  <main class="article-page">
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span>/</span>
-      <a href="/articles">Articles</a>
-      <span>/</span>
-      <span>{article.toolName}</span>
-    </div>
+  <section>
+    <h2>How to use this workflow</h2>
+    <ol>
+      {article.steps.map((step) => (
+        <li>{step}</li>
+      ))}
+    </ol>
+  </section>
 
-    <article class="article-shell" data-reveal>
-      <header class="article-header">
-        <p class="eyebrow">{article.familyLabel}</p>
-        <h1>{article.articleTitle}</h1>
-        <p class="article-description">{article.articleDescription}</p>
-        <div class="meta-row">
-          <span>{article.articleTypeLabel}</span>
-          <span>{article.sectionLabel}</span>
-          <span>{article.clusterLabel}</span>
-          <span>Updated {article.updatedDate}</span>
-          <span>Free to use</span>
-        </div>
-      </header>
+  <section>
+    <h2>Best use cases</h2>
+    <ul>
+      {article.useCases.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </section>
 
-      <section>
-        <h2>What this tool helps you do</h2>
-        <p>{article.introParagraph}</p>
-        <p>{article.summaryParagraph}</p>
-      </section>
+  <section>
+    <h2>SEO and GEO optimization notes</h2>
+    <p>
+      This article is built for both search engine indexing and generative engine retrieval by keeping tool intent,
+      workflow steps, and decision context in clear semantic sections.
+    </p>
+    <p>
+      For best results, pair this guide with the live tool route, then publish supporting pages that include
+      practical examples, expected outputs, and consistent terminology.
+    </p>
+  </section>
 
-      <section>
-        <h2>How to use this workflow</h2>
-        <ol>
-          {article.steps.map((step) => (
-            <li>{step}</li>
-          ))}
-        </ol>
-      </section>
+  <section>
+    <h2>Trusted source reference</h2>
+    <p>
+      For semantic SEO validation and structured implementation guidance, review the official Search Central
+      documentation alongside this workflow.
+    </p>
+    <p>
+      <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener noreferrer">
+        Google Search Central SEO starter guide
+      </a>
+    </p>
+  </section>
 
-      <section>
-        <h2>Best use cases</h2>
-        <ul>
-          {article.useCases.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h2>SEO and GEO optimization notes</h2>
-        <p>
-          This article is built for both search engine indexing and generative engine retrieval by keeping tool intent,
-          workflow steps, and decision context in clear semantic sections.
-        </p>
-        <p>
-          For best results, pair this guide with the live tool route, then publish supporting pages that include
-          practical examples, expected outputs, and consistent terminology.
-        </p>
-      </section>
-
-      <section>
-        <h2>Frequently asked questions</h2>
-        <dl class="faq-list">
-          {article.faq.map((entry) => (
-            <>
-              <dt>{entry.question}</dt>
-              <dd>{entry.answer}</dd>
-            </>
-          ))}
-        </dl>
-      </section>
-
-      <section>
-        <h2>Related tools</h2>
-        <ul class="related-tool-list">
-          {relatedTools.map((entry) => (
-            <li>
-              <a href={entry.href}>{entry.name}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="article-actions">
-        <a class="primary" href={article.toolHref}>Open {article.toolName}</a>
-        <a class="secondary" href="/articles">Browse all articles</a>
-      </section>
-    </article>
-
-    <section class="related-articles" data-reveal>
-      <h2>Related articles</h2>
-      <ul>
-        {relatedArticles.map((entry) => (
-          <li>
-            <a href={entry.articleHref}>{entry.articleTitle}</a>
-            <span>{entry.sectionLabel}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  </main>
-
-  <Footer />
-</BaseLayout>
-
-<style>
-  .article-page {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 2rem 1rem 4rem;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: #60728f;
-    font-size: 0.9rem;
-  }
-
-  .article-shell {
-    border: 1px solid var(--color-border);
-    border-radius: 0.95rem;
-    background: #fffef9;
-    box-shadow: var(--shadow-soft);
-    padding: 1.25rem;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .article-header {
-    border-bottom: 1px solid #e6d6be;
-    padding-bottom: 0.8rem;
-  }
-
-  .eyebrow {
-    color: #8a531f;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .article-header h1 {
-    font-size: clamp(1.55rem, 3.5vw, 2.4rem);
-    margin-bottom: 0.55rem;
-    line-height: 1.18;
-  }
-
-  .article-description {
-    color: #364f6d;
-    line-height: 1.62;
-    margin-bottom: 0.65rem;
-  }
-
-  .meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.52rem;
-  }
-
-  .meta-row span {
-    border: 1px solid #d4e1f2;
-    border-radius: 999px;
-    background: #f2f7ff;
-    color: #34557d;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 0.2rem 0.58rem;
-  }
-
-  .article-shell section h2,
-  .related-articles h2 {
-    font-size: 1.25rem;
-    margin-bottom: 0.45rem;
-    color: #193657;
-  }
-
-  .article-shell p {
-    color: #415977;
-    line-height: 1.68;
-    margin-bottom: 0.56rem;
-  }
-
-  .article-shell ol,
-  .article-shell ul {
-    padding-left: 1.15rem;
-    color: #405777;
-    display: grid;
-    gap: 0.35rem;
-    line-height: 1.62;
-  }
-
-  .faq-list {
-    display: grid;
-    gap: 0.42rem;
-  }
-
-  .faq-list dt {
-    font-weight: 700;
-    color: #1c3656;
-  }
-
-  .faq-list dd {
-    margin: 0 0 0.35rem;
-    color: #46607f;
-    line-height: 1.58;
-  }
-
-  .related-tool-list {
-    display: grid;
-    gap: 0.35rem;
-  }
-
-  .related-tool-list li {
-    list-style: disc;
-  }
-
-  .related-tool-list a {
-    color: #2b527b;
-    font-weight: 700;
-  }
-
-  .article-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.72rem;
-  }
-
-  .article-actions a {
-    border: 1px solid #d5c4a7;
-    border-radius: 0.56rem;
-    padding: 0.55rem 0.9rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
-
-  .article-actions .primary {
-    background: #ffc53d;
-    color: #20324d;
-    border-color: #e8b73b;
-  }
-
-  .article-actions .secondary {
-    background: #fff7e9;
-    color: #2a4361;
-  }
-
-  .related-articles {
-    border: 1px solid var(--color-border);
-    border-radius: 0.95rem;
-    background: #fffefb;
-    box-shadow: var(--shadow-soft);
-    padding: 1rem;
-  }
-
-  .related-articles ul {
-    list-style: none;
-    display: grid;
-    gap: 0.4rem;
-  }
-
-  .related-articles li {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem;
-    border-bottom: 1px dashed #e7d8c3;
-    padding-bottom: 0.34rem;
-  }
-
-  .related-articles li:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .related-articles a {
-    color: #233f5f;
-    font-size: 0.9rem;
-  }
-
-  .related-articles span {
-    color: #607592;
-    font-size: 0.78rem;
-    font-weight: 700;
-  }
-
-  @media (max-width: 768px) {
-    .article-page {
-      padding: 1.45rem 0.8rem 3rem;
-    }
-
-    .article-shell,
-    .related-articles {
-      padding: 0.9rem;
-    }
-
-    .related-tool-list {
-      padding-left: 1rem;
-    }
-
-    .related-articles li {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.14rem;
-    }
-  }
-</style>
+  <section>
+    <h2>Frequently asked questions</h2>
+    <dl class="faq-list">
+      {article.faq.map((entry) => (
+        <>
+          <dt>{entry.question}</dt>
+          <dd>{entry.answer}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
+</ToolArticleLayout>

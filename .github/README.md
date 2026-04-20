@@ -28,7 +28,7 @@ Auto-deployment settings (already configured, no changes needed)
 |------|------|------------|
 | Edit a blog article | 2 min | ⭐ Very Easy |
 | Add a new blog post | 5 min | ⭐ Very Easy |
-| Add/edit AI prompts | 3 min | ⭐ Very Easy |
+| Add/edit workflow templates | 3 min | ⭐ Very Easy |
 | Setup contact form | 10 min | ⭐⭐ Easy |
 | Setup Google Analytics | 10 min | ⭐⭐ Easy |
 | Setup domain (velnoraai.com) | 5 min + 48h wait | ⭐⭐ Easy |
@@ -40,7 +40,7 @@ Auto-deployment settings (already configured, no changes needed)
 
 **View/Edit Your Content:**
 - 📝 [Edit Blog Articles](https://github.com/sameednawaz-vu/velnoraai/edit/main/src/pages/blog/%5Bslug%5D.astro)
-- 🤖 [Edit AI Prompts](https://github.com/sameednawaz-vu/velnoraai/edit/main/src/content/prompts.json)
+- 🧩 [Edit Workflow Templates](https://github.com/sameednawaz-vu/velnoraai/edit/main/src/content/prompts.json)
 - 👤 [Edit Contact Form Setup](https://github.com/sameednawaz-vu/velnoraai/edit/main/src/components/ContactForm.astro)
 
 **Check Website Status:**
@@ -82,7 +82,7 @@ Auto-deployment settings (already configured, no changes needed)
 ✅ Website created and hosted (GitHub Pages)  
 ✅ Auto-deployment configured  
 ✅ 7 blog articles ready to edit  
-✅ 12 AI prompts ready to edit  
+✅ Workflow template library ready to edit  
 ✅ Contact form ready to setup  
 ✅ Google Analytics ready to setup  
 ✅ All instructions written in plain English  

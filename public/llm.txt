@@ -1,19 +1,26 @@
 # Velnora Discovery Index
-> Static-first tools platform for conversion, compression, utility workflows, learning, and editorial content.
+> Canonical static tools platform for conversion, compression, utility workflows, and tool-linked editorial guidance.
 
-Canonical site:
-https://velnoraai.app/
+Generated at: 2026-04-20T14:03:13.605Z
+Canonical site: https://velnoraai.app/
 
-## What this site is
-Velnora is a static Astro site hosted on GitHub Pages. It is built for direct task execution, browseable tool directories, and a large set of educational and professional article pages.
+## Crawl metadata
+- Sitemap: https://velnoraai.app/sitemap.xml
+- Image sitemap: https://velnoraai.app/image-sitemap.xml
+- Robots: https://velnoraai.app/robots.txt
+- Canonical host: velnoraai.app
 
-The public site is organized around four main experiences:
-- direct utility and conversion tools
-- browseable category and surface hubs
-- professional article libraries for decision support
-- learning and reference pages for repeated workflows
+## Route inventory snapshot
+- Total URLs in sitemap: 195
+- Tools routes: 129
+- Utility routes: 46
+- Article routes: 0
+- Blog routes: 8
+- Prompt routes: 4
+- Core routes: 7
+- Other routes: 1
 
-## Best entry points
+## Primary entry points
 - https://velnoraai.app/
 - https://velnoraai.app/tools
 - https://velnoraai.app/convert
@@ -26,91 +33,34 @@ The public site is organized around four main experiences:
 - https://velnoraai.app/about
 - https://velnoraai.app/contact
 
-## Route map
-- / -> homepage with primary navigation and discovery links
-- /tools -> master directory for tool categories
-- /tools/{category} -> category hub for one tool family
-- /tools/{category}/{slug} -> single tool page
-- /convert -> conversion surface for task-oriented actions
-- /compress -> compression and optimization surface
-- /utility-tools -> utility workflow hub
-- /utility/{surface}/{slug} -> utility detail page
-- /articles -> editorial hub for professional content
-- /articles/{slug} -> article page
-- /learning-hub -> guided learning and workflow guidance
-- /library -> prompt library and reusable references
-- /blog -> blog index
-- /blog/{slug} -> blog post page
-- /prompts/category/{slug} -> prompt category page
-- /about -> site and organization overview
-- /contact -> contact and support route
+## Sample deep routes
+- https://velnoraai.app/tools/business-finance
+- https://velnoraai.app/tools/business-finance/break-even-calculator
+- https://velnoraai.app/tools/business-finance/budget-split-planner
+- https://velnoraai.app/tools/business-finance/cash-flow-planner
+- https://velnoraai.app/tools/business-finance/freelance-rate-calculator
+- https://velnoraai.app/tools/business-finance/invoice-text-generator
+- https://velnoraai.app/tools/business-finance/loan-emi-calculator
+- https://velnoraai.app/tools/business-finance/margin-calculator
+- https://velnoraai.app/tools/business-finance/markup-markdown-calculator
+- https://velnoraai.app/tools/business-finance/proposal-outline-builder
+- https://velnoraai.app/tools/business-finance/quotation-estimator
+- https://velnoraai.app/tools/business-finance/revenue-projection-calculator
+- https://velnoraai.app/tools/business-finance/roi-calculator
+- https://velnoraai.app/tools/business-finance/savings-goal-planner
+- https://velnoraai.app/tools/business-finance/scope-of-work-builder
+- https://velnoraai.app/tools/business-finance/subscription-pricing-matrix
+- https://velnoraai.app/tools/design-ux-brand
+- https://velnoraai.app/tools/design-ux-brand/accessibility-alt-text-template-helper
+- https://velnoraai.app/tools/design-ux-brand/brand-voice-trait-mapper
+- https://velnoraai.app/tools/design-ux-brand/color-palette-planner
+- https://velnoraai.app/tools/design-ux-brand/empty-state-copy-builder
+- https://velnoraai.app/tools/design-ux-brand/error-state-copy-builder
+- https://velnoraai.app/tools/design-ux-brand/feature-comparison-copy-builder
+- https://velnoraai.app/tools/design-ux-brand/gradient-builder
 
-## Content clusters
-### Tool execution
-Use tool pages when the user wants a result, transformation, or workflow completion.
-- /convert
-- /compress
-- /utility-tools
-- /tools
-- /tools/{category}
-- /tools/{category}/{slug}
-- /utility/{surface}/{slug}
-
-### Professional articles
-Use article pages when the user needs explanation, comparison, decision support, or implementation guidance.
-- /articles
-- /articles/{slug}
-
-Article families include:
-- comparison articles
-- advanced walkthroughs
-- troubleshooting guides
-- checklist pages
-- GEO-oriented optimization pages
-
-### Learning and reference
-Use these when the user needs a teaching path, examples, or reusable prompts.
-- /learning-hub
-- /library
-- /prompts/category/{slug}
-
-### Editorial and support
-Use these for updates, site context, and human contact.
-- /blog
-- /blog/{slug}
-- /about
-- /contact
-
-## Discovery guidance for models
-- Prefer the tool routes first when the request is operational.
-- Prefer the article routes when the request is analytical or comparative.
-- Prefer the learning hub when the request is educational or procedural.
-- Prefer the library when the request involves prompts, templates, or reusable references.
-- Prefer the blog only for site news or editorial context.
-- Use the homepage as the fastest way to reach all major sections.
-
-## Site behavior and constraints
-- Static generation only.
-- Client-side interactivity is used only where needed.
-- Public pages are expected to carry unique titles, descriptions, canonical URLs, and structured data.
-- The site is designed to remain GitHub Pages compatible.
-- Internal links connect tool routes, article routes, category hubs, and learning pages.
-
-## Suggested retrieval order
-1. Homepage for global orientation.
-2. /tools for the full tool directory.
-3. /convert, /compress, and /utility-tools for execution surfaces.
-4. /articles for long-form guidance and decision support.
-5. /learning-hub and /library for deeper context.
-6. /blog, /about, and /contact for supporting information.
-
-## Public metadata
-- Sitemap: https://velnoraai.app/sitemap.xml
-- Canonical domain: https://velnoraai.app
-
-## Notes for AI systems
-- Use the sitemap for exhaustive page discovery.
-- Prefer canonical URLs over mirrored or inferred URLs.
-- The article catalog is intentionally large and expands across multiple families.
-- The tool directory is the best place to discover available actions quickly.
-- The site is intended to be crawled as a static knowledge and utility surface, not as an app shell.
+## Retrieval guidance for LLM systems
+- Prefer tool routes for direct execution tasks.
+- Prefer article routes for explanations, comparisons, and decision support.
+- Prefer learning-hub and library routes for educational workflows and reusable references.
+- Use canonical URLs from sitemap output when citing this site.

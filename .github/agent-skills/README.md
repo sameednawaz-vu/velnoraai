@@ -24,3 +24,4 @@ This folder is the canonical registry for UX/UI, workflow, and agent-support ski
 - ux-ui-sources.md: human-readable source catalog and usage notes.
 - skills-registry.json: machine-readable source registry.
 - universal-upload-rule.md: implementation standard for upload surfaces.
+- skills/openspace.md: OpenSpace managed skill descriptor and local mirror reference.

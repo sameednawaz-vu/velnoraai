@@ -96,7 +96,7 @@
  - If you prefer zero-backend at all, implement the full public surface using the Client-only and Build-time categories and mark the rest as “Pro” features that will require an external integration later.
 
  ## Quick next steps
- - Pick Batch A tools (core AI / writing) — I can mark which of those are client-only vs. require LLM and start implementing the client-only ones first.
+- Pick Batch A tools (core writing and workflow) — I can mark which of those are client-only vs. require external integrations and start implementing the client-only ones first.
  - Or tell me a specific tool from the Client-only list and I’ll scaffold it (UI + client logic) so it’s ready to drop into the site.
 
  Generated: analysis saved in repo.
