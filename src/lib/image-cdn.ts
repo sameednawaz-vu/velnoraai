@@ -10,7 +10,17 @@ export function withImageCdn(assetPath: string): string {
   }
 
   const normalizedPath = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
-  return imageCdnBase ? `${imageCdnBase}${normalizedPath}` : normalizedPath;
+
+  // Cloudflare image project is deployed from public/images as the project root.
+  // Convert /images/foo.png into /foo.png when a CDN base is configured.
+  let cdnPath = normalizedPath;
+  if (normalizedPath === '/images') {
+    cdnPath = '/';
+  } else if (normalizedPath.startsWith('/images/')) {
+    cdnPath = normalizedPath.slice('/images'.length);
+  }
+
+  return imageCdnBase ? `${imageCdnBase}${cdnPath}` : normalizedPath;
 }
 
 export function getImageCdnOrigin(): string {
