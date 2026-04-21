@@ -645,13 +645,15 @@ const breadcrumbSchema = {
       </div>
     </section>
 
-    <section class="faq-block" data-reveal>
+    <section class="faq-block" data-reveal itemScope itemType="https://schema.org/FAQPage">
       <h2>Common questions users ask</h2>
       <div class="faq-grid">
         {faqItems.map((entry) => (
-          <article>
-            <h3>{entry.question}</h3>
-            <p>{entry.answer}</p>
+          <article itemProp="mainEntity" itemScope itemType="https://schema.org/Question">
+            <h3 itemProp="name">{entry.question}</h3>
+            <p itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
+              <span itemProp="text">{entry.answer}</span>
+            </p>
           </article>
         ))}
       </div>
@@ -936,6 +938,7 @@ const breadcrumbSchema = {
   .hero-board strong {
     color: var(--color-primary);
     font-size: 0.84rem;
+    overflow-wrap: anywhere;
   }
 
   .eyebrow {
@@ -1115,6 +1118,10 @@ const breadcrumbSchema = {
     align-items: start;
   }
 
+  .runner-layout > * {
+    min-width: 0;
+  }
+
   .runner-main {
     min-width: 0;
   }
@@ -1156,6 +1163,10 @@ const breadcrumbSchema = {
     display: grid;
     gap: 0.1rem;
     color: var(--color-primary);
+  }
+
+  .recommended-rail li a strong {
+    overflow-wrap: anywhere;
   }
 
   .recommended-rail li a span {

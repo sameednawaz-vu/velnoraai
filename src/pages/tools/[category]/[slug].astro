@@ -444,12 +444,12 @@ const faqSchema = {
 
     <section class="runner-layout" data-reveal>
       <article class="section-panel" aria-label="Tool runner">
-        <h2>Run the tool</h2>
+        <h2 class="runner-heading">Run the tool</h2>
         <UniversalToolRunner client:load tool={tool} />
       </article>
 
       <aside class="section-panel recommended-rail" aria-label="Recommended tools">
-        <h2>{useConversionRecommendations ? 'Recommended Conversions' : 'Recommended Tools'}</h2>
+        <h2 class="runner-heading">{useConversionRecommendations ? 'Recommended Conversions' : 'Recommended Tools'}</h2>
         <p class="lede">{recommendedRailSummary}</p>
 
         <ul class="rail-list">
@@ -538,13 +538,15 @@ const faqSchema = {
       </ul>
     </section>
 
-    <section class="section-panel" data-reveal>
+    <section class="section-panel" data-reveal itemScope itemType="https://schema.org/FAQPage">
       <h2>Common questions</h2>
       <div class="faq-items">
         {faqItems.map((entry) => (
-          <article>
-            <h3>{entry.question}</h3>
-            <p>{entry.answer}</p>
+          <article itemProp="mainEntity" itemScope itemType="https://schema.org/Question">
+            <h3 itemProp="name">{entry.question}</h3>
+            <p itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
+              <span itemProp="text">{entry.answer}</span>
+            </p>
           </article>
         ))}
       </div>
@@ -626,6 +628,16 @@ const faqSchema = {
     align-items: start;
   }
 
+  .runner-layout > * {
+    min-width: 0;
+  }
+
+  .runner-heading {
+    font-size: clamp(1.28rem, 1.9vw, 1.72rem);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
   .tool-page.template-finance .tool-hero,
   .tool-page.template-design .tool-hero {
     grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1fr);
@@ -680,6 +692,10 @@ const faqSchema = {
     color: var(--color-primary);
   }
 
+  .rail-list li a strong {
+    overflow-wrap: anywhere;
+  }
+
   .rail-list li a span {
     font-family: var(--font-mono);
     font-size: 0.66rem;
@@ -713,6 +729,7 @@ const faqSchema = {
     line-height: 1.58;
     color: var(--color-primary);
     font-size: 0.86rem;
+    overflow-x: auto;
   }
 
   .updated {

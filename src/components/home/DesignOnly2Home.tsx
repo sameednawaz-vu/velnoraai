@@ -688,9 +688,9 @@ export default function DesignOnly2Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] bg-app-bg/95 backdrop-blur-md flex flex-col px-[60px] pt-10 overflow-y-auto"
+              className="fixed inset-0 z-[100] bg-app-bg/95 backdrop-blur-md flex flex-col px-4 md:px-[60px] pt-6 md:pt-10 overflow-y-auto"
             >
-            <div className="flex justify-between items-center mb-20 transition-colors duration-500">
+            <div className="flex justify-between items-center mb-10 md:mb-20 transition-colors duration-500">
               <span className={`font-display text-gold text-lg tracking-widest uppercase ${theme === "dark" ? "opacity-90" : "opacity-70"}`}>
                 Intelligence Search
               </span>
@@ -701,7 +701,7 @@ export default function DesignOnly2Home() {
                 <X size={24} className="text-gold" />
               </button>
             </div>
-            <div className="max-w-5xl w-full mx-auto">
+              <div className="max-w-5xl w-full mx-auto">
               <div className="border-b-2 border-gold/30 pb-4 flex items-center gap-6 group focus-within:border-gold transition-colors">
                 <Search size={32} className="text-gold opacity-80 group-focus-within:opacity-100 transition-opacity" />
                 <input 
@@ -715,12 +715,12 @@ export default function DesignOnly2Home() {
                     }
                   }}
                   placeholder="SEARCH TOOLS OR ARTICLES (E.G. MP4 TO GIF, COMPRESS PDF, QA CHECKLIST)"
-                  className={`bg-transparent border-none outline-none text-4xl font-display w-full uppercase tracking-tight py-2 text-app-text ${theme === "dark" ? "placeholder:opacity-55" : "placeholder:opacity-35"}`}
+                    className={`bg-transparent border-none outline-none text-2xl sm:text-3xl md:text-4xl font-display w-full uppercase tracking-tight py-2 text-app-text ${theme === "dark" ? "placeholder:opacity-55" : "placeholder:opacity-35"}`}
                 />
               </div>
               {!hasActiveQuery && (
-                <div className="mt-10 grid grid-cols-2 gap-14 border-t border-app-sep pt-10">
-                  <div className="border-r border-app-sep pr-20">
+                <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 border-t border-app-sep pt-8 md:pt-10">
+                  <div className="md:border-r md:border-app-sep md:pr-20">
                     <h4 className="text-[11px] uppercase tracking-[0.3em] text-gold mb-8 opacity-60">Trending Searches</h4>
                     <div className="flex flex-col gap-4 text-app-text">
                       {QUICK_SEARCHES.map((s) => (
@@ -827,12 +827,12 @@ export default function DesignOnly2Home() {
       )}
 
       {/* Header */}
-      <header className="flex items-center justify-between px-[60px] py-10 border-b border-app-sep relative z-[80] bg-app-bg transition-colors duration-500">
+      <header className="flex flex-col md:flex-row md:items-center md:justify-between px-4 md:px-[60px] py-4 md:py-10 border-b border-app-sep relative z-[80] bg-app-bg transition-colors duration-500 gap-3 md:gap-0">
         <a href="/" className="flex items-center gap-3 text-gold">
           <img src="/images/favicon-velnora.svg" width={24} height={24} alt="Velnora" className="w-6 h-6" />
-          <span className="font-display text-[1.2rem] tracking-[0.1em] uppercase">Velnora</span>
+          <span className="font-display text-[1rem] md:text-[1.2rem] tracking-[0.1em] uppercase">Velnora</span>
         </a>
-        <nav className="flex items-center gap-8 text-[12px] uppercase tracking-[0.15em] text-app-text">
+        <nav className="w-full md:w-auto flex items-center gap-3 md:gap-8 text-[10px] md:text-[12px] uppercase tracking-[0.12em] md:tracking-[0.15em] text-app-text overflow-x-auto md:overflow-visible pb-1 md:pb-0">
           {NAVIGATION_LINKS.map(link => (
             <div 
               key={link.name} 
@@ -840,7 +840,7 @@ export default function DesignOnly2Home() {
               onMouseLeave={() => link.megaKey && scheduleMegaMenuClose()}
               className="relative"
             >
-              <a href={link.href} className={`hover:text-gold transition-colors cursor-pointer py-4 inline-block ${link.megaKey && openMegaKey === link.megaKey ? "text-gold" : ""}`}>
+              <a href={link.href} className={`hover:text-gold transition-colors cursor-pointer py-2 md:py-4 inline-block whitespace-nowrap ${link.megaKey && openMegaKey === link.megaKey ? "text-gold" : ""}`}>
                 {link.name}
               </a>
 
@@ -910,14 +910,14 @@ export default function DesignOnly2Home() {
             onClick={() => setIsSearchOpen(true)}
             aria-label="Search tools"
             title="Search tools"
-            className={`p-2.5 border rounded-full transition-all cursor-pointer ${theme === "dark" ? "border-gold/55 bg-app-card-bg/[0.2] text-gold hover:border-gold hover:bg-gold/[0.14]" : "border-gold/30 bg-app-card-bg/[0.16] text-app-text hover:border-gold hover:bg-gold/[0.1] hover:text-gold"}`}
+            className={`p-2 md:p-2.5 border rounded-full transition-all cursor-pointer shrink-0 ${theme === "dark" ? "border-gold/55 bg-app-card-bg/[0.2] text-gold hover:border-gold hover:bg-gold/[0.14]" : "border-gold/30 bg-app-card-bg/[0.16] text-app-text hover:border-gold hover:bg-gold/[0.1] hover:text-gold"}`}
           >
             <Search size={18} />
           </button>
           
           <button 
             onClick={toggleTheme}
-            className="p-2 bg-app-card-bg/[0.16] border border-gold/30 rounded-full hover:border-gold transition-all cursor-pointer text-gold flex items-center justify-center overflow-hidden"
+            className="p-2 bg-app-card-bg/[0.16] border border-gold/30 rounded-full hover:border-gold transition-all cursor-pointer text-gold flex items-center justify-center overflow-hidden shrink-0"
             aria-label="Toggle Theme"
           >
             <span className={`inline-flex transition-transform duration-300 ${theme === "dark" ? "rotate-0" : "rotate-180"}`}>
@@ -925,7 +925,7 @@ export default function DesignOnly2Home() {
             </span>
           </button>
 
-          <a href="/tools" className="bg-gold text-obsidian px-5 py-2 font-bold tracking-widest hover:opacity-90 transition-opacity cursor-pointer inline-block">
+          <a href="/tools" className="bg-gold text-obsidian px-3 md:px-5 py-2 font-bold tracking-[0.12em] md:tracking-widest text-[10px] md:text-[12px] hover:opacity-90 transition-opacity cursor-pointer inline-block whitespace-nowrap ml-auto md:ml-0">
             Open workspace
           </a>
         </nav>
@@ -933,15 +933,15 @@ export default function DesignOnly2Home() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <div className="grid grid-cols-[60%_40%] px-[60px] pt-[60px] pb-20">
-          <div className="flex flex-col justify-center pr-10">
-            <h1 className="font-display text-[72px] leading-[1.05] font-normal max-w-[540px]">
+        <div className="grid grid-cols-1 md:grid-cols-[60%_40%] px-4 md:px-[60px] pt-8 md:pt-[60px] pb-14 md:pb-20 gap-8 md:gap-0">
+          <div className="flex flex-col justify-center pr-0 md:pr-10">
+            <h1 className="font-display text-[42px] sm:text-[56px] md:text-[72px] leading-[1.06] md:leading-[1.05] font-normal max-w-[540px]">
               The next generation of high-end tools is <em className="italic text-gold">already here.</em>
             </h1>
-            <p className="mt-8 text-[14px] leading-relaxed max-w-md opacity-60 font-light italic">
+            <p className="mt-6 md:mt-8 text-[13px] md:text-[14px] leading-relaxed max-w-md opacity-60 font-light italic">
               165 free professional utility tools. Convert, compress, and build in your browser. Secure, fast, and entirely client-side.
             </p>
-            <div className="mt-10 flex items-center gap-6">
+            <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
               <a href="/tools#all-tools-directory" className="bg-text text-app-bg px-8 py-3.5 font-bold tracking-[0.1em] uppercase text-[12px] hover:bg-gold transition-colors cursor-pointer inline-block">
                 Browse the Index
               </a>
@@ -951,14 +951,14 @@ export default function DesignOnly2Home() {
             </div>
           </div>
 
-          <div className="border-l border-gold/20 pl-[60px] flex flex-col justify-between">
+          <div className="border-t md:border-t-0 md:border-l border-gold/20 pt-4 md:pt-0 md:pl-[60px] flex flex-row md:flex-col gap-5 md:gap-0 justify-between">
             {STATS.map((stat, i) => (
-              <div key={stat.label} className={`py-5 ${i < STATS.length - 1 ? 'border-b border-app-sep' : ''}`}>
+              <div key={stat.label} className={`flex-1 md:flex-none py-3 md:py-5 ${i < STATS.length - 1 ? 'md:border-b md:border-app-sep' : ''}`}>
                 <div className="h-px w-14 bg-gold/30 mb-3" />
-                <span className="font-display text-[42px] text-gold block leading-none">
+                <span className="font-display text-[32px] md:text-[42px] text-gold block leading-none">
                   {stat.value}
                 </span>
-                <span className="text-[11px] uppercase tracking-[0.2em] opacity-60 mt-1 block">
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] opacity-60 mt-1 block">
                   {stat.label}
                 </span>
                 <div className="h-px w-20 bg-gold/20 mt-3" />
@@ -986,15 +986,15 @@ export default function DesignOnly2Home() {
         </div>
 
         {/* Why Velnora Section */}
-        <section className="px-[60px] py-32 border-b border-app-sep">
-          <div className="grid grid-cols-2 gap-20">
+        <section className="px-4 md:px-[60px] py-16 md:py-32 border-b border-app-sep">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
             <div>
               <div className="text-gold text-[11px] uppercase tracking-[0.3em] font-bold mb-6">Manifesto</div>
-              <h2 className="font-display text-[48px] leading-tight max-w-sm">
+              <h2 className="font-display text-[38px] md:text-[48px] leading-tight max-w-sm">
                 Built for those who value <em className="italic text-gold opacity-80">privacy & speed.</em>
               </h2>
             </div>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-16 pt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10 md:gap-y-16 pt-4 md:pt-12">
               <div>
                 <div className="w-8 h-[1px] bg-gold mb-6" />
                 <h3 className="text-[14px] font-bold uppercase tracking-widest mb-3 text-app-text">Client-Side First</h3>
@@ -1028,12 +1028,12 @@ export default function DesignOnly2Home() {
         </section>
 
         {/* Categories Grid */}
-        <section className="px-[60px] py-24">
-          <div className="mb-12 flex items-center justify-between">
-            <h2 className="font-display text-[42px] font-normal tracking-tight">Browse strictly by vertical.</h2>
+        <section className="px-4 md:px-[60px] py-16 md:py-24">
+          <div className="mb-10 md:mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-0">
+            <h2 className="font-display text-[34px] md:text-[42px] font-normal tracking-tight">Browse strictly by vertical.</h2>
             <div className="text-[11px] uppercase tracking-[0.2em] opacity-40">Section 03 / Index Classification</div>
           </div>
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {CATEGORIES.map(cat => (
               <a
                 key={cat.id}
@@ -1058,12 +1058,12 @@ export default function DesignOnly2Home() {
         </section>
 
         {/* Popular Tools Section */}
-        <section className="px-[60px] py-24 bg-gold/[0.03]">
+        <section className="px-4 md:px-[60px] py-16 md:py-24 bg-gold/[0.03]">
           <div className="mb-12 text-[11px] uppercase tracking-[0.2em] opacity-40 border-b border-app-sep pb-4 flex justify-between">
             <span>Current Popularity Index</span>
             <span>Real-time Usage Stats</span>
           </div>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {POPULAR_TOOLS.map(tool => (
               <div key={tool.name} className="border border-app-sep p-8 group hover:border-gold/30 transition-colors bg-app-card-bg/[0.02]">
                 <div className="flex justify-between items-start mb-6">
@@ -1082,11 +1082,11 @@ export default function DesignOnly2Home() {
         </section>
 
         {/* Featured Blog Section */}
-        <section className="px-[60px] py-32">
-          <div className="grid grid-cols-[300px_1fr] gap-20">
+        <section className="px-4 md:px-[60px] py-16 md:py-32">
+          <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 md:gap-20">
             <div>
               <div className="text-gold text-[11px] uppercase tracking-[0.3em] font-bold mb-6">Blog</div>
-              <h2 className="font-display text-[36px] leading-tight mb-8">
+              <h2 className="font-display text-[30px] md:text-[36px] leading-tight mb-8">
                 Thinking deeper about <em className="italic not-italic text-gold opacity-80">digital craft.</em>
               </h2>
               <a href="/blog" className="text-[12px] uppercase tracking-[0.2em] opacity-60 hover:opacity-100 transition-opacity cursor-pointer border-b border-gold/40 pb-1 inline-block">
@@ -1095,10 +1095,10 @@ export default function DesignOnly2Home() {
             </div>
             <div className="flex flex-col gap-px bg-app-sep border border-app-sep">
               {BLOG_HIGHLIGHTS.map((article, i) => (
-                <a key={i} href={article.href} className="bg-app-bg p-10 group cursor-pointer hover:bg-gold/[0.02] transition-colors flex justify-between items-center">
+                <a key={i} href={article.href} className="bg-app-bg p-6 md:p-10 group cursor-pointer hover:bg-gold/[0.02] transition-colors flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
                   <div className="flex flex-col gap-2">
                     <span className="text-[10px] uppercase tracking-[0.2em] text-gold/60">{article.category}</span>
-                    <h4 className="font-display text-[24px] group-hover:text-gold transition-colors">{article.title}</h4>
+                    <h4 className="font-display text-[20px] md:text-[24px] group-hover:text-gold transition-colors">{article.title}</h4>
                     <span className="text-[11px] opacity-30">{article.date}</span>
                   </div>
                   <ArrowRight size={24} className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all text-gold" />
@@ -1109,9 +1109,9 @@ export default function DesignOnly2Home() {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="px-[60px] py-32 border-t border-app-sep text-center">
+        <section className="px-4 md:px-[60px] py-16 md:py-32 border-t border-app-sep text-center">
           <div className="max-w-2xl mx-auto">
-            <h2 className="font-display text-[56px] leading-tight mb-8">
+            <h2 className="font-display text-[40px] sm:text-[46px] md:text-[56px] leading-tight mb-8">
               Join the <em className="italic not-italic text-gold opacity-80">Intelligence List.</em>
             </h2>
             <p className={`text-[14px] leading-relaxed mb-12 font-light ${theme === "dark" ? "opacity-85" : "opacity-70"}`}>
@@ -1155,8 +1155,8 @@ export default function DesignOnly2Home() {
       </main>
 
       {/* Large Footer */}
-      <footer className="bg-app-bg border-t border-app-sep px-[60px] pt-24 pb-12 transition-colors duration-500">
-        <div className="grid grid-cols-4 gap-20 mb-24">
+      <footer className="bg-app-bg border-t border-app-sep px-4 md:px-[60px] pt-16 md:pt-24 pb-10 md:pb-12 transition-colors duration-500">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-20 mb-16 md:mb-24">
           <div className="col-span-1">
             <div className="font-display text-[24px] tracking-[0.1em] uppercase text-gold mb-8">
               Velnora
@@ -1201,7 +1201,7 @@ export default function DesignOnly2Home() {
           </div>
         </div>
 
-        <div className="flex justify-between items-center pt-12 border-t border-app-sep">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0 pt-8 md:pt-12 border-t border-app-sep text-center md:text-left">
           <div className="text-[10px] tracking-[0.2em] uppercase opacity-30">
             © 2026 Velnora Laboratory / Global Intelligence Index
           </div>
