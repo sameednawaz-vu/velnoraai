@@ -1164,10 +1164,9 @@ export default function DesignOnly2Home() {
             <p className="text-[12px] opacity-40 leading-relaxed font-light mb-8 max-w-[200px]">
               A curated index of highly professional utility tools for the next generation of creative digital builders.
             </p>
-            <div className="flex gap-4">
-               <div className="w-5 h-5 bg-gold/10 rounded-full cursor-pointer hover:bg-gold transition-colors" />
-               <div className="w-5 h-5 bg-gold/10 rounded-full cursor-pointer hover:bg-gold transition-colors" />
-               <div className="w-5 h-5 bg-gold/10 rounded-full cursor-pointer hover:bg-gold transition-colors" />
+            <div className="flex flex-wrap gap-4 mt-8">
+              <a href="https://www.reddit.com/user/Velnoraai/" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest text-gold/60 hover:text-gold transition-colors underline underline-offset-4 decoration-gold/20">Reddit</a>
+              <a href="https://www.facebook.com/profile.php?id=61588840100652" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest text-gold/60 hover:text-gold transition-colors underline underline-offset-4 decoration-gold/20">Facebook</a>
             </div>
           </div>
 
@@ -1197,6 +1196,7 @@ export default function DesignOnly2Home() {
               <a href="/about" className="hover:text-gold transition-colors">About</a>
               <a href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</a>
               <a href="/contact" className="hover:text-gold transition-colors">Contact</a>
+              <a href="mailto:sameednawaz1@gmail.com" className="hover:text-gold transition-colors lowercase">sameednawaz1@gmail.com</a>
             </div>
           </div>
         </div>

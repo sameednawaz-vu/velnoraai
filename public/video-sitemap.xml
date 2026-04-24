@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://velnoraai.app/utility/convert/mp4-to-mp3</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>MP4 to MP3</video:title>
+      <video:description>Professional browser-native mp4 to mp3 utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/convert/mp4-to-mp3</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/convert/video-to-mp3</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>Video to MP3</video:title>
+      <video:description>Professional browser-native video to mp3 utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/convert/video-to-mp3</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/convert/mov-to-mp4</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>MOV to MP4</video:title>
+      <video:description>Professional browser-native mov to mp4 utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/convert/mov-to-mp4</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/convert/mp3-to-ogg</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>MP3 to OGG</video:title>
+      <video:description>Professional browser-native mp3 to ogg utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/convert/mp3-to-ogg</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/compress/video-compressor</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>Video Compressor</video:title>
+      <video:description>Professional browser-native video compressor utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/compress/video-compressor</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/compress/mp3-compressor</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>MP3 Compressor</video:title>
+      <video:description>Professional browser-native mp3 compressor utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/compress/mp3-compressor</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/compress/wav-compressor</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>WAV Compressor</video:title>
+      <video:description>Professional browser-native wav compressor utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/compress/wav-compressor</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/tools/crop-video</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>Crop Video</video:title>
+      <video:description>Professional browser-native crop video utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/tools/crop-video</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://velnoraai.app/utility/tools/trim-video</loc>
+    <video:video>
+      <video:thumbnail_loc>https://velnoraai.app/images/favicon-velnora.jpg</video:thumbnail_loc>
+      <video:title>Trim Video</video:title>
+      <video:description>Professional browser-native trim video utility for fast, secure media processing.</video:description>
+      <video:content_loc>https://velnoraai.app/utility/tools/trim-video</video:content_loc>
+      <video:publication_date>2026-04-24T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+</urlset>

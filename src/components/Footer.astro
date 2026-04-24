@@ -20,6 +20,17 @@ const liveToolCount = publishedTools + utilityToolCount;
         A curated index of practical browser workflows with {liveToolCount} free tools and {blogPosts.length} blog
         guides for conversion, compression, and utility execution.
       </p>
+      <div class="footer-socials">
+        <a href="https://www.reddit.com/user/Velnoraai/" target="_blank" rel="noopener noreferrer" title="Reddit">
+          Reddit
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61588840100652" target="_blank" rel="noopener noreferrer" title="Facebook">
+          Facebook
+        </a>
+        <a href="mailto:sameednawaz1@gmail.com" title="Email Us">
+          sameednawaz1@gmail.com
+        </a>
+      </div>
       <div class="footer-actions">
         <a href="/tools#tool-search">Search all tools</a>
         <a href="/blog">Read practical guides</a>
@@ -107,6 +118,27 @@ const liveToolCount = publishedTools + utilityToolCount;
     line-height: 1.68;
     font-size: 0.88rem;
     max-width: 39ch;
+  }
+
+  .footer-socials {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .footer-socials a {
+    font-size: 0.76rem;
+    color: color-mix(in srgb, var(--color-secondary) 82%, var(--color-text));
+    font-family: var(--font-mono);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(200, 168, 75, 0.3);
+  }
+
+  .footer-socials a:hover {
+    color: var(--color-secondary);
+    text-decoration-color: var(--color-secondary);
   }
 
   .footer-actions {
