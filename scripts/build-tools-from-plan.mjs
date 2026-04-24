@@ -300,12 +300,21 @@ const validationProblems = [];
 for (const tool of tools) {
   if (!tool.seoTitle || typeof tool.seoTitle !== 'string' || !tool.seoTitle.includes('| Velnora')) {
     validationProblems.push({ slug: tool.slug, issue: 'seoTitle missing or not using expected \'| Velnora\' suffix' });
+  } else {
+    // Extract the title part before " | Velnora" and check its length
+    const titleBeforeSuffix = tool.seoTitle.replace(/\s*\|\s*Velnora\s*$/, '').trim();
+    if (titleBeforeSuffix.length > 50) {
+      validationProblems.push({ 
+        slug: tool.slug, 
+        issue: `seoTitle too long before suffix (${titleBeforeSuffix.length} > 50): "${titleBeforeSuffix}"` 
+      });
+    }
   }
 
   if (!tool.seoDescription || typeof tool.seoDescription !== 'string') {
     validationProblems.push({ slug: tool.slug, issue: 'seoDescription missing' });
-  } else if (tool.seoDescription.length > 160) {
-    validationProblems.push({ slug: tool.slug, issue: `seoDescription too long (${tool.seoDescription.length} > 160)` });
+  } else if (tool.seoDescription.length > 155) {
+    validationProblems.push({ slug: tool.slug, issue: `seoDescription too long (${tool.seoDescription.length} > 155)` });
   }
 }
 

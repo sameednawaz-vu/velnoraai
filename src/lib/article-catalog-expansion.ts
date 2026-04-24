@@ -206,7 +206,7 @@ function getExpandedProfessionalArticleContent(
   switch (articleType) {
     case 'comparison':
       return {
-        title: `${tool.name} Comparison: When It Beats Nearby ${categoryName} Tools`,
+        title: `${tool.name}: Compare`,
         description: `Compare ${tool.name} with nearby ${categoryName.toLowerCase()} options and choose the cleanest workflow faster.`,
         introParagraph: `Use this comparison when you need a practical answer about whether ${tool.name} or a neighboring ${categoryName.toLowerCase()} tool is the better fit.`,
         summaryParagraph: `The comparison focuses on output shape, setup effort, review speed, and the task conditions where ${tool.name} is strongest.`,
@@ -239,7 +239,7 @@ function getExpandedProfessionalArticleContent(
       };
     case 'advanced':
       return {
-        title: `${tool.name} Advanced Playbook: Power User ${categoryName} Patterns`,
+        title: `${tool.name}: Advanced`,
         description: `Go deeper with ${tool.name} using advanced ${categoryName.toLowerCase()} patterns built for repeatable execution.`,
         introParagraph: `This advanced playbook shows how to use ${tool.name} when the task is bigger than a single quick run.`,
         summaryParagraph: `It focuses on higher-volume work, tighter review loops, and the way ${tool.name} can fit into a more deliberate delivery process.`,
@@ -272,7 +272,7 @@ function getExpandedProfessionalArticleContent(
       };
     case 'troubleshooting':
       return {
-        title: `${tool.name} Troubleshooting: Fix Common ${categoryName} Issues Fast`,
+        title: `${tool.name}: Troubleshooting`,
         description: `Resolve common ${tool.name} issues with a troubleshooting guide for ${categoryName.toLowerCase()} workflows.`,
         introParagraph: `Use this troubleshooting page when the output is incomplete, unclear, or not matching the task brief.`,
         summaryParagraph: `It keeps the fix path simple: check the input, isolate the issue, rerun the tool, and verify the result before you move on.`,
@@ -305,7 +305,7 @@ function getExpandedProfessionalArticleContent(
       };
     case 'checklist':
       return {
-        title: `${tool.name} Checklist: Pre-Run and Post-Run Review for ${categoryName}`,
+        title: `${tool.name}: Checklist`,
         description: `Use this checklist to verify ${tool.name} inputs and outputs before publishing or handoff.`,
         introParagraph: `This checklist gives you a lightweight quality gate before and after you run ${tool.name}.`,
         summaryParagraph: `It is designed for teams that want a repeatable QA step without adding unnecessary process overhead.`,
@@ -338,7 +338,7 @@ function getExpandedProfessionalArticleContent(
       };
     case 'geo':
       return {
-        title: `${tool.name} GEO Playbook: SEO and Generative Engine Optimization`,
+        title: `${tool.name}: SEO`,
         description: `Position ${tool.name} for SEO and GEO visibility with entity-rich structure, clear intent, and answer-ready sections.`,
         introParagraph: `Use this GEO playbook to publish ${tool.name} content that works for search engines, answer surfaces, and location-aware queries when the workflow depends on them.`,
         summaryParagraph: `The page stays easy for crawlers and answer systems to parse by separating intent, steps, related tools, and FAQ answers.`,

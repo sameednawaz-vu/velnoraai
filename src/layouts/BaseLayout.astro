@@ -17,7 +17,10 @@ const canonicalPath = Astro.url.pathname
   .replace(/\.html$/, '') || '/';
 const canonicalURL = new URL(canonicalPath, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID;
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
 const shouldLoadAnalytics = Boolean(gaId) && canonicalURL.hostname === 'velnoraai.app';
+const shouldLoadGTM = Boolean(gtmId) && canonicalURL.hostname === 'velnoraai.app';
+const shouldLoadAdSense = canonicalURL.hostname === 'velnoraai.app';
 const imageCdnOrigin = getImageCdnOrigin();
 const toAbsoluteImageUrl = (assetPath: string) => {
   const rewrittenPath = withImageCdn(assetPath);
@@ -33,6 +36,54 @@ const faviconSvgImage = withImageCdn('/images/favicon-velnora.svg');
 const faviconFallbackImage = withImageCdn('/images/favicon-velnora.webp');
 const socialImage = image ? toAbsoluteImageUrl(image) : defaultOgImage;
 const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
+
+// Build structured data schema
+const logoUrl = toAbsoluteImageUrl('/images/favicon-velnora.webp');
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://velnoraai.app/#organization',
+  name: 'Velnora',
+  description: 'Free professional utility tools for conversion, compression, and practical workflows',
+  url: 'https://velnoraai.app/',
+  logo: {
+    '@type': 'ImageObject',
+    url: logoUrl,
+    width: 160,
+    height: 160,
+    contentUrl: logoUrl,
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Sameed Nawaz',
+  },
+  sameAs: [
+    'https://www.reddit.com/user/Velnoraai/',
+    'https://www.facebook.com/profile.php?id=61588840100652',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Support',
+    url: 'https://velnoraai.app/contact',
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://velnoraai.app/#website',
+  name: 'Velnora',
+  url: 'https://velnoraai.app/',
+  description: 'Free tools workspace for conversion, compression, and practical workflows',
+  isPartOf: {
+    '@id': 'https://velnoraai.app/#organization',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://velnoraai.app/tools?search={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
 ---
 
 <!DOCTYPE html>
@@ -88,6 +139,10 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
     <meta property="article:author" content={author} />
   )}
   
+  <!-- Structured Data Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href={faviconSvgImage} />
   <link rel="alternate icon" type="image/webp" href={faviconFallbackImage} />
@@ -104,6 +159,34 @@ const shouldLoadDynamicSchema = Astro.url.pathname.startsWith('/utility/');
         gtag('config', gaId);
       </script>
     </>
+  )}
+
+  {shouldLoadGTM && (
+    <>
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    </>
+  )}
+
+  {shouldLoadGTM && (
+    <>
+      <!-- Google Tag Manager -->
+      <script define:vars={{ gtmId }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    </>
+  )}
+
+  {shouldLoadAdSense && (
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5036125669252744"
+      crossorigin="anonymous"
+    ></script>
   )}
 
   {shouldLoadDynamicSchema && <script type="module" src="/schema-generator.js"></script>}

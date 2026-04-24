@@ -188,6 +188,7 @@ function validateCombinedCatalog(articles: ToolArticleEntry[]): void {
   const slugSet = new Set<string>();
   const titleSet = new Set<string>();
   const descriptionSet = new Set<string>();
+  const TITLE_MAX = 50; // Max title length (will have " | Velnora" suffix added in layout)
 
   for (const article of articles) {
     if (slugSet.has(article.slug)) {
@@ -200,6 +201,12 @@ function validateCombinedCatalog(articles: ToolArticleEntry[]): void {
 
     if (descriptionSet.has(article.articleDescription)) {
       throw new Error(`Duplicate article description detected: ${article.articleDescription}`);
+    }
+
+    if (article.articleTitle.length > TITLE_MAX) {
+      throw new Error(
+        `Article title exceeds ${TITLE_MAX} chars for ${article.slug}: "${article.articleTitle}" (${article.articleTitle.length} chars). With " | Velnora" suffix, it will exceed 60 chars.`
+      );
     }
 
     slugSet.add(article.slug);

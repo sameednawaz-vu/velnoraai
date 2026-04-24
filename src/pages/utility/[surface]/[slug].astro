@@ -80,7 +80,7 @@ const buildSemanticKeywordSet = (intentKeyword: string, slug: string) => {
   return ranked;
 };
 
-const truncateToMetaLength = (value: string, maxLength = 158) => {
+const truncateToMetaLength = (value: string, maxLength = 155) => {
   if (value.length <= maxLength) {
     return value;
   }
@@ -382,7 +382,7 @@ const faqItems = [
   },
 ];
 
-const seoTitle = `${tool.name} | ${headlineKeyword}`;
+const seoTitle = tool.name;
 const seoDescription = buildSeoDescription(tool.name, primarySemanticPhrase, secondarySemanticPhrase);
 
 const softwareSchema = {

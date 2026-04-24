@@ -10,20 +10,47 @@ const canonicalUrl = 'https://velnoraai.app/';
 const socialImage = new URL(withImageCdn('/images/favicon-velnora.webp'), canonicalUrl).toString();
 const faviconSvgImage = withImageCdn('/images/favicon-velnora.svg');
 const faviconWebpImage = withImageCdn('/images/favicon-velnora.webp');
+const logoUrl = new URL(withImageCdn('/images/favicon-velnora.webp'), canonicalUrl).toString();
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': 'https://velnoraai.app/#organization',
   name: 'Velnora',
   url: canonicalUrl,
   description,
+  logo: {
+    '@type': 'ImageObject',
+    url: logoUrl,
+    width: 160,
+    height: 160,
+    contentUrl: logoUrl,
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Sameed Nawaz',
+  },
+  sameAs: [
+    'https://www.reddit.com/user/Velnoraai/',
+    'https://www.facebook.com/profile.php?id=61588840100652',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Support',
+    url: canonicalUrl + 'contact',
+  },
 };
 
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': 'https://velnoraai.app/#website',
   name: 'Velnora',
   url: canonicalUrl,
+  description,
+  isPartOf: {
+    '@id': 'https://velnoraai.app/#organization',
+  },
   potentialAction: {
     '@type': 'SearchAction',
     target: 'https://velnoraai.app/tools?search={search_term_string}',
@@ -76,6 +103,11 @@ const websiteSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5036125669252744"
+      crossorigin="anonymous"
+    ></script>
     <script is:inline>
       (() => {
         const key = 'velnora-theme';

@@ -415,7 +415,7 @@ function getProfessionalArticleContent(
   switch (articleType) {
     case 'guide':
       return {
-        title: `${tool.name} Guide: Free ${categoryName} Workflow`,
+        title: `${tool.name}: Guide`,
         description: `Learn how to use ${tool.name} for ${categoryName.toLowerCase()} work with a repeatable browser-first process.`,
         introParagraph: `Use ${tool.name} when you need a direct ${categoryName.toLowerCase()} path from input to result without switching tools.`,
         summaryParagraph: `This guide covers setup, execution, and the checks that keep ${tool.name} useful in daily work.`,
@@ -453,7 +453,7 @@ function getProfessionalArticleContent(
       };
     case 'workflow':
       return {
-        title: `${tool.name} Workflow Steps: A Practical ${categoryName} Playbook`,
+        title: `${tool.name}: Workflow`,
         description: `Follow this workflow playbook to run ${tool.name} with fewer mistakes and a clearer output check.`,
         introParagraph: `This workflow article turns ${tool.name} into a repeatable sequence so the tool fits a real delivery process.`,
         summaryParagraph: `It is designed for teams that want the steps, order, and review checkpoints in one place.`,
@@ -488,7 +488,7 @@ function getProfessionalArticleContent(
       };
     case 'decision':
       return {
-        title: `${tool.name} Decision Guide: When to Use It Instead of Other ${categoryName} Tools`,
+        title: `${tool.name}: Decision`,
         description: `Compare ${tool.name} with nearby workflows and decide when it is the best fit.`,
         introParagraph: `Use this decision guide when you need to choose the right tool without overbuilding the workflow.`,
         summaryParagraph: `It helps readers pick the right path, avoid unnecessary steps, and move toward a shippable result faster.`,
@@ -542,7 +542,7 @@ function getUtilityArticleContent(
     .filter((value): value is string => Boolean(value));
 
   return {
-    title: `${tool.name} Guide: Free ${surface.name} ${group.name} Workflow`,
+    title: `${tool.name}: Reference`,
     description: `Use ${tool.name} as a practical ${surface.name.toLowerCase()} reference for ${group.name.toLowerCase()} tasks.`,
     introParagraph: `Use ${tool.name} when you want a straightforward ${surface.name.toLowerCase()} workflow that stays inside the browser and keeps the task easy to verify.`,
     summaryParagraph: `This reference explains how to prepare inputs, run the utility, and check the result before you move to the next step.`,
