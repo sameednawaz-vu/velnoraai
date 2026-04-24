@@ -25,7 +25,7 @@ const aboutImageJpg = withImageCdn('/images/about-sameed.jpg');
 
 <BaseLayout
   title="About Velnora"
-  description="About Velnora and its builder: a tools-first website focused on practical browser workflows, conversion utilities, and clear execution UX."
+  description="Learn about Velnora and its builder, Sameed Nawaz. We provide a tools-first website focusing on practical workflows and secure conversion utilities."
   image={aboutImageWebp}
 >
   <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
@@ -38,17 +38,15 @@ const aboutImageJpg = withImageCdn('/images/about-sameed.jpg');
         <picture>
           <source srcset={aboutImageAvif} type="image/avif" />
           <source srcset={aboutImageWebp} type="image/webp" />
-          <img src={aboutImageJpg} alt="Sameed Nawaz" loading="eager" decoding="async" width="420" height="420" />
+          <img src={aboutImageJpg} alt="Sameed Nawaz, Creator of Velnora" loading="eager" decoding="async" width="420" height="420" />
         </picture>
       </div>
 
       <div class="hero-copy">
         <p class="eyebrow">About Velnora</p>
-        <h1>Website and builder overview</h1>
+        <h1>Empowering Fast, Secure Workflows</h1>
         <p class="lede">
-          Velnora is a free tools website designed for practical execution. The product direction is tools-first,
-          client-side processing, and clear navigation so users can convert, compress, and run utility workflows
-          quickly.
+          Velnora is a free, utility-first website designed for practical execution. Our mission is to provide you with secure, client-side tools so you can convert, compress, and run complex workflows directly in your browser.
         </p>
 
         <div class="cta-row">
@@ -60,49 +58,48 @@ const aboutImageJpg = withImageCdn('/images/about-sameed.jpg');
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>Website focus</h2>
+      <h2>Our Core Values & Focus</h2>
       <div class="focus-grid">
         <article>
-          <h3>Free utility execution</h3>
+          <h3>100% Free & Accessible</h3>
           <p>
-            Velnora prioritizes usable browser workflows for conversion, compression, and practical utility tasks that
-            can run without account friction.
+            We believe professional-grade utilities should not be hidden behind paywalls. Velnora prioritizes usable browser workflows for conversion, compression, and practical utility tasks that run without account friction.
           </p>
         </article>
 
         <article>
-          <h3>Clear route architecture</h3>
+          <h3>Client-Side Privacy First</h3>
           <p>
-            Categories, tool routes, and blog guidance are organized for fast discovery and direct movement from search
-            intent to execution.
+            Your data remains yours. Our tools leverage modern WebAssembly to process files locally on your device. We do not upload your sensitive images or documents to remote servers, ensuring complete privacy.
           </p>
         </article>
 
         <article>
-          <h3>Builder direction</h3>
+          <h3>Clear Route Architecture</h3>
           <p>
-            The builder direction is to keep Velnora practical, stable, and continuously improved through production QA,
-            SEO hygiene, and UX iteration.
+            Categories, tool routes, and expert blog guidance are organized for fast discovery. We help you move directly from search intent to task execution with zero distractions.
           </p>
         </article>
       </div>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>How Velnora is built</h2>
+      <h2>How Velnora is Built</h2>
       <ul class="workflow-list">
-        <li>Start from user task clarity and keep each page focused on what users can do immediately.</li>
-        <li>Ship deterministic client-side workflows compatible with static deployment constraints.</li>
-        <li>Prioritize responsive rendering, metadata quality, and structured information architecture.</li>
-        <li>Iterate through measured improvements in search UX, page clarity, and route reliability.</li>
+        <li><strong>Task Clarity:</strong> Start from user task clarity and keep each page focused on what users can do immediately.</li>
+        <li><strong>Deterministic Outputs:</strong> Ship deterministic client-side workflows compatible with secure, static deployment constraints.</li>
+        <li><strong>SEO & Technical Excellence:</strong> Prioritize responsive rendering, metadata quality, structured information architecture, and Core Web Vitals.</li>
+        <li><strong>Continuous Iteration:</strong> Iterate through measured improvements in search UX, page clarity, and route reliability.</li>
       </ul>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>Builder note</h2>
-      <p class="lede">
-        Velnora is built by Sameed Nawaz and focused on long-term growth as a free tools destination with practical
-        utility surfaces and a clean publishing workflow.
+      <h2>Meet the Builder</h2>
+      <p class="lede" style="margin-bottom: 1rem;">
+        Velnora is proudly built and maintained by <strong>Sameed Nawaz</strong>. 
+      </p>
+      <p style="color: color-mix(in srgb, var(--color-text) 78%, transparent); font-size: 0.9rem; line-height: 1.6;">
+        With a deep focus on technical SEO, semantic content structuring, and robust frontend engineering, Sameed created Velnora as a long-term, free tools destination. The goal is to provide users with a clean, fast, and secure publishing workflow that solves everyday digital problems without compromise.
       </p>
     </section>
   </main>

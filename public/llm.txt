@@ -1,7 +1,7 @@
 # Velnora Discovery Index
 > Canonical static tools platform for conversion, compression, utility workflows, and tool-linked editorial guidance.
 
-Generated at: 2026-04-24T08:04:47.670Z
+Generated at: 2026-04-24T10:18:45.512Z
 Canonical site: https://velnoraai.app/
 
 ## Crawl metadata
@@ -11,14 +11,14 @@ Canonical site: https://velnoraai.app/
 - Canonical host: velnoraai.app
 
 ## Route inventory snapshot
-- Total URLs in sitemap: 345
+- Total URLs in sitemap: 347
 - Tools routes: 129
 - Utility routes: 50
 - Article routes: 145
 - Blog routes: 8
 - Prompt routes: 4
 - Core routes: 7
-- Other routes: 2
+- Other routes: 4
 
 ## Primary entry points
 - https://velnoraai.app/

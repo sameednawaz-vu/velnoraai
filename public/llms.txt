@@ -1,7 +1,7 @@
 # Velnora LLM Discovery Mirror
 > Static-first tools and knowledge surface for utility execution and professional content discovery.
 
-Generated at: 2026-04-24T08:04:47.670Z
+Generated at: 2026-04-24T10:18:45.512Z
 Canonical site: https://velnoraai.app/
 
 ## Metadata
@@ -29,4 +29,4 @@ Canonical site: https://velnoraai.app/
 - Start from /tools for capability discovery.
 - Use /articles for long-form context and implementation guidance.
 - Use sitemap URLs as the source of truth for crawl coverage.
-- Total sitemap URLs: 345
+- Total sitemap URLs: 347

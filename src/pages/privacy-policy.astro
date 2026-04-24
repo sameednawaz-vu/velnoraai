@@ -11,12 +11,12 @@ const privacySchema = {
   url: 'https://velnoraai.app/privacy-policy',
 };
 
-const updatedDate = '2026-04-18';
+const updatedDate = new Date().toISOString().split('T')[0];
 ---
 
 <BaseLayout
   title="Privacy Policy"
-  description="Read the Velnora privacy policy for client-side processing, local storage usage, and contact information."
+  description="Read the Velnora privacy policy for client-side processing, local storage usage, and third-party advertising partners like Google AdSense."
 >
   <script type="application/ld+json" set:html={JSON.stringify(privacySchema)} />
 
@@ -28,61 +28,79 @@ const updatedDate = '2026-04-18';
       <h1>Privacy Policy</h1>
       <p class="lede">
         Velnora is a tools-first website. This policy explains what information is processed when you use
-        velnoraai.app and its utility routes.
+        velnoraai.app, our utility routes, and our interaction with third-party vendors like Google AdSense.
       </p>
       <p class="updated">Last updated: {new Date(updatedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>1. Core privacy model</h2>
+      <h2>1. Core Privacy Model & Client-Side Execution</h2>
       <p>
-        Velnora is built for browser-first execution. File processing on utility pages is designed to run client-side
-        whenever possible. We do not operate a public user account system for the main tool workflows.
+        Velnora is built for browser-first execution. The majority of file processing on our utility pages (e.g., video to audio conversion, image compression) runs entirely client-side on your device using WebAssembly technologies.
+      </p>
+      <p>
+        This means your files are not uploaded to our servers, they are not stored by us, and we do not have access to the contents of the files you process using our primary tools. If a specific tool requires server-side processing in the future, it will be explicitly stated on that tool's page.
       </p>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>2. Information we may process</h2>
+      <h2>2. Information We Process</h2>
+      <p>While we do not require account sign-ups or payment information, we may process certain data to keep the site operational:</p>
       <ul>
-        <li>Basic analytics events when analytics is enabled on the production domain.</li>
-        <li>Local browser storage for theme preference and interface state.</li>
-        <li>Locally saved newsletter submission entries created on your own browser session.</li>
+        <li><strong>Analytics:</strong> Basic analytics events (via Google Analytics 4) to monitor website performance and visitor counts.</li>
+        <li><strong>Local Storage:</strong> Browser local storage for theme preferences, search state, and interface settings.</li>
+        <li><strong>Communications:</strong> Locally saved newsletter submission entries, or data you provide if you contact us directly.</li>
       </ul>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>3. Third-Party Advertising and Google AdSense</h2>
       <p>
-        We do not request payment information on the public free tools website and we do not require account sign-up
-        to use standard utility routes.
+        We use third-party advertising companies to serve ads when you visit our website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
+      </p>
+      <h3>Google AdSense and the DoubleClick DART Cookie</h3>
+      <ul>
+        <li>Google, as a third-party vendor, uses cookies to serve ads on Velnora.</li>
+        <li>Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our site and/or other sites on the Internet.</li>
+        <li>Users may opt out of personalized advertising by visiting Google's <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Ads Settings</a>.</li>
+      </ul>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>4. Cookies and Web Beacons</h2>
+      <p>
+        Velnora may use cookies to store information about visitors' preferences, record user-specific information on which pages the user accesses or visits, and customize webpage content based on visitors' browser type or other information that the visitor sends via their browser.
       </p>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>3. File handling</h2>
+      <h2>5. Log Files</h2>
       <p>
-        Utility pages are intended for client-side processing. Your files should remain on your device during normal
-        usage of in-browser tools. If a specific route introduces different behavior in the future, that page will be
-        updated with explicit handling details.
+        Like many other websites, Velnora makes use of log files. The information inside the log files includes internet protocol (IP) addresses, type of browser, Internet Service Provider (ISP), date/time stamp, referring/exit pages, and number of clicks. This data is used to analyze trends, administer the site, track users' movement around the site, and gather demographic information. IP addresses and other such information are not linked to any information that is personally identifiable.
       </p>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>4. Cookies and local storage</h2>
+      <h2>6. Children's Information</h2>
       <p>
-        Velnora may use browser storage and similar technologies for operational behavior such as theme mode,
-        search-state memory, and UI preferences. You can clear local storage anytime in your browser settings.
+        We believe it is important to provide added protection for children online. We encourage parents and guardians to spend time online with their children to observe, participate in, and/or monitor and guide their online activity.
+      </p>
+      <p>
+        Velnora does not knowingly collect any personally identifiable information from children under the age of 13. If a parent or guardian believes that Velnora has in its database the personally-identifiable information of a child under the age of 13, please contact us immediately, and we will use our best efforts to promptly remove such information from our records.
       </p>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>5. Third-party services</h2>
+      <h2>7. Consent</h2>
       <p>
-        We may rely on infrastructure and analytics providers for delivery and quality monitoring. These providers may
-        process limited technical metadata required to serve the website securely and efficiently.
+        By using our website, you hereby consent to our Privacy Policy and agree to its terms.
       </p>
     </section>
 
     <section class="section-panel" data-reveal>
-      <h2>6. Contact</h2>
+      <h2>8. Contact Information</h2>
       <p>
-        For privacy requests or questions, contact: <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
+        For privacy requests, questions about your data, or inquiries regarding our advertising partners, contact: <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
       </p>
       <p>
         You can also use the contact page: <a href="/contact">/contact</a>
@@ -110,11 +128,19 @@ const updatedDate = '2026-04-18';
     margin-bottom: 0.42rem;
   }
 
+  .privacy-page h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.42rem;
+    color: var(--color-primary);
+  }
+
   .privacy-page p {
     margin: 0;
     color: color-mix(in srgb, var(--color-text) 78%, transparent);
     line-height: 1.64;
     font-size: 0.86rem;
+    margin-bottom: 0.5rem;
   }
 
   .privacy-page ul {

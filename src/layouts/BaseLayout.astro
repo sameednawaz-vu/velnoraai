@@ -276,16 +276,16 @@ const websiteSchema = {
       --color-secondary: #c8a84b;
       --color-accent: #e1c77c;
       --color-background: #0e0c09;
-      --color-background-soft: #14110c;
+      --color-background-soft: #0e0c09;
       --color-text: #f2ead8;
-      --color-border: rgba(242, 234, 216, 0.16);
-      --color-card-bg: rgba(255, 246, 227, 0.03);
+      --color-border: rgba(242, 234, 216, 0.1);
+      --color-card-bg: rgba(255, 255, 255, 0.02);
       --shadow-soft: 0 20px 42px rgba(0, 0, 0, 0.4);
       --shadow-medium: 0 34px 76px rgba(0, 0, 0, 0.56);
-      --panel-edge: rgba(200, 168, 75, 0.26);
-      --panel-glow: radial-gradient(circle at 84% -10%, rgba(200, 168, 75, 0.16), transparent 60%);
-      --body-grad-a: rgba(200, 168, 75, 0.18);
-      --body-grad-b: rgba(74, 56, 22, 0.3);
+      --panel-edge: rgba(200, 168, 75, 0.16);
+      --panel-glow: radial-gradient(circle at 84% -10%, rgba(200, 168, 75, 0.12), transparent 60%);
+      --body-grad-a: rgba(200, 168, 75, 0.12);
+      --body-grad-b: rgba(143, 118, 64, 0.08);
     }
     
     html {
@@ -293,6 +293,7 @@ const websiteSchema = {
       background: var(--color-background);
       color: var(--color-text);
       color-scheme: light;
+      transition: background-color 0.5s ease;
     }
 
     :root[data-theme='dark'] html {
@@ -308,10 +309,10 @@ const websiteSchema = {
       letter-spacing: 0.002em;
       font-family: var(--font-sans);
       background:
-        radial-gradient(circle at 8% 6%, var(--body-grad-a), transparent 44%),
-        radial-gradient(circle at 82% 12%, var(--body-grad-b), transparent 42%),
-        linear-gradient(180deg, color-mix(in srgb, var(--color-background) 96%, #ffffff 4%) 0%, var(--color-background) 100%);
-      transition: background 0.35s ease, color 0.35s ease;
+        radial-gradient(circle at 10% 8%, color-mix(in srgb, #C8A84B 16%, transparent), transparent 46%),
+        radial-gradient(circle at 82% 14%, color-mix(in srgb, #8F7640 12%, transparent), transparent 44%),
+        var(--color-background);
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
 
     body::before {

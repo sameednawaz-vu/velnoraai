@@ -361,24 +361,24 @@ const privacyPromise =
 
 const practicalBenefit =
   surface.slug === 'compress'
-    ? `${tool.name} helps you reduce file size so uploads are faster, pages load quicker, and storage use stays lower.`
+    ? `${tool.name} reduces file size to improve load speed and storage efficiency.`
     : surface.slug === 'convert'
-      ? `${tool.name} helps you move between file formats without switching tools, which keeps your workflow fast and predictable.`
-      : `${tool.name} helps you finish this task in one browser workflow with no account setup.`;
+      ? `${tool.name} changes file formats while maintaining data integrity and workflow continuity.`
+      : `${tool.name} executes this utility task directly in the browser without account friction.`;
 
 const faqItems = [
   {
     question: `Is ${tool.name} free to use?`,
     answer:
-      'Yes. This route is free to use and does not require signup. You can run a sample first, confirm the result, then process your full file set.',
+      `Yes. ${tool.name} is a free tool. It operates entirely in your browser and requires no account or payment to process files.`,
   },
   {
-    question: `What is the main advantage of using ${tool.name}?`,
-    answer: `${practicalBenefit} Start with the recommended pair on this page (${currentFrom.toUpperCase()} to ${currentTo.toUpperCase()}) and switch formats if needed.`,
+    question: `How does ${tool.name} work?`,
+    answer: `${practicalBenefit} It uses browser-native APIs or WebAssembly to ensure your files never leave your device.`,
   },
   {
-    question: `Will my files stay private while using ${tool.name}?`,
-    answer: privacyPromise,
+    question: `Are my files secure with ${tool.name}?`,
+    answer: `Yes. Your privacy is protected because ${tool.name} processes files client-side. No data is uploaded to a remote server for media routes.`,
   },
 ];
 

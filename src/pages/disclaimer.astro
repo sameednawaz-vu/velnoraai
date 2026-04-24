@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const disclaimerSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Velnora Disclaimer',
+  description: 'Disclaimer for velnoraai.app and its utility workflows.',
+  url: 'https://velnoraai.app/disclaimer',
+};
+
+const updatedDate = new Date().toISOString().split('T')[0];
+---
+
+<BaseLayout
+  title="Disclaimer"
+  description="Read the Velnora Disclaimer. Understand the limits of liability and information accuracy for our free tools."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(disclaimerSchema)} />
+
+  <Header />
+
+  <main class="page-shell privacy-page">
+    <section class="hero-panel" data-reveal>
+      <p class="eyebrow">Legal</p>
+      <h1>Disclaimer</h1>
+      <p class="lede">
+        The information and tools provided by Velnora on velnoraai.app are for general informational and utility purposes only.
+      </p>
+      <p class="updated">Last updated: {new Date(updatedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>1. General Disclaimer</h2>
+      <p>
+        All information and tools on the site are provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information or tool on the site.
+      </p>
+      <p>
+        Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the site or reliance on any information provided on the site. Your use of the site and your reliance on any information on the site is solely at your own risk.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>2. Professional Disclaimer</h2>
+      <p>
+        The site cannot and does not contain professional advice. Any information provided is for general informational and educational purposes only and is not a substitute for professional advice.
+      </p>
+      <p>
+        Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. The use or reliance of any information contained on this site is solely at your own risk.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>3. External Links Disclaimer</h2>
+      <p>
+        The site may contain (or you may be sent through the site) links to other websites or content belonging to or originating from third parties. Such external links are not investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability, or completeness by us.
+      </p>
+      <p>
+        We do not warrant, endorse, guarantee, or assume responsibility for the accuracy or reliability of any information offered by third-party websites linked through the site.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>4. Tool Usage Disclaimer</h2>
+      <p>
+        The tools provided on Velnora (including converters, compressors, and calculators) are designed to run client-side. While we strive to ensure optimal performance, we do not guarantee that the tools will work flawlessly across all devices, browsers, or file types. Users should always verify the output of critical workflows.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>5. Contact</h2>
+      <p>
+        If you have any questions regarding this disclaimer, please contact us at: <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
+      </p>
+      <p>
+        You can also use our contact page: <a href="/contact">/contact</a>
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    gap: 0.95rem;
+  }
+
+  .updated {
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: color-mix(in srgb, var(--color-text) 64%, transparent);
+  }
+
+  .privacy-page h2 {
+    font-size: 1.16rem;
+    margin-bottom: 0.42rem;
+  }
+
+  .privacy-page p {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    line-height: 1.64;
+    font-size: 0.86rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .privacy-page ul {
+    margin: 0.2rem 0 0.52rem;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.24rem;
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
+    font-size: 0.84rem;
+  }
+</style>

@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const termsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Velnora Terms of Service',
+  description: 'Terms of Service for velnoraai.app and its utility workflows.',
+  url: 'https://velnoraai.app/terms-of-service',
+};
+
+const updatedDate = new Date().toISOString().split('T')[0];
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Read the Velnora Terms of Service. Understand the rules and regulations for using our free conversion and utility tools."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(termsSchema)} />
+
+  <Header />
+
+  <main class="page-shell privacy-page">
+    <section class="hero-panel" data-reveal>
+      <p class="eyebrow">Legal</p>
+      <h1>Terms of Service</h1>
+      <p class="lede">
+        By accessing and using Velnora, you agree to comply with these Terms of Service. Velnora provides free, client-side tools for conversion, compression, and other utility workflows.
+      </p>
+      <p class="updated">Last updated: {new Date(updatedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>1. Acceptance of Terms</h2>
+      <p>
+        By accessing the website at velnoraai.app, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>2. Use License</h2>
+      <ul>
+        <li>Velnora grants you permission to temporarily use the materials and tools on its website for personal, non-commercial, and commercial transitory viewing and execution only.</li>
+        <li>This is the grant of a license, not a transfer of title. Under this license, you may not attempt to reverse engineer any software or tools contained on the Velnora website, except as permitted by open-source licenses where applicable.</li>
+        <li>This license shall automatically terminate if you violate any of these restrictions and may be terminated by Velnora at any time.</li>
+      </ul>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>3. Disclaimer of Warranties</h2>
+      <p>
+        The materials and tools on Velnora are provided on an 'as is' basis. Velnora makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+      </p>
+      <p>
+        Furthermore, Velnora does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the tools on its website.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>4. Limitations of Liability</h2>
+      <p>
+        In no event shall Velnora or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the tools on Velnora's website, even if Velnora or a Velnora authorized representative has been notified orally or in writing of the possibility of such damage.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>5. Client-Side Processing</h2>
+      <p>
+        Velnora operates primarily through browser-native, client-side execution. Your files (such as images, PDFs, and videos) are processed directly on your device. We do not upload, store, or access your files on our servers unless explicitly stated otherwise for a specific tool.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>6. Modifications to Terms</h2>
+      <p>
+        Velnora may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.
+      </p>
+    </section>
+
+    <section class="section-panel" data-reveal>
+      <h2>7. Contact Information</h2>
+      <p>
+        If you have any questions about these Terms, please contact us at: <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
+      </p>
+      <p>
+        You can also use our contact page: <a href="/contact">/contact</a>
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    gap: 0.95rem;
+  }
+
+  .updated {
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: color-mix(in srgb, var(--color-text) 64%, transparent);
+  }
+
+  .privacy-page h2 {
+    font-size: 1.16rem;
+    margin-bottom: 0.42rem;
+  }
+
+  .privacy-page p {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-text) 78%, transparent);
+    line-height: 1.64;
+    font-size: 0.86rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .privacy-page ul {
+    margin: 0.2rem 0 0.52rem;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.24rem;
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
+    font-size: 0.84rem;
+  }
+</style>
