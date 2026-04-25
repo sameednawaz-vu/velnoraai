@@ -112,6 +112,29 @@ const websiteSchema = {
 
   {imageCdnOrigin && <link rel="preconnect" href={imageCdnOrigin} crossorigin />}
 
+  <!-- Google Consent Mode v2 Initialization -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+
+  <!-- Google CMP (Funding Choices) -->
+  {shouldLoadAdSense && (
+    <script async src="https://pagead2.googlesyndication.com/tag/js/gpt.js"></script>
+    <script 
+      async 
+      src="https://fundingchoicesmessages.google.com/i/pub-5036125669252744?ers=1" 
+      crossorigin="anonymous"
+    ></script>
+  )}
+
   <title>{(() => {
     const siteSuffix = ' | Velnora';
     if (title.toLowerCase().includes('velnora')) return title;
