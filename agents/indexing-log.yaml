@@ -1,18 +1,12 @@
-last_full_sitemap_ping: "2026-04-24T18:14:12Z"
-last_submission_date: "2026-04-24"
+last_full_sitemap_ping: "2026-04-25T17:40:00Z"
+last_submission_date: "2026-04-25"
 submissions:
-  - date: "2026-04-24"
-    engine: "Google Search Console"
-    type: "Batch"
-    status: "Success"
-    urls_count: 50
-    note: "Batch 1: Core tools and high-priority utilities."
-  - date: "2026-04-24"
+  - date: "2026-04-25"
     engine: "Bing Webmaster"
-    type: "Batch"
+    type: "IndexNow (API)"
     status: "Success"
-    urls_count: 50
-    note: "IndexNow submission for Batch 1."
+    urls_count: "Full Sitemap"
+    note: "Triggered re-crawl via sitemap.xml ping using API Key."
 
 pending_indexing:
   - engine: "Google Search Console"

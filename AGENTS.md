@@ -1,6 +1,15 @@
 # Velnora Workspace Instructions
 
-## Project Shape
+## Engineering Standards
+
+### 🧐 Ruthless Mentor Review (MANDATORY)
+Before completing any directive, the agent MUST pause and review their work from the perspective of a ruthless senior mentor.
+- **Accuracy:** Did I follow every sub-instruction?
+- **Elegance:** Is the code/config minimal and robust?
+- **Impact:** Does this actually improve the site (SEO, UX, Perf)?
+- **Mistakes:** If a mistake is found during this self-critique, the agent MUST immediately fix it before reporting completion.
+
+### Project Shape
 - Astro static site for GitHub Pages.
 - Keep the site static and client-side only; do not introduce a server runtime.
 - Preserve blog and learning content, but treat tools as the primary product area.
