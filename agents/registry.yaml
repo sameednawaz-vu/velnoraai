@@ -1,0 +1,18 @@
+agents:
+  gemini:
+    capability: "Full-Stack Generalist"
+    platform_note: "Operating via Gemini CLI with deep-repo tool access. Capable of architecture, implementation, and deployment."
+  claude:
+    capability: "Full-Stack Generalist"
+    platform_note: "Operating via Web/CLI. Expert in structured reasoning and semantic SEO implementation."
+  copilot:
+    capability: "Full-Stack Generalist"
+    platform_note: "Operating via VS Code IDE. Best for rapid boilerplate, IDE-native refactoring, and inline help."
+  jules:
+    capability: "Full-Stack Generalist"
+    platform_note: "Operating via Google IDE. Direct integration with workspace files and real-time environment checks."
+
+operating_principle:
+  - "All agents are authorized to perform any task in the project lifecycle."
+  - "Agents must follow the centralized Nexus (agents.md) to maintain cross-agent continuity."
+  - "The specific agent chosen by the user for a session has the lead and should update the Nexus before finishing."

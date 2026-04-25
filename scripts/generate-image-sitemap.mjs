@@ -8,6 +8,7 @@ const articleVisualsPath = resolve('src/content/data/article-visuals.json');
 const blogVisualsPath = resolve('src/content/data/blog-visuals.json');
 const toolVisualsPath = resolve('src/content/data/tool-page-visuals.json');
 const toolsDataPath = resolve('src/content/data/tools.json');
+const seoKeywordsPath = resolve('src/content/data/seo-keywords.generated.json');
 const allowedExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.avif']);
 const modernExtensions = new Set(['.avif', '.webp']);
 const routeByImageBaseName = {
@@ -20,10 +21,18 @@ const articleVisuals = JSON.parse(readFileSync(articleVisualsPath, 'utf8'));
 const blogVisuals = JSON.parse(readFileSync(blogVisualsPath, 'utf8'));
 const toolVisuals = JSON.parse(readFileSync(toolVisualsPath, 'utf8'));
 const toolsData = JSON.parse(readFileSync(toolsDataPath, 'utf8'));
+const seoKeywords = JSON.parse(readFileSync(seoKeywordsPath, 'utf8'));
 const publishedToolRouteBySlug = new Map(
   (toolsData.tools ?? [])
     .filter((tool) => tool.status === 'published' && tool.slug && tool.category)
     .map((tool) => [String(tool.slug).toLowerCase(), `/tools/${tool.category}/${tool.slug}`])
+);
+
+const keywordBySlug = new Map(
+  Object.entries(seoKeywords.toolKeywordTemplates ?? {}).map(([slug, keywords]) => [
+    slug.toLowerCase(),
+    keywords[0],
+  ])
 );
 
 function resolveToolRoute(baseName) {
@@ -109,8 +118,12 @@ function main() {
   const entries = imageFiles
     .map((entry) => {
       const imageUrl = `${site}/${entry.relativePath}`;
-      const imageTitle = toImageTitle(entry.fileName);
       const baseName = basename(entry.fileName, extname(entry.fileName)).toLowerCase();
+      
+      // Prioritize semantic keywords -> Visual Entry Alt -> Formatted Filename
+      const semanticTitle = keywordBySlug.get(baseName) || toolVisuals[baseName]?.alt || toImageTitle(entry.fileName);
+      const imageTitle = semanticTitle.charAt(0).toUpperCase() + semanticTitle.slice(1);
+
       const toolRoute = toolVisuals[baseName] ? resolveToolRoute(baseName) : undefined;
       const blogRoute = blogVisuals[baseName] ? `/blog/${baseName}` : undefined;
       const route = articleVisuals[baseName]

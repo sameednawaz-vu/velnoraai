@@ -1,0 +1,32 @@
+last_full_sitemap_ping: "2026-04-24T18:14:12Z"
+last_submission_date: "2026-04-24"
+submissions:
+  - date: "2026-04-24"
+    engine: "Google Search Console"
+    type: "Batch"
+    status: "Success"
+    urls_count: 50
+    note: "Batch 1: Core tools and high-priority utilities."
+  - date: "2026-04-24"
+    engine: "Bing Webmaster"
+    type: "Batch"
+    status: "Success"
+    urls_count: 50
+    note: "IndexNow submission for Batch 1."
+
+pending_indexing:
+  - engine: "Google Search Console"
+    batch_name: "Batch 2: SEO & Content Ops"
+    priority: "High"
+    urls_count: 80
+    suggested_date: "2026-04-25"
+  - engine: "Bing Webmaster"
+    batch_name: "Batch 2: SEO & Content Ops"
+    priority: "High"
+    urls_count: 80
+    suggested_date: "2026-04-25"
+
+index_coverage_snapshot:
+  total_urls: 347
+  indexed_google: "Check GSC for exact number"
+  indexed_bing: "Check Bing for exact number"

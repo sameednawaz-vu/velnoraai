@@ -6,7 +6,14 @@ import UniversalToolRunner from '../../../components/tools/UniversalToolRunner';
 import toolsData from '../../../content/data/tools.json';
 import catalog from '../../../content/data/freeconvert-catalog.json';
 import toolVisuals from '../../../content/data/tool-page-visuals.json';
+import seoKeywords from '../../../content/data/seo-keywords.generated.json';
 import { withImageCdn } from '../../../lib/image-cdn';
+import { 
+  buildWebPageSchema, 
+  buildSoftwareAppSchema, 
+  buildBreadcrumbSchema, 
+  buildFAQSchema 
+} from '../../../lib/seo-schema';
 
 export async function getStaticPaths() {
   return toolsData.tools
@@ -328,88 +335,63 @@ const toolImageWebp = withImageCdn(visualEntry?.imageWebp ?? '/images/favicon-ve
 const toolImageAvif = withImageCdn(visualEntry?.imageAvif ?? '/images/favicon-velnora.avif');
 const toolImageFallback = withImageCdn(visualEntry?.imageFallback ?? '/images/favicon-velnora.jpg');
 
+// Semantic Keyword Mapping
+const keywordEntry = (seoKeywords.toolKeywordTemplates as Record<string, string[]>)[tool.slug] || [];
+const primaryKeyword = keywordEntry[0] || '';
+
+// Title Logic: Strictly keep under 60 chars to pass SEO validation
+// Format: "Tool Name | Keyword" if possible, else just "Tool Name"
+const brandSpace = 11; // Reserved for " | Velnora" in Layout
+const availableSpace = 60 - brandSpace;
+const rawTitle = (primaryKeyword && (tool.name.length + primaryKeyword.length + 3) <= availableSpace)
+  ? `${tool.name} | ${primaryKeyword.charAt(0).toUpperCase() + primaryKeyword.slice(1)}`
+  : tool.name;
+
+const displayTitle = rawTitle;
+
 const faqItems = [
   {
     question: `Is ${tool.name} free to use?`,
     answer:
-      'Yes. This tool is available as a free web workflow. You can run a quick sample first and then scale to your full task once the output looks right.',
+      `Yes. ${tool.name} is a free ${primaryKeyword} workflow available directly in your browser. You can run samples locally and scale your tasks without cost.`,
   },
   {
     question: `What is the main benefit of using ${tool.name}?`,
     answer:
-      'It turns a multi-step manual task into one focused workflow with clear inputs and outputs. In most cases, you can move from draft input to a usable result in minutes.',
+      `As a specialized ${primaryKeyword}, it streamlines multi-step manual tasks into one focused workflow. It ensures consistency and speed for ${categoryInfo.name} requirements.`,
   },
   {
     question: `Will Velnora store my input while I use ${tool.name}?`,
     answer:
-      'For browser-native routes, processing stays in your browser tab. When a route needs a different flow, the page explains it clearly before you run anything.',
+      'Velnora prioritizes privacy. For most tools, processing stays entirely in your browser tab using WebAssembly, ensuring your sensitive data never leaves your device.',
   },
 ];
 
-const softwareSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: tool.name,
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  description: tool.description,
+// Build Static Schemas
+const schemaOptions = {
+  title: displayTitle,
+  description: tool.seoDescription,
   url: canonicalPath,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
+  image: toolImageWebp,
+  imageAlt: toolImageAlt,
 };
 
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://velnoraai.app/',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Tools',
-      item: 'https://velnoraai.app/tools',
-    },
-    {
-      '@type': 'ListItem',
-      position: 3,
-      name: categoryInfo.name,
-      item: `https://velnoraai.app/tools/${categoryInfo.slug}`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 4,
-      name: tool.name,
-      item: canonicalPath,
-    },
-  ],
-};
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((entry) => ({
-    '@type': 'Question',
-    name: entry.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: entry.answer,
-    },
-  })),
-};
+const webpageSchema = buildWebPageSchema(schemaOptions, 'https://velnoraai.app');
+const softwareAppSchema = buildSoftwareAppSchema(tool, canonicalPath);
+const breadcrumbSchema = buildBreadcrumbSchema('https://velnoraai.app', [
+  { name: 'Home', url: '/' },
+  { name: 'Tools', url: '/tools' },
+  { name: categoryInfo.name, url: `/tools/${categoryInfo.slug}` },
+  { name: tool.name, url: canonicalPath },
+]);
+const faqSchema = buildFAQSchema(faqItems);
 ---
 
-<BaseLayout title={tool.name} description={tool.seoDescription} image={toolImageWebp}>
-  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<BaseLayout title={displayTitle} description={tool.seoDescription} image={toolImageWebp}>
+  <script type="application/ld+json" set:html={JSON.stringify(webpageSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(softwareAppSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <Header />
 

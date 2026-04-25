@@ -112,7 +112,11 @@ const websiteSchema = {
 
   {imageCdnOrigin && <link rel="preconnect" href={imageCdnOrigin} crossorigin />}
 
-  <title>{title} | Velnora</title>
+  <title>{(() => {
+    const siteSuffix = ' | Velnora';
+    if (title.toLowerCase().includes('velnora')) return title;
+    return (title.length + siteSuffix.length) <= 60 ? `${title}${siteSuffix}` : title;
+  })()}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
   
@@ -188,8 +192,6 @@ const websiteSchema = {
       crossorigin="anonymous"
     ></script>
   )}
-
-  {shouldLoadDynamicSchema && <script type="module" src="/schema-generator.js"></script>}
 
   <script is:inline>
     (() => {

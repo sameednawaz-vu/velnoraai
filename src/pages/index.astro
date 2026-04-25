@@ -3,60 +3,18 @@ import '../styles/tailwind.css';
 import '../styles/design-only-2-home.css';
 import DesignOnly2Home from '../components/home/DesignOnly2Home';
 import { withImageCdn } from '../lib/image-cdn';
+import { buildOrganizationSchema, buildWebSiteSchema } from '../lib/seo-schema';
 
-const title = 'Home | Velnora';
-const description = '165 free professional utility tools. Convert, compress, and build in your browser. Secure, fast, and entirely client-side.';
+const title = 'Velnora | Free Professional Utility Tools & Workflows';
+const description = 'Access 165+ free professional utility tools for secure conversion, compression, and practical planning. Entirely client-side and privacy-focused.';
 const canonicalUrl = 'https://velnoraai.app/';
 const socialImage = new URL(withImageCdn('/images/favicon-velnora.webp'), canonicalUrl).toString();
 const faviconSvgImage = withImageCdn('/images/favicon-velnora.svg');
 const faviconWebpImage = withImageCdn('/images/favicon-velnora.webp');
 const logoUrl = new URL(withImageCdn('/images/favicon-velnora.webp'), canonicalUrl).toString();
 
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': 'https://velnoraai.app/#organization',
-  name: 'Velnora',
-  url: canonicalUrl,
-  description,
-  logo: {
-    '@type': 'ImageObject',
-    url: logoUrl,
-    width: 160,
-    height: 160,
-    contentUrl: logoUrl,
-  },
-  founder: {
-    '@type': 'Person',
-    name: 'Sameed Nawaz',
-  },
-  sameAs: [
-    'https://www.reddit.com/user/Velnoraai/',
-    'https://www.facebook.com/profile.php?id=61588840100652',
-  ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Support',
-    url: canonicalUrl + 'contact',
-  },
-};
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': 'https://velnoraai.app/#website',
-  name: 'Velnora',
-  url: canonicalUrl,
-  description,
-  isPartOf: {
-    '@id': 'https://velnoraai.app/#organization',
-  },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://velnoraai.app/tools?search={search_term_string}',
-    'query-input': 'required name=search_term_string',
-  },
-};
+const organizationSchema = buildOrganizationSchema('https://velnoraai.app', logoUrl);
+const websiteSchema = buildWebSiteSchema('https://velnoraai.app');
 ---
 
 <!doctype html>

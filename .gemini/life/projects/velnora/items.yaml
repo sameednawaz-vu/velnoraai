@@ -1,0 +1,23 @@
+# Atomic Facts for Velnora Project
+
+- id: 20260424-001
+  fact: "Website live on https://velnoraai.app/ via GitHub Pages."
+  status: active
+- id: 20260424-002
+  fact: "Mobile APK com.velnoraai.app v1.0.0 built and tested on Pixel 9 Pro emulator."
+  status: active
+- id: 20260424-003
+  fact: "Google AdSense ID pub-5036125669252744 and ads.txt deployed."
+  status: active
+- id: 20260424-004
+  fact: "Ghulam Ali Semantic SEO Level 1 enforced on 347 routes."
+  status: active
+- id: 20260424-005
+  fact: "Robots.txt explicitly allows GPTBot, ClaudeBot, and other AI crawlers."
+  status: active
+- id: 20260424-006
+  fact: "Identity graph limited strictly to Reddit (Velnoraai) and Facebook."
+  status: active
+- id: 20260424-007
+  fact: "Cloudflare image hosting migrated to Wrangler Pages (velnora-images)."
+  status: active
