@@ -1,7 +1,7 @@
 # Velnora LLM Discovery Mirror
 > Static-first tools and knowledge surface for utility execution and professional content discovery.
 
-Generated at: 2026-10-29T16:36:01.566Z
+Generated at: 2026-10-29T16:51:22.289Z
 Canonical site: https://velnoraai.app/
 
 ## Metadata
@@ -11,12 +11,12 @@ Canonical site: https://velnoraai.app/
 
 ## High-priority routes
 - https://velnoraai.app/
-- https://velnoraai.app/tools
+- https://velnoraai.app/tools/
 - https://velnoraai.app/convert
 - https://velnoraai.app/compress
 - https://velnoraai.app/utility-tools
-- https://velnoraai.app/articles
-- https://velnoraai.app/blog
+- https://velnoraai.app/articles/
+- https://velnoraai.app/blog/
 
 ## Route family counts
 - tools: 129

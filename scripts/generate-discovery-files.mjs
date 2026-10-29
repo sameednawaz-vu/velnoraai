@@ -121,14 +121,14 @@ function buildRobotsTxt() {
 function buildLlmTxt(urls, stats) {
   const primaryEntries = [
     `${site}/`,
-    `${site}/tools`,
+    `${site}/tools/`,
     `${site}/convert`,
     `${site}/compress`,
     `${site}/utility-tools`,
-    `${site}/articles`,
+    `${site}/articles/`,
     `${site}/learning-hub`,
     `${site}/library`,
-    `${site}/blog`,
+    `${site}/blog/`,
     `${site}/about`,
     `${site}/contact`,
   ];
@@ -190,12 +190,12 @@ function buildLlmTxt(urls, stats) {
 function buildLlmsTxt(urls, stats) {
   const importantRoutes = [
     `${site}/`,
-    `${site}/tools`,
+    `${site}/tools/`,
     `${site}/convert`,
     `${site}/compress`,
     `${site}/utility-tools`,
-    `${site}/articles`,
-    `${site}/blog`,
+    `${site}/articles/`,
+    `${site}/blog/`,
   ];
 
   return [
