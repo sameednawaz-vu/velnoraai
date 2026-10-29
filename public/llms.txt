@@ -1,7 +1,7 @@
 # Velnora LLM Discovery Mirror
 > Static-first tools and knowledge surface for utility execution and professional content discovery.
 
-Generated at: 2026-04-25T13:22:43.428Z
+Generated at: 2026-10-29T16:36:01.566Z
 Canonical site: https://velnoraai.app/
 
 ## Metadata

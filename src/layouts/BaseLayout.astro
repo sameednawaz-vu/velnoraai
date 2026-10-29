@@ -12,9 +12,29 @@ interface Props {
 }
 
 const { title, description = "Velnora - Free tools workspace for conversion, compression, and practical workflows", image, article = false, publishedDate, author } = Astro.props;
-const canonicalPath = Astro.url.pathname
+
+const directoryPrefixes = [
+  '/articles',
+  '/blog',
+  '/tools',
+  '/tools/business-finance',
+  '/tools/design-ux-brand',
+  '/tools/developer-advanced',
+  '/tools/developer-data-core',
+  '/tools/education-team-communication',
+  '/tools/productivity-planning',
+  '/tools/seo-content-ops',
+  '/tools/writing-messaging',
+];
+
+let canonicalPath = Astro.url.pathname
   .replace(/\/index\.html$/, '/')
   .replace(/\.html$/, '') || '/';
+
+const normalizedBare = canonicalPath.replace(/\/$/, '');
+if (directoryPrefixes.includes(normalizedBare)) {
+  canonicalPath = normalizedBare + '/';
+}
 const canonicalURL = new URL(canonicalPath, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const gtmId = import.meta.env.PUBLIC_GTM_ID;

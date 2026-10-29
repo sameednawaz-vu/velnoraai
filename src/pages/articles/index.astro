@@ -1,21 +1,225 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { toolArticles } from '../../lib/article-catalog';
+
+const articlesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Velnora Workflow Guides & Decision Frameworks',
+  description: 'Comprehensive guides, step-by-step workflows, and decision frameworks for professional browser tools and conversion utilities.',
+  url: 'https://velnoraai.app/articles/',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: toolArticles.slice(0, 50).map((article, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: article.articleTitle,
+      url: `https://velnoraai.app${article.articleHref}`,
+    })),
+  },
+};
+
+const articlesBySection = toolArticles.reduce<Record<string, typeof toolArticles>>((acc, article) => {
+  const section = article.sectionLabel || 'General Guides';
+  if (!acc[section]) acc[section] = [];
+  acc[section].push(article);
+  return acc;
+}, {});
+
+const totalArticles = toolArticles.length;
 ---
 
 <BaseLayout
-  title="Article Index"
-  description="Browse tool guides, workflows, and decision frameworks for free conversion and utility tools."
+  title="Workflow Guides & Decision Frameworks | Velnora"
+  description={`Browse ${totalArticles} in-depth tool guides, conversion tutorials, and architectural decision frameworks built for reliable web execution.`}
 >
-  <main style="padding: 2rem; text-align: center; min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <h1>Article Index</h1>
-    <p style="margin: 1.5rem 0; font-size: 1.1rem; max-width: 600px;">
-      This section redirects to the blog index where you'll find all our guides, workflows, and decision frameworks.
-    </p>
-    <p>
-      <a href="/blog" style="display: inline-block; margin-top: 1rem; padding: 0.75rem 1.5rem; background: var(--color-secondary); color: var(--color-primary); text-decoration: none; border-radius: 8px; font-weight: 600;">
-        Go to Blog →
-      </a>
-    </p>
+  <script type="application/ld+json" set:html={JSON.stringify(articlesSchema)} />
+
+  <Header />
+
+  <main class="page-shell articles-index">
+    <section class="hero-panel" data-reveal>
+      <p class="eyebrow">Knowledge &amp; Implementation Guides</p>
+      <h1>Tool Workflows &amp; Decision Frameworks</h1>
+      <p class="lede">
+        Explore {totalArticles} verified guides, technical checklists, and decision matrixes. Learn how to optimize conversions, maintain privacy, and streamline professional workflows directly in your browser.
+      </p>
+      <div class="quick-nav-pills">
+        {Object.keys(articlesBySection).map((section) => (
+          <a href={`#${section.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} class="pill-link">
+            {section} ({articlesBySection[section].length})
+          </a>
+        ))}
+      </div>
+    </section>
+
+    {Object.entries(articlesBySection).map(([section, articles]) => (
+      <section class="section-panel section-group" id={section.toLowerCase().replace(/[^a-z0-9]+/g, '-')} data-reveal>
+        <div class="section-heading">
+          <h2>{section}</h2>
+          <span class="count-tag">{articles.length} Guides</span>
+        </div>
+        <div class="articles-grid">
+          {articles.map((article) => (
+            <article class="article-card">
+              <div class="card-meta">
+                <span class="type-badge">{article.articleType}</span>
+                {article.familyLabel && <span class="family-tag">{article.familyLabel}</span>}
+              </div>
+              <h3>
+                <a href={article.articleHref}>{article.articleTitle}</a>
+              </h3>
+              <p>{article.articleDescription}</p>
+              <div class="card-footer">
+                <a href={article.articleHref} class="read-btn">
+                  Read Guide &rarr;
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
   </main>
+
+  <Footer />
 </BaseLayout>
+
+<style>
+  .articles-index {
+    display: grid;
+    gap: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .quick-nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .pill-link {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.75rem;
+    background: color-mix(in srgb, var(--color-card-bg) 80%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .pill-link:hover {
+    border-color: var(--color-accent, #6366f1);
+    background: color-mix(in srgb, var(--color-accent, #6366f1) 15%, transparent);
+  }
+
+  .section-group {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .count-tag {
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    background: color-mix(in srgb, var(--color-card-bg) 90%, transparent);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    background: color-mix(in srgb, var(--color-card-bg) 95%, transparent);
+    padding: 1.1rem;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  .article-card:hover {
+    border-color: var(--color-accent, #6366f1);
+    transform: translateY(-2px);
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .type-badge {
+    text-transform: capitalize;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-accent, #6366f1);
+    background: color-mix(in srgb, var(--color-accent, #6366f1) 12%, transparent);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+  }
+
+  .family-tag {
+    font-size: 0.72rem;
+    color: color-mix(in srgb, var(--color-text) 65%, transparent);
+    padding: 0.15rem 0.45rem;
+  }
+
+  .article-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+
+  .article-card h3 a {
+    color: var(--color-heading, var(--color-text));
+    text-decoration: none;
+  }
+
+  .article-card h3 a:hover {
+    color: var(--color-accent, #6366f1);
+  }
+
+  .article-card p {
+    font-size: 0.88rem;
+    color: color-mix(in srgb, var(--color-text) 75%, transparent);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+  }
+
+  .read-btn {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent, #6366f1);
+    text-decoration: none;
+  }
+
+  .read-btn:hover {
+    text-decoration: underline;
+  }
+</style>
 

@@ -30,26 +30,62 @@ const contactSchema = {
 
     <section class="contact-grid" data-reveal>
       <article class="section-panel">
-        <h2>Email</h2>
-        <p>Fastest way to reach the builder for support and collaboration.</p>
-        <a href="mailto:sameednawaz1@gmail.com">sameednawaz1@gmail.com</a>
+        <h2>Direct Email</h2>
+        <p>The fastest route for technical support, partnership inquiries, and business collaboration.</p>
+        <a href="mailto:sameednawaz1@gmail.com" class="contact-link">sameednawaz1@gmail.com</a>
+        <span class="subtext">Typical response time: Within 24–48 hours</span>
       </article>
 
       <article class="section-panel">
-        <h2>Reddit</h2>
-        <p>Community updates and public discussions.</p>
-        <a href="https://www.reddit.com/user/Velnoraai/" target="_blank" rel="noopener noreferrer">
+        <h2>Community Discussions</h2>
+        <p>Join public discussions, submit workflow feedback, and follow tool release notes on Reddit.</p>
+        <a href="https://www.reddit.com/user/Velnoraai/" target="_blank" rel="noopener noreferrer" class="contact-link">
           reddit.com/user/Velnoraai/
         </a>
+        <span class="subtext">Public feedback &amp; community updates</span>
       </article>
 
       <article class="section-panel">
-        <h2>Facebook</h2>
-        <p>Social updates and page visibility.</p>
-        <a href="https://www.facebook.com/profile.php?id=61588840100652" target="_blank" rel="noopener noreferrer">
+        <h2>Social &amp; Announcements</h2>
+        <p>Follow product announcements and utility updates on our official Facebook profile.</p>
+        <a href="https://www.facebook.com/profile.php?id=61588840100652" target="_blank" rel="noopener noreferrer" class="contact-link">
           facebook.com/profile.php?id=61588840100652
         </a>
+        <span class="subtext">Official announcements</span>
       </article>
+    </section>
+
+    <section class="section-panel" style="margin-top: 1.5rem;" data-reveal>
+      <h2>Reporting Bugs or Requesting New Utilities</h2>
+      <p style="color: color-mix(in srgb, var(--color-text) 78%, transparent); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem;">
+        When reporting a conversion error or tool malfunction, including the following details helps us reproduce and fix issues quickly:
+      </p>
+      <ul class="workflow-list" style="margin-bottom: 1.2rem;">
+        <li><strong>Tool URL:</strong> The specific converter, compressor, or calculator page where the issue occurred.</li>
+        <li><strong>File Details:</strong> Approximate input file size, format extension (e.g. .mp4, .webp, .pdf), and error messages shown in the console.</li>
+        <li><strong>Browser &amp; OS:</strong> Your operating system (Windows, macOS, Linux, Android, iOS) and browser version (Chrome, Safari, Firefox, Edge).</li>
+      </ul>
+      <p style="color: color-mix(in srgb, var(--color-text) 78%, transparent); font-size: 0.92rem; line-height: 1.65;">
+        Every report is reviewed directly by the maintainer. We do not use automated bot filters or generic tier-1 responses.
+      </p>
+    </section>
+
+    <section class="section-panel" style="margin-top: 1.5rem;" data-reveal>
+      <h2>Frequently Asked Questions</h2>
+      <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.3rem;">Are all Velnora tools free to use?</h3>
+          <p style="font-size: 0.88rem; color: color-mix(in srgb, var(--color-text) 75%, transparent); line-height: 1.5;">
+            Yes. All 120+ tools on Velnora are 100% free with no account registration, subscriptions, or hidden limits.
+          </p>
+        </div>
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.3rem;">Does Velnora store or view my uploaded files?</h3>
+          <p style="font-size: 0.88rem; color: color-mix(in srgb, var(--color-text) 75%, transparent); line-height: 1.5;">
+            No. File conversions and compressions run client-side using in-memory WebAssembly. Files never touch a remote backend server, ensuring complete data security.
+          </p>
+        </div>
+      </div>
     </section>
   </main>
 

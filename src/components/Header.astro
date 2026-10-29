@@ -78,7 +78,7 @@ const compressMenu = buildUtilityMenu('compress', '/compress');
 
 const professionalToolsMenu: NavMenuItem = {
   label: 'Tools',
-  href: '/tools',
+  href: '/tools/',
   groups: toolsData.categories
     .map((category) => {
       const categoryTools = publishedTools.filter((tool) => tool.category === category.slug);
@@ -88,7 +88,7 @@ const professionalToolsMenu: NavMenuItem = {
 
       return {
         label: category.name,
-        href: `/tools/${category.slug}`,
+        href: `/tools/${category.slug}/`,
         summary: `${categoryTools.length} pages`,
         children: categoryTools.slice(0, 10).map((tool) => ({
           label: tool.name,
@@ -104,7 +104,8 @@ const navMenuItems: NavMenuItem[] = [
   professionalToolsMenu,
   ...(convertMenu ? [convertMenu] : []),
   ...(compressMenu ? [compressMenu] : []),
-  { label: 'Blog', href: '/blog' },
+  { label: 'Guides', href: '/articles/' },
+  { label: 'Blog', href: '/blog/' },
 ];
 
 const searchIndex = [

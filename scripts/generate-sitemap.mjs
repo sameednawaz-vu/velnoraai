@@ -22,20 +22,20 @@ function buildDataRoutes() {
   const routes = new Set([
     '/',
     '/about',
-    '/articles',
+    '/articles/',
     '/compress',
     '/contact',
     '/learning-hub',
     '/library',
-    '/blog',
+    '/blog/',
     '/working-tools',
     '/utility-tools',
     '/convert',
-    '/tools',
+    '/tools/',
   ]);
 
   for (const category of tools.categories) {
-    routes.add(`/tools/${category.slug}`);
+    routes.add(`/tools/${category.slug}/`);
   }
 
   for (const tool of tools.tools) {
@@ -100,6 +100,11 @@ function collectDistRoutes(distRoot) {
         continue;
       }
 
+      if (withoutExtension.endsWith('/index')) {
+        routes.add(`/${withoutExtension.replace(/\/index$/, '')}/`);
+        continue;
+      }
+
       routes.add(`/${withoutExtension}`);
     }
   };
@@ -127,7 +132,31 @@ for (const route of distRoutes) {
   routes.add(route);
 }
 
-const xmlItems = [...routes]
+const directoryPrefixes = new Set([
+  '/articles',
+  '/blog',
+  '/tools',
+  '/tools/business-finance',
+  '/tools/design-ux-brand',
+  '/tools/developer-advanced',
+  '/tools/developer-data-core',
+  '/tools/education-team-communication',
+  '/tools/productivity-planning',
+  '/tools/seo-content-ops',
+  '/tools/writing-messaging',
+]);
+
+const finalRoutes = new Set();
+for (const route of routes) {
+  const bare = route.replace(/\/$/, '');
+  if (directoryPrefixes.has(bare)) {
+    finalRoutes.add(`${bare}/`);
+  } else {
+    finalRoutes.add(route);
+  }
+}
+
+const xmlItems = [...finalRoutes]
   .sort((a, b) => a.localeCompare(b))
   .map((route) => {
     return [
