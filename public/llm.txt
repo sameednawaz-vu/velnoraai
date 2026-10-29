@@ -1,7 +1,7 @@
 # Velnora Discovery Index
 > Canonical static tools platform for conversion, compression, utility workflows, and tool-linked editorial guidance.
 
-Generated at: 2026-10-29T16:51:22.289Z
+Generated at: 2026-10-29T17:06:03.822Z
 Canonical site: https://velnoraai.app/
 
 ## Crawl metadata
